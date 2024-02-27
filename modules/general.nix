@@ -4,6 +4,7 @@
     ./user/main-user.nix
     ./desktop/sway.nix
     ./security.nix
+    ./devel.nix
   ];
 
   
