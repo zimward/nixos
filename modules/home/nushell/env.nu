@@ -74,7 +74,7 @@ $env.CLIPPY_CONF_DIR = "/home/modsog/.config/clippy"
 $env._JAVA_AWT_WM_NONREPARENTING = 1
 
 #autostart sway
-if  not ($env | columns | any {|c| $c == DISPLAY }) and $env.XDG_VTNR? == "1" {
+if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
    #WLR_RENDERER=GLES sway
-    sway
+   sway
 }
