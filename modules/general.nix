@@ -7,6 +7,10 @@
     ./devel.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    nushell
+    starship
+  ];
   
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "de_DE.UTF-8";
