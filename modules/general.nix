@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     nushell
     starship
+    htop
   ];
   
   time.timeZone = "Europe/Berlin";
