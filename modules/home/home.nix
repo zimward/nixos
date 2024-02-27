@@ -72,10 +72,10 @@
 
   wayland.windowManager.sway = {
     enable = true;
+    xwayland = true;
     config = rec {
       modifier = "Mod4";
       terminal = "alacritty";
-      xwayland = true;
       startup = [
         {command = "dbus-sway-environment";}
         {command = "configure-gtk";}
