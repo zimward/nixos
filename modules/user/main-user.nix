@@ -13,6 +13,7 @@
       isNormalUser = true;
       initialPassword = "password";
       description = "main user";
+      shell = pkgs.nushell;
     };
   };
 }
