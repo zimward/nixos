@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -70,13 +70,26 @@
     config = rec {
       modifier = "Mod4";
       terminal = "alacritty";
+      menu = "nu -c bemenu-run | xargs swaymsg exec --";
       startup = [
         {command = "dbus-sway-environment";}
         {command = "configure-gtk";}
       ];
+      bars = [
+        {
+          position = "top";
+        }
+      ];
+      input = {
+        "type:keyboard" = {xkb_layout = "de,de"; xkb_variant = "dvorak,"; xkb_numlock="enabled";};
+      };
+      keybindings = lib.mkOptionDefault {
+        "${modifier}+Shift+t" = "exec ${terminal}";
+        "${modifier}+p" = "exec ${menu}";
+        "${modifier}+BackSpace" = "input type:keyboard xkb_switch_layout next";
+      };
     };
   };
-
   programs.nushell = {
     enable = true;
     configFile.source = ./nushell/config.nu;
