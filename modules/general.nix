@@ -22,6 +22,7 @@
 
   
   main-user.userName = "zimward";
+  services.getty.autologinUser = config.main-user.userName;
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
