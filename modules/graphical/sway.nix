@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let
   #propagate sway env vars
@@ -24,7 +24,7 @@ let
       gnome_schema=org.gnome.desktop.interface
       gsettings set $gnome_schema gtk-theme 'palenight'
     '';
-  };
+  };  
   in
   {
     environment.systemPackages = with pkgs;[
@@ -54,11 +54,11 @@ let
     driSupport = true;
    };
     
-    programs.sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      
-      extraSessionCommands = ''
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+     
+    extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
       export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"

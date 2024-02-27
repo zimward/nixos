@@ -5,7 +5,9 @@
   # manage.
   home.username = "zimward";
   home.homeDirectory = "/home/zimward";
-
+  imports = [
+    ../graphical/sway_cfg.nix
+  ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -64,32 +66,6 @@
     EDITOR = "helix";
   };
 
-  wayland.windowManager.sway = {
-    enable = true;
-    xwayland = true;
-    config = rec {
-      modifier = "Mod4";
-      terminal = "alacritty";
-      menu = "nu -c bemenu-run | xargs swaymsg exec --";
-      startup = [
-        {command = "dbus-sway-environment";}
-        {command = "configure-gtk";}
-      ];
-      bars = [
-        {
-          position = "top";
-        }
-      ];
-      input = {
-        "type:keyboard" = {xkb_layout = "de,de"; xkb_variant = "dvorak,"; xkb_numlock="enabled";};
-      };
-      keybindings = lib.mkOptionDefault {
-        "${modifier}+Shift+t" = "exec ${terminal}";
-        "${modifier}+p" = "exec ${menu}";
-        "${modifier}+BackSpace" = "input type:keyboard xkb_switch_layout next";
-      };
-    };
-  };
   programs.nushell = {
     enable = true;
     configFile.source = ./nushell/config.nu;

@@ -2,7 +2,7 @@
 {
   imports = [
     ./user/main-user.nix
-    ./desktop/sway.nix
+    ./graphical/sway.nix
     ./security.nix
     ./devel.nix
   ];
