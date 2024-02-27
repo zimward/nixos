@@ -67,7 +67,20 @@
   #  /etc/profiles/per-user/zimward/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "helix";
+  };
+
+  wayland.windowManager.sway = {
+    enable = true;
+    config = rec {
+      modifier = "Mod4";
+      terminal = "alacritty";
+      xwayland = true;
+      startup = [
+        {command = "dbus-sway-environment";}
+        {command = "configure-gtk";}
+      ];
+    };
   };
 
   # Let Home Manager install and manage itself.
