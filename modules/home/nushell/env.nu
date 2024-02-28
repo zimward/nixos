@@ -58,21 +58,6 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.config-path | path dirname | path join 'plugins')
 ]
 
-
-
-# To add entries to PATH (on Windows you might use Path), you can use the following pattern:
-$env.GTK_THEME = "Adwaita:dark"
-$env.PATH = ($env.PATH | split row (char esep) | prepend '~/.local/bin:/opt/riscv32/bin:/opt/xpack/riscv-none-embed-gcc/bin:~/.cargo/bin:/var/lib/flatpak/exports/bin:~/.local/share/flatpak/exports/bin')
-$env.STEAM_DIR = ($env.HOME | append '.steam' )
-$env.EDITOR = 'helix'
-$env.NNN_OPENER = '/home/modsog/.config/nnn/plugins/nuke'
-$env.NNN_TMPFILE = '/tmp/nnn'
-$env.MOZ_ENABLE_WAYLAND = 1
-$env.LANG = "de_DE.utf-8"
-$env.SSH_AUTH_SOCK = /run/user/1000/ssh-agent.socket
-$env.CLIPPY_CONF_DIR = "/home/modsog/.config/clippy"
-$env._JAVA_AWT_WM_NONREPARENTING = 1
-
 #autostart sway
 if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
    #WLR_RENDERER=GLES sway
