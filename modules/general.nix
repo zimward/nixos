@@ -4,8 +4,10 @@
     ./user/main-user.nix
     ./graphical/sway.nix
     ./graphical/fonts.nix
+    ./graphical/applications.nix
     ./security.nix
     ./devel.nix
+    ./cli.nix
   ];
 
   environment.systemPackages = with pkgs; [
