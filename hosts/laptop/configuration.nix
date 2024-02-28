@@ -35,15 +35,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-
-  
-  #exclude useless pkgs
-  programs.nano.enable = false;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     helix 
   ];
 
   #sound
