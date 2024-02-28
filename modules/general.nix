@@ -3,6 +3,7 @@
   imports = [
     ./user/main-user.nix
     ./graphical/sway.nix
+    ./graphical/fonts.nix
     ./security.nix
     ./devel.nix
   ];
