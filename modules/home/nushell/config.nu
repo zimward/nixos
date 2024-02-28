@@ -537,19 +537,9 @@ $env.config = {
   ]
 }
 
-alias vim = nvim
 alias grep = rg
 alias sha256sum = uu-hashsum --sha256
 alias sha512sum = uu-hashsum --sha512
 alias md5sum = uu-hashsum --md5
 alias b2sum = uu-hashsum --b2sum
 alias b3sum = uu-hashsum --b3sum
-alias hx = helix
-
-def --env n [] {
-    nnn
-    cd (cat $env.NNN_TMPFILE | parse "cd '{path}'").path.0
-    rm $env.NNN_TMPFILE
-}
-
-source ~/.cache/starship/init.nu
