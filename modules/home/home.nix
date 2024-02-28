@@ -66,6 +66,26 @@
     EDITOR = "helix";
   };
 
+  programs.helix = {
+    enable = true;
+    settings = {
+      theme = "tokyonight";
+      keys={
+        insert = {
+          "C-d" = '''"normal mode"'';
+        };
+        normal = {
+          "C-5" = ''":run-shell-command cargo run"'';
+        };
+      };
+    };
+    languages.language = [{
+      name = "nix";
+      auto-format = true;
+      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+    }];
+  };
+  
   programs.nushell = {
     enable = true;
     configFile.source = ./nushell/config.nu;
