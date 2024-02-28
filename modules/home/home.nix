@@ -140,6 +140,20 @@
     };
   };
 
+  programs.git = {
+    enable = true;
+    userName = "zimward";
+    userEmail = "96021122+zimward@users.noreply.github.com";
+    aliases = {
+      "commit" = "commit -S";
+    };
+    extraConfig = {
+      commit = { gpgsign = true; };
+      safe = { directory = "/etc/nixos/"; };
+      user = { signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9"; };
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
