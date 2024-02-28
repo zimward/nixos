@@ -108,7 +108,7 @@
         "\$rust"+
         "[](fg:#212736 bg:#1d2230)"+
         "\$time"+
-        "[ ](fg:1d2230)"+
+        "[ ](fg:#1d2230)"+
         "\n$character";
       directory = {
         style = "fg:#e3e5e5 bg:#769ff0";
