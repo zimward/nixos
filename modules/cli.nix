@@ -8,5 +8,7 @@
 		joshuto #file manager
 		ripgrep
 		#zenith #process manager, build currently failing
+		htop
+		du-dust
 	];
 }
