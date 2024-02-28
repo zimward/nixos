@@ -70,13 +70,11 @@
     enable = true;
     settings = {
       theme = "tokyonight";
-      keys={
-        insert = {
-          "C-d" = '''"normal mode"'';
-        };
-        normal = {
-          "C-5" = ''":run-shell-command cargo run"'';
-        };
+      keys.insert = {
+        "C-d" = "normal_mode";
+      };
+      keys.normal = {
+        "C-5" = ":run-shell-command cargo run";
       };
     };
     languages.language = [{

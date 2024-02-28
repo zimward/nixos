@@ -11,12 +11,6 @@
     ./cli.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    nushell
-    starship
-    htop
-  ];
-  
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "de_DE.UTF-8";
   console = {

@@ -1,9 +1,12 @@
 {pkgs, ...}:
 {
 	environment.systemPackages = with pkgs;[
+    nushell
+    starship
+    htop
+    helix
 		joshuto #file manager
 		ripgrep
-		helix
 		#zenith #process manager, build currently failing
 	];
 }
