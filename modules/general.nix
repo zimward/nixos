@@ -6,6 +6,7 @@
     ./graphical/fonts.nix
     ./graphical/applications.nix
     ./security.nix
+    ./undesired.nix
     ./devel.nix
     ./cli.nix
   ];
