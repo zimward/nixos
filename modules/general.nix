@@ -1,7 +1,7 @@
 {pkgs, libs, config, inputs, ...}:
 {
   imports = [
-    ./user/main-user.nix
+    ./main-user.nix
     ./graphical/sway.nix
     ./graphical/fonts.nix
     ./graphical/applications.nix
