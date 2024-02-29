@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = config.main-user.userName;
-  home.homeDirectory = "/home/${config.main-user.userName}";
+  home.username = "zimward";
+  home.homeDirectory = "/home/zimward";
   imports = [
     ../graphical/sway_cfg.nix
     ./ssh.nix
