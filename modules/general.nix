@@ -11,8 +11,8 @@
     ./cli.nix
   ];
 
-  environment.variables = rec {
-    EDITOR="pkgs.helix/bin/hx";
+  environment.sessionVariables = {
+    EDITOR="${pkgs.helix}/bin/hx";
   };
 
   time.timeZone = "Europe/Berlin";
