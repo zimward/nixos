@@ -3,6 +3,7 @@
 pkgs.writeText "configuration.toml" ''
   [[block]]
   block = "battery"
+  format = " $icon $percentage "
   missing_format = ""
 
   [[block]]
