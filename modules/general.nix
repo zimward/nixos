@@ -11,6 +11,10 @@
     ./cli.nix
   ];
 
+  environment.variables = rec {
+    EDITOR="pkgs.helix/bin/hx";
+  };
+
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "de_DE.UTF-8";
   console = {
