@@ -7,7 +7,7 @@
     ./graphical/applications.nix
     ./security.nix
     ./undesired.nix
-    ./devel.nix
+    ./devel/devel.nix
     ./cli.nix
   ];
 
