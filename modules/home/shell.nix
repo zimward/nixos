@@ -1,5 +1,11 @@
 {config,pkgs,...}:
 {
+
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+  
   programs.nushell = {
     enable = true;
     configFile.source = ./nushell/config.nu;
