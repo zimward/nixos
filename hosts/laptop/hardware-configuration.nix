@@ -30,6 +30,10 @@
       fsType = "ext4";
     };
 
+  fileSystems."/tmp" = {
+    fsType = "tmpfs";
+  };
+
   swapDevices = [ 
     {
       device = "/.swapfile";
