@@ -48,6 +48,10 @@ flake-overlays:
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "obsidian"
+  ];
+  
   environment.systemPackages = with pkgs; [
     obsidian
   ];
