@@ -8,7 +8,7 @@ in
     xwayland = true;
     config = rec {
       modifier = "Mod4";
-      terminal = "alacritty";
+      terminal = "${pkgs.alacritty}/bin/alacritty";
       menu = "nu -c bemenu-run | xargs swaymsg exec --";
       up = "r";
       down = "d";
