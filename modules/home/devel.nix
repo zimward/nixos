@@ -1,7 +1,11 @@
-{config,pkgs,...}:
-{
+{pkgs, ...}: {
   programs.helix = {
     enable = true;
+    defaultEditor = true;
+    extraPackages = with pkgs; [
+      alejandra
+      nil
+    ];
     settings = {
       theme = "tokyonight";
       keys.insert = {
@@ -11,13 +15,14 @@
         "C-5" = ":run-shell-command cargo run";
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-    }];
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.alejandra}/bin/alejandra";
+      }
+    ];
   };
-  
 
   programs.git = {
     enable = true;
@@ -27,9 +32,9 @@
       "commit" = "commit -S";
     };
     extraConfig = {
-      commit = { gpgsign = true; };
-      safe = { directory = "/etc/nixos/"; };
-      user = { signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9"; };
+      commit = {gpgsign = true;};
+      safe = {directory = "/etc/nixos/";};
+      user = {signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";};
     };
   };
 }
