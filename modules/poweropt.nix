@@ -22,4 +22,6 @@
 
     };
   };
+  powerManagement.powertop.enable = true;
+  powerManagement.scsiLinkPolicy = "med_power_with_dipm";
 }
