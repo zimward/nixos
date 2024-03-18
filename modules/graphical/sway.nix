@@ -67,6 +67,6 @@ let
       '';
     };
 
-    services.xserver.layout = "de";
-    services.xserver.xkbVariant = "dvorak";
+    services.xserver.xkb.layout = "de";
+    services.xserver.xkb.variant = "dvorak";
   }
