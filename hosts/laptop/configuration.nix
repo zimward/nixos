@@ -11,6 +11,7 @@ flake-overlays:
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ../../modules/general.nix
+      ../../modules/poweropt.nix
     ];
 
   nixpkgs.overlays = [
