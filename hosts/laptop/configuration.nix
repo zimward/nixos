@@ -12,6 +12,7 @@ flake-overlays:
       inputs.home-manager.nixosModules.default
       ../../modules/general.nix
       ../../modules/poweropt.nix
+      ../../modules/net/wifi.nix
     ];
 
   nixpkgs.overlays = [
