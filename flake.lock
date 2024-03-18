@@ -23,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710714957,
-        "narHash": "sha256-eZCxuF58YWgaJMMRrn8oRkwRhxooe5kBS/s2wRVr9PA=",
+        "lastModified": 1710796387,
+        "narHash": "sha256-ve/vpbby+4LPJrlNGqGyuzZMLL7zHUZhvvKu1StsaC8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7b3fca5adcf6c709874a8f2e0c364fe9c58db989",
+        "rev": "baf7659448ffa6ab6870dba1ca681a4868c3068a",
         "type": "github"
       },
       "original": {
@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709391714,
-        "narHash": "sha256-WTnqheqaW6kHJaG7keEfoVx3q3PPYMXVZbQC5QwPepo=",
+        "lastModified": 1710774114,
+        "narHash": "sha256-bljS2velgh95iKYUdcgRytDo+tdqlrJdWY+mFUNAZNc=",
         "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "c60d4dbed0fc6698c0ea4b9340f7cac3b5a4da0e",
+        "rev": "fda842214aaeb923d53df6352318552144a5f59e",
         "type": "gitlab"
       },
       "original": {
@@ -74,11 +74,70 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1710628718,
+        "narHash": "sha256-y+l3eH53UlENaYa1lmnCBHusZb1kxBEFd2/c7lDsGpw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6dc11d9859d6a18ab0c5e5829a5b8e4810658de3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-23.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nix-matlab": "nix-matlab",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "soppps-nix": "soppps-nix",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "soppps-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1710799205,
+        "narHash": "sha256-oOBU8GlszhjLiKSlONuPyhEgCS1cQTPy0y8JvPmj1vI=",
+        "owner": "zimward",
+        "repo": "soppps-nix",
+        "rev": "7b0b1c14f4c896a297967476e9bc6ca06dbdfd65",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zimward",
+        "repo": "soppps-nix",
+        "type": "github"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": "nixpkgs-stable"
+      },
+      "locked": {
+        "lastModified": 1710644594,
+        "narHash": "sha256-RquCuzxfy4Nr8DPbdp3D/AsbYep21JgQzG8aMH9jJ4A=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "83b68a0e8c94b72cdd0a6e547a14ca7eb1c03616",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     }
   },
