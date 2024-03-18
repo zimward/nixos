@@ -11,6 +11,9 @@
         PLATFORM_PROFILE_ON_AC = "balanced";
         PLATFORM_PROFILE_ON_BAT = "low-power";
 
+        SATA_LINKPWR_ON_BAT = "med_power_with_dipm";
+        SATA_LINKPWR_ON_AC = "med_power_with_dipm";
+        
         CPU_BOOST_ON_AC=1;
         CPU_BOOST_ON_BAT=0;
 
@@ -23,5 +26,4 @@
     };
   };
   powerManagement.powertop.enable = true;
-  powerManagement.scsiLinkPolicy = "med_power_with_dipm";
 }
