@@ -1,28 +1,21 @@
-{...}:{
+{...}: {
   services.tlp = {
     enable = true;
     settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
+      CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
 
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balanced";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      SATA_LINKPWR_ON_BAT = "med_power_with_dipm";
+      SATA_LINKPWR_ON_AC = "med_power_with_dipm";
 
-        PLATFORM_PROFILE_ON_AC = "balanced";
-        PLATFORM_PROFILE_ON_BAT = "low-power";
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
 
-        SATA_LINKPWR_ON_BAT = "med_power_with_dipm";
-        SATA_LINKPWR_ON_AC = "med_power_with_dipm";
-        
-        CPU_BOOST_ON_AC=1;
-        CPU_BOOST_ON_BAT=0;
+      CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_HWP_DYN_BOOST_ON_BAT = 0;
 
-        CPU_HWP_DYN_BOOST_ON_AC=1;
-        CPU_HWP_DYN_BOOST_ON_BAT=0;
-        
-       START_CHARGE_THRESH_BAT0 = 70;
-       STOP_CHARGE_THRESH_BAT0 = 80; 
-
+      START_CHARGE_THRESH_BAT0 = 70;
+      STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
   powerManagement.powertop.enable = true;
