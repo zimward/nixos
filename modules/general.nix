@@ -24,7 +24,7 @@
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     _JAVA_AWT_WM_NONREPARENTING = "1";
     MOZ_ENABLE_WAYLAND = "1";
-    SSH_AUTH_SOCK = /run/user/1000/ssh-agent;
+    SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
   };
 
   time.timeZone = "Europe/Berlin";
