@@ -58,4 +58,17 @@
       persist = true;
     }
   ];
+  # auto system upgrade
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = ["--update-input" "nixpkgs"];
+    dates = "10:00";
+  };
+  # nixos garbage collection automation
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
 }
