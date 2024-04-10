@@ -13,6 +13,7 @@
     ./undesired.nix
     ./devel/devel.nix
     ./cli.nix
+    ./wine.nix
     inputs.sops-nix.nixosModules.sops
     inputs.soppps-nix.nixosModules.soppps
   ];
@@ -71,4 +72,7 @@
     dates = "weekly";
     options = "--delete-older-than 15d";
   };
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
 }
