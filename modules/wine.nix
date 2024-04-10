@@ -5,7 +5,10 @@
   ...
 }: {
   options = {
-    enable = lib.mkDefault true;
+    enable = lib.mkOption {
+      default = true;
+      description = "Enable wine packages";
+    };
   };
   config = lib.mkIf config.enable {
     environment.systemPackages = with pkgs; [
