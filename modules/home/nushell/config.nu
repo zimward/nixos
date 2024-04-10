@@ -537,9 +537,4 @@ $env.config = {
   ]
 }
 
-alias grep = rg
-alias sha256sum = uu-hashsum --sha256
-alias sha512sum = uu-hashsum --sha512
-alias md5sum = uu-hashsum --md5
-alias b2sum = uu-hashsum --b2sum
-alias b3sum = uu-hashsum --b3sum
+alias matlab = nix run gitlab:doronbehar/nix-matlab
