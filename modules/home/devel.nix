@@ -5,6 +5,7 @@
     extraPackages = with pkgs; [
       alejandra
       nil
+      python311Packages.python-lsp-server
     ];
     settings = {
       theme = "tokyonight";
