@@ -11,8 +11,16 @@
       theme = "tokyonight";
       keys.insert = {
         "C-d" = "normal_mode";
+        "A-h" = "extend_char_left";
+        "A-d" = "extend_visual_line_down";
+        "A-r" = "extend_visual_line_up";
+        "A-n" = "extend_char_right";
       };
       keys.normal = {
+        "A-h" = "move_char_left";
+        "A-d" = "move_line_down";
+        "A-r" = "move_line_up";
+        "A-n" = "move_char_right";
         "C-5" = ":run-shell-command cargo run";
       };
     };
