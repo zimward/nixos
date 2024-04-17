@@ -18,8 +18,7 @@
       helix
       joshuto #file manager
       ripgrep
-      #zenith #process manager, build currently failing
-      htop
+      zenith #process manager
       du-dust
     ];
   };
