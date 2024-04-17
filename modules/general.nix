@@ -6,9 +6,7 @@
 }: {
   imports = [
     ./main-user.nix
-    ./graphical/sway.nix
-    ./graphical/fonts.nix
-    ./graphical/applications.nix
+    ./graphical
     ./security.nix
     ./undesired.nix
     ./devel/devel.nix
@@ -48,7 +46,7 @@
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
-  soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
+  # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
 
   security.doas.enable = true;
   security.sudo.enable = false;
