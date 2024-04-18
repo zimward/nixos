@@ -1,8 +1,6 @@
-{pkgs, config, lib, ...}:
-let
-  status_cfg = import ./status_cfg.nix {inherit pkgs config;};
-in
-{
+{pkgs, ...}: let
+  status_cfg = import ./status_cfg.nix {inherit pkgs;};
+in {
   wayland.windowManager.sway = {
     enable = true;
     xwayland = true;
@@ -22,13 +20,17 @@ in
         {
           position = "top";
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status_cfg}";
-         # swaybarCommand = "${pkgs.waybar}/bin/waybar"; maybe configure waybar
+          # swaybarCommand = "${pkgs.waybar}/bin/waybar"; maybe configure waybar
         }
       ];
       input = {
-        "type:keyboard" = {xkb_layout = "de,de"; xkb_variant = "dvorak,"; xkb_numlock="enabled";};
+        "type:keyboard" = {
+          xkb_layout = "de,de";
+          xkb_variant = "dvorak,";
+          xkb_numlock = "enabled";
+        };
       };
-      keybindings =  {
+      keybindings = {
         "${modifier}+Shift+t" = "exec ${terminal}";
         "${modifier}+p" = "exec ${menu}";
         "${modifier}+Shift+j" = "kill";
@@ -76,24 +78,15 @@ in
         "${modifier}+8" = "workspace number 8";
         "${modifier}+9" = "workspace number 9";
 
-        "${modifier}+Shift+1" =
-          "move container to workspace number 1";
-        "${modifier}+Shift+2" =
-          "move container to workspace number 2";
-        "${modifier}+Shift+3" =
-          "move container to workspace number 3";
-        "${modifier}+Shift+4" =
-          "move container to workspace number 4";
-        "${modifier}+Shift+5" =
-          "move container to workspace number 5";
-        "${modifier}+Shift+6" =
-          "move container to workspace number 6";
-        "${modifier}+Shift+7" =
-          "move container to workspace number 7";
-        "${modifier}+Shift+8" =
-          "move container to workspace number 8";
-        "${modifier}+Shift+9" =
-          "move container to workspace number 9";
+        "${modifier}+Shift+1" = "move container to workspace number 1";
+        "${modifier}+Shift+2" = "move container to workspace number 2";
+        "${modifier}+Shift+3" = "move container to workspace number 3";
+        "${modifier}+Shift+4" = "move container to workspace number 4";
+        "${modifier}+Shift+5" = "move container to workspace number 5";
+        "${modifier}+Shift+6" = "move container to workspace number 6";
+        "${modifier}+Shift+7" = "move container to workspace number 7";
+        "${modifier}+Shift+8" = "move container to workspace number 8";
+        "${modifier}+Shift+9" = "move container to workspace number 9";
 
         "${modifier}+Shift+minus" = "move scratchpad";
         "${modifier}+minus" = "scratchpad show";
