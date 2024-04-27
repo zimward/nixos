@@ -13,6 +13,6 @@ pkgs.writeText "configuration.toml" ''
 
   [[block]]
   block = "time"
-  format = "$timestamp.datetime(f:'%Y.%m.%d %a日 %H:%M:%S',l:ja_JP)"
+  format = "$timestamp.datetime(f:'%Y.%m.%d %a曜日 %H:%M:%S',l:ja_JP)"
   interval = 1
 ''
