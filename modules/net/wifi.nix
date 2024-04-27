@@ -34,8 +34,10 @@
         ca-cert = "${config.sops.secrets.easyroam_root_ca.path}";
         client-cert = "${config.sops.secrets.easyroam_client_cert.path}";
         eap = "tls";
-        identity = "secret:${config.sops.secrets."wifi/easyroam_ca".path}";
+        # identity = "secret:${config.sops.secrets."wifi/easyroam_ca".path}";
+        identity = "6889164916985036865@easyroam-pca.htw-berlin.de";
         private-key = "${config.sops.secrets.easyroam_client_key.path}";
+        private-key-password = "none";
       };
       ipv4.method = "auto";
       ipv6 = {
