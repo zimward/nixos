@@ -21,9 +21,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    soppps-nix = {
-      url = "git+file:/home/zimward/gits/soppps-nix";
-    };
+    #soppps-nix = {
+    #  url = "git+file:/home/zimward/gits/soppps-nix";
+    #};
   };
 
   outputs = {
@@ -48,6 +48,15 @@
       specialArgs = {inherit inputs;};
       modules = [
         (import ./hosts/laptop/configuration.nix flake-overlays)
+        inputs.home-manager.nixosModules.default
+        inputs.impermanence.nixosModules.impermanence
+      ];
+    };
+    
+    nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/nas/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.impermanence.nixosModules.impermanence
       ];
