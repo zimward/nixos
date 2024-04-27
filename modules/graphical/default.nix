@@ -9,5 +9,6 @@
     ./fonts.nix
     ./applications.nix
     ./sway.nix
+    ./ime.nix
   ];
 }
