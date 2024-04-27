@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,8 +32,6 @@
     nix-matlab,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
     flake-overlays = [
       nix-matlab.overlay
     ];
@@ -47,6 +49,7 @@
       modules = [
         (import ./hosts/laptop/configuration.nix flake-overlays)
         inputs.home-manager.nixosModules.default
+        inputs.impermanence.nixosModules.impermanence
       ];
     };
   };
