@@ -1,8 +1,8 @@
-
 {
   pkgs,
   config,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -10,11 +10,12 @@
     ./security.nix
     ./undesired.nix
     ./cli.nix
+    ./hardware/tmpfsroot.nix
     inputs.sops-nix.nixosModules.sops
     # inputs.soppps-nix.nixosModules.soppps
   ];
 
-  environment.systemPackages=with pkgs;[
+  environment.systemPackages = with pkgs; [
     git
   ];
 
@@ -31,7 +32,7 @@
 
   main-user.userName = "zimward";
   services.getty.autologinUser = config.main-user.userName;
-  
+
   security.doas.enable = true;
   security.sudo.enable = false;
   security.doas.extraRules = [
@@ -41,11 +42,10 @@
       persist = true;
     }
   ];
-
-  environment.persistence."/nix/persist/system" = {
+  environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
     hideMounts = true;
     directories = [
-    "/var/lib/nixos"
+      "/var/lib/nixos"
     ];
     files = [
       "/etc/machine-id"
@@ -55,7 +55,6 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
     ];
   };
-  
   # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
