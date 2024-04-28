@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   inputs,
   ...
@@ -8,6 +7,7 @@
     ./graphical
     ./devel/devel.nix
     ./wine.nix
+    ./general_server.nix
   ];
 
   environment.sessionVariables = {
@@ -25,10 +25,4 @@
       ${config.main-user.userName} = import ./home/default.nix;
     };
   };
-
-  #systemd.sysusers.enable = true;
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
 }

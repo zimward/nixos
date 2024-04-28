@@ -5,7 +5,7 @@
 }: {
   options = {
     tmpfsroot.enable = lib.mkOption {
-      default = true;
+      default = false;
       description = "enable Tmpfs root fs";
     };
     tmpfsroot.nixstore = lib.mkOption {
