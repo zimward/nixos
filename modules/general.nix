@@ -8,8 +8,6 @@
     ./graphical
     ./devel/devel.nix
     ./wine.nix
-    inputs.sops-nix.nixosModules.sops
-    inputs.soppps-nix.nixosModules.soppps
   ];
 
   environment.sessionVariables = {
@@ -29,10 +27,6 @@
   };
 
   #systemd.sysusers.enable = true;
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
-  # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"

@@ -18,12 +18,13 @@
     };
   };
   config = lib.mkIf config.tmpfsroot.enable {
-    fileSystems."/" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = ["size=2G" "mode=755"];
-    };
-    fileSystems."/nix" = config.tmpfsroot.nixstore;
-    fileSystems."/home" = config.tmpfsroot.home;
+    # fileSystems."/" = {
+    #   device = "none";
+    #   fsType = "tmpfs";
+    #   options = ["size=2G" "mode=755"];
+    # };
+    # fileSystems."/nix" = config.tmpfsroot.nixstore;
+    # fileSystems."/home" = config.tmpfsroot.home;
+    sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
   };
 }
