@@ -1,5 +1,6 @@
 keys:
   - &primary age1cm57kdku8zdue9d000urwkamgnlv3jc48fkgl6e9szz9y2ysaaes2hwlfg
+  - &nas age16eyshxlvs5kvyedcmphcn5awx06dghe0kfnc72gjd2yfdgqtvyzsyl5345
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
@@ -9,3 +10,7 @@ creation_rules:
     key_groups:
       - age:
           - *primary
+  - path_regex: secrets/naskey
+    key_groups:
+      - age:
+          - *nas
