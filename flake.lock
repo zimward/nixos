@@ -60,11 +60,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714143710,
-        "narHash": "sha256-ZPQW4x26GeNvDSOQ1Q3lt/TVFmHXnYOLYkI1GiZvRyk=",
+        "lastModified": 1714230098,
+        "narHash": "sha256-34l39LwU/zUhVTq1ogeHhOz9/PjlM5kVGAnI5kJv6M8=",
         "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "7ac48be6dbab4e00b97b1d3fa11be33b15bcb7e9",
+        "rev": "03ada3bde2418252a48c33e22e8895c84127eee0",
         "type": "gitlab"
       },
       "original": {
@@ -105,47 +105,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1710544003,
-        "narHash": "sha256-O5Stzo0cf/1II+7wY+Vhsi7oCARXUuP7pZo0K/bDgh8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "bfaf0a1feb46a3ef8b17a195d52ee8d4c029e28a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs",
-        "soppps-nix": "soppps-nix",
         "sops-nix": "sops-nix"
-      }
-    },
-    "soppps-nix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1711187204,
-        "narHash": "sha256-Dt65R+9rl6BldH7oRAmcntS+1X4+qsRjGeJZsRXhX98=",
-        "ref": "refs/heads/master",
-        "rev": "e7b8365c0d0acdc3156be018fedf085be52786f0",
-        "revCount": 7,
-        "type": "git",
-        "url": "file:/home/zimward/gits/soppps-nix"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:/home/zimward/gits/soppps-nix"
       }
     },
     "sops-nix": {

@@ -10,6 +10,8 @@
     ./security.nix
     ./undesired.nix
     ./cli.nix
+    inputs.sops-nix.nixosModules.sops
+    # inputs.soppps-nix.nixosModules.soppps
   ];
 
   environment.systemPackages=with pkgs;[
@@ -54,6 +56,11 @@
     ];
   };
   
+  # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
+
   # auto system upgrade
   system.autoUpgrade = {
     enable = true;

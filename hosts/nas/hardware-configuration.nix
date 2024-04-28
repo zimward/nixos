@@ -12,6 +12,17 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = ["zfs"];
+
+  #import zfs pool on boot
+  boot.zfs.extraPools = ["Pool1_20TB"];
+  boot.zfs.forceImportRoot = false;
+  #nas
+  # fileSystems."/mnt/nas" = {
+  #   device = "Pool1_20TB";
+  #   fsType = "zfs";
+  #   options = ["bg"];    
+  # };
 
   fileSystems."/" =
     { device = "tmpfs";

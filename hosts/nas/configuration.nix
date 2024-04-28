@@ -10,9 +10,19 @@
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ../../modules/general_server.nix
+      ../../modules/hardware/tmpfsroot.nix
     ];
   config.main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
+
+  #enable tmpfs root (currently only changes sops key location)
+  config.tmpfsroot.enable = true;
+  
     config = {
+  #zfs key location
+  sops.secrets.naskey = {
+    "format" = "binary";
+    sopsFile = ../../secrets/naskey;
+  };
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -20,6 +30,7 @@
   boot.loader.systemd-boot.memtest86.enable = true;
 
   networking.hostName = "nas"; # Define your hostname.
+  networking.hostId = "bc365a3a";
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -34,6 +45,14 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZ4iv3QwB03x5UlteFjPmTymPb29ruuKiMdZLn8jIem mobian@pinephone"
   ];
 
+  #zfs auto scrubbing
+  services.zfs.autoScrub.enable = true;
+  #nfs
+  services.nfs.server.enable = true;
+  services.nfs.server.exports = ''
+    /mnt/nas/nas/mainpc    192.168.0.1(rw,fsid=0,no_subtree_check)
+  '';
+  
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -48,10 +67,10 @@
 
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 2049 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
