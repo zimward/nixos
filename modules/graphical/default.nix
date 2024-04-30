@@ -10,5 +10,6 @@
     ./applications.nix
     ./sway.nix
     ./ime.nix
+    ./kicad.nix
   ];
 }
