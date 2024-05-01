@@ -60,6 +60,8 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
 
+  services.logind.powerKey = "suspend";
+
   # auto system upgrade
   system.autoUpgrade = {
     enable = true;
