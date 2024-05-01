@@ -15,7 +15,6 @@
 
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -61,7 +60,7 @@
         inputs.impermanence.nixosModules.impermanence
       ];
     };
-    
+
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
