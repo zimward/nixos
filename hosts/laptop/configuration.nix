@@ -13,7 +13,7 @@ flake-overlays: {
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
     ../../modules/general.nix
-    ../../modules/poweropt.nix
+    ../../modules/hardware/poweropt.nix
     ../../modules/net/wifi.nix
   ];
 
