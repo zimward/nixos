@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -58,6 +59,7 @@
         (import ./hosts/laptop/configuration.nix flake-overlays)
         inputs.home-manager.nixosModules.default
         inputs.impermanence.nixosModules.impermanence
+        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
       ];
     };
 
