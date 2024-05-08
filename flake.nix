@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -26,50 +27,67 @@
     #};
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nix-matlab,
-    ...
-  } @ inputs: let
-    flake-overlays = [
-      nix-matlab.overlay
-    ];
-  in {
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/vm/configuration.nix
-        inputs.home-manager.nixosModules.default
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      nix-matlab,
+      ...
+    }@inputs:
+    let
+      flake-overlays = [
+        nix-matlab.overlay
+        (final: prev: {
+          unstable = import nixpkgs-unstable {
+            system = prev.system;
+          };
+        })
       ];
-    };
+    in
+    {
+      nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./hosts/vm/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
 
-    nixosConfigurations.kalman = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        (import ./hosts/workstation/configuration.nix)
-        inputs.home-manager.nixosModules.default
-        inputs.impermanence.nixosModules.impermanence
-      ];
-    };
+      nixosConfigurations.kalman = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          (import ./hosts/workstation/configuration.nix)
+          inputs.home-manager.nixosModules.default
+          inputs.impermanence.nixosModules.impermanence
+        ];
+      };
 
-    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        (import ./hosts/laptop/configuration.nix flake-overlays)
-        inputs.home-manager.nixosModules.default
-        inputs.impermanence.nixosModules.impermanence
-        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
-      ];
-    };
+      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          (import ./hosts/laptop/configuration.nix flake-overlays)
+          inputs.home-manager.nixosModules.default
+          inputs.impermanence.nixosModules.impermanence
+          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
+        ];
+      };
 
-    nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/nas/configuration.nix
-        inputs.home-manager.nixosModules.default
-        inputs.impermanence.nixosModules.impermanence
-      ];
+      nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./hosts/nas/configuration.nix
+          inputs.home-manager.nixosModules.default
+          inputs.impermanence.nixosModules.impermanence
+        ];
+      };
     };
-  };
 }

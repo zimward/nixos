@@ -5,6 +5,7 @@ flake-overlays: {
   config,
   lib,
   pkgs,
+  nixpkgs-unstable,
   inputs,
   ...
 }: {
@@ -17,13 +18,7 @@ flake-overlays: {
     ../../modules/net/wifi.nix
   ];
 
-  nixpkgs.overlays =
-    [
-      (
-        final: prev: {}
-      )
-    ]
-    ++ flake-overlays;
+  nixpkgs.overlays = [] ++ flake-overlays;
 
   boot.loader.grub = {
     enable = true;
