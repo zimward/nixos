@@ -36,11 +36,20 @@
       nix-matlab.overlay
     ];
   in {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./configuration.nix
+        ./hosts/vm/configuration.nix
         inputs.home-manager.nixosModules.default
+      ];
+    };
+
+    nixosConfigurations.kalman = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        (import ./hosts/workstation/configuration.nix)
+        inputs.home-manager.nixosModules.default
+        inputs.impermanence.nixosModules.impermanence
       ];
     };
 
