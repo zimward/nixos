@@ -11,5 +11,6 @@
     ./sway.nix
     ./ime.nix
     ./kicad.nix
+    ./steam.nix
   ];
 }
