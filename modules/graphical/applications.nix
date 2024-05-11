@@ -21,6 +21,9 @@
         keepassxc
         mpv
         thunderbird
+        mumble
+        freetube
+        pavucontrol
       ];
   };
 }
