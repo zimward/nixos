@@ -26,5 +26,6 @@
     # fileSystems."/nix" = config.tmpfsroot.nixstore;
     # fileSystems."/home" = config.tmpfsroot.home;
     sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
+    programs.fuse.userAllowOther = true;
   };
 }

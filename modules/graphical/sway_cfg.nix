@@ -15,6 +15,7 @@ in {
       startup = [
         {command = "dbus-sway-environment";}
         {command = "configure-gtk";}
+        {command = "fcitx5 -d";}
       ];
       bars = [
         {
@@ -30,11 +31,18 @@ in {
           xkb_numlock = "enabled";
         };
       };
+      output = {
+        "DP-1" = {
+          position = "0 +1920";
+        };
+      };
       keybindings = {
         "${modifier}+Shift+t" = "exec ${terminal}";
         "${modifier}+p" = "exec ${menu}";
         "${modifier}+Shift+j" = "kill";
         "${modifier}+BackSpace" = "input type:keyboard xkb_switch_layout next";
+
+        "${modifier}+Shift+y" = "exec swaymsg output DP-1 transform 90 clockwise";
 
         "${modifier}+${left}" = "focus left";
         "${modifier}+${down}" = "focus down";

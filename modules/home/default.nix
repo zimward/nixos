@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  lib,
+  inputs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "zimward";
@@ -10,6 +13,7 @@
     ./ssh.nix
     ./shell.nix
     ./devel.nix
+    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -29,7 +33,7 @@
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;  
+    # ".screenrc".source = dotfiles/screenrc;
   };
 
   # Home Manager can also manage your environment variables through
@@ -48,6 +52,26 @@
   #  /etc/profiles/per-user/zimward/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
+  };
+
+  home.persistence."/nix/persist/home/zimward/" = {
+    directories = [
+      ".local/share/keyrings"
+      ".config/FreeTube"
+      ".local/share/Mumble"
+      ".config/Mumble"
+      "Downloads"
+      "Dokumente"
+      {
+        directory = ".local/share/Steam";
+        method = "symlink";
+      }
+      {
+        directory = ".ssh";
+        method = "symlink";
+      }
+    ];
+    allowOther = true;
   };
 
   # Let Home Manager install and manage itself.

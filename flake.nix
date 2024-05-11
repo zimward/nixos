@@ -20,7 +20,6 @@
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     #soppps-nix = {
     #  url = "git+file:/home/zimward/gits/soppps-nix";
@@ -61,7 +60,7 @@
           inherit inputs;
         };
         modules = [
-          (import ./hosts/workstation/configuration.nix)
+          (import ./hosts/kalman/configuration.nix flake-overlays)
           inputs.home-manager.nixosModules.default
           inputs.impermanence.nixosModules.impermanence
         ];
