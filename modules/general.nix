@@ -2,7 +2,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./graphical
     ./devel/devel.nix
@@ -28,10 +29,28 @@
     };
 
     home-manager = {
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {
+        inherit inputs;
+      };
       users = {
         ${config.main-user.userName} = import ./home/default.nix;
       };
     };
+    #sound
+    sound.enable = true;
+    hardware.pulseaudio.enable = false;
+    #allow user processes to run with realitme scheduling
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      #may need to enable alsa if some applications need it
+      alsa.enable = false;
+      alsa.support32Bit = false;
+      pulse.enable = true;
+    };
+
+    # opengl 32bit support
+    hardware.opengl.driSupport = true;
+    hardware.opengl.driSupport32Bit = true;
   };
 }
