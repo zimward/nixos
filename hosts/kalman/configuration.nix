@@ -25,6 +25,8 @@ flake-overlays: {
 
   config.ethernet.share.device = "enp49s0f3u3";
 
+  config.graphical.steam.enable = true;
+
   config = {
     nixpkgs.overlays = [] ++ flake-overlays;
 
@@ -44,10 +46,6 @@ flake-overlays: {
     # services.xserver.libinput.enable = true;
 
     #obsidian
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "obsidian"
-      ];
     environment.systemPackages = with pkgs; [
       obsidian
     ];
