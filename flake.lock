@@ -186,11 +186,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
+        "dirtyRev": "e01c2ceb3ea3adf592386fbdac248cc20fc199a0-dirty",
+        "dirtyShortRev": "e01c2ce-dirty",
         "lastModified": 1715542817,
-        "narHash": "sha256-IebUvyA8Q+Q7e5XvmSkpFUA15iq6D2LM2moQPmMBYZI=",
-        "ref": "refs/heads/master",
-        "rev": "e01c2ceb3ea3adf592386fbdac248cc20fc199a0",
-        "revCount": 2,
+        "narHash": "sha256-ungV49ypVG9fk04qfy2GPdGs0hD6o+fS68A/8+7cInU=",
         "type": "git",
         "url": "file:/home/zimward/gits/pid-fan-controller-nix"
       },
