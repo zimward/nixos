@@ -23,7 +23,7 @@
   '';
 
   fileSystems."/" = {
-    device = "tmfs";
+    device = "tmpfs";
     fsType = "tmpfs";
   };
 
@@ -53,7 +53,7 @@
   fileSystems."/mnt/nas" = {
     device = "192.168.0.238:/mnt/nas/nas/mainpc";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto"];
+    options = ["x-systemd.automount" "noauto" "soft" "bg" "timeo=10"];
   };
 
   swapDevices = [];
