@@ -30,11 +30,13 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/E939-E650";
     fsType = "vfat";
+    options = ["umask=0077"];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/8455ca75-43e5-4a7d-9d0f-96950408f262";
     fsType = "f2fs";
+    options = ["discard"];
   };
 
   boot.initrd.luks.devices."root" = {
