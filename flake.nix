@@ -21,6 +21,10 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
     };
+
+    pid-fan-controller = {
+      url = "git+file:/home/zimward/gits/pid-fan-controller-nix";
+    };
     #soppps-nix = {
     #  url = "git+file:/home/zimward/gits/soppps-nix";
     #};
@@ -63,6 +67,7 @@
           (import ./hosts/kalman/configuration.nix flake-overlays)
           inputs.home-manager.nixosModules.default
           inputs.impermanence.nixosModules.impermanence
+          inputs.pid-fan-controller.default
         ];
       };
 
