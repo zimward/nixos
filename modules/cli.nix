@@ -16,7 +16,7 @@
       starship
       htop
       helix
-      joshuto #file manager
+      yazi #file manager
       ripgrep
       zenith #process manager
       du-dust
