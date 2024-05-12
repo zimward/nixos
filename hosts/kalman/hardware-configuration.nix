@@ -42,7 +42,7 @@
     allowDiscards = true;
   };
 
-  fileSystems."/nix/persist/home" = {
+  fileSystems."/home" = {
     device = "/dev/disk/by-uuid/047830f0-a9d4-4c1f-b1c7-7af9a2b7337e";
     fsType = "ext4";
   };

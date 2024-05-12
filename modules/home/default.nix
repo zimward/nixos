@@ -13,7 +13,7 @@
     ./ssh.nix
     ./shell.nix
     ./devel.nix
-    inputs.impermanence.nixosModules.home-manager.impermanence
+    # inputs.impermanence.nixosModules.home-manager.impermanence
   ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -52,27 +52,31 @@
   #  /etc/profiles/per-user/zimward/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_CACHE_HOME = "$HOME/.cache";
   };
 
-  home.persistence."/nix/persist/home/zimward/" = {
-    directories = [
-      ".local/share/keyrings"
-      ".config/FreeTube"
-      ".local/share/Mumble"
-      ".config/Mumble"
-      "Downloads"
-      "Dokumente"
-      {
-        directory = ".local/share/Steam";
-        method = "symlink";
-      }
-      {
-        directory = ".ssh";
-        method = "symlink";
-      }
-    ];
-    allowOther = true;
-  };
+  # home.persistence."/nix/persist/home/zimward/" = {
+  #   directories = [
+  #     ".local/share/keyrings"
+  #     ".config/FreeTube"
+  #     ".local/share/Mumble"
+  #     ".config/Mumble"
+  #     "Downloads"
+  #     "Dokumente"
+  #     ".local/share/Steam"
+  #     ".factorio"
+  #     "gits"
+  #     "Anime"
+  #     ".thunderbird"
+  #     {
+  #       directory = ".ssh";
+  #       method = "symlink";
+  #     }
+  #   ];
+  #   allowOther = true;
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
