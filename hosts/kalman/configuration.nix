@@ -29,6 +29,8 @@ flake-overlays: {
   config.graphical.deluge.enable = true;
 
   config = {
+    pid-fan-controller.enable = true;
+    environment.etc."pid-fan-settings.json".source = ./pid-fan-settings.json;
     nixpkgs.overlays = [] ++ flake-overlays;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
