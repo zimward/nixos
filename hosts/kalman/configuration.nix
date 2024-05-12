@@ -26,6 +26,7 @@ flake-overlays: {
   config.ethernet.share.device = "enp49s0f3u3";
 
   config.graphical.steam.enable = true;
+  config.graphical.deluge.enable = true;
 
   config = {
     nixpkgs.overlays = [] ++ flake-overlays;
