@@ -12,5 +12,6 @@
     ./ime.nix
     ./kicad.nix
     ./steam.nix
+    ./deluge.nix
   ];
 }
