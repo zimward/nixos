@@ -53,6 +53,9 @@ flake-overlays: {
       "electron-25.9.0"
     ];
 
+    virtualisation.libvirtd.enable = true;
+    programs.virt-manager.enable = true;
+
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     # programs.mtr.enable = true;
