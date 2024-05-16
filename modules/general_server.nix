@@ -62,6 +62,9 @@
 
   services.logind.powerKey = "suspend";
 
+  #DONT USE PROVIDER DNS
+  networking.nameservers = ["1.1.1.1" "2606:4700:4700:1111"];
+
   # auto system upgrade
   system.autoUpgrade = {
     enable = true;
