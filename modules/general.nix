@@ -7,6 +7,7 @@
   imports = [
     ./graphical
     ./devel/devel.nix
+    ./devel/tex.nix
     ./wine.nix
     ./general_server.nix
     ./unfree.nix
@@ -18,6 +19,7 @@
     "steam-original"
     "steam-run"
   ];
+  config.latex = true;
   config = {
     environment.sessionVariables = {
       SDL_VIDEODRIVER = "wayland";
