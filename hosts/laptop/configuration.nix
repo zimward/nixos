@@ -24,7 +24,11 @@ flake-overlays: {
 
   networking.hostName = "laptop"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    enableCryptodisk = true;
+  };
   #obsidian
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
