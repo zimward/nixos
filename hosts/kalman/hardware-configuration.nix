@@ -25,6 +25,7 @@
   fileSystems."/" = {
     device = "tmpfs";
     fsType = "tmpfs";
+    options = ["noexec"];
   };
 
   fileSystems."/boot" = {
@@ -53,7 +54,7 @@
   fileSystems."/mnt/nas" = {
     device = "192.168.0.238:/mnt/nas/nas/mainpc";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "soft" "bg" "timeo=10"];
+    options = ["x-systemd.automount" "noauto" "soft" "bg" "timeo=10" "noexec"];
   };
 
   swapDevices = [];
