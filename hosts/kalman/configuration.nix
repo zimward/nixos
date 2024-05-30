@@ -53,6 +53,7 @@ flake-overlays: {
     #obsidian
     environment.systemPackages = with pkgs; [
       obsidian
+      opentabletdriver
     ];
     nixpkgs.config.permittedInsecurePackages = [
       "electron-25.9.0"
