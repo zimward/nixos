@@ -1,6 +1,10 @@
-{ lib, config, pkgs, ...}:
 {
-  options ={
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  options = {
     main-user.userName = lib.mkOption {
       default = "mainuser";
       description = ''
@@ -13,9 +17,9 @@
     };
   };
   config = {
-    users.users.${config.main-user.userName}={
+    users.users.${config.main-user.userName} = {
       isNormalUser = true;
-      initialPassword = "password";
+      initialPassword = lib.mkIf (config.main-user.hashedPassword == null) "password";
       hashedPassword = config.main-user.hashedPassword;
       description = "main user";
       shell = pkgs.nushell;
