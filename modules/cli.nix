@@ -18,7 +18,7 @@
       helix
       yazi #file manager
       ripgrep
-      zenith #process manager
+      bottom #process manager
       du-dust
     ];
   };
