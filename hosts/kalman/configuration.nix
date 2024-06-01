@@ -53,7 +53,6 @@ flake-overlays: {
     #obsidian
     environment.systemPackages = with pkgs; [
       obsidian
-      opentabletdriver
     ];
     nixpkgs.config.permittedInsecurePackages = [
       "electron-25.9.0"
@@ -61,6 +60,8 @@ flake-overlays: {
 
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
+
+    hardware.opentabletdriver.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
