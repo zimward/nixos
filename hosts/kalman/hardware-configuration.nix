@@ -5,10 +5,13 @@
   config,
   lib,
   modulesPath,
+  inputs,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
 
   boot.initrd.availableKernelModules = ["nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
