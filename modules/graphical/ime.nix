@@ -6,7 +6,7 @@
 }: {
   options = {
     graphical.ime = lib.mkOption {
-      default = true;
+      default = false;
       description = "enable IME";
     };
   };
