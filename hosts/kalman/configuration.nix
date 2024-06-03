@@ -50,9 +50,8 @@ flake-overlays: {
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
 
-    #obsidian
     environment.systemPackages = with pkgs; [
-      obsidian
+      docker
     ];
     nixpkgs.config.permittedInsecurePackages = [
       "electron-25.9.0"
@@ -60,6 +59,8 @@ flake-overlays: {
 
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
+    virtualisation.docker.enable = true;
+    users.users."zimward".extraGroups = ["docker"];
 
     hardware.opentabletdriver.enable = true;
 
