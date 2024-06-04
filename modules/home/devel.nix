@@ -6,6 +6,7 @@
       alejandra
       nil
       python311Packages.python-lsp-server
+      texlab #latex
     ];
     settings = {
       theme = "tokyonight";
