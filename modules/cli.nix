@@ -20,6 +20,7 @@
       ripgrep
       bottom #process manager
       du-dust
+      sshfs
     ];
   };
 }
