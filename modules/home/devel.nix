@@ -25,13 +25,21 @@
         "C-5" = ":run-shell-command cargo run";
       };
     };
-    languages.language = [
-      {
-        name = "nix";
-        auto-format = true;
-        formatter.command = "${pkgs.alejandra}/bin/alejandra";
-      }
-    ];
+    languages = {
+      language-server.rust-analyzer = {
+        config.check = {
+          command = "clippy";
+          extraArgs = ["--" "-W" "clippy::pedantic" "-W" "clippy::nursery"];
+        };
+      };
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.alejandra}/bin/alejandra";
+        }
+      ];
+    };
   };
 
   programs.git = {
