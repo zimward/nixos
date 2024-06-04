@@ -2,8 +2,12 @@
   lib,
   config,
   pkgs,
+  unstable,
   ...
 }:
+let
+  alt = cond: pkg: (if cond then [ pkg ] else [ ]);
+in
 {
   options = {
     graphical.kicad = {
@@ -20,10 +24,11 @@
     };
   };
   config = lib.mkIf (config.graphical.enable && config.graphical.kicad.enable) {
-    environment.systemPackages = with pkgs;
-      lib.mkIf (config.graphical.kicad.unstable && !config.graphical.kicad.minimal) [unstable.kicad];
-    # ++ lib.mkIf (config.graphical.kicad.unstable && config.kicad.minimal) [unstable.kicad-small]
-    # ++ lib.mkIf (!config.graphical.kicad.unstable && !config.graphical.kicad.minimal) [kicad]
-    # ++ lib.mkIf (!config.graphical.kicad.unstable && config.kicad.minimal) [kicad-small];
+    environment.systemPackages =
+      [ ]
+      ++ alt (config.graphical.kicad.unstable && !config.graphical.kicad.minimal) unstable.kicad
+      ++ alt (config.graphical.kicad.unstable && config.graphical.kicad.minimal) unstable.kicad-small
+      ++ alt (!config.graphical.kicad.unstable && !config.graphical.kicad.minimal) pkgs.kicad
+      ++ alt (!config.graphical.kicad.unstable && config.graphical.kicad.minimal) pkgs.kicad-small;
   };
 }
