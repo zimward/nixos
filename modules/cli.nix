@@ -14,7 +14,6 @@
     environment.systemPackages = with pkgs; [
       nushell
       starship
-      htop
       helix
       yazi #file manager
       ripgrep
