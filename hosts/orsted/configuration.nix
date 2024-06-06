@@ -24,7 +24,7 @@ flake-overlays: {
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
-    networking.hostName = "laptop"; # Define your hostname.
+    networking.hostName = "orsted"; # Define your hostname.
     networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
     boot.loader.grub = {
       enable = true;
