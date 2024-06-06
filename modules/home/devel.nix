@@ -27,9 +27,11 @@
     };
     languages = {
       language-server.rust-analyzer = {
-        config.check = {
-          command = "clippy";
-          extraArgs = ["--" "-W" "clippy::pedantic" "-W" "clippy::nursery"];
+        config = {
+          check = {
+            command = "clippy";
+            extraArgs = ["--" "-D" "clippy::pedantic" "-W" "clippy::nursery"];
+          };
         };
       };
       language = [
