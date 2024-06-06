@@ -71,12 +71,12 @@
         ];
       };
 
-      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.orsted = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
         };
         modules = [
-          (import ./hosts/laptop/configuration.nix flake-overlays)
+          (import ./hosts/orsted/configuration.nix flake-overlays)
           inputs.home-manager.nixosModules.default
           inputs.impermanence.nixosModules.impermanence
           inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
