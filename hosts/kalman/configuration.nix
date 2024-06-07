@@ -20,9 +20,6 @@ flake-overlays: {
   #gets wiped due to tmpfs
   config.main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
-  #enable tmpfs root (currently only changes sops key location)
-  config.tmpfsroot.enable = true;
-
   config.ethernet.share.device = "enp49s0f3u3";
 
   config.graphical.steam.enable = true;
