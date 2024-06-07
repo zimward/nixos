@@ -25,7 +25,7 @@
     fileSystems."/" = {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = ["noexec"];
+      options = ["noexec" "mode=755"];
     };
     fileSystems."/nix" = config.tmpfsroot.nixstore;
     fileSystems."/home" = config.tmpfsroot.home;
