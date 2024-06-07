@@ -11,27 +11,28 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
-  config.tmpfsroot = {
-    enable = true;
-    home = {
-      device = "/dev/disk/by-uuid/047830f0-a9d4-4c1f-b1c7-7af9a2b7337e";
-      fsType = "ext4";
-    };
-    nixstore = {
-      device = "/dev/disk/by-uuid/8455ca75-43e5-4a7d-9d0f-96950408f262";
-      fsType = "f2fs";
-      options = ["discard"];
-    };
-    boot = {
-      device = "/dev/disk/by-uuid/E939-E650";
-      fsType = "vfat";
-    };
-  };
   config = {
     boot.initrd.availableKernelModules = ["nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
     boot.initrd.kernelModules = ["dm-snapshot" "dm-cache"];
     boot.kernelModules = ["kvm-amd"];
     boot.extraModulePackages = [];
+
+    tmpfsroot = {
+      enable = true;
+      home = {
+        device = "/dev/disk/by-uuid/047830f0-a9d4-4c1f-b1c7-7af9a2b7337e";
+        fsType = "ext4";
+      };
+      nixstore = {
+        device = "/dev/disk/by-uuid/8455ca75-43e5-4a7d-9d0f-96950408f262";
+        fsType = "f2fs";
+        options = ["discard"];
+      };
+      boot = {
+        device = "/dev/disk/by-uuid/E939-E650";
+        fsType = "vfat";
+      };
+    };
 
     #crypttab for lvm drives
     environment.etc.crypttab.text = ''

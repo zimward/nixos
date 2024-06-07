@@ -13,12 +13,13 @@ flake-overlays: {
     ../../modules/hardware/poweropt.nix
     ../../modules/net/wifi.nix
   ];
-  config.graphical.kicad.minimal = true;
 
   config = {
     nixpkgs.overlays = [] ++ flake-overlays;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
+
+    graphical.kicad.minimal = true;
 
     networking.hostName = "orsted"; # Define your hostname.
     networking.networkmanager.enable = true;
