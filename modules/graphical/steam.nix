@@ -10,7 +10,14 @@
       description = "enable steam";
     };
   };
-  config = lib.mkIf config.graphical.steam.enable {
+  imports = [../unfree.nix];
+
+  config = lib.mkIf (config.graphical.enable && config.graphical.steam.enable) {
+    nixpkgs.allowUnfreePackages = [
+      "steam"
+      "steam-original"
+      "steam-run"
+    ];
     programs.steam.enable = true;
     programs.steam.package = pkgs.steam.override {
       extraPkgs = pkgs:
