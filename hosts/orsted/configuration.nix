@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 flake-overlays: {
   config,
   lib,
@@ -10,7 +7,6 @@ flake-overlays: {
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
     ../../modules/general.nix
@@ -25,23 +21,17 @@ flake-overlays: {
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
     networking.hostName = "orsted"; # Define your hostname.
-    networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+    networking.networkmanager.enable = true;
     boot.loader.grub = {
       enable = true;
       device = "nodev";
       enableCryptodisk = true;
     };
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # programs.mtr.enable = true;
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
 
-    # List services that you want to enable:
-
-    # Enable the OpenSSH daemon.
     services.openssh = {
       enable = true;
       settings.PasswordAuthentication = false;
@@ -51,14 +41,9 @@ flake-overlays: {
     users.users.${config.main-user.userName}.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZ4iv3QwB03x5UlteFjPmTymPb29ruuKiMdZLn8jIem mobian@pinephone"
     ];
-
-    # Open ports in the firewall.
-    # networking.firewall.allowedTCPPorts = [ ... ];
-    # networking.firewall.allowedUDPPorts = [ ... ];
-    # Or disable the firewall altogether.
+    # only ssh is running with pubkey auth so a firewall would only waste memory
     networking.firewall.enable = false;
 
-    # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
     system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
