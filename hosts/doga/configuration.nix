@@ -27,7 +27,7 @@
 
     boot.loader.systemd-boot.memtest86.enable = true;
 
-    networking.hostName = "nas"; # Define your hostname.
+    networking.hostName = "doga"; # Define your hostname.
     networking.hostId = "bc365a3a";
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

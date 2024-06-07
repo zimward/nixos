@@ -83,12 +83,12 @@
         ];
       };
 
-      nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.doga = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
         };
         modules = [
-          ./hosts/nas/configuration.nix
+          ./hosts/doga/configuration.nix
           inputs.home-manager.nixosModules.default
           inputs.impermanence.nixosModules.impermanence
         ];
