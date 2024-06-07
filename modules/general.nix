@@ -10,15 +10,8 @@
     ./devel/tex.nix
     ./wine.nix
     ./general_server.nix
-    ./unfree.nix
   ];
 
-  config.nixpkgs.allowUnfreePackages = [
-    "obsidian"
-    "steam"
-    "steam-original"
-    "steam-run"
-  ];
   config.latex = true;
   config = {
     environment.sessionVariables = {

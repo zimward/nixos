@@ -13,5 +13,6 @@
     ./kicad.nix
     ./steam.nix
     ./deluge.nix
+    ./obsidian.nix
   ];
 }
