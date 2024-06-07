@@ -10,19 +10,20 @@ flake-overlays: {
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
     ../../modules/general.nix
-    ../../modules/hardware/tmpfsroot.nix
     ../../modules/net/eth_share.nix
   ];
-  #gets wiped due to tmpfs
-  config.main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
-
-  config.ethernet.share.device = "enp49s0f3u3";
-
-  config.graphical.steam.enable = true;
-  config.graphical.deluge.enable = true;
 
   config = {
+    #gets wiped due to tmpfs
+    main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
+
+    ethernet.share.device = "enp49s0f3u3";
+
+    graphical.steam.enable = true;
+    graphical.deluge.enable = true;
+
     pid-fan-controller.enable = true;
+
     environment.etc."pid-fan-settings.json".source = ./pid-fan-settings.json;
     nixpkgs.overlays = [] ++ flake-overlays;
 
