@@ -16,6 +16,5 @@
   config = lib.mkIf (config.graphical.enable && config.graphical.obsidian.enable) {
     nixpkgs.allowUnfreePackages = ["obsidian"];
     environment.systemPackages = with pkgs; [obsidian];
-    nixpkgs.config.permittedInsecurePackages = ["electron-25.9.0"];
   };
 }
