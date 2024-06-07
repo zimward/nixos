@@ -31,18 +31,6 @@ flake-overlays: {
       device = "nodev";
       enableCryptodisk = true;
     };
-    #obsidian
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "obsidian"
-      ];
-    environment.systemPackages = with pkgs; [
-      obsidian
-    ];
-    nixpkgs.config.permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
-
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     # programs.mtr.enable = true;

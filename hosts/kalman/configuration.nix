@@ -53,9 +53,6 @@ flake-overlays: {
     environment.systemPackages = with pkgs; [
       docker
     ];
-    nixpkgs.config.permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
 
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
