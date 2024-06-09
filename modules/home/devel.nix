@@ -35,6 +35,11 @@
         "A-n" = "extend_char_right";
       };
       keys.normal = {
+        "A-i" = ["add_newline_below" "move_line_down" "insert_mode"];
+        "j" = {
+          "p" = "goto_next_paragraph";
+          "P" = "goto_prev_paragraph";
+        };
         "A-h" = "move_char_left";
         "A-d" = "move_line_down";
         "A-r" = "move_line_up";
