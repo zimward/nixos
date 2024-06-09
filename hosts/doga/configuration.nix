@@ -39,14 +39,19 @@
     #zfs auto scrubbing
     services.zfs.autoScrub.enable = true;
     #nfs
-    services.nfs.server.enable = true;
-    services.nfs.server.exports = ''
-      /mnt/nas/nas/mainpc    192.168.0.1(rw,fsid=0,no_subtree_check)
-    '';
+    services.nfs.server = {
+      enable = true;
+      lockdPort = 4001;
+      mountdPort = 4002;
+      statdPort = 4000;
+      exports = ''
+        /mnt/nas/nas/mainpc    192.168.0.1(rw,fsid=0,no_subtree_check)
+      '';
+    };
 
     # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [22 2049 20048];
-    networking.firewall.allowedUDPPorts = [20048];
+    networking.firewall.allowedTCPPorts = [22 111 2049 4000 4001 4002 20048];
+    networking.firewall.allowedUDPPorts = [2049 111 4000 4001 4002 20048];
     networking.firewall.enable = true;
 
     system.stateVersion = "23.11"; # Did you read the comment?
