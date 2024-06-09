@@ -9,6 +9,19 @@
       texlab #latex
     ];
     settings = {
+      editor = {
+        line-number = "relative";
+        completion-replace = true;
+        true-color = true;
+        rulers = [120];
+        color-modes = true;
+        #dvorak home row etc
+        jump-label-alphabet = "aoeidrnsuhlqwt";
+        lsp = {
+          display-inlay-hints = true;
+        };
+        indent-guides.render = true;
+      };
       theme = "tokyonight";
       keys.insert = {
         "C-d" = "normal_mode";
