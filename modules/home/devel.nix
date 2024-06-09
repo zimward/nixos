@@ -20,7 +20,11 @@
         lsp = {
           display-inlay-hints = true;
         };
-        indent-guides.render = true;
+        indent-guides = {
+          render = true;
+          skip-levels = 1;
+          character = "⸽";
+        };
       };
       theme = "tokyonight";
       keys.insert = {
@@ -57,6 +61,21 @@
     };
   };
 
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_shell = "${pkgs.nushell}/bin/nu";
+      keybinds = {
+        pane = {
+          "bind \"h\"" = {MoveFocus = "Left";};
+          "bind \"n\"" = {MoveFocus = "Right";};
+          "bind \"d\"" = {MoveFocus = "Down";};
+          "bind \"r\"" = {MoveFocus = "Up";};
+        };
+      };
+    };
+  };
+
   programs.git = {
     enable = true;
     userName = "zimward";
@@ -65,6 +84,7 @@
       "commit" = "commit -S";
     };
     extraConfig = {
+      push.autoSetupRemote = true;
       commit = {gpgsign = true;};
       safe = {directory = "/etc/nixos/";};
       user = {signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";};
