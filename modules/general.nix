@@ -1,4 +1,6 @@
 {
+  lib,
+  pkgs,
   config,
   inputs,
   ...
@@ -26,10 +28,9 @@
     home-manager = {
       extraSpecialArgs = {
         inherit inputs;
+        syscfg = config;
       };
-      users = {
-        ${config.main-user.userName} = import ./home/default.nix;
-      };
+      users.${config.main-user.userName}.imports = [ ./home ];
     };
     #sound
     sound.enable = true;
