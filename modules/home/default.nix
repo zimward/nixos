@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  syscfg,
   ...
 }: {
   imports = [
@@ -12,8 +13,8 @@
     # inputs.impermanence.nixosModules.home-manager.impermanence
   ];
   config = {
-    home.username = "zimward";
-    home.homeDirectory = "/home/zimward";
+    home.username = syscfg.main-user.userName;
+    home.homeDirectory = "/home/${syscfg.main-user.userName}";
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
