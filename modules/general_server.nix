@@ -70,12 +70,13 @@
     enable = true;
     flake = inputs.self.outPath;
     flags = ["--update-input" "nixpkgs"];
+    persistent = true;
     dates = "10:00";
   };
   # nixos garbage collection automation
   nix.gc = {
     automatic = true;
-    dates = "weekly";
+    dates = "10:30";
     options = "--delete-older-than 15d";
   };
 }
