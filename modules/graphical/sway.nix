@@ -55,10 +55,10 @@ in {
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-    };
+    # hardware.opengl = {
+    #   enable = true;
+    #   driSupport = true;
+    # };
 
     programs.sway = {
       enable = true;

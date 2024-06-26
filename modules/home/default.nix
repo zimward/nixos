@@ -10,11 +10,13 @@
     ./ssh.nix
     ./shell.nix
     ./devel.nix
+    ./matlab.nix
     # inputs.impermanence.nixosModules.home-manager.impermanence
   ];
   config = {
     home.username = syscfg.main-user.userName;
     home.homeDirectory = "/home/${syscfg.main-user.userName}";
+    matlab.enable = true;
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
