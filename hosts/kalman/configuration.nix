@@ -2,7 +2,6 @@ flake-overlays: {
   config,
   lib,
   pkgs,
-  nixpkgs-unstable,
   inputs,
   ...
 }: {
@@ -14,6 +13,7 @@ flake-overlays: {
   ];
 
   config = {
+    nixpkgs.overlays = [] ++ flake-overlays;
     #gets wiped due to tmpfs
     main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
@@ -25,7 +25,6 @@ flake-overlays: {
     pid-fan-controller.enable = true;
 
     environment.etc."pid-fan-settings.json".source = ./pid-fan-settings.json;
-    nixpkgs.overlays = [] ++ flake-overlays;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 

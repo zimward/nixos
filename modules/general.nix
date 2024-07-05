@@ -23,6 +23,7 @@
       _JAVA_AWT_WM_NONREPARENTING = "1";
       MOZ_ENABLE_WAYLAND = "1";
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
+      PATH = "$HOME/.local/bin/";
     };
 
     home-manager = {
