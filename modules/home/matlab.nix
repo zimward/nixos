@@ -8,7 +8,6 @@
     matlab.enable = lib.mkEnableOption "Matlab";
   };
   config = lib.mkIf config.matlab.enable {
-    home.sessionPath = ["$HOME/.local/bin"];
     home.file = {
       ".config/matlab/nix.sh" = {
         executable = true;
