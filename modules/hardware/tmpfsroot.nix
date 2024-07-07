@@ -27,6 +27,11 @@
       fsType = "tmpfs";
       options = ["noexec" "mode=755"];
     };
+    fileSystems."/tmp" = {
+      device = "tmpfs";
+      fsType = "tmpfs";
+      options = ["defaults" "mode=755"];
+    };
     fileSystems."/nix" = config.tmpfsroot.nixstore;
     fileSystems."/home" = config.tmpfsroot.home;
     #umask to close potential security hole of stored inital seed
