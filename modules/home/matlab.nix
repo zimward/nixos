@@ -18,7 +18,7 @@
       ".local/bin/matlab" = {
         executable = true;
         text = ''
-          #!${pkgs.dash}/bin/sh
+          #!${pkgs.bash}/bin/bash
           nix run gitlab:doronbehar/nix-matlab
         '';
       };
