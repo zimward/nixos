@@ -22,8 +22,8 @@
         mpv
         thunderbird
         mumble
-        freetube
         pavucontrol
+        unstable.freetube
       ];
   };
 }
