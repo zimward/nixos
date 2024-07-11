@@ -43,7 +43,7 @@
         nix-matlab.overlay
         (final: prev: {
           unstable = import nixpkgs-unstable {
-            system = prev.system;
+            system = final.system;
           };
         })
       ];
@@ -54,8 +54,19 @@
           inherit inputs;
         };
         modules = [
+          (
+            {
+              config,
+              pkgs,
+              ...
+            }:
+            {
+              nixpkgs.overlays = flake-overlays;
+            }
+          )
           ./hosts/vm/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.impermanence.nixosModules.impermanence
         ];
       };
 
@@ -64,10 +75,20 @@
           inherit inputs;
         };
         modules = [
-          (import ./hosts/kalman/configuration.nix flake-overlays)
+          (
+            {
+              config,
+              pkgs,
+              ...
+            }:
+            {
+              nixpkgs.overlays = flake-overlays;
+            }
+          )
+          ./hosts/kalman/configuration.nix
           inputs.home-manager.nixosModules.default
           inputs.impermanence.nixosModules.impermanence
-          inputs.pid-fan-controller.default
+          inputs.pid-fan-controller.nixosModules.default
         ];
       };
 
