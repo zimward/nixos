@@ -13,6 +13,7 @@
     ./hardware/tmpfsroot.nix
     ./net/filter.nix
     inputs.sops-nix.nixosModules.sops
+    inputs.impermanence.nixosModules.impermanence
     # inputs.soppps-nix.nixosModules.soppps
   ];
 
