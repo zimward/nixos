@@ -39,80 +39,99 @@
       ...
     }@inputs:
     let
+      unst_overlay = final: prev: {
+        unstable = import nixpkgs-unstable {
+          system = final.system;
+        };
+      };
       flake-overlays = [
         nix-matlab.overlay
-        (final: prev: {
-          unstable = import nixpkgs-unstable {
-            system = final.system;
-          };
-        })
+        unst_overlay
       ];
     in
     {
-      nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+      nixosConfigurations = {
+        # testing vm
+        vm = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            (
+              {
+                config,
+                pkgs,
+                ...
+              }:
+              {
+                nixpkgs.overlays = flake-overlays;
+              }
+            )
+            ./hosts/vm/configuration.nix
+            inputs.home-manager.nixosModules.default
+            inputs.impermanence.nixosModules.impermanence
+          ];
         };
-        modules = [
-          (
-            {
-              config,
-              pkgs,
-              ...
-            }:
-            {
-              nixpkgs.overlays = flake-overlays;
-            }
-          )
-          ./hosts/vm/configuration.nix
-          inputs.home-manager.nixosModules.default
-          inputs.impermanence.nixosModules.impermanence
-        ];
-      };
 
-      nixosConfigurations.kalman = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+        kalman = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            (
+              {
+                config,
+                pkgs,
+                ...
+              }:
+              {
+                nixpkgs.overlays = flake-overlays;
+              }
+            )
+            ./hosts/kalman/configuration.nix
+            inputs.home-manager.nixosModules.default
+            inputs.impermanence.nixosModules.impermanence
+            inputs.pid-fan-controller.nixosModules.default
+          ];
         };
-        modules = [
-          (
-            {
-              config,
-              pkgs,
-              ...
-            }:
-            {
-              nixpkgs.overlays = flake-overlays;
-            }
-          )
-          ./hosts/kalman/configuration.nix
-          inputs.home-manager.nixosModules.default
-          inputs.impermanence.nixosModules.impermanence
-          inputs.pid-fan-controller.nixosModules.default
-        ];
-      };
 
-      nixosConfigurations.orsted = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+        orsted = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            (import ./hosts/orsted/configuration.nix flake-overlays)
+            inputs.home-manager.nixosModules.default
+            inputs.impermanence.nixosModules.impermanence
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
+          ];
         };
-        modules = [
-          (import ./hosts/orsted/configuration.nix flake-overlays)
-          inputs.home-manager.nixosModules.default
-          inputs.impermanence.nixosModules.impermanence
-          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
-        ];
-      };
 
-      nixosConfigurations.doga = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+        doga = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./hosts/doga/configuration.nix
+            inputs.home-manager.nixosModules.default
+            inputs.impermanence.nixosModules.impermanence
+          ];
         };
-        modules = [
-          ./hosts/doga/configuration.nix
-          inputs.home-manager.nixosModules.default
-          inputs.impermanence.nixosModules.impermanence
-        ];
+
+        kirishika = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            (
+              { config, ... }:
+              {
+                nixpkgs.overlays = [ unst_overlay ];
+              }
+            )
+            ./hosts/kirishika/configuration.nix
+          ];
+        };
       };
     };
 }
