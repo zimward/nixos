@@ -25,6 +25,10 @@
     pid-fan-controller = {
       url = "git+file:/home/zimward/gits/pid-fan-controller-nix";
     };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #soppps-nix = {
     #  url = "git+file:/home/zimward/gits/soppps-nix";
     #};
@@ -36,6 +40,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nix-matlab,
+      nixos-generators,
       ...
     }@inputs:
     let
@@ -127,6 +132,27 @@
               { config, ... }:
               {
                 nixpkgs.overlays = [ unst_overlay ];
+              }
+            )
+            ./hosts/kirishika/configuration.nix
+          ];
+        };
+      };
+      packages.kirishika = {
+        sdcard = nixos-generators.nixosGenerate {
+          system = "aarch64-linux";
+          format = "sd-aarch64";
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            (
+              { config, ... }:
+              {
+                nixpkgs.overlays = [ unst_overlay ];
+                nixpkgs.config.allowUnsupportedSystem = true;
+                nixpkgs.hostPlatform.system = "aarch64-linux";
+                nixpkgs.buildPlatform.system = "x86_64-linux";
               }
             )
             ./hosts/kirishika/configuration.nix

@@ -5,15 +5,23 @@
   ...
 }: {
   imports = [
-    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+    # (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+    ../../modules/hardware/devices/pine64-pinephonepro/kernel
+    ../../modules/general_server.nix
+    # ./hardware-configuration.nix
   ];
   config = {
     boot.supportedFilesystems = lib.mkForce ["vfat" "f2fs" "ext4" "tmpfs"];
+    boot.loader.generic-extlinux-compatible.enable = true;
+
+    networking.networkmanager.enable = true;
+
     sdImage.compressImage = false;
+
+    security.apparmor.enable = lib.mkForce false;
 
     services.openssh.enable = true;
 
     system.stateVersion = "24.05";
-    nixpkgs.hostPlatform = "aarch64-linux";
   };
 }
