@@ -11,6 +11,7 @@
     ./undesired.nix
     ./cli.nix
     ./hardware/tmpfsroot.nix
+    ./net/filter.nix
     inputs.sops-nix.nixosModules.sops
     # inputs.soppps-nix.nixosModules.soppps
   ];
