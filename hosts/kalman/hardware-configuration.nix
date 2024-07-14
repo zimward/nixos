@@ -52,6 +52,66 @@
       options = ["x-systemd.automount" "noauto" "soft" "bg" "timeo=10" "noexec"];
     };
 
+    #fan settings
+    pid-fan-controller = {
+      enable = true;
+      config = {
+        heat_srcs = [
+          {
+            name = "cpu";
+            wildcard_path = "sys/class/hwmon/hwmon2/temp1_input";
+            PID_params = {
+              set_point = 60;
+              P = -0.005;
+              I = -0.002;
+              D = -0.006;
+            };
+          }
+          {
+            name = "gpu";
+            wildcard_path = "/sys/class/hwmon/hwmon2/temp1_input";
+            PID_params = {
+              set_point = 60;
+              P = -0.005;
+              I = -0.002;
+              D = -0.006;
+            };
+          }
+        ];
+        fans = [
+          {
+            name = "front intake";
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
+            min_pwm = 60;
+            max_pwm = 255;
+            cutoff = true;
+            heat_pressure_srcs = ["cpu" "gpu"];
+          }
+          {
+            name = "pump";
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm2";
+            min_pwm = 100;
+            max_pwm = 255;
+            heat_pressure_srcs = ["cpu"];
+          }
+          {
+            name = "front intake2";
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
+            min_pwm = 60;
+            max_pwm = 255;
+            heat_pressure_srcs = ["cpu" "gpu"];
+          }
+          {
+            wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/pwm1";
+            min_pwm = 10;
+            max_pwm = 255;
+            cutoff = true;
+            heat_pressure_srcs = ["gpu"];
+          }
+        ];
+      };
+    };
+
     swapDevices = [];
 
     networking.useDHCP = lib.mkDefault true;

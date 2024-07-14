@@ -27,10 +27,6 @@
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
 
-    pid-fan-controller.enable = true;
-
-    environment.etc."pid-fan-settings.json".source = ./pid-fan-settings.json;
-
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
