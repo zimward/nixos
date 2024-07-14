@@ -34,130 +34,95 @@
     #};
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      nix-matlab,
-      nixos-generators,
-      ...
-    }@inputs:
-    let
-      unst_overlay = final: prev: {
-        unstable = import nixpkgs-unstable {
-          system = final.system;
-        };
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    nixos-generators,
+    nix-matlab,
+    ...
+  } @ inputs: let
+    unst_overlay = final: prev: {
+      unstable = import nixpkgs-unstable {
+        system = final.system;
       };
-      flake-overlays = [
-        nix-matlab.overlay
-        unst_overlay
-      ];
-    in
-    {
-      nixosConfigurations = {
-        # testing vm
-        vm = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              {
-                config,
-                pkgs,
-                ...
-              }:
-              {
-                nixpkgs.overlays = flake-overlays;
-              }
-            )
-            ./hosts/vm/configuration.nix
-            inputs.home-manager.nixosModules.default
-            inputs.impermanence.nixosModules.impermanence
-          ];
-        };
-
-        kalman = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              {
-                config,
-                pkgs,
-                ...
-              }:
-              {
-                nixpkgs.overlays = flake-overlays;
-              }
-            )
-            ./hosts/kalman/configuration.nix
-            inputs.home-manager.nixosModules.default
-            inputs.impermanence.nixosModules.impermanence
-            inputs.pid-fan-controller.nixosModules.default
-          ];
-        };
-
-        orsted = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (import ./hosts/orsted/configuration.nix flake-overlays)
-            inputs.home-manager.nixosModules.default
-            inputs.impermanence.nixosModules.impermanence
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
-          ];
-        };
-
-        doga = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./hosts/doga/configuration.nix
-            inputs.home-manager.nixosModules.default
-            inputs.impermanence.nixosModules.impermanence
-          ];
-        };
-
-        kirishika = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { config, ... }:
-              {
-                nixpkgs.overlays = [ unst_overlay ];
-              }
-            )
-            ./hosts/kirishika/configuration.nix
-          ];
-        };
+    };
+    flake-overlays = [
+      nix-matlab.overlay
+      unst_overlay
+    ];
+  in {
+    nixosConfigurations = {
+      # testing vm
+      vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ({
+            config,
+            pkgs,
+            ...
+          }: {nixpkgs.overlays = flake-overlays;})
+          ./hosts/vm/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
       };
-      packages.kirishika = {
-        sdcard = nixos-generators.nixosGenerate {
-          system = "aarch64-linux";
-          format = "sd-aarch64";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { config, ... }:
-              {
-                nixpkgs.overlays = [ unst_overlay ];
-                nixpkgs.config.allowUnsupportedSystem = true;
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-                nixpkgs.buildPlatform.system = "x86_64-linux";
-              }
-            )
-            ./hosts/kirishika/configuration.nix
-          ];
+      kalman = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ({
+            config,
+            pkgs,
+            ...
+          }: {nixpkgs.overlays = flake-overlays;})
+          ./hosts/kalman/configuration.nix
+          inputs.home-manager.nixosModules.default
+          inputs.pid-fan-controller.nixosModules.default
+        ];
+      };
+
+      orsted = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          (import ./hosts/orsted/configuration.nix flake-overlays)
+          inputs.home-manager.nixosModules.default
+          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
+        ];
+      };
+
+      doga = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/doga/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+
+      kirishika = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ({
+            config,
+            modulesPath,
+            ...
+          }: {
+            imports = [
+              (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+            ];
+            nixpkgs.overlays = [unst_overlay];
+            nixpkgs.hostPlatform.system = "aarch64-linux";
+          })
+          ./hosts/kirishika/configuration.nix
+        ];
+      };
+    };
+    packages.kirishika = {
+      sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        specialArgs = {
+          inherit inputs;
         };
       };
     };
+  };
 }
