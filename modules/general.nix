@@ -1,6 +1,4 @@
 {
-  lib,
-  pkgs,
   config,
   inputs,
   ...
@@ -12,10 +10,11 @@
     ./devel/tex.nix
     ./wine.nix
     ./general_server.nix
+    ./hardware/automounting.nix
   ];
 
-  config.latex = true;
   config = {
+    latex = true;
     environment.sessionVariables = {
       SDL_VIDEODRIVER = "wayland";
       QT_QPA_PLATFORM = "wayland";
