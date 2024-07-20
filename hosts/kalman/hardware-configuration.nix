@@ -55,7 +55,7 @@
     #fan settings
     pid-fan-controller = {
       enable = true;
-      config = {
+      settings = {
         heat_srcs = [
           {
             name = "cpu";
