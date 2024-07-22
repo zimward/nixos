@@ -59,7 +59,7 @@
         heat_srcs = [
           {
             name = "cpu";
-            wildcard_path = "sys/class/hwmon/hwmon2/temp1_input";
+            wildcard_path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
             PID_params = {
               set_point = 60;
               P = -0.005;
@@ -84,6 +84,28 @@
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
             min_pwm = 60;
             max_pwm = 255;
+            heat_pressure_srcs = ["cpu" "gpu"];
+          }
+          {
+            name = "front intake2";
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
+            min_pwm = 60;
+            max_pwm = 255;
+            heat_pressure_srcs = ["cpu" "gpu"];
+          }
+          {
+            name = "back exauhst";
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm5";
+            min_pwm = 60;
+            max_pwm = 255;
+            cutoff = true;
+            heat_pressure_srcs = ["cpu" "gpu"];
+          }
+          {
+            name = "back exauhst2";
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
+            min_pwm = 60;
+            max_pwm = 255;
             cutoff = true;
             heat_pressure_srcs = ["cpu" "gpu"];
           }
@@ -95,13 +117,7 @@
             heat_pressure_srcs = ["cpu"];
           }
           {
-            name = "front intake2";
-            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
-            min_pwm = 60;
-            max_pwm = 255;
-            heat_pressure_srcs = ["cpu" "gpu"];
-          }
-          {
+            name = "gpu";
             wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/pwm1";
             min_pwm = 10;
             max_pwm = 255;
