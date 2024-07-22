@@ -117,7 +117,7 @@
     };
     packages.kirishika = {
       sdcard = nixos-generators.nixosGenerate {
-        system = "aarch64-linux";
+        system = "x86_64-linux";
         format = "sd-aarch64";
         specialArgs = {
           inherit inputs;
