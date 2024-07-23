@@ -34,170 +34,134 @@
     #};
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      nixos-generators,
-      nix-matlab,
-      ...
-    }@inputs:
-    let
-      unst_overlay = final: prev: {
-        unstable = import nixpkgs-unstable {
-          system = final.system;
-        };
-      };
-      flake-overlays = [
-        nix-matlab.overlay
-        unst_overlay
-      ];
-    in
-    {
-      nixosConfigurations = {
-        # testing vm
-        vm = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              {
-                config,
-                pkgs,
-                ...
-              }:
-              {
-                nixpkgs.overlays = flake-overlays;
-              }
-            )
-            ./hosts/vm/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
-        kalman = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              {
-                config,
-                pkgs,
-                ...
-              }:
-              {
-                nixpkgs.overlays = flake-overlays;
-              }
-            )
-            ./hosts/kalman/configuration.nix
-            inputs.home-manager.nixosModules.default
-            inputs.pid-fan-controller.nixosModules.default
-          ];
-        };
-
-        orsted = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (import ./hosts/orsted/configuration.nix flake-overlays)
-            inputs.home-manager.nixosModules.default
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
-          ];
-        };
-
-        doga = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./hosts/doga/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
-
-        kirishika = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              {
-                config,
-                modulesPath,
-                ...
-              }:
-              {
-                imports = [
-                  (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
-                ];
-                nixpkgs.overlays = [ unst_overlay ];
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-              }
-            )
-            ./hosts/kirishika/configuration.nix
-          ];
-        };
-
-        shila = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { config, ... }:
-              {
-                nixpkgs.overlays = [ unst_overlay ];
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-              }
-            )
-            ./hosts/shila/configuration.nix
-          ];
-        };
-      };
-      packages.kirishika = {
-        sdcard = nixos-generators.nixosGenerate {
-          system = "aarch64-linux";
-          format = "sd-aarch64";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { config, ... }:
-              {
-                nixpkgs.overlays = [ unst_overlay ];
-                nixpkgs.config.allowUnsupportedSystem = true;
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-                nixpkgs.buildPlatform.system = "aarch64-linux";
-              }
-            )
-            ./hosts/kirishika/configuration.nix
-          ];
-        };
-      };
-      packages.shila = {
-        sdcard = nixos-generators.nixosGenerate {
-          system = "aarch64-linux";
-          format = "sd-aarch64";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { config, ... }:
-              {
-                nixpkgs.overlays = [ unst_overlay ];
-                nixpkgs.config.allowUnsupportedSystem = true;
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-                nixpkgs.buildPlatform.system = "aarch64-linux";
-              }
-            )
-            ./hosts/shila/configuration.nix
-          ];
-        };
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    nixos-generators,
+    nix-matlab,
+    ...
+  } @ inputs: let
+    unst_overlay = final: prev: {
+      unstable = import nixpkgs-unstable {
+        system = final.system;
       };
     };
+    flake-overlays = [
+      nix-matlab.overlay
+      unst_overlay
+    ];
+  in {
+    nixosConfigurations = {
+      # testing vm
+      vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ({
+            config,
+            pkgs,
+            ...
+          }: {nixpkgs.overlays = flake-overlays;})
+          ./hosts/vm/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+      kalman = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ({
+            config,
+            pkgs,
+            ...
+          }: {nixpkgs.overlays = flake-overlays;})
+          ./hosts/kalman/configuration.nix
+          inputs.home-manager.nixosModules.default
+          inputs.pid-fan-controller.nixosModules.default
+        ];
+      };
+
+      orsted = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          (import ./hosts/orsted/configuration.nix flake-overlays)
+          inputs.home-manager.nixosModules.default
+          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
+        ];
+      };
+
+      doga = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/doga/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+
+      kirishika = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ({
+            config,
+            modulesPath,
+            ...
+          }: {
+            imports = [
+              (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+            ];
+            nixpkgs.overlays = [unst_overlay];
+            nixpkgs.hostPlatform.system = "aarch64-linux";
+          })
+          ./hosts/kirishika/configuration.nix
+        ];
+      };
+
+      shila = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          (
+            {config, ...}: {
+              nixpkgs.overlays = [unst_overlay];
+              nixpkgs.hostPlatform.system = "aarch64-linux";
+            }
+          )
+          ./hosts/shila/configuration.nix
+          ./hosts/shila/hardware-configuration.nix
+        ];
+      };
+    };
+    packages.aarch64-linux.kirishika.sdcard = nixos-generators.nixosGenerate {
+      system = "aarch64-linux";
+      format = "sd-aarch64";
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [
+        ({config, ...}: {
+          nixpkgs.overlays = [unst_overlay];
+          nixpkgs.config.allowUnsupportedSystem = true;
+          nixpkgs.hostPlatform.system = "aarch64-linux";
+          nixpkgs.buildPlatform.system = "aarch64-linux";
+        })
+        ./hosts/kirishika/configuration.nix
+      ];
+    };
+    packages.aarch64-linux.shila.sdcard = nixos-generators.nixosGenerate {
+      system = "aarch64-linux";
+      format = "sd-aarch64";
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [
+        ({config, ...}: {
+          nixpkgs.overlays = [unst_overlay];
+          nixpkgs.config.allowUnsupportedSystem = true;
+          nixpkgs.hostPlatform.system = "aarch64-linux";
+          nixpkgs.buildPlatform.system = "aarch64-linux";
+
+          sdImage.compressImage = false;
+        })
+        ./hosts/shila/configuration.nix
+      ];
+    };
+  };
 }

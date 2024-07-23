@@ -22,8 +22,6 @@
       zfs = false;
     };
 
-    sdImage.compressImage = false;
-
     networking.hostName = "shila";
     services.openssh = {
       enable = true;
