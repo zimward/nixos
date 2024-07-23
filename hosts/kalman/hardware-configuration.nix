@@ -87,14 +87,15 @@
             heat_pressure_srcs = ["cpu" "gpu"];
           }
           {
-            name = "front intake2";
+            name = "top exhaust";
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
             min_pwm = 60;
             max_pwm = 255;
+            cutoff = true;
             heat_pressure_srcs = ["cpu" "gpu"];
           }
           {
-            name = "back exauhst";
+            name = "back exhaust";
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm5";
             min_pwm = 60;
             max_pwm = 255;
@@ -102,11 +103,10 @@
             heat_pressure_srcs = ["cpu" "gpu"];
           }
           {
-            name = "back exauhst2";
+            name = "front intake 2";
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
-            min_pwm = 60;
+            min_pwm = 100;
             max_pwm = 255;
-            cutoff = true;
             heat_pressure_srcs = ["cpu" "gpu"];
           }
           {
