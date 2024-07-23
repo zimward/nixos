@@ -16,8 +16,6 @@ flake-overlays: {
   config = {
     nixpkgs.overlays = [] ++ flake-overlays;
 
-    nix.settings.experimental-features = ["nix-command" "flakes"];
-
     graphical.kicad.minimal = true;
 
     networking.hostName = "orsted"; # Define your hostname.

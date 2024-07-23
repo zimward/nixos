@@ -27,8 +27,6 @@
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
 
-    nix.settings.experimental-features = ["nix-command" "flakes"];
-
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
     boot.loader.systemd-boot.enable = true;

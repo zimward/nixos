@@ -21,6 +21,8 @@
     git
   ];
 
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   environment.sessionVariables = {
     EDITOR = "${pkgs.helix}/bin/hx";
   };
