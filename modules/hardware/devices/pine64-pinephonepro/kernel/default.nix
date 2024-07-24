@@ -14,7 +14,7 @@
     patch = ./${p};
   };
 in {
-  boot.kernelPatches = lib.lists.forEach kernelPatches applyPatches;
+  boot.kernelPatches = map applyPatches kernelPatches;
   boot.initrd.kernelModules = [
     # Rockchip modules
     "rockchip_rga"
