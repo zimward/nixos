@@ -23,7 +23,7 @@
     };
 
     pid-fan-controller = {
-      url = "git+file:/home/zimward/gits/pid-fan-controller";
+      url = "github:zimward/PID-fan-control";
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -129,39 +129,43 @@
         ];
       };
     };
-    packages.aarch64-linux.kirishika.sdcard = nixos-generators.nixosGenerate {
-      system = "aarch64-linux";
-      format = "sd-aarch64";
-      specialArgs = {
-        inherit inputs;
+    packages.aarch64-linux = {
+      kirishika.sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ({config, ...}: {
+            nixpkgs.overlays = [unst_overlay];
+            nixpkgs.config.allowUnsupportedSystem = true;
+            nixpkgs.hostPlatform.system = "aarch64-linux";
+            nixpkgs.buildPlatform.system = "aarch64-linux";
+          })
+          ./hosts/kirishika/configuration.nix
+        ];
       };
-      modules = [
-        ({config, ...}: {
-          nixpkgs.overlays = [unst_overlay];
-          nixpkgs.config.allowUnsupportedSystem = true;
-          nixpkgs.hostPlatform.system = "aarch64-linux";
-          nixpkgs.buildPlatform.system = "aarch64-linux";
-        })
-        ./hosts/kirishika/configuration.nix
-      ];
-    };
-    packages.aarch64-linux.shila.sdcard = nixos-generators.nixosGenerate {
-      system = "aarch64-linux";
-      format = "sd-aarch64";
-      specialArgs = {
-        inherit inputs;
-      };
-      modules = [
-        ({config, ...}: {
-          nixpkgs.overlays = [unst_overlay];
-          nixpkgs.config.allowUnsupportedSystem = true;
-          nixpkgs.hostPlatform.system = "aarch64-linux";
-          nixpkgs.buildPlatform.system = "aarch64-linux";
+      shila.sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ({config, ...}: {
+            nixpkgs.overlays = [unst_overlay];
+            nixpkgs.config.allowUnsupportedSystem = true;
+            nixpkgs.hostPlatform.system = "aarch64-linux";
+            nixpkgs.buildPlatform.system = "aarch64-linux";
 
-          sdImage.compressImage = false;
-        })
-        ./hosts/shila/configuration.nix
-      ];
+            sdImage.compressImage = false;
+          })
+          ./hosts/shila/configuration.nix
+        ];
+      };
+      ppp-kernel =
+        nixpkgs.legacyPackages.aarch64-linux.callPackage ./modules/hardware/devices/pine64-pinephonepro/kernel {};
     };
   };
 }

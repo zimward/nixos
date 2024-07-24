@@ -109,11 +109,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1721413321,
-        "narHash": "sha256-0GdiQScDceUrVGbxYpV819LHesK3szHOhJ09e6sgES4=",
+        "lastModified": 1721754224,
+        "narHash": "sha256-JEVfxzZRo+/zdWKBjHpAUG905SDZL9fmoLJxf9b5CGU=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "ab165a8a6cd12781d76fe9cbccb9e975d0fb634f",
+        "rev": "405b654893aba16c8014de6a17e84439d3fb8e46",
         "type": "github"
       },
       "original": {
@@ -222,16 +222,17 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "dirtyRev": "4053fd0aa9e4e49ddc4a6f0eda4d92830eae5bc0-dirty",
-        "dirtyShortRev": "4053fd0-dirty",
-        "lastModified": 1715540892,
-        "narHash": "sha256-50Bb/6aLtq7P4jT+h1gmrWzFMKyad8+HmnADHPreVR8=",
-        "type": "git",
-        "url": "file:/home/zimward/gits/pid-fan-controller"
+        "lastModified": 1721811318,
+        "narHash": "sha256-A5njA124KhXJkgoKWPaylvqI9sddeB+KdFhGaWc6n08=",
+        "owner": "zimward",
+        "repo": "PID-fan-control",
+        "rev": "dff8db48e6e1003cb941c44759244f7d4d0c8098",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:/home/zimward/gits/pid-fan-controller"
+        "owner": "zimward",
+        "repo": "PID-fan-control",
+        "type": "github"
       }
     },
     "root": {
