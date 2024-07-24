@@ -37,6 +37,15 @@
     # only ssh is running with pubkey auth so a firewall would only waste memory
     networking.firewall.enable = false;
 
+    services.hydra = {
+      enable = true;
+      hydraURL = "http://localhost:3000";
+      notificationSender = "hydra@localhost";
+      buildMachinesFiles = [];
+      useSubstitutes = true;
+      minimumDiskFree = 1;
+    };
+
     system.stateVersion = "24.05";
   };
 }

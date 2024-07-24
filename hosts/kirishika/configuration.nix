@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    # (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
     ../../modules/hardware/devices/pine64-pinephonepro/kernel
     ../../modules/general_server.nix
     # ./hardware-configuration.nix
