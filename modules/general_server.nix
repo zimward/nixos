@@ -4,12 +4,14 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./main-user.nix
     ./security.nix
     ./undesired.nix
     ./cli.nix
+    ./motd.nix
     ./hardware/tmpfsroot.nix
     ./net/filter.nix
     inputs.sops-nix.nixosModules.sops
@@ -17,11 +19,12 @@
     # inputs.soppps-nix.nixosModules.soppps
   ];
 
-  environment.systemPackages = with pkgs; [
-    git
-  ];
+  environment.systemPackages = with pkgs; [ git ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   environment.sessionVariables = {
     EDITOR = "${pkgs.helix}/bin/hx";
@@ -33,7 +36,7 @@
     font = "Lat2-Terminus16";
     keyMap = "dvorak-de";
   };
-
+  motd.enable = true;
   main-user.userName = "zimward";
   services.getty.autologinUser = config.main-user.userName;
 
@@ -41,16 +44,14 @@
   security.sudo.enable = false;
   security.doas.extraRules = [
     {
-      users = [config.main-user.userName];
+      users = [ config.main-user.userName ];
       keepEnv = true;
       persist = true;
     }
   ];
   environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
     hideMounts = true;
-    directories = [
-      "/var/lib/nixos"
-    ];
+    directories = [ "/var/lib/nixos" ];
     files = [
       "/etc/machine-id"
       "/etc/ssh/ssh_host_ed25519_key"
@@ -67,13 +68,19 @@
   services.logind.powerKey = "suspend";
 
   #DONT USE PROVIDER DNS
-  networking.nameservers = ["1.1.1.1" "2606:4700:4700:1111"];
+  networking.nameservers = [
+    "1.1.1.1"
+    "2606:4700:4700:1111"
+  ];
 
   # auto system upgrade
   system.autoUpgrade = {
     enable = true;
     flake = inputs.self.outPath;
-    flags = ["--update-input" "nixpkgs"];
+    flags = [
+      "--update-input"
+      "nixpkgs"
+    ];
     persistent = true;
     dates = "10:00";
   };
