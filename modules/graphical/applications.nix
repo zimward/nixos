@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     graphical.default.applications.enable = lib.mkOption {
       default = true;
@@ -11,11 +12,12 @@
     };
   };
   config = {
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       lib.optionals (config.graphical.default.applications.enable && config.graphical.enable) [
         librewolf
         libreoffice-qt
-        hunspell #auto correction
+        hunspell # auto correction
         hunspellDicts.de_DE
         hunspellDicts.en_US
         keepassxc

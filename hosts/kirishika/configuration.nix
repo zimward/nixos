@@ -1,16 +1,18 @@
 {
-  config,
+  pkgs,
   lib,
-  modulesPath,
+  inputs,
   ...
-}: {
+}:
+{
   imports = [
-    ../../modules/hardware/devices/pine64-pinephonepro/kernel
+    # ../../modules/hardware/devices/pine64-pinephonepro/kernel
     ../../modules/general_server.nix
     # ./hardware-configuration.nix
   ];
   config = {
-    boot.supportedFilesystems = lib.mkForce ["vfat" "f2fs" "ext4" "tmpfs"];
+    boot.kernelPackages = pkgs.linuxPackagesFor inputs.ppp-kernel.packages.linuxppp;
+    # boot.supportedFilesystems = lib.mkForce ["vfat" "f2fs" "ext4" "tmpfs"];
     boot.loader.generic-extlinux-compatible.enable = true;
 
     networking.networkmanager.enable = true;
