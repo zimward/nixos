@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     graphical.obsidian.enable = lib.mkOption {
       default = true;
@@ -11,10 +12,10 @@
     };
   };
 
-  imports = [../unfree.nix];
+  imports = [ ../unfree.nix ];
 
   config = lib.mkIf (config.graphical.enable && config.graphical.obsidian.enable) {
-    nixpkgs.allowUnfreePackages = ["obsidian"];
-    environment.systemPackages = with pkgs; [obsidian];
+    nixpkgs.allowUnfreePackages = [ "obsidian" ];
+    environment.systemPackages = with pkgs; [ obsidian ];
   };
 }

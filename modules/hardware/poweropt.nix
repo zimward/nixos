@@ -1,8 +1,5 @@
+{ lib, config, ... }:
 {
-  lib,
-  config,
-  ...
-}: {
   options = {
     pwropt = lib.mkOption {
       default = true;

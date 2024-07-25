@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     wine.enable = lib.mkOption {
       default = true;

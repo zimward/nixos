@@ -4,7 +4,8 @@
   modulesPath,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ../../modules/hardware/tmpfsroot.nix
@@ -12,10 +13,20 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
   config = {
-    boot.initrd.availableKernelModules = ["nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
-    boot.initrd.kernelModules = ["dm-snapshot" "dm-cache"];
-    boot.kernelModules = ["kvm-amd"];
-    boot.extraModulePackages = [];
+    boot.initrd.availableKernelModules = [
+      "nvme"
+      "ahci"
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
+    boot.initrd.kernelModules = [
+      "dm-snapshot"
+      "dm-cache"
+    ];
+    boot.kernelModules = [ "kvm-amd" ];
+    boot.extraModulePackages = [ ];
 
     tmpfsroot = {
       enable = true;
@@ -26,7 +37,7 @@
       nixstore = {
         device = "/dev/disk/by-uuid/8455ca75-43e5-4a7d-9d0f-96950408f262";
         fsType = "f2fs";
-        options = ["discard"];
+        options = [ "discard" ];
       };
       boot = {
         device = "/dev/disk/by-uuid/E939-E650";
@@ -49,7 +60,14 @@
     fileSystems."/mnt/nas" = {
       device = "192.168.0.238:/mnt/nas/nas/mainpc";
       fsType = "nfs";
-      options = ["x-systemd.automount" "noauto" "soft" "bg" "timeo=10" "noexec"];
+      options = [
+        "x-systemd.automount"
+        "noauto"
+        "soft"
+        "bg"
+        "timeo=10"
+        "noexec"
+      ];
     };
 
     #fan settings
@@ -62,9 +80,9 @@
             wildcard_path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
             PID_params = {
               set_point = 60;
-              P = -0.005;
-              I = -0.002;
-              D = -0.006;
+              P = -5.0e-3;
+              I = -2.0e-3;
+              D = -6.0e-3;
             };
           }
           {
@@ -72,9 +90,9 @@
             wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
             PID_params = {
               set_point = 60;
-              P = -0.005;
-              I = -0.002;
-              D = -0.006;
+              P = -5.0e-3;
+              I = -2.0e-3;
+              D = -6.0e-3;
             };
           }
         ];
@@ -84,7 +102,10 @@
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
             min_pwm = 60;
             max_pwm = 255;
-            heat_pressure_srcs = ["cpu" "gpu"];
+            heat_pressure_srcs = [
+              "cpu"
+              "gpu"
+            ];
           }
           {
             name = "top exhaust";
@@ -92,7 +113,10 @@
             min_pwm = 60;
             max_pwm = 255;
             cutoff = true;
-            heat_pressure_srcs = ["cpu" "gpu"];
+            heat_pressure_srcs = [
+              "cpu"
+              "gpu"
+            ];
           }
           {
             name = "back exhaust";
@@ -100,21 +124,27 @@
             min_pwm = 60;
             max_pwm = 255;
             cutoff = true;
-            heat_pressure_srcs = ["cpu" "gpu"];
+            heat_pressure_srcs = [
+              "cpu"
+              "gpu"
+            ];
           }
           {
             name = "front intake 2";
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
             min_pwm = 100;
             max_pwm = 255;
-            heat_pressure_srcs = ["cpu" "gpu"];
+            heat_pressure_srcs = [
+              "cpu"
+              "gpu"
+            ];
           }
           {
             name = "pump";
             wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm2";
             min_pwm = 100;
             max_pwm = 255;
-            heat_pressure_srcs = ["cpu"];
+            heat_pressure_srcs = [ "cpu" ];
           }
           {
             name = "gpu";
@@ -122,13 +152,13 @@
             min_pwm = 10;
             max_pwm = 255;
             cutoff = true;
-            heat_pressure_srcs = ["gpu"];
+            heat_pressure_srcs = [ "gpu" ];
           }
         ];
       };
     };
 
-    swapDevices = [];
+    swapDevices = [ ];
 
     networking.useDHCP = lib.mkDefault true;
 

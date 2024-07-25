@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   options = {
     graphical.enable = lib.mkOption {
       default = true;

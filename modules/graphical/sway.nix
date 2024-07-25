@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   #propagate sway env vars
   dbus-sway-environment = pkgs.writeTextFile {
     name = "dbus-sway-environment";
@@ -20,15 +21,18 @@
     name = "configure-gtk";
     destination = "/bin/configure-gtk";
     executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-    in ''
-      gnome_schema=org.gnome.desktop.interface
-      gsettings set $gnome_schema gtk-theme 'palenight'
-    '';
+    text =
+      let
+        schema = pkgs.gsettings-desktop-schemas;
+        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+      in
+      ''
+        gnome_schema=org.gnome.desktop.interface
+        gsettings set $gnome_schema gtk-theme 'palenight'
+      '';
   };
-in {
+in
+{
   options = {
     graphical.sway.enable = lib.mkEnableOption "sway";
   };
@@ -42,8 +46,8 @@ in {
       glib
       palenight-theme
       gnome3.adwaita-icon-theme
-      grim #screenshot
-      slurp #screenshot
+      grim # screenshot
+      slurp # screenshot
       wl-clipboard
       bemenu
       mako
@@ -52,7 +56,7 @@ in {
     xdg.portal = {
       enable = true;
       wlr.enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
 
     # hardware.opengl = {

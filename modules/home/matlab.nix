@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     matlab.enable = lib.mkEnableOption "Matlab";
   };

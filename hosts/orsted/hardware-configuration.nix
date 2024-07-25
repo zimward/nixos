@@ -3,20 +3,38 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = ["uhci_hcd" "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci" "adiantum" "chacha_x86_64" "nhpoly1305" "nhpoly1305_sse2"];
-  boot.initrd.kernelModules = ["adiantum" "chacha_x86_64" "nhpoly1305" "nhpoly1305_sse2"];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "uhci_hcd"
+    "ehci_pci"
+    "ahci"
+    "xhci_pci"
+    "firewire_ohci"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+    "sdhci_pci"
+    "adiantum"
+    "chacha_x86_64"
+    "nhpoly1305"
+    "nhpoly1305_sse2"
+  ];
+  boot.initrd.kernelModules = [
+    "adiantum"
+    "chacha_x86_64"
+    "nhpoly1305"
+    "nhpoly1305_sse2"
+  ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/ea530a69-5ef7-4481-adad-f51a5c20bf11";
     fsType = "f2fs";
-    options = ["discard"];
+    options = [ "discard" ];
   };
 
   boot.initrd.luks.devices."root" = {
@@ -32,7 +50,7 @@
   swapDevices = [
     {
       device = "/.swapfile";
-      size = 2 * 1024; #2GiB
+      size = 2 * 1024; # 2GiB
     }
   ];
 

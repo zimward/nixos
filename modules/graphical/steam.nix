@@ -3,14 +3,15 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     graphical.steam.enable = lib.mkOption {
       default = false;
       description = "enable steam";
     };
   };
-  imports = [../unfree.nix];
+  imports = [ ../unfree.nix ];
 
   config = lib.mkIf (config.graphical.enable && config.graphical.steam.enable) {
     nixpkgs.allowUnfreePackages = [
@@ -20,8 +21,8 @@
     ];
     programs.steam.enable = true;
     programs.steam.package = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
+      extraPkgs =
+        pkgs: with pkgs; [
           xorg.libXcursor
           xorg.libXi
           xorg.libXinerama

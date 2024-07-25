@@ -1,8 +1,5 @@
+{ config, inputs, ... }:
 {
-  config,
-  inputs,
-  ...
-}: {
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
@@ -50,8 +47,23 @@
     };
 
     # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [22 111 2049 4000 4001 4002 20048];
-    networking.firewall.allowedUDPPorts = [2049 111 4000 4001 4002 20048];
+    networking.firewall.allowedTCPPorts = [
+      22
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+    networking.firewall.allowedUDPPorts = [
+      2049
+      111
+      4000
+      4001
+      4002
+      20048
+    ];
     networking.firewall.enable = true;
 
     system.stateVersion = "23.11"; # Did you read the comment?

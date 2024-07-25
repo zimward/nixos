@@ -1,8 +1,5 @@
+{ lib, config, ... }:
 {
-  lib,
-  config,
-  ...
-}: {
   options = {
     tmpfsroot.enable = lib.mkOption {
       default = false;
@@ -25,17 +22,26 @@
     fileSystems."/" = {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = ["noexec" "mode=755"];
+      options = [
+        "noexec"
+        "mode=755"
+      ];
     };
     fileSystems."/tmp" = {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = ["defaults" "mode=755"];
+      options = [
+        "defaults"
+        "mode=755"
+      ];
     };
     fileSystems."/nix" = config.tmpfsroot.nixstore;
     fileSystems."/home" = config.tmpfsroot.home;
     #umask to close potential security hole of stored inital seed
-    fileSystems."/boot" = lib.mkMerge [config.tmpfsroot.boot {options = ["umask=0077"];}];
+    fileSystems."/boot" = lib.mkMerge [
+      config.tmpfsroot.boot
+      { options = [ "umask=0077" ]; }
+    ];
     sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
     programs.fuse.userAllowOther = true;
   };
