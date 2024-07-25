@@ -186,5 +186,8 @@
           ];
         };
       };
+      hydraJobs = {
+        inherit (self) packages;
+      };
     };
 }
