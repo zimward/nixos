@@ -62,7 +62,7 @@
         }
       );
     in
-    {
+    rec {
       nixosConfigurations = {
         # testing vm
         vm = nixpkgs.lib.nixosSystem {
@@ -187,7 +187,7 @@
         };
       };
       hydraJobs = {
-        inherit (self) packages;
+        kirishika = packages.aarch64-linux.kirishika.sdcard;
       };
     };
 }
