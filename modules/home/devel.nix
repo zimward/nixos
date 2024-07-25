@@ -1,19 +1,20 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.helix = {
     enable = true;
     defaultEditor = true;
     extraPackages = with pkgs; [
-      alejandra
-      nil
+      nixfmt-rfc-style
+      nixd
       python311Packages.python-lsp-server
-      texlab #latex
+      texlab # latex
     ];
     settings = {
       editor = {
         line-number = "relative";
         completion-replace = true;
         true-color = true;
-        rulers = [120];
+        rulers = [ 120 ];
         color-modes = true;
         #dvorak home row etc
         jump-label-alphabet = "aoeidrnsuhlqwt";
@@ -35,7 +36,11 @@
         "A-n" = "extend_char_right";
       };
       keys.normal = {
-        "A-i" = ["add_newline_below" "move_line_down" "insert_mode"];
+        "A-i" = [
+          "add_newline_below"
+          "move_line_down"
+          "insert_mode"
+        ];
         "j" = {
           "p" = "goto_next_paragraph";
           "P" = "goto_prev_paragraph";
@@ -52,15 +57,25 @@
         config = {
           check = {
             command = "clippy";
-            extraArgs = ["--" "-D" "clippy::pedantic" "-W" "clippy::nursery"];
+            extraArgs = [
+              "--"
+              "-D"
+              "clippy::pedantic"
+              "-W"
+              "clippy::nursery"
+            ];
           };
         };
+      };
+      language-server.nixd = {
+        command = "${pkgs.nixd}/bin/nixd";
       };
       language = [
         {
           name = "nix";
           auto-format = true;
-          formatter.command = "${pkgs.alejandra}/bin/alejandra";
+          formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+          language-servers = [ "nixd" ];
         }
       ];
     };
@@ -72,10 +87,18 @@
       default_shell = "${pkgs.nushell}/bin/nu";
       keybinds = {
         pane = {
-          "bind \"h\"" = {MoveFocus = "Left";};
-          "bind \"n\"" = {MoveFocus = "Right";};
-          "bind \"d\"" = {MoveFocus = "Down";};
-          "bind \"r\"" = {MoveFocus = "Up";};
+          "bind \"h\"" = {
+            MoveFocus = "Left";
+          };
+          "bind \"n\"" = {
+            MoveFocus = "Right";
+          };
+          "bind \"d\"" = {
+            MoveFocus = "Down";
+          };
+          "bind \"r\"" = {
+            MoveFocus = "Up";
+          };
         };
       };
     };
@@ -90,9 +113,15 @@
     };
     extraConfig = {
       push.autoSetupRemote = true;
-      commit = {gpgsign = true;};
-      safe = {directory = "/etc/nixos/";};
-      user = {signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";};
+      commit = {
+        gpgsign = true;
+      };
+      safe = {
+        directory = "/etc/nixos/";
+      };
+      user = {
+        signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
+      };
     };
   };
 }
