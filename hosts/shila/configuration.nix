@@ -5,7 +5,8 @@
   inputs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../../modules/general_server.nix
@@ -14,13 +15,10 @@
     #needed to prevent kernel from failing build due to missing module
     nixpkgs.overlays = [
       (final: super: {
-        makeModulesClosure = x:
-          super.makeModulesClosure (x // {allowMissing = true;});
+        makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
       })
     ];
-    boot.supportedFilesystems = lib.mkForce {
-      zfs = false;
-    };
+    boot.supportedFilesystems = lib.mkForce { zfs = false; };
 
     networking.hostName = "shila";
     services.openssh = {
@@ -41,10 +39,14 @@
       enable = true;
       hydraURL = "http://localhost:3000";
       notificationSender = "hydra@localhost";
-      buildMachinesFiles = [];
+      buildMachinesFiles = [ ];
       useSubstitutes = true;
       minimumDiskFree = 1;
     };
+    nix.settings.allowed-uris = [
+      "github:"
+      "git+ssh://git@arcu.dyndns.org:223"
+    ];
 
     system.stateVersion = "24.05";
   };
