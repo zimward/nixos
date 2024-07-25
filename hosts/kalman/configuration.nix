@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
@@ -16,9 +17,7 @@
     systemd.services.nix-daemon = {
       environment.TMPDIR = "/nix/tmp";
     };
-    systemd.tmpfiles.rules = [
-      "d /nix/tmp 0755 root root 1d"
-    ];
+    systemd.tmpfiles.rules = [ "d /nix/tmp 0755 root root 1d" ];
     #gets wiped due to tmpfs
     main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
@@ -27,7 +26,7 @@
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
 
-    boot.binfmt.emulatedSystems = ["aarch64-linux"];
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -37,14 +36,12 @@
 
     networking.hostName = "kalman"; # Define your hostname.
 
-    environment.systemPackages = with pkgs; [
-      docker
-    ];
+    environment.systemPackages = with pkgs; [ docker ];
 
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
     virtualisation.docker.enable = true;
-    users.users."zimward".extraGroups = ["docker"];
+    users.users."zimward".extraGroups = [ "docker" ];
 
     hardware.opentabletdriver.enable = true;
 

@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.writeText "configuration.toml" ''
   [[block]]
   block = "battery"

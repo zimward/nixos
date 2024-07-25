@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     main-user.userName = lib.mkOption {
       default = "mainuser";

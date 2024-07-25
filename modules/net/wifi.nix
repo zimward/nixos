@@ -1,7 +1,8 @@
-{config, ...}: {
+{ config, ... }:
+{
   sops.secrets = {
-    "wifi/GvR" = {};
-    "wifi/easyroam_ca" = {};
+    "wifi/GvR" = { };
+    "wifi/easyroam_ca" = { };
   };
   sops.secrets.easyroam_client_cert = {
     "format" = "binary";

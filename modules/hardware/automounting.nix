@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   options = {
     automount.enable = lib.mkOption {
       default = true;

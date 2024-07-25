@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     cli.enable = lib.mkOption {
       default = true;
@@ -15,9 +16,9 @@
       nushell
       starship
       helix
-      yazi #file manager
+      yazi # file manager
       ripgrep
-      bottom #process manager
+      bottom # process manager
       du-dust
       sshfs
     ];

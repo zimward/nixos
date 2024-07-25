@@ -3,7 +3,8 @@
   lib,
   fetchgit,
   ...
-}: let
+}:
+let
   kernelPatches = [
     # "0001-arm64-dts-rockchip-set-type-c-dr_mode-as-otg.patch"
     # "0001-dts-pinephone-pro-Setup-default-on-and-panic-LEDs.patch"
@@ -13,7 +14,8 @@
     name = p;
     patch = ./${p};
   };
-in {
+in
+{
   boot.kernelPatches = map applyPatches kernelPatches;
   boot.initrd.kernelModules = [
     # Rockchip modules

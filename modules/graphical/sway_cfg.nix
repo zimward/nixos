@@ -3,9 +3,11 @@
   lib,
   syscfg,
   ...
-}: let
-  status_cfg = import ./status_cfg.nix {inherit pkgs;};
-in {
+}:
+let
+  status_cfg = import ./status_cfg.nix { inherit pkgs; };
+in
+{
   config = lib.mkIf (syscfg.graphical.enable && syscfg.graphical.sway.enable) {
     wayland.windowManager.sway = {
       enable = true;
@@ -19,9 +21,9 @@ in {
         left = "n";
         right = "s";
         startup = [
-          {command = "dbus-sway-environment";}
-          {command = "configure-gtk";}
-          {command = "fcitx5 -d";}
+          { command = "dbus-sway-environment"; }
+          { command = "configure-gtk"; }
+          { command = "fcitx5 -d"; }
         ];
         bars = [
           {

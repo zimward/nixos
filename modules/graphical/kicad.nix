@@ -15,12 +15,8 @@ in
         default = true;
         description = "enable kicad and other EE programms";
       };
-      unstable = lib.mkOption {
-        default = false;
-      };
-      minimal = lib.mkOption {
-        default = false;
-      };
+      unstable = lib.mkOption { default = false; };
+      minimal = lib.mkOption { default = false; };
     };
   };
   config = lib.mkIf (config.graphical.enable && config.graphical.kicad.enable) {

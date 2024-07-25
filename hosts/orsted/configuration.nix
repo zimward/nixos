@@ -1,10 +1,12 @@
-flake-overlays: {
+flake-overlays:
+{
   config,
   lib,
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
@@ -14,7 +16,7 @@ flake-overlays: {
   ];
 
   config = {
-    nixpkgs.overlays = [] ++ flake-overlays;
+    nixpkgs.overlays = [ ] ++ flake-overlays;
 
     graphical.kicad.minimal = true;
 

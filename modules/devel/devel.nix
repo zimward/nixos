@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     devenv.enable = lib.mkOption {
       default = true;

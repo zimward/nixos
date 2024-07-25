@@ -4,7 +4,8 @@
   inputs,
   syscfg,
   ...
-}: {
+}:
+{
   imports = [
     ../graphical/sway_cfg.nix
     ./ssh.nix

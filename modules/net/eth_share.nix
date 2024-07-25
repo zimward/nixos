@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   options = {
     ethernet.share.device = lib.mkOption {
       default = null;
@@ -19,7 +16,7 @@
       matchConfig = {
         Name = config.ethernet.share.device;
       };
-      address = ["192.168.0.1/24"];
+      address = [ "192.168.0.1/24" ];
       networkConfig = {
         DHCPServer = true;
         IPMasquerade = "both";

@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     graphical.deluge.enable = lib.mkOption {
       default = false;
@@ -11,8 +12,6 @@
     };
   };
   config = lib.mkIf config.graphical.deluge.enable {
-    environment.systemPackages = with pkgs; [
-      deluge
-    ];
+    environment.systemPackages = with pkgs; [ deluge ];
   };
 }
