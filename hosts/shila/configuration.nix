@@ -1,9 +1,7 @@
 {
   config,
   lib,
-  pkgs,
   inputs,
-  modulesPath,
   ...
 }:
 {
@@ -32,7 +30,8 @@
     users.users.${config.main-user.userName}.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZ4iv3QwB03x5UlteFjPmTymPb29ruuKiMdZLn8jIem mobian@pinephone"
     ];
-    # only ssh is running with pubkey auth so a firewall would only waste memory
+
+    #all services should be open anyways (unless i overlooked something)
     networking.firewall.enable = false;
 
     services.hydra = {
@@ -43,6 +42,9 @@
       useSubstitutes = true;
       minimumDiskFree = 1;
     };
+
+    systemd.tmpfiles.rules = [ "d /tmp 1777 root root 1d" ];
+
     nix.settings.allowed-uris = [
       "github:"
       "git+ssh://git@arcu.dyndns.org:223"
