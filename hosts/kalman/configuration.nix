@@ -25,6 +25,7 @@
 
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
+    graphical.ime.enable = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
