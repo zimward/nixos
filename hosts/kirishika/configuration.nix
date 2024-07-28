@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }:
 {
@@ -11,17 +12,63 @@
     # ./hardware-configuration.nix
   ];
   config = {
-    boot.kernelPackages = pkgs.linuxPackagesFor inputs.ppp-kernel.packages.linuxppp;
-    # boot.supportedFilesystems = lib.mkForce ["vfat" "f2fs" "ext4" "tmpfs"];
+    nixpkgs.overlays = [
+      (final: super: {
+        makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
+      })
+    ];
+
+    boot.kernelPackages = pkgs.linuxPackagesFor inputs.ppp-kernel.packages.aarch64-linux.linuxppp;
     boot.loader.generic-extlinux-compatible.enable = true;
 
+    boot.supportedFilesystems = lib.mkForce { zfs = false; };
     networking.networkmanager.enable = true;
 
     sdImage.compressImage = false;
 
+    hardware.firmware = [ inputs.ppp-kernel.packages.aarch64-linux.firmwareppp ];
+    # hardware.enableRedistributableFirmware = true;
     security.apparmor.enable = lib.mkForce false;
 
+    #sound
+    sound.enable = true;
+    hardware.pulseaudio.enable = false;
+    #allow user processes to run with realitme scheduling
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = false;
+      pulse.enable = true;
+    };
+
     services.openssh.enable = true;
+
+    networking.firewall.enable = false;
+    security.polkit.enable = true;
+
+    #graphical config
+    services.xserver = {
+      desktopManager.phosh = {
+        enable = true;
+        user = config.main-user.userName;
+        group = "users";
+
+      };
+    };
+    main-user.hashedPassword = "$y$j9T$tLtgJK7n2chx0mGQNUT/d/$2SJiFUqYsiYxbKaISRNCCKZ9Q7scfx.//MmqeVqxIHB";
+
+    fonts.enableDefaultPackages = true; # enable default fonts
+    programs.calls.enable = true;
+
+    environment.systemPackages = [
+      pkgs.cryptsetup
+      pkgs.chatty
+      pkgs.squeekboard
+      pkgs.gnome-console
+      pkgs.powersupply
+      pkgs.bookworm
+    ];
 
     system.stateVersion = "24.05";
   };
