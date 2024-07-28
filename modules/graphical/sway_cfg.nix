@@ -23,7 +23,7 @@ in
         startup = [
           { command = "dbus-sway-environment"; }
           { command = "configure-gtk"; }
-          { command = "fcitx5 -d"; }
+          { command = lib.mkIf syscfg.graphical.ime.enable "fcitx5 -d"; }
         ];
         bars = [
           {

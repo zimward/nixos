@@ -31,7 +31,7 @@
     };
 
     ppp-kernel = {
-      url = "git+ssh://arcugit:/~/git/ppp-kernel";
+      url = "git+file:///home/zimward/gits/nixcfg/ppp-kernel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #soppps-nix = {
@@ -78,7 +78,6 @@
         kalman = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            unstable = nixpkgs-unstable;
           };
           modules = [
             overlays
