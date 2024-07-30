@@ -242,10 +242,10 @@
         ]
       },
       "locked": {
-        "dirtyRev": "c67b6fdeb1962667ffd9b61f4fbac396acf5cc2b-dirty",
-        "dirtyShortRev": "c67b6fd-dirty",
-        "lastModified": 1722192784,
-        "narHash": "sha256-qzTdFwER4bM6ikoy6gJ+ubJcqoslHlLHNaiO8KGLEIw=",
+        "dirtyRev": "97650d7712a47a088a7514744c47e6fb5b61c2d6-dirty",
+        "dirtyShortRev": "97650d7-dirty",
+        "lastModified": 1722371440,
+        "narHash": "sha256-swJ5pF+mS8C8tyC2fMFRL+VkIu2KFSE06fY2aIZdu9s=",
         "type": "git",
         "url": "file:///home/zimward/gits/nixcfg/ppp-kernel"
       },
