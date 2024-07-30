@@ -31,7 +31,7 @@
     };
 
     ppp-kernel = {
-      url = "git+file:///home/zimward/gits/nixcfg/ppp-kernel";
+      url = "git+ssh://arcugit:/~/git/ppp-kernel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #soppps-nix = {
