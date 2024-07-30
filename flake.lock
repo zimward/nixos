@@ -242,11 +242,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722371440,
-        "narHash": "sha256-bhqHFaqEo8R28/XioqHLbwKDUXaXYaRsCvgUROmZw0g=",
+        "lastModified": 1722373730,
+        "narHash": "sha256-vmwbJeff/bKxuYTcPnnVBItwtmUkx6yMpgdo/SFPDJU=",
         "ref": "refs/heads/master",
-        "rev": "97650d7712a47a088a7514744c47e6fb5b61c2d6",
-        "revCount": 16,
+        "rev": "095915dba57ef81912906391181de1a0910e90d1",
+        "revCount": 17,
         "type": "git",
         "url": "ssh://arcugit:/~/git/ppp-kernel"
       },
