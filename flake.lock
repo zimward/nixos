@@ -242,16 +242,17 @@
         ]
       },
       "locked": {
-        "dirtyRev": "97650d7712a47a088a7514744c47e6fb5b61c2d6-dirty",
-        "dirtyShortRev": "97650d7-dirty",
         "lastModified": 1722371440,
-        "narHash": "sha256-swJ5pF+mS8C8tyC2fMFRL+VkIu2KFSE06fY2aIZdu9s=",
+        "narHash": "sha256-bhqHFaqEo8R28/XioqHLbwKDUXaXYaRsCvgUROmZw0g=",
+        "ref": "refs/heads/master",
+        "rev": "97650d7712a47a088a7514744c47e6fb5b61c2d6",
+        "revCount": 16,
         "type": "git",
-        "url": "file:///home/zimward/gits/nixcfg/ppp-kernel"
+        "url": "ssh://arcugit:/~/git/ppp-kernel"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/zimward/gits/nixcfg/ppp-kernel"
+        "url": "ssh://arcugit:/~/git/ppp-kernel"
       }
     },
     "root": {
