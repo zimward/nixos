@@ -26,6 +26,7 @@
         mumble
         pavucontrol
         unstable.freetube
+        fractal-next
       ];
   };
 }
