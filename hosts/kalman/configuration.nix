@@ -39,7 +39,16 @@
 
     environment.systemPackages = with pkgs; [ docker ];
 
-    virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf.enable = true;
+      };
+    };
+    virtualisation.spiceUSBRedirection.enable = true;
     programs.virt-manager.enable = true;
     virtualisation.docker.enable = true;
     users.users."zimward".extraGroups = [ "docker" ];
@@ -52,6 +61,21 @@
     };
     # since no services are supposed to run on this machine a firewall would only wase memory
     networking.firewall.enable = false;
+
+    # nix.buildMachines = [
+    #   {
+    #     hostName = "shila";
+    #     system = "aarch64-linux";
+    #     protocol = "ssh-ng";
+    #     maxJobs = 4;
+    #     speedFactor = 1;
+    #     supportedFeatures = [ "big-parallel" ];
+    #   }
+    # ];
+    # nix.distributedBuilds = true;
+    # nix.extraOptions = ''
+    #   builders-use-substitutes=true
+    # '';
 
     system.stateVersion = "23.11"; # Did you read the comment?
   };
