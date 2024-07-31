@@ -43,15 +43,18 @@
       enable = true;
       qemu = {
         package = pkgs.qemu_kvm;
-        runAsRoot = true;
         swtpm.enable = true;
         ovmf.enable = true;
+        vhostUserPackages = [ pkgs.virtiofsd ];
       };
     };
     virtualisation.spiceUSBRedirection.enable = true;
     programs.virt-manager.enable = true;
     virtualisation.docker.enable = true;
-    users.users."zimward".extraGroups = [ "docker" ];
+    users.users."zimward".extraGroups = [
+      "docker"
+      "libvirtd"
+    ];
 
     hardware.opentabletdriver.enable = true;
 
