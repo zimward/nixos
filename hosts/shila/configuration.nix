@@ -48,7 +48,8 @@
     nix.settings.allowed-uris = [
       "github:"
       "git+ssh://git@arcu.dyndns.org:223"
-      "git+ssh://arcugit"
+      "git+ssh://arcugit:/"
+      "git+ssh://arcugit:"
     ];
 
     system.stateVersion = "24.05";
