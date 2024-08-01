@@ -537,5 +537,4 @@ $env.config = {
   ]
 }
 
-alias matlab = nix run gitlab:doronbehar/nix-matlab
 source ~/.config/nushell/commands.nu

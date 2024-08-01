@@ -80,6 +80,8 @@
     #   builders-use-substitutes=true
     # '';
 
+    graphical.matlab.enable = true;
+
     system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
