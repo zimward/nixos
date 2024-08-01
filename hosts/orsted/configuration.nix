@@ -40,6 +40,7 @@
     ];
     # only ssh is running with pubkey auth so a firewall would only waste memory
     networking.firewall.enable = false;
+    graphical.matlab.enable = true;
 
     system.stateVersion = "23.11"; # Did you read the comment?
   };
