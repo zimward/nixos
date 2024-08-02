@@ -19,6 +19,7 @@
       };
     };
   };
+  imports = [ inputs.home-manager.nixosModules.default ];
   config = {
     home-manager = {
       extraSpecialArgs = {
