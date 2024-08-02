@@ -2,8 +2,7 @@
 {
   imports = [
     ./graphical
-    ./devel/devel.nix
-    ./devel/tex.nix
+    ./devel
     ./misc/wine.nix
     ./general_server.nix
     ./hardware/automounting.nix
@@ -13,6 +12,11 @@
 
   config = {
     latex = true;
+    devel = {
+      helix.enable = true;
+      git.enable = true;
+      zellij.enable = true;
+    };
     environment.sessionVariables = {
       SDL_VIDEODRIVER = "wayland";
       QT_QPA_PLATFORM = "wayland";
