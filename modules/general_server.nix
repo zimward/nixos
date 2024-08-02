@@ -8,8 +8,7 @@
 {
   imports = [
     ./security
-    ./cli/cli.nix
-    ./cli/motd.nix
+    ./cli
     ./misc/main-user.nix
     ./misc/undesired.nix
     ./hardware/tmpfsroot.nix
