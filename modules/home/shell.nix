@@ -1,10 +1,4 @@
-{
-  config,
-  syscfg,
-  pkgs,
-  lib,
-  ...
-}:
+{ syscfg, ... }:
 {
   config = {
     programs.carapace = {
