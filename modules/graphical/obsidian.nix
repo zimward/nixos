@@ -12,7 +12,7 @@
     };
   };
 
-  imports = [ ../unfree.nix ];
+  imports = [ ../misc/unfree.nix ];
 
   config = lib.mkIf (config.graphical.enable && config.graphical.obsidian.enable) {
     nixpkgs.allowUnfreePackages = [ "obsidian" ];

@@ -7,16 +7,15 @@
 }:
 {
   imports = [
-    ./main-user.nix
-    ./security.nix
-    ./undesired.nix
-    ./cli.nix
-    ./motd.nix
+    ./security
+    ./cli/cli.nix
+    ./cli/motd.nix
+    ./misc/main-user.nix
+    ./misc/undesired.nix
     ./hardware/tmpfsroot.nix
     ./net/filter.nix
     inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
-    # inputs.soppps-nix.nixosModules.soppps
   ];
 
   environment.systemPackages = with pkgs; [ git ];
