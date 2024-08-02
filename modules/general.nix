@@ -1,14 +1,10 @@
-{
-  config,
-  inputs,
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./graphical
     ./devel/devel.nix
     ./devel/tex.nix
-    ./wine.nix
+    ./misc/wine.nix
     ./general_server.nix
     ./hardware/automounting.nix
     ./home

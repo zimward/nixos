@@ -11,7 +11,7 @@
       description = "enable steam";
     };
   };
-  imports = [ ../unfree.nix ];
+  imports = [ ../misc/unfree.nix ];
 
   config = lib.mkIf (config.graphical.enable && config.graphical.steam.enable) {
     nixpkgs.allowUnfreePackages = [

@@ -1,4 +1,4 @@
-{ pkgs, libs, ... }:
+{ pkgs, ... }:
 {
   security.polkit.enable = true;
   security.apparmor = {
