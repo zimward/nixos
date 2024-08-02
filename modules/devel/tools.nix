@@ -13,14 +13,13 @@
   };
   config = lib.mkIf config.devenv.enable {
     environment.systemPackages = with pkgs; [
-      git
       rustup
       gcc_multi
-      (pkgs.python3.withPackages (python-pkgs: [
+      (python3.withPackages (python-pkgs: [
         python-pkgs.numpy
         python-pkgs.matplotlib
       ]))
-      pkgs.linuxPackages_latest.perf
+      linuxPackages_latest.perf
     ];
   };
 }

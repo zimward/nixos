@@ -8,6 +8,7 @@ let
   status_cfg = import ./status_cfg.nix { inherit pkgs; };
 in
 {
+  imports = [ ../home ];
   config = lib.mkIf (syscfg.graphical.enable && syscfg.graphical.sway.enable) {
     wayland.windowManager.sway = {
       enable = true;
