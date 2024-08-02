@@ -1,8 +1,7 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
     ../../modules/general.nix
     ../../modules/net/eth_share.nix
   ];

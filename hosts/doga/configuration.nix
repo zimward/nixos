@@ -1,8 +1,7 @@
-{ config, inputs, ... }:
+{ config, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
     ../../modules/general_server.nix
   ];
 

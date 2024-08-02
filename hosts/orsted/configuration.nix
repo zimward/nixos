@@ -1,14 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ config, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
     ../../modules/general.nix
     ../../modules/hardware/poweropt.nix
     ../../modules/net/wifi.nix
