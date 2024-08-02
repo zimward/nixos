@@ -72,7 +72,6 @@
           modules = [
             overlays
             ./hosts/vm/configuration.nix
-            inputs.home-manager.nixosModules.default
           ];
         };
         kalman = nixpkgs.lib.nixosSystem {
@@ -82,7 +81,6 @@
           modules = [
             overlays
             ./hosts/kalman/configuration.nix
-            inputs.home-manager.nixosModules.default
             inputs.pid-fan-controller.nixosModules.default
           ];
         };
@@ -94,7 +92,6 @@
           modules = [
             overlays
             ./hosts/orsted/configuration.nix
-            inputs.home-manager.nixosModules.default
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
           ];
         };
@@ -103,10 +100,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [
-            ./hosts/doga/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
+          modules = [ ./hosts/doga/configuration.nix ];
         };
 
         kirishika = nixpkgs.lib.nixosSystem {
