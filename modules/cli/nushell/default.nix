@@ -38,13 +38,23 @@
 
             programs.yazi.enableNushellIntegration = true;
 
-            home.file."/.config/nushell/commands.nu".source = ./commands.nu;
-
             programs.nushell = {
               enable = true;
-              configFile.source = ./config.nu;
-              extraConfig = config.cli.nushell.extraConfig;
-              envFile.source = ./env.nu;
+              # configFile.source = ./config.nu;
+              extraConfig =
+                ''
+                  $env.config = {
+                    show_banner: false,
+                  }
+                  source ${./commands.nu}
+                ''
+                + config.cli.nushell.extraConfig;
+              # envFile.source = ./env.nu;
+              extraEnv = ''
+                if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
+                   sway
+                }
+              '';
             };
 
             programs.starship = {
