@@ -24,7 +24,6 @@
     home-manager = {
       extraSpecialArgs = {
         inherit inputs;
-        syscfg = config;
       };
       users.${config.main-user.userName}.imports = [
         (
