@@ -22,12 +22,8 @@
       PATH = "$HOME/.local/bin/";
     };
     net.filter.enable = true;
-    hm.modules = [
-      ./home/devel.nix
-      ./home/shell.nix
-      ./home/ssh.nix
-    ];
-
+    #running ssh agent on graphical hosts is most often needed
+    cli.ssh.enableAgent = true;
     #sound
     sound.enable = true;
     hardware.pulseaudio.enable = false;
