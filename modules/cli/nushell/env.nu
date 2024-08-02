@@ -60,6 +60,5 @@ $env.NU_PLUGIN_DIRS = [
 
 #autostart sway
 if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
-   #WLR_RENDERER=GLES sway
    sway
 }
