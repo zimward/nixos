@@ -44,7 +44,12 @@
               extraConfig =
                 ''
                   $env.config = {
-                    show_banner: false,
+                    show_banner: false
+                    cursor_shape:{
+                      vi_insert:line
+                      vi_normal:underscore
+                    }
+                    edit_mode:vi
                   }
                   source ${./commands.nu}
                 ''
