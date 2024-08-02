@@ -33,6 +33,7 @@ let
   };
 in
 {
+  imports = [ ./sway_cfg.nix ];
   options = {
     graphical.sway.enable = lib.mkEnableOption "sway";
   };
