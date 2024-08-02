@@ -11,6 +11,7 @@
     ./wine.nix
     ./general_server.nix
     ./hardware/automounting.nix
+    ./home
   ];
 
   config = {
@@ -25,14 +26,12 @@
       PATH = "$HOME/.local/bin/";
     };
     net.filter.enable = true;
+    hm.modules = [
+      ./home/devel.nix
+      ./home/shell.nix
+      ./home/ssh.nix
+    ];
 
-    home-manager = {
-      extraSpecialArgs = {
-        inherit inputs;
-        syscfg = config;
-      };
-      users.${config.main-user.userName}.imports = [ ./home ];
-    };
     #sound
     sound.enable = true;
     hardware.pulseaudio.enable = false;
