@@ -8,6 +8,11 @@
         type = lib.types.bool;
         description = "Enable nushell configuration";
       };
+      extraConfig = lib.mkOption {
+        default = "";
+        type = lib.types.lines;
+        description = "Extra nushell commands appended to config.nu";
+      };
       starship.enable = lib.mkOption {
         default = true;
         type = lib.types.bool;
@@ -38,14 +43,7 @@
             programs.nushell = {
               enable = true;
               configFile.source = ./config.nu;
-              extraConfig =
-                if config.motd.enable then
-                  ''
-                    echo "\n"
-                    fortune
-                  ''
-                else
-                  "";
+              extraConfig = config.cli.nushell.extraConfig;
               envFile.source = ./env.nu;
             };
 
