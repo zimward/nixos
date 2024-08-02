@@ -7,6 +7,7 @@
     ./misc/wine.nix
     ./general_server.nix
     ./hardware/automounting.nix
+    ./hardware/sound.nix
     ./home
   ];
 
@@ -25,18 +26,7 @@
     #running ssh agent on graphical hosts is most often needed
     cli.ssh.enableAgent = true;
     #sound
-    sound.enable = true;
-    hardware.pulseaudio.enable = false;
-    #allow user processes to run with realitme scheduling
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      #may need to enable alsa if some applications need it
-      alsa.enable = false;
-      alsa.support32Bit = false;
-      pulse.enable = true;
-    };
-
+    sys.sound.enable = true;
     # opengl 32bit support
     hardware.opengl.driSupport = true;
     hardware.opengl.driSupport32Bit = true;
