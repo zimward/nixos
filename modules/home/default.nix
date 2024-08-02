@@ -22,9 +22,6 @@
   imports = [ inputs.home-manager.nixosModules.default ];
   config = {
     home-manager = {
-      extraSpecialArgs = {
-        inherit inputs;
-      };
       users.${config.main-user.userName}.imports = [
         (
           { ... }:
