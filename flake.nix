@@ -111,7 +111,6 @@
             (
               { ... }:
               {
-                # imports = [ (modulesPath + "/installer/sd-card/sd-image-aarch64.nix") ];
                 nixpkgs.overlays = [ unst_overlay ];
                 nixpkgs.hostPlatform.system = "aarch64-linux";
               }
@@ -128,7 +127,6 @@
             (
               { ... }:
               {
-                nixpkgs.overlays = [ unst_overlay ];
                 nixpkgs.hostPlatform.system = "aarch64-linux";
               }
             )
