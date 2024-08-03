@@ -28,13 +28,12 @@ in
               startup = [
                 { command = "dbus-sway-environment"; }
                 { command = "configure-gtk"; }
-                { command = lib.mkIf config.graphical.ime.enable "fcitx5 -d"; }
+                { command = if config.graphical.ime.enable then "fcitx5 -d" else ""; }
               ];
               bars = [
                 {
                   position = "top";
                   statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status_cfg}";
-                  # swaybarCommand = "${pkgs.waybar}/bin/waybar"; maybe configure waybar
                 }
               ];
               input = {
