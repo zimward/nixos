@@ -40,21 +40,15 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       nixos-generators,
       nix-matlab,
       ...
     }@inputs:
     let
-      unst_overlay = final: prev: { unstable = import nixpkgs-unstable { system = final.system; }; };
-      flake-overlays = [
-        nix-matlab.overlay
-        unst_overlay
-      ];
       overlays = (
         { ... }:
         {
-          nixpkgs.overlays = flake-overlays;
+          nixpkgs.overlays = [ nix-matlab.overlay ];
         }
       );
     in
@@ -97,7 +91,6 @@
             (
               { ... }:
               {
-                nixpkgs.overlays = [ unst_overlay ];
                 nixpkgs.hostPlatform.system = "aarch64-linux";
               }
             )
@@ -132,7 +125,6 @@
             (
               { ... }:
               {
-                nixpkgs.overlays = [ unst_overlay ];
                 nixpkgs.config.allowUnsupportedSystem = true;
                 nixpkgs.hostPlatform.system = "aarch64-linux";
                 nixpkgs.buildPlatform.system = "aarch64-linux";
@@ -151,7 +143,6 @@
             (
               { ... }:
               {
-                nixpkgs.overlays = [ unst_overlay ];
                 nixpkgs.config.allowUnsupportedSystem = true;
                 nixpkgs.hostPlatform.system = "aarch64-linux";
                 nixpkgs.buildPlatform.system = "aarch64-linux";

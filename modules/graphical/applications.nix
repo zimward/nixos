@@ -2,8 +2,12 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
+let
+  unstable = import inputs.nixpkgs-unstable { system = config.nixpkgs.hostPlatform.system; };
+in
 {
   options = {
     graphical.default.applications.enable = lib.mkOption {
@@ -11,10 +15,10 @@
       description = "enable default graphical applications";
     };
   };
-  config = {
+  config = lib.mkIf (config.graphical.default.applications.enable && config.graphical.enable) {
     environment.systemPackages =
-      with pkgs;
-      lib.optionals (config.graphical.default.applications.enable && config.graphical.enable) [
+      [ unstable.pkgs.freetube ]
+      ++ (with pkgs; [
         librewolf
         libreoffice-qt
         hunspell # auto correction
@@ -25,8 +29,7 @@
         thunderbird
         mumble
         pavucontrol
-        unstable.freetube
         fractal-next
-      ];
+      ]);
   };
 }
