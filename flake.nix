@@ -34,9 +34,6 @@
       url = "git+ssh://arcugit:/~/git/ppp-kernel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #soppps-nix = {
-    #  url = "git+file:/home/zimward/gits/soppps-nix";
-    #};
   };
 
   outputs =
@@ -46,7 +43,6 @@
       nixpkgs-unstable,
       nixos-generators,
       nix-matlab,
-      ppp-kernel,
       ...
     }@inputs:
     let
@@ -64,16 +60,6 @@
     in
     rec {
       nixosConfigurations = {
-        # testing vm
-        vm = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            overlays
-            ./hosts/vm/configuration.nix
-          ];
-        };
         kalman = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
