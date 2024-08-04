@@ -23,7 +23,8 @@
     };
 
     pid-fan-controller = {
-      url = "github:zimward/PID-fan-control";
+      # url = "github:zimward/PID-fan-control";
+      url = "git+file:///home/zimward/gits/pid-fan-controller";
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
