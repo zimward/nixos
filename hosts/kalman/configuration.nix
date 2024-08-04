@@ -20,6 +20,7 @@
     graphical.deluge.enable = true;
     graphical.ime.enable = true;
 
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     boot.loader.systemd-boot.enable = true;
