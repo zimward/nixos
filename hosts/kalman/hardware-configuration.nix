@@ -89,7 +89,7 @@
             name = "gpu";
             wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
             PID_params = {
-              set_point = 60;
+              set_point = 65;
               P = -5.0e-3;
               I = -2.0e-3;
               D = -6.0e-3;
