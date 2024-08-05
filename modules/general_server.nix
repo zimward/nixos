@@ -17,12 +17,16 @@
     inputs.impermanence.nixosModules.impermanence
   ];
 
+  #needed to rebuild system
   environment.systemPackages = with pkgs; [ git ];
 
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  #doesn't hurt
+  zramSwap.enable = true;
 
   environment.sessionVariables = {
     EDITOR = "${pkgs.helix}/bin/hx";
