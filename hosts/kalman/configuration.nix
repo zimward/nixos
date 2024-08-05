@@ -35,6 +35,8 @@
 
     virtualisation.libvirtd = {
       enable = true;
+      #user mode networking
+      allowedBridges = [ "virbr0" ];
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
