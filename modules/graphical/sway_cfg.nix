@@ -28,8 +28,7 @@ in
               startup = [
                 { command = "dbus-sway-environment"; }
                 { command = "configure-gtk"; }
-                { command = if config.graphical.ime.enable then "fcitx5 -d" else ""; }
-              ];
+              ] ++ lib.optionals config.graphical.ime.enable [ { command = "fcitx5 -d"; } ];
               bars = [
                 {
                   position = "top";
