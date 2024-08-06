@@ -28,7 +28,7 @@
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     ppp-kernel = {
@@ -41,6 +41,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       nixos-generators,
       nix-matlab,
       ...
@@ -87,6 +88,7 @@
         kirishika = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
+            nixpkgs = nixpkgs-unstable;
           };
           modules = [
             (
@@ -121,6 +123,7 @@
           format = "sd-aarch64";
           specialArgs = {
             inherit inputs;
+            nixpkgs = nixpkgs-unstable;
           };
           modules = [
             (

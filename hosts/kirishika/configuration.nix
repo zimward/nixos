@@ -66,9 +66,9 @@
     # hardware.enableRedistributableFirmware = true;
     security.apparmor.enable = lib.mkForce false;
     hardware.sensor.iio.enable = true;
+    services.eg25-manager.enable = true;
 
     #sound
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = true;
