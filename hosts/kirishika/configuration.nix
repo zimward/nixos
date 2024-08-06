@@ -60,6 +60,12 @@
     boot.supportedFilesystems = lib.mkForce { zfs = false; };
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.powersave = lib.mkDefault false;
+    #disable SAE and FWSUP (WPA3 related) due to firmware bug
+    #preventing wifi connections to be estabilshed
+    #brcmfmac: brcmf_set_channel: set chanspec 0x???? fail, reason -52
+    boot.extraModprobeConfig = ''
+      options brcmfmac feature_disable=0x82000
+    '';
 
     nix.gc.automatic = lib.mkForce false; # causes image to eat itself when no rebuild switch is invoked
 
@@ -68,8 +74,6 @@
     hardware.sensor.iio.enable = true;
     services.eg25-manager.enable = true;
 
-    #sound
-    hardware.pulseaudio.enable = false;
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = true;
     services.pipewire = {
