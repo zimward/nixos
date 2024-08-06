@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    # ../../modules/hardware/devices/pine64-pinephonepro/kernel
     ../../modules/general_server.nix
     # ./hardware-configuration.nix
   ];
@@ -56,6 +55,7 @@
     ];
 
     boot.loader.generic-extlinux-compatible.enable = true;
+    boot.loader.grub.enable = false;
 
     boot.supportedFilesystems = lib.mkForce { zfs = false; };
     networking.networkmanager.enable = true;
@@ -63,10 +63,9 @@
 
     nix.gc.automatic = lib.mkForce false; # causes image to eat itself when no rebuild switch is invoked
 
-    sdImage.compressImage = false;
-
     # hardware.enableRedistributableFirmware = true;
     security.apparmor.enable = lib.mkForce false;
+    hardware.sensor.iio.enable = true;
 
     #sound
     sound.enable = true;

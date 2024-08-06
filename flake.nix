@@ -126,6 +126,7 @@
             (
               { ... }:
               {
+                sdImage.compressImage = true;
                 nixpkgs.config.allowUnsupportedSystem = true;
                 nixpkgs.hostPlatform.system = "aarch64-linux";
                 nixpkgs.buildPlatform.system = "aarch64-linux";
