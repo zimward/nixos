@@ -24,7 +24,6 @@ in
       map blacklist (
         [
           "reddit.com"
-          "old.reddit.com"
           "www.reddit.com"
           "pornhub.com"
           "youporn.com"

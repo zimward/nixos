@@ -8,7 +8,7 @@
 {
   imports = [
     ../../modules/general_server.nix
-    # ./hardware-configuration.nix
+    inputs.nixos-hardware-fork.nixosModules.pine64-pinephone-pro
   ];
   config = {
     nixpkgs.overlays = [
@@ -17,55 +17,49 @@
       })
     ];
 
-    boot.kernelPackages = pkgs.linuxPackagesFor inputs.ppp-kernel.packages.aarch64-linux.linuxppp;
-    hardware.firmware = [ inputs.ppp-kernel.packages.aarch64-linux.firmwareppp ];
+    # boot.initrd.kernelModules = [
+    #   # Rockchip modules
+    #   "rockchip_rga"
+    #   "rockchip_saradc"
+    #   "rockchip_thermal"
+    #   "rockchipdrm"
 
-    boot.initrd.kernelModules = [
-      # Rockchip modules
-      "rockchip_rga"
-      "rockchip_saradc"
-      "rockchip_thermal"
-      "rockchipdrm"
+    #   # GPU/Display modules
+    #   "cec"
+    #   "drm"
+    #   "drm_kms_helper"
+    #   "dw_hdmi"
+    #   "dw_mipi_dsi"
+    #   "gpu_sched"
+    #   "panel_edp"
+    #   "panel_simple"
+    #   "panfrost"
+    #   "pwm_bl"
 
-      # GPU/Display modules
-      "cec"
-      "drm"
-      "drm_kms_helper"
-      "dw_hdmi"
-      "dw_mipi_dsi"
-      "gpu_sched"
-      "panel_edp"
-      "panel_simple"
-      "panfrost"
-      "pwm_bl"
+    #   # USB / Type-C related modules
+    #   "fusb302"
+    #   "tcpm"
+    #   "typec"
 
-      # USB / Type-C related modules
-      "fusb302"
-      "tcpm"
-      "typec"
+    #   # PCIe/NVMe
+    #   "pcie_rockchip_host"
+    #   "phy_rockchip_pcie"
 
-      # PCIe/NVMe
-      "pcie_rockchip_host"
-      "phy_rockchip_pcie"
+    #   # Misc. modules
+    #   "cw2015_battery"
+    #   "gpio_charger"
+    #   "rtc_rk808"
+    # ];
 
-      # Misc. modules
-      "cw2015_battery"
-      "gpio_charger"
-      "rtc_rk808"
+    boot.kernelPatches = [
+      {
+        name = "DMC patch";
+        patch = ./0001-arm64-dts-rockchip-rk3399-pinephone-pro-Enable-DMC.patch;
+      }
     ];
-
-    boot.loader.generic-extlinux-compatible.enable = true;
-    boot.loader.grub.enable = false;
-
     boot.supportedFilesystems = lib.mkForce { zfs = false; };
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.powersave = true;
-    #disable SAE and FWSUP (WPA3 related) due to firmware bug
-    #preventing wifi connections to be estabilshed
-    #brcmfmac: brcmf_set_channel: set chanspec 0x???? fail, reason -52
-    boot.extraModprobeConfig = ''
-      options brcmfmac feature_disable=0x82000
-    '';
 
     nix.gc.automatic = lib.mkForce false; # causes image to eat itself when no rebuild switch is invoked
 

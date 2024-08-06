@@ -58,11 +58,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1722870125,
-        "narHash": "sha256-Fk+ymFz4R7v8yDjsNYqchMCkYNxLQ4h8DauU4cIABLE=",
+        "lastModified": 1722956506,
+        "narHash": "sha256-J6UCqGPG4WOd+zbqhLv0J37y1NhUN43N2aXqdhEW9WI=",
         "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "493e20f039d9c0f963172bafc730bcb1545181cd",
+        "rev": "eea84624ec1df66a6b4049f608434047a5888ae4",
         "type": "gitlab"
       },
       "original": {
@@ -123,13 +123,29 @@
         "type": "github"
       }
     },
+    "nixos-hardware-fork": {
+      "locked": {
+        "lastModified": 1722982808,
+        "narHash": "sha256-sOPmsVv/sHV4mCF6+ZlB5TLruLD1N9zodZpA2KxK63Y=",
+        "owner": "zimward",
+        "repo": "nixos-hardware",
+        "rev": "74678649edfa8a2983057d0e6b395383feefde0b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zimward",
+        "ref": "pinephone-pro",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722730825,
-        "narHash": "sha256-X6U+w8qFBuGPCYrZzc9mpN34aRjQ8604MonpBUkj908=",
+        "lastModified": 1722895844,
+        "narHash": "sha256-kGwDuefMQgzdzMXx1BN3+pS7oKafQd6LTDG6XMwcqrU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f3834de3782b82bfc666abf664f946d0e7d1f116",
+        "rev": "d3f42bd62aa840084563e3b93e4eab73cb0a0448",
         "type": "github"
       },
       "original": {
@@ -171,11 +187,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1722791413,
-        "narHash": "sha256-rCTrlCWvHzMCNcKxPE3Z/mMK2gDZ+BvvpEVyRM4tKmU=",
+        "lastModified": 1722869614,
+        "narHash": "sha256-7ojM1KSk3mzutD7SkrdSflHXEujPvW1u7QuqWoTLXQU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8b5b6723aca5a51edf075936439d9cd3947b7b2c",
+        "rev": "883180e6550c1723395a3a342f830bfc5c371f6b",
         "type": "github"
       },
       "original": {
@@ -261,6 +277,7 @@
         "nix-matlab": "nix-matlab",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
+        "nixos-hardware-fork": "nixos-hardware-fork",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "pid-fan-controller": "pid-fan-controller",
