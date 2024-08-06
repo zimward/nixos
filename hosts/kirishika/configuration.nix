@@ -59,7 +59,7 @@
 
     boot.supportedFilesystems = lib.mkForce { zfs = false; };
     networking.networkmanager.enable = true;
-    networking.networkmanager.wifi.powersave = lib.mkDefault false;
+    networking.networkmanager.wifi.powersave = true;
     #disable SAE and FWSUP (WPA3 related) due to firmware bug
     #preventing wifi connections to be estabilshed
     #brcmfmac: brcmf_set_channel: set chanspec 0x???? fail, reason -52
