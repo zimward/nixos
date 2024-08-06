@@ -74,6 +74,7 @@
     hardware.sensor.iio.enable = true;
     services.eg25-manager.enable = true;
 
+    hardware.pulseaudio.enable = false; # this is the default but for some reason this has to be set
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = true;
     services.pipewire = {
@@ -87,6 +88,14 @@
 
     networking.firewall.enable = false;
     security.polkit.enable = true;
+
+    users.users."${config.main-user.userName}".extraGroups = [
+      "dialout"
+      "feedbackd"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
 
     #graphical config
     services.xserver = {
