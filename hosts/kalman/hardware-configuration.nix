@@ -31,7 +31,7 @@
     tmpfsroot = {
       enable = true;
       home = {
-        device = "/dev/disk/by-uuid/047830f0-a9d4-4c1f-b1c7-7af9a2b7337e";
+        device = "/dev/disk/by-uuid/90ef6e31-3665-4d6f-b69c-01c358c68076";
         fsType = "btrfs";
         options = [ "compress=zstd:7" ];
       };
