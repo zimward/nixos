@@ -33,7 +33,7 @@
       home = {
         device = "/dev/disk/by-uuid/90ef6e31-3665-4d6f-b69c-01c358c68076";
         fsType = "btrfs";
-        options = [ "compress=zstd:7" ];
+        options = [ "compress=zstd:3" ];
       };
       nixstore = {
         device = "/dev/disk/by-uuid/8455ca75-43e5-4a7d-9d0f-96950408f262";
