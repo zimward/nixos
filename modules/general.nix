@@ -31,8 +31,5 @@
     cli.ssh.enableAgent = true;
     #sound
     sys.sound.enable = true;
-    # opengl 32bit support
-    hardware.opengl.driSupport = true;
-    hardware.opengl.driSupport32Bit = true;
   };
 }
