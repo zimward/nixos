@@ -112,6 +112,8 @@
       pkgs.gnome-console
       pkgs.powersupply
       pkgs.bookworm
+      pkgs.libcamera
+      pkgs.snapshot
     ];
 
     system.stateVersion = "24.05";
