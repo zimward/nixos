@@ -17,5 +17,6 @@
     ./deluge.nix
     ./obsidian.nix
     ./matlab.nix
+    ./minecraft.nix
   ];
 }

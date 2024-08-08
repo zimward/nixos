@@ -53,6 +53,7 @@
     ];
 
     hardware.opentabletdriver.enable = true;
+    graphical.minecraft.enable = true;
 
     programs.gnupg.agent = {
       enable = true;
