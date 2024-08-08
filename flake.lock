@@ -124,11 +124,11 @@
     },
     "nixos-hardware-fork": {
       "locked": {
-        "lastModified": 1722982808,
-        "narHash": "sha256-sOPmsVv/sHV4mCF6+ZlB5TLruLD1N9zodZpA2KxK63Y=",
+        "lastModified": 1723199748,
+        "narHash": "sha256-+86fDpKZCiiWB4e2PoF8aiyhMDAGpIvpZbmG05GOlSc=",
         "owner": "zimward",
         "repo": "nixos-hardware",
-        "rev": "74678649edfa8a2983057d0e6b395383feefde0b",
+        "rev": "ad36d9b70e1540f45c014c4af0d90047d73648fe",
         "type": "github"
       },
       "original": {
