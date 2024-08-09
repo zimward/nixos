@@ -14,9 +14,6 @@
     ./ime.nix
     ./kicad.nix
     ./steam.nix
-    ./deluge.nix
-    ./obsidian.nix
     ./matlab.nix
-    ./minecraft.nix
   ];
 }

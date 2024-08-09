@@ -46,7 +46,7 @@ in
       xdg-utils
       glib
       palenight-theme
-      gnome3.adwaita-icon-theme
+      adwaita-icon-theme
       grim # screenshot
       slurp # screenshot
       wl-clipboard
