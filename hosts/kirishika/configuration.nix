@@ -17,6 +17,14 @@
       })
     ];
 
+    boot.initrd.kernelModules = [
+      "gpu_sched"
+      "dw_wdt"
+      "fusb302"
+      "panel_himax_hx8394"
+      "goodix_ts"
+    ];
+
     # boot.initrd.kernelModules = [
     #   # Rockchip modules
     #   "rockchip_rga"
@@ -63,7 +71,7 @@
 
     nix.gc.automatic = lib.mkForce false; # causes image to eat itself when no rebuild switch is invoked
 
-    # hardware.enableRedistributableFirmware = true;
+    hardware.enableRedistributableFirmware = true;
     security.apparmor.enable = lib.mkForce false;
     hardware.sensor.iio.enable = true;
     services.eg25-manager.enable = true;
@@ -89,6 +97,9 @@
       "networkmanager"
       "video"
       "wheel"
+      "audio"
+      "bluetooth"
+      "render"
     ];
 
     #graphical config
