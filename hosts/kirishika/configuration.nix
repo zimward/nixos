@@ -76,16 +76,16 @@
     hardware.sensor.iio.enable = true;
     services.eg25-manager.enable = true;
 
-    hardware.pulseaudio.enable = false; # this is the default but for some reason this has to be set
+    # hardware.pulseaudio.enable = false; # this is the default but for some reason this has to be set
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = false;
-      pulse.enable = true;
-    };
-
+    hardware.pulseaudio.enable = true;
+    # services.pipewire = {
+    #   enable = true;
+    #   alsa.enable = true;
+    #   alsa.support32Bit = false;
+    #   pulse.enable = true;
+    # };
     services.openssh.enable = true;
 
     networking.firewall.enable = false;
@@ -123,8 +123,6 @@
       pkgs.gnome-console
       pkgs.powersupply
       pkgs.bookworm
-      pkgs.libcamera
-      pkgs.snapshot
     ];
 
     system.stateVersion = "24.05";
