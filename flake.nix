@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixos-hardware-fork.url = "github:zimward/nixos-hardware/pinephone-pro";
+    # nixos-hardware-fork.url = "github:zimward/nixos-hardware/pinephone-pro";
+    nixos-hardware-fork.url = "git+ssh://arcugit:/~/git/nixos-hardware?ref=pinephone-pro";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -32,10 +33,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    ppp-kernel = {
-      url = "git+ssh://arcugit:/~/git/ppp-kernel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
