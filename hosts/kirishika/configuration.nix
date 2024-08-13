@@ -23,41 +23,38 @@
       "fusb302"
       "panel_himax_hx8394"
       "goodix_ts"
+      # Rockchip modules
+      "rockchip_rga"
+      "rockchip_saradc"
+      "rockchip_thermal"
+      "rockchipdrm"
+
+      # GPU/Display modules
+      "cec"
+      "drm"
+      "drm_kms_helper"
+      "dw_hdmi"
+      "dw_mipi_dsi"
+      "gpu_sched"
+      "panel_edp"
+      "panel_simple"
+      "panfrost"
+      "pwm_bl"
+
+      # USB / Type-C related modules
+      "fusb302"
+      "tcpm"
+      "typec"
+
+      # PCIe/NVMe
+      "pcie_rockchip_host"
+      "phy_rockchip_pcie"
+
+      # Misc. modules
+      "cw2015_battery"
+      "gpio_charger"
+      "rtc_rk808"
     ];
-
-    # boot.initrd.kernelModules = [
-    #   # Rockchip modules
-    #   "rockchip_rga"
-    #   "rockchip_saradc"
-    #   "rockchip_thermal"
-    #   "rockchipdrm"
-
-    #   # GPU/Display modules
-    #   "cec"
-    #   "drm"
-    #   "drm_kms_helper"
-    #   "dw_hdmi"
-    #   "dw_mipi_dsi"
-    #   "gpu_sched"
-    #   "panel_edp"
-    #   "panel_simple"
-    #   "panfrost"
-    #   "pwm_bl"
-
-    #   # USB / Type-C related modules
-    #   "fusb302"
-    #   "tcpm"
-    #   "typec"
-
-    #   # PCIe/NVMe
-    #   "pcie_rockchip_host"
-    #   "phy_rockchip_pcie"
-
-    #   # Misc. modules
-    #   "cw2015_battery"
-    #   "gpio_charger"
-    #   "rtc_rk808"
-    # ];
 
     boot.kernelPatches = [
       {
