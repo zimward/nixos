@@ -53,6 +53,12 @@
       "git+ssh://arcugit:"
     ];
 
+    systemd.oomd = {
+      enable = true;
+      enableSystemSlices = true;
+    };
+    #dont oom sshd
+    systemd.services.sshd.serviceConfig.OOMScoreAdjust = -1000;
     system.stateVersion = "24.05";
   };
 }
