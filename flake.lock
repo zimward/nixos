@@ -124,11 +124,11 @@
     },
     "nixos-hardware-fork": {
       "locked": {
-        "lastModified": 1723993366,
-        "narHash": "sha256-dJ5ylu2hGKwdXRqrw5/XjFPGqQgyNROY70wWcbj2ah8=",
+        "lastModified": 1724010823,
+        "narHash": "sha256-T20lc39cU4b5xqO6E0gfkTsS6QrDvlQmtrNBu0mhG4w=",
         "ref": "pinephone-pro",
-        "rev": "9ccd1001d5d08494e2382037b275c138764ef3c0",
-        "revCount": 1827,
+        "rev": "8d79de10ec926f2fc65d24b68c5687f8afb15a77",
+        "revCount": 1828,
         "type": "git",
         "url": "ssh://arcugit:/~/git/nixos-hardware"
       },
