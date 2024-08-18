@@ -8,6 +8,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../../modules/general_server.nix
+    ./git.nix
   ];
   config = {
     #needed to prevent kernel from failing build due to missing module
