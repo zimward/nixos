@@ -19,6 +19,7 @@ in
     minecraft.enable = lib.mkEnableOption "minecraft launcher";
     deluge.enable = lib.mkEnableOption "Deluge torrent client";
     obsidian.enable = lib.mkEnableOption "Obsidian";
+    irc.enable = lib.mkEnableOption "irc";
   };
   config = lib.mkIf (config.graphical.default.applications.enable && config.graphical.enable) {
     environment.systemPackages =
@@ -26,6 +27,7 @@ in
       ++ enPkg cfg.minecraft pkgs.prismlauncher
       ++ enPkg cfg.deluge pkgs.deluge
       ++ enPkg cfg.obsidian pkgs.obsidian
+      ++ enPkg cfg.irc pkgs.weechat
       ++ (with pkgs; [
         librewolf
         libreoffice-qt

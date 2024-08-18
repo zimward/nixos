@@ -60,6 +60,7 @@
       graphical.minecraft.enable = true;
       graphical.ereader.enable = true;
     };
+    graphical.irc.enable = true;
 
     # nix.buildMachines = [
     #   {
