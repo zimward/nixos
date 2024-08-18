@@ -37,12 +37,28 @@
 
     services.hydra = {
       enable = true;
-      hydraURL = "https://arcu.dyndns.org:9000";
-      port = 9000;
+      hydraURL = "https://arcu.dyndns.org";
+      port = 3000;
       notificationSender = "hydra@localhost";
       buildMachinesFiles = [ ];
       useSubstitutes = true;
       minimumDiskFree = 1;
+    };
+
+    services.nginx = {
+      enable = true;
+      virtualHosts."arcu.dyndns.org" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:3000";
+          recommendedProxySettings = true;
+        };
+      };
+    };
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "minespeed200@gmail.com";
     };
 
     systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
