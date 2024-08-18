@@ -55,7 +55,7 @@
 
     systemd.oomd = {
       enable = true;
-      enableSystemSlices = true;
+      enableSystemSlice = true;
     };
     #dont oom sshd
     systemd.services.sshd.serviceConfig.OOMScoreAdjust = -1000;
