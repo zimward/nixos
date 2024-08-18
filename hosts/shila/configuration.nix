@@ -37,12 +37,14 @@
 
     services.hydra = {
       enable = true;
-      hydraURL = "http://localhost:3000";
+      hydraURL = "https://arcu.dyndns.org:9000";
+      port = 9000;
       notificationSender = "hydra@localhost";
       buildMachinesFiles = [ ];
       useSubstitutes = true;
       minimumDiskFree = 1;
     };
+
     systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
 
     systemd.tmpfiles.rules = [ "d /tmp 1777 root root 1d" ];
