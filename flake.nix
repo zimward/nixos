@@ -96,6 +96,7 @@
               }
             )
             ./hosts/kirishika/configuration.nix
+            ./hosts/kirishika/hardware-configuration.nix
           ];
         };
 
