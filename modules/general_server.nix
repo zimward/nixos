@@ -90,6 +90,6 @@
   nix.gc = {
     automatic = true;
     dates = "10:30";
-    options = "--delete-older-than 15d";
+    options = "--delete-older-than 5d";
   };
 }

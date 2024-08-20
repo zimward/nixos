@@ -98,7 +98,7 @@
       "bluetooth"
       "render"
     ];
-
+    nixpkgs.config.permittedInsecurePackages = [ "olm-3.2.16" ];
     #graphical config
     services.xserver = {
       desktopManager.phosh = {
