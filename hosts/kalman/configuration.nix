@@ -56,11 +56,11 @@
     specialisation.freizeit.configuration = {
       graphical.steam.enable = true;
       graphical.deluge.enable = true;
-      graphical.ime.enable = true;
       graphical.minecraft.enable = true;
       graphical.ereader.enable = true;
     };
     graphical.irc.enable = true;
+    graphical.ime.enable = true;
 
     # nix.buildMachines = [
     #   {
