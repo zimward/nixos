@@ -29,7 +29,10 @@
                 line-number = "relative";
                 completion-replace = true;
                 true-color = true;
-                rulers = [ 120 ];
+                rulers = [
+                  80
+                  120
+                ];
                 color-modes = true;
                 #dvorak home row etc
                 jump-label-alphabet = "aoeidrnsuhlqwt";
@@ -89,7 +92,13 @@
                 {
                   name = "nix";
                   auto-format = true;
-                  formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+                  formatter = {
+                    command = "${pkgs.bash}/bin/bash";
+                    args = [
+                      "-c"
+                      "${pkgs.gnused}/bin/sed s/[ \t]*$// || ${pkgs.nixfmt-rfc-style}/bin/nixfmt"
+                    ];
+                  };
                   language-servers = [ "nixd" ];
                 }
               ];
