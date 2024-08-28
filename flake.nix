@@ -3,10 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixos-hardware-fork.url = "github:zimward/nixos-hardware/pinephone-pro";
     nixos-hardware-fork.url = "git+ssh://arcugit:/~/git/nixos-hardware?ref=pinephone-pro";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,16 +30,15 @@
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
   outputs =
     {
-      self,
       nixpkgs,
-      nixpkgs-unstable,
+      nixpkgs-small,
       nixos-generators,
       nix-matlab,
       ...
@@ -76,7 +75,7 @@
           ];
         };
 
-        doga = nixpkgs.lib.nixosSystem {
+        doga = nixpkgs-small.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
@@ -86,7 +85,6 @@
         kirishika = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            nixpkgs = nixpkgs-unstable;
           };
           modules = [
             (
@@ -100,7 +98,7 @@
           ];
         };
 
-        shila = nixpkgs.lib.nixosSystem {
+        shila = nixpkgs-small.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
@@ -122,7 +120,6 @@
           format = "sd-aarch64";
           specialArgs = {
             inherit inputs;
-            nixpkgs = nixpkgs-unstable;
           };
           modules = [
             (
