@@ -45,6 +45,8 @@
       '';
     };
 
+    services.logind.powerKeyLongPress = "reboot";
+
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22
