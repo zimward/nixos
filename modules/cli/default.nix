@@ -5,5 +5,6 @@
     ./motd.nix
     ./ssh.nix
     ./nushell
+    ./applications.nix
   ];
 }
