@@ -42,6 +42,7 @@
     users.users."zimward".extraGroups = [
       "docker"
       "libvirtd"
+      "dialout"
     ];
 
     hardware.opentabletdriver.enable = true;
