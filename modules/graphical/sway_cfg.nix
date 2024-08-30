@@ -5,7 +5,23 @@
   ...
 }:
 let
-  status_cfg = import ./status_cfg.nix { inherit pkgs; };
+  status_cfg = pkgs.writeText "configuration.toml" ''
+    [[block]]
+    block = "battery"
+    format = " $icon $percentage "
+    missing_format = ""
+
+    [[block]]
+    block = "cpu"
+
+    [[block]]
+    block = "memory"
+
+    [[block]]
+    block = "time"
+    format = "$timestamp.datetime(f:'%Y.%m.%d %a曜日 %H:%M:%S',l:ja_JP)"
+    interval = 1
+  '';
 in
 {
   imports = [ ../home ];
@@ -16,19 +32,15 @@ in
         config = lib.mkIf (config.graphical.enable && config.graphical.sway.enable) {
           wayland.windowManager.sway = {
             enable = true;
-            xwayland = true;
+            package = null;
             config = rec {
               modifier = "Mod4";
               terminal = "${pkgs.alacritty}/bin/alacritty";
-              menu = "nu -c bemenu-run | xargs swaymsg exec --";
+              menu = "bemenu-run";
               up = "r";
               down = "d";
               left = "n";
               right = "s";
-              startup = [
-                { command = "dbus-sway-environment"; }
-                { command = "configure-gtk"; }
-              ] ++ lib.optionals config.graphical.ime.enable [ { command = "fcitx5 -d"; } ];
               bars = [
                 {
                   position = "top";
