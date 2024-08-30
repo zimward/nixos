@@ -89,7 +89,7 @@
   # nixos garbage collection automation
   nix.gc = {
     automatic = true;
-    dates = "10:30";
+    dates = "weekly";
     options = "--delete-older-than 5d";
   };
 }
