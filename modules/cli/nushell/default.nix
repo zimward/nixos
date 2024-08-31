@@ -4,7 +4,10 @@ let
   wrap = envVars: lib.attrsets.mapAttrs (_name: value: ''"${value}"'') envVars;
 in
 {
-  imports = [ ../../home ];
+  imports = [
+    ../../home
+    ./login-workaround.nix
+  ];
   options = {
     cli.nushell = {
       enable = lib.mkOption {
@@ -59,11 +62,11 @@ in
                 ''
                 + config.cli.nushell.extraConfig;
 
-              extraEnv = ''
-                if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
-                   sway
-                }
-              '';
+              # extraEnv = ''
+              #   if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
+              #      sway
+              #   }
+              # '';
               environmentVariables = wrap config.environment.variables;
             };
 
