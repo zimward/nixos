@@ -1,4 +1,8 @@
 { lib, config, ... }:
+let
+  # forPath = value: fn: if lib.strings.hasPrefix "/" value then (fn value) else value;
+  wrap = envVars: lib.attrsets.mapAttrs (_name: value: ''"${value}"'') envVars;
+in
 {
   imports = [ ../../home ];
   options = {
@@ -40,7 +44,7 @@
 
             programs.nushell = {
               enable = true;
-              # configFile.source = ./config.nu;
+
               extraConfig =
                 ''
                   $env.config = {
@@ -54,12 +58,13 @@
                   source ${./commands.nu}
                 ''
                 + config.cli.nushell.extraConfig;
-              # envFile.source = ./env.nu;
+
               extraEnv = ''
                 if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
                    sway
                 }
               '';
+              environmentVariables = wrap config.environment.variables;
             };
 
             programs.starship = {
