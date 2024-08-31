@@ -41,6 +41,7 @@ in
               down = "d";
               left = "n";
               right = "s";
+              startup = lib.optionals config.graphical.ime.enable [ { command = "fcitx5 -d"; } ];
               bars = [
                 {
                   position = "top";
