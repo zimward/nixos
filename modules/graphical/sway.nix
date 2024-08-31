@@ -30,20 +30,14 @@
       extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
     };
 
-    programs.sway = {
-      enable = true;
-      extraSessionCommands = lib.strings.concatLines (
-        [
-          ''
-            export SDL_VIDEODRIVER=wayland
-            export QT_QPA_PLATFORM=wayland
-            export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-            export _JAVA_AWT_WM_NONREPARENTING=1
-            export MOZ_ENABLE_WAYLAND=1
-          ''
-        ]
-        ++ lib.optionals config.graphical.ime.enable [ "fcitx5 -d" ]
-      );
+    programs.sway.enable = true;
+
+    environment.variables = {
+      SDL_VIDEODRIVER = "wayland";
+      QT_QPA_PLATFORM = "wayland";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      _JAVA_AWT_WM_NONREPARENTING = 1;
+      MOZ_ENABLE_WAYLAND = 1;
     };
 
     services.xserver.xkb.layout = "de";
