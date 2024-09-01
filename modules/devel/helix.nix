@@ -23,6 +23,7 @@
               nixd
               python311Packages.python-lsp-server
               texlab # latex
+              lldb_18
             ];
             settings = {
               editor = {
