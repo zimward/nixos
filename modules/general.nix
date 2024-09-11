@@ -8,6 +8,7 @@
     ./hardware/automounting.nix
     ./hardware/sound.nix
     ./home
+    ./cli/nushell/login-workaround.nix
   ];
 
   config = {
