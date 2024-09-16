@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -19,6 +19,7 @@
     programs.virt-manager.enable = true;
 
     graphical.kicad.minimal = true;
+    graphical.obsidian.enable = true;
 
     networking.hostName = "orsted"; # Define your hostname.
     networking.networkmanager.enable = true;
@@ -52,6 +53,13 @@
     graphical.ime.enable = true;
     graphical.matlab.enable = true;
 
+    # vpn stuff
+    networking.networkmanager = {
+      enableStrongSwan = true;
+      plugins = [
+        pkgs.networkmanager-openconnect
+      ];
+    };
     system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
