@@ -9,6 +9,7 @@
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../../modules/general_server.nix
     ./git.nix
+    ./imgserv.nix
   ];
   config = {
     #needed to prevent kernel from failing build due to missing module
@@ -50,9 +51,19 @@
       virtualHosts."arcu.dyndns.org" = {
         forceSSL = true;
         enableACME = true;
-        locations."/" = {
-          proxyPass = "http://localhost:3000";
-          recommendedProxySettings = true;
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:3000";
+            recommendedProxySettings = true;
+          };
+          "/imgserv/" = {
+            proxyPass = "http://[::]:8000/";
+            recommendedProxySettings = true;
+            extraConfig = ''
+              proxy_redirect  http://[::]:8000/ /;
+              proxy_read_timeout 60s;
+            '';
+          };
         };
       };
     };

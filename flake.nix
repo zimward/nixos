@@ -24,10 +24,10 @@
       url = "github:Mic92/sops-nix";
     };
 
-    pid-fan-controller = {
-      url = "github:zimward/PID-fan-control";
-      # url = "git+file:///home/zimward/gits/pid-fan-controller";
-    };
+    pid-fan-controller.url = "github:zimward/PID-fan-control";
+
+    imgserv.url = "github:zimward/imgserv";
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
