@@ -15,7 +15,7 @@
           exec sway
         fi
       '';
-      interactiveShellInit = ''
+      promptInit = ''
         if [[ $TERM == "alacritty" ]]
         then
           nu
