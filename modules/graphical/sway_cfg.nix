@@ -61,7 +61,7 @@ in
                 };
               };
               keybindings = {
-                "${modifier}+Shift+t" = "exec ${terminal}";
+                "${modifier}+Shift+t" = "exec (${terminal} msg create-window) || ${terminal}";
                 "${modifier}+p" = "exec ${menu}";
                 "${modifier}+Shift+j" = "kill";
                 "${modifier}+BackSpace" = "input type:keyboard xkb_switch_layout next";
