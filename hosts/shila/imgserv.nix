@@ -28,6 +28,7 @@ in
         Environment = [
           "CONFIG_FILE=${cfgFile}"
           "ROCKET_ADDRESS=::"
+          "ROCKET_LIMITS={file=\"10 MiB\"}"
         ];
         ExecStart = [ "${inputs.imgserv.packages.aarch64-linux.default}/bin/imgserv" ];
         StateDirectory = "/var/lib/imgserv";
