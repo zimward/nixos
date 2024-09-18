@@ -14,9 +14,6 @@
       alacritty
       xdg-utils
       adwaita-icon-theme
-      grim # screenshot
-      slurp # screenshot
-      wl-clipboard
       bemenu
       mako # wayland notification service
     ];
