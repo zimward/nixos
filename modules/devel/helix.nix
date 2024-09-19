@@ -48,6 +48,17 @@
               };
               theme = "tokyonight";
               keys.insert = {
+                "up" = "no_op";
+                "down" = "no_op";
+                "right" = "no_op";
+                "left" = "no_op";
+                "C-d" = "normal_mode";
+                "A-h" = "move_char_left";
+                "A-d" = "move_visual_line_down";
+                "A-r" = "move_visual_line_up";
+                "A-n" = "move_char_right";
+              };
+              keys.select = {
                 "C-d" = "normal_mode";
                 "A-h" = "extend_char_left";
                 "A-d" = "extend_visual_line_down";
@@ -55,6 +66,10 @@
                 "A-n" = "extend_char_right";
               };
               keys.normal = {
+                "up" = "no_op";
+                "down" = "no_op";
+                "right" = "no_op";
+                "left" = "no_op";
                 "A-i" = [
                   "add_newline_below"
                   "move_line_down"
