@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -52,6 +57,7 @@
     networking.firewall.enable = false;
     graphical.ime.enable = true;
     graphical.matlab.enable = true;
+    motd.enable = lib.mkForce false;
 
     # vpn stuff
     networking.networkmanager = {
