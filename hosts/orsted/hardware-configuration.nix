@@ -47,12 +47,14 @@
     fsType = "ext4";
   };
 
-  swapDevices = [
-    # {
-    #   device = "/.swapfile";
-    #   size = 2 * 1024; # 2GiB
-    # }
-  ];
+  fileSystems."/tmp" = {
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [
+      "defaults"
+      "mode=755"
+    ];
+  };
 
   networking.useDHCP = lib.mkDefault true;
 
