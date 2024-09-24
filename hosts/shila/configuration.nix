@@ -64,6 +64,12 @@
               proxy_read_timeout 60s;
             '';
           };
+          "/stat" = {
+            extraConfig = ''
+              root /var/lib/static/;
+              autoindex on;
+            '';
+          };
         };
       };
     };
