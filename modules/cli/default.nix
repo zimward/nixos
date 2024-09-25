@@ -6,5 +6,6 @@
     ./ssh.nix
     ./nushell
     ./applications.nix
+    ./update.nix
   ];
 }
