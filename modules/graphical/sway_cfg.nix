@@ -68,6 +68,7 @@ in
 
                 "${modifier}+j" = ''exec ${lib.getExe pkgs.slurp} |${lib.getExe pkgs.grim} -g - - | ${lib.getExe pkgs.curl} -4 -X POST -H "Content-Type: image/png" https://arcu.dyndns.org/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy'';
                 "${modifier}+Print" = ''exec ${lib.getExe pkgs.grim} - | ${lib.getExe pkgs.curl} -4 -X POST -H "Content-Type: image/png" https://arcu.dyndns.org/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy'';
+                "${modifier}+Shift+i" = "exec ${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom";
                 "${modifier}+Shift+y" = "exec swaymsg output DP-1 transform 90 clockwise";
 
                 "${modifier}+${left}" = "focus left";
