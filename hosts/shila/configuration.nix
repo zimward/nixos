@@ -80,7 +80,10 @@
 
     systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
 
-    systemd.tmpfiles.rules = [ "d /tmp 1777 root root 1d" ];
+    systemd.tmpfiles.rules = [
+      "d /tmp 1777 root root 1d"
+      "d /nix/tmp 1777 root root 1d"
+    ];
 
     nix.settings.allowed-uris = [
       "github:"
@@ -88,6 +91,7 @@
       "git+ssh://arcugit:/"
       "git+ssh://arcugit:"
     ];
+    systemd.services.nix-daemon.environment.TEMPDIR = "/nix/tmp";
 
     systemd.oomd = {
       enable = true;
