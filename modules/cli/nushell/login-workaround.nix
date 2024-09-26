@@ -15,12 +15,12 @@
           exec sway
         fi
       '';
-      interactiveShellInit = ''
-        if [[ $TERM == "alacritty" ]]
-        then
-          nu
-        fi
-      '';
+      # promptInit = ''
+      #   if [[ $TERM == "alacritty" ]]
+      #   then
+      #     nu
+      #   fi
+      # '';
     };
   };
 }

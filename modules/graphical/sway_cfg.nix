@@ -22,6 +22,7 @@ let
     format = "$timestamp.datetime(f:'%Y.%m.%d %a曜日 %H:%M:%S',l:ja_JP)"
     interval = 1
   '';
+  shell = lib.optionalString config.cli.nushell.enable "-e '${lib.getExe pkgs.nushell}'";
 in
 {
   imports = [ ../home ];
@@ -61,7 +62,7 @@ in
                 };
               };
               keybindings = {
-                "${modifier}+Shift+t" = "exec (${terminal} msg create-window) || ${terminal}";
+                "${modifier}+Shift+t" = "exec (${terminal} msg create-window ${shell}) || ${terminal} ${shell}";
                 "${modifier}+p" = "exec ${menu}";
                 "${modifier}+Shift+j" = "kill";
                 "${modifier}+BackSpace" = "input type:keyboard xkb_switch_layout next";
