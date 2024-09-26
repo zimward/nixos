@@ -27,7 +27,7 @@
 
         home.file."git-shell-commands/newrepo" = {
           text = ''
-            !#${pkgs.bash}/bin/bash
+            #!${pkgs.bash}/bin/bash
             cd git
             mkdir $1
             cd $1

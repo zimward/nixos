@@ -8,7 +8,7 @@ let
     #!${pkgs.stdenv.shell}
     cd /tmp
     git clone --depth 1 shilagit:git/nixos
-    doas nixos-rebuild switch --flake .
+    doas nixos-rebuild switch --flake ./nixos/.
     cd ..
     rm -rf nixos
   '';
