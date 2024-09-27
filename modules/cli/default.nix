@@ -1,11 +1,11 @@
 { ... }:
 {
   imports = [
+    ./applications.nix
     ./cli.nix
     ./motd.nix
-    ./ssh.nix
     ./nushell
-    ./applications.nix
+    ./ssh.nix
     ./update.nix
   ];
 }

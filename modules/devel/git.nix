@@ -5,7 +5,6 @@
   ...
 }:
 {
-  imports = [ ../home ];
   options = {
     devel.git = {
       enable = lib.mkEnableOption "git";

@@ -3,7 +3,7 @@
   options = {
     ethernet.share.device = lib.mkOption {
       default = null;
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Interface to masqerade";
     };
   };

@@ -5,7 +5,6 @@
   ...
 }:
 {
-  imports = [ ../home ];
   options = {
     devel.zellij.enable = lib.mkEnableOption "zelji terminal multiplexer";
   };
