@@ -15,13 +15,7 @@
   config = {
     device.class = "desktop"; # its a laptop but it doesnt matter
     time.timeZone = "Asia/Tokyo";
-    virtualisation.libvirtd = {
-      enable = true;
-      #user mode networking
-      allowedBridges = [ "virbr0" ];
-    };
 
-    virtualisation.spiceUSBRedirection.enable = true;
     programs.virt-manager.enable = true;
 
     graphical.kicad.minimal = true;
