@@ -7,10 +7,11 @@
 }:
 {
   imports = [
-    ../../modules/general_server.nix
+    ../../modules
     inputs.nixos-hardware-fork.nixosModules.pine64-pinephone-pro
   ];
   config = {
+    device.class = "base";
     nixpkgs.overlays = [
       (final: super: {
         makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
@@ -76,13 +77,13 @@
     # hardware.pulseaudio.enable = false; # this is the default but for some reason this has to be set
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = true;
-    hardware.pulseaudio.enable = true;
-    # services.pipewire = {
-    #   enable = true;
-    #   alsa.enable = true;
-    #   alsa.support32Bit = false;
-    #   pulse.enable = true;
-    # };
+    # hardware.pulseaudio.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = false;
+      pulse.enable = true;
+    };
     services.openssh.enable = true;
 
     networking.firewall.enable = false;

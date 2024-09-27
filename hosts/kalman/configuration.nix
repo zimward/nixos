@@ -2,11 +2,12 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/general.nix
+    ../../modules
     ../../modules/net/eth_share.nix
   ];
 
   config = {
+    device.class = "desktop";
     #gets wiped due to tmpfs
     main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 

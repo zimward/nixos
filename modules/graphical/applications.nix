@@ -12,7 +12,7 @@ in
 {
   options.graphical = {
     default.applications.enable = lib.mkOption {
-      default = true;
+      default = config.device.class == "desktop";
       description = "enable default graphical applications";
     };
     ereader.enable = lib.mkEnableOption "E-Book reader";

@@ -8,7 +8,7 @@
   options = {
     graphical.kicad = {
       enable = lib.mkOption {
-        default = true;
+        default = config.device.class == "desktop";
         description = "enable kicad and other EE programms";
       };
       minimal = lib.mkOption { default = false; };

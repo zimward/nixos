@@ -7,11 +7,12 @@
 {
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
-    ../../modules/general_server.nix
+    ../../modules
     ./git.nix
     ./imgserv.nix
   ];
   config = {
+    device.class = "server";
     #needed to prevent kernel from failing build due to missing module
     nixpkgs.overlays = [
       (final: super: {

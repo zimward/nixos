@@ -2,10 +2,11 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/general_server.nix
+    ../../modules
   ];
 
   config = {
+    device.class = "server";
     main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
     #zfs key location
     sops.secrets.naskey = {

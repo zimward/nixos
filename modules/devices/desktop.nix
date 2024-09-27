@@ -1,17 +1,15 @@
-{ ... }:
+{ lib, config, ... }:
 {
   imports = [
-    ./graphical
-    ./devel
-    ./misc/wine.nix
-    ./general_server.nix
-    ./hardware/automounting.nix
-    ./hardware/sound.nix
-    ./home
-    ./cli/nushell/login-workaround.nix
+    ../graphical
+    ../devel
+    ../misc/wine.nix
+    ../hardware/automounting.nix
+    ../hardware/sound.nix
+    ../home
+    ../cli/nushell/login-workaround.nix
   ];
-
-  config = {
+  config = lib.mkIf (config.device.class == "desktop") {
     latex = true;
     devel = {
       helix.enable = true;
