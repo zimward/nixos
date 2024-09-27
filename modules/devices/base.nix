@@ -7,12 +7,6 @@
 }:
 {
   imports = [
-    ../security
-    ../cli
-    ../misc/main-user.nix
-    ../misc/undesired.nix
-    ../hardware/tmpfsroot.nix
-    ../net/filter.nix
     inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
   ];

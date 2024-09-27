@@ -8,12 +8,12 @@
   };
   config.graphical.sway.enable = true;
   imports = [
-    ./fonts.nix
     ./applications.nix
-    ./sway.nix
+    ./fonts.nix
     ./ime.nix
     ./kicad.nix
-    ./steam.nix
     ./matlab.nix
+    ./steam.nix
+    ./sway.nix
   ];
 }

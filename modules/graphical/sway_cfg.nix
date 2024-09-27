@@ -25,7 +25,6 @@ let
   shell = lib.optionalString config.cli.nushell.enable "-e '${lib.getExe pkgs.nushell}'";
 in
 {
-  imports = [ ../home ];
   hm.modules = [
     (
       { ... }:

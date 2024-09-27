@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    ../../home
+    ./login-workaround.nix
   ];
   options = {
     cli.nushell = {

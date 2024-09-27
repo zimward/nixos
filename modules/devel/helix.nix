@@ -5,7 +5,6 @@
   ...
 }:
 {
-  imports = [ ../home ];
   options = {
     devel.helix.enable = lib.mkEnableOption "Helix editor";
   };
