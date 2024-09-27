@@ -1,8 +1,8 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   options = {
     graphical.enable = lib.mkOption {
-      default = true;
+      default = config.device.class == "desktop";
       description = "enable graphical applications";
     };
   };

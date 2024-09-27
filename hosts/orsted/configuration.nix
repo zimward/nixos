@@ -7,12 +7,13 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/general.nix
+    ../../modules
     ../../modules/hardware/poweropt.nix
     ../../modules/net/wifi.nix
   ];
 
   config = {
+    device.class = "desktop"; # its a laptop but it doesnt matter
     time.timeZone = "Asia/Tokyo";
     virtualisation.libvirtd = {
       enable = true;

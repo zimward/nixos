@@ -7,8 +7,8 @@
 {
   options = {
     automount.enable = lib.mkOption {
-      default = true;
-      description = "weather to enable automounting";
+      default = config.device.class == "desktop";
+      description = "Weather to enable automounting";
     };
   };
   config = lib.mkIf config.automount.enable {

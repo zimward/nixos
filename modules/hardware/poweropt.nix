@@ -1,10 +1,7 @@
 { lib, config, ... }:
 {
   options = {
-    pwropt = lib.mkOption {
-      default = true;
-      description = "Apply power draw optimizations";
-    };
+    pwropt = lib.mkEnableOption "power draw optimizations";
   };
   config = lib.mkIf config.pwropt {
     services.tlp = {

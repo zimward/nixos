@@ -4,7 +4,7 @@
     sys.sound = {
       enable = lib.mkEnableOption "Sound";
       allowRTsched = lib.mkOption {
-        default = true;
+        default = config.device.class == "desktop" || config.device.class == "mobile";
         type = lib.types.bool;
         description = "Whether to enable realtime scheduling via rtkit";
       };
