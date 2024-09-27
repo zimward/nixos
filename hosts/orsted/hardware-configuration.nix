@@ -34,7 +34,10 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/ea530a69-5ef7-4481-adad-f51a5c20bf11";
     fsType = "f2fs";
-    options = [ "discard" ];
+    options = [
+      "discard"
+      "noatime"
+    ];
   };
 
   boot.initrd.luks.devices."root" = {
