@@ -18,7 +18,7 @@
             enable = true;
             defaultEditor = true;
             extraPackages = with pkgs; [
-              nixfmt-rfc-style
+              # nixfmt-rfc-style
               nixd
               python311Packages.python-lsp-server
               texlab # latex
@@ -109,11 +109,7 @@
                   name = "nix";
                   auto-format = true;
                   formatter = {
-                    command = "${pkgs.bash}/bin/bash";
-                    args = [
-                      "-c"
-                      "${pkgs.gnused}/bin/sed s/[ \t]*$// || ${pkgs.nixfmt-rfc-style}/bin/nixfmt"
-                    ];
+                    command = "${lib.getExe pkgs.nixfmt-rfc-style}";
                   };
                   language-servers = [ "nixd" ];
                 }
