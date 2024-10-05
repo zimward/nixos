@@ -60,7 +60,6 @@
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";
     sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
-
     services.logind.powerKey = "suspend";
 
     #DONT USE PROVIDER DNS

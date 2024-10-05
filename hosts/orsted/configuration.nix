@@ -14,6 +14,7 @@
 
   config = {
     device.class = "desktop"; # its a laptop but it doesnt matter
+    net.wifi.enable = true;
     time.timeZone = "Asia/Tokyo";
 
     programs.virt-manager.enable = true;
