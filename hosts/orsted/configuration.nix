@@ -18,7 +18,18 @@
 
     programs.virt-manager.enable = true;
 
-    graphical.kicad.minimal = true;
+    #for zoom
+    environment.systemPackages = [ pkgs.chromium ];
+    environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
+    xdg.mime.defaultApplications = {
+      "text/html" = "librewolf.desktop";
+      "x-scheme-handler/http" = "librewolf.desktop";
+      "x-scheme-handler/https" = "librewolf.desktop";
+      "x-scheme-handler/about" = "librewolf.desktop";
+      "x-scheme-handler/unknown" = "librewolf.desktop";
+    };
+    graphical.kicad.enable = lib.mkForce false;
+    graphical.kicad.minimal = false;
     graphical.obsidian.enable = true;
 
     networking.hostName = "orsted"; # Define your hostname.
