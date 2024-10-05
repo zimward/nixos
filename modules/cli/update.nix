@@ -9,7 +9,6 @@ let
     cd /tmp
     git clone --depth 1 shilagit:git/nixos
     doas nixos-rebuild switch --flake ./nixos/.
-    cd ..
     rm -rf nixos
   '';
 in
