@@ -54,6 +54,10 @@
         enableACME = true;
         locations = {
           "/" = {
+            proxyPass = "http://localhost:3000/";
+            recommendedProxySettings = true;
+          };
+          "/static" = {
             proxyPass = "http://localhost:3000";
             recommendedProxySettings = true;
           };
