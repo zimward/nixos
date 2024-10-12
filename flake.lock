@@ -4,7 +4,10 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": [
+          "imgserv",
+          "nixpkgs"
+        ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -100,18 +103,14 @@
           "cargo2nix",
           "flake-utils"
         ],
-        "nixpkgs": [
-          "imgserv",
-          "cargo2nix",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1727000162,
-        "narHash": "sha256-HIyF9EBHXLoY3YWYOE36dPEsiJpI24+SfDMy3UiQAfA=",
+        "lastModified": 1728699435,
+        "narHash": "sha256-XqLFMViSZqqQrfTdZqPwb/jXVbR3C/IL8Lw5Wgrepcw=",
         "owner": "zimward",
         "repo": "imgserv",
-        "rev": "6b92e394a9c87759e23b21ee6b2f689a7c71a74b",
+        "rev": "4e92f2085a4b64f3396901e33a1144de7d1a52cd",
         "type": "github"
       },
       "original": {
@@ -224,16 +223,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1705099185,
-        "narHash": "sha256-SxJenKtvcrKJd0TyJQMO3p6VA7PEp+vmMnmlKFzWMNs=",
+        "lastModified": 1728627514,
+        "narHash": "sha256-r+SF9AnHrTg+bk6YszoKfV9lgyw+yaFUQe0dOjI0Z2o=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2bce5ccff0ad7abda23e8bb56434b6877a446694",
+        "rev": "c505ebf777526041d792a49d5f6dd4095ea391a7",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "release-23.11",
+        "ref": "nixos-24.05",
         "repo": "nixpkgs",
         "type": "github"
       }
