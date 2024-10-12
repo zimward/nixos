@@ -29,6 +29,7 @@ in
           "CONFIG_FILE=${cfgFile}"
           "ROCKET_ADDRESS=::"
           "ROCKET_LIMITS={file=\"10 MiB\"}"
+          "XDG_DATA_DIRS=/nix/var/nix/profiles/default/share:/run/current-system/sw/share"
         ];
         ExecStart = [ "${inputs.imgserv.packages.aarch64-linux.default}/bin/imgserv" ];
         StateDirectory = "/var/lib/imgserv";
