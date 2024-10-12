@@ -73,6 +73,11 @@
         pkgs.networkmanager-openconnect
       ];
     };
+    #dont update during uni
+    system.autoUpgrade.dates = lib.mkForce "19:00";
+    #dont auto garbage collect to prevent having to recompile build tools constantly
+    nix.gc.dates = lib.mkForce "monthly";
+
     system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
