@@ -17,6 +17,8 @@
     net.wifi.enable = true;
     time.timeZone = "Asia/Tokyo";
 
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     programs.virt-manager.enable = true;
 
     #for zoom
