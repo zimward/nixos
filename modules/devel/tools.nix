@@ -13,7 +13,6 @@
   };
   config = lib.mkIf config.devenv.enable {
     environment.systemPackages = with pkgs; [
-      rustup
       # gcc_multi
       (python3.withPackages (python-pkgs: [
         python-pkgs.numpy
