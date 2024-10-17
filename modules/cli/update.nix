@@ -1,15 +1,14 @@
 {
   pkgs,
-  config,
   ...
 }:
 let
   updScript = pkgs.writeShellScriptBin "update.sh" ''
-    #!${pkgs.stdenv.shell}
     cd /tmp
     git clone --depth 1 shilagit:git/nixos
+    doas chown root:root -R ./nixos/
     doas nixos-rebuild switch --flake ./nixos/.
-    rm -rf nixos
+    doas rm -rf /tmp/nixos
   '';
 in
 {
