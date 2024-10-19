@@ -12,7 +12,10 @@
   ];
   config = lib.mkIf (config.device.class != "none") {
     #needed to rebuild system
-    environment.systemPackages = with pkgs; [ git ];
+    environment.systemPackages = with pkgs; [
+      git
+      doas-sudo-shim
+    ];
 
     nix.settings.experimental-features = [
       "nix-command"
