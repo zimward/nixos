@@ -83,7 +83,10 @@
       defaults.email = "minespeed200@gmail.com";
     };
 
-    systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
+    systemd.services.hydra-evaluator.environment = {
+      GC_DONT_GC = "true";
+      TEMPDIR = "/nix/tmp";
+    };
 
     systemd.tmpfiles.rules = [
       "d /tmp 1777 root root 1d"
