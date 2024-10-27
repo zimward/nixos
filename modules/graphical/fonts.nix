@@ -3,7 +3,7 @@
   fonts = {
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       liberation_ttf
       fira-code
       fira-code-symbols
