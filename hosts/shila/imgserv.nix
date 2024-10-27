@@ -7,8 +7,9 @@ let
   cfgFile = pkgs.writeText "config.toml" ''
     url = "https://arcu.dyndns.org/imgserv"
     data_dir = "/var/lib/imgserv/"
-    image_ttl = 1209600
-    cleanup_interval = 21600
+    image_ttl = "14d"
+    paste_ttl = "1y"
+    cleanup_interval = "6h"
   '';
 in
 {
@@ -27,8 +28,6 @@ in
         Group = "imgserv";
         Environment = [
           "CONFIG_FILE=${cfgFile}"
-          "ROCKET_ADDRESS=::"
-          "ROCKET_LIMITS={file=\"10 MiB\"}"
           "XDG_DATA_DIRS=/nix/var/nix/profiles/default/share:/run/current-system/sw/share"
         ];
         ExecStart = [ "${inputs.imgserv.packages.aarch64-linux.default}/bin/imgserv" ];
