@@ -102,18 +102,31 @@
                 };
               };
               language-server.nixd = {
-                command = "${pkgs.nixd}/bin/nixd";
+                command = lib.getExe pkgs.nixd;
               };
               language = [
                 {
                   name = "nix";
                   auto-format = true;
                   formatter = {
-                    command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+                    command = lib.getExe pkgs.nixfmt-rfc-style;
                   };
                   language-servers = [ "nixd" ];
                 }
+                {
+                  name = "html";
+                  auto-format = true;
+                  file-types = [
+                    "html"
+                    "css"
+                  ];
+                  language-servers = [ "superhtml" ];
+                }
               ];
+              language-server.superhtml = {
+                command = lib.getExe pkgs.superhtml;
+                args = [ "lsp" ];
+              };
             };
           };
         }
