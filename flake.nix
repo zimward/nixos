@@ -26,7 +26,10 @@
 
     pid-fan-controller.url = "github:zimward/PID-fan-control";
 
-    imgserv.url = "github:zimward/imgserv";
+    imgserv = {
+      url = "github:zimward/imgserv";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
