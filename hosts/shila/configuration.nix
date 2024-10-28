@@ -85,7 +85,7 @@
 
     systemd.services.hydra-evaluator.environment = {
       GC_DONT_GC = "true";
-      TEMPDIR = "/nix/tmp";
+      TMPDIR = "/nix/tmp";
     };
 
     systemd.tmpfiles.rules = [
@@ -99,7 +99,7 @@
       "git+ssh://arcugit:/"
       "git+ssh://arcugit:"
     ];
-    systemd.services.nix-daemon.environment.TEMPDIR = "/nix/tmp";
+    systemd.services.nix-daemon.environment.TMPDIR = "/nix/tmp";
 
     systemd.oomd = {
       enable = true;
