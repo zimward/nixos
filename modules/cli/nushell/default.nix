@@ -1,8 +1,4 @@
 { lib, config, ... }:
-let
-  # forPath = value: fn: if lib.strings.hasPrefix "/" value then (fn value) else value;
-  wrap = envVars: lib.attrsets.mapAttrs (_name: value: ''"${value}"'') envVars;
-in
 {
   imports = [
     ./login-workaround.nix
@@ -60,13 +56,6 @@ in
                   source ${./commands.nu}
                 ''
                 + config.cli.nushell.extraConfig;
-
-              # extraEnv = ''
-              #   if  (not ($env | columns | any {|c| $c == DISPLAY })) and $env.XDG_VTNR? == "1" {
-              #      sway
-              #   }
-              # '';
-              environmentVariables = wrap config.environment.variables;
             };
 
             programs.starship = {
