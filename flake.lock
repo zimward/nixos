@@ -163,18 +163,18 @@
     },
     "nixos-hardware-fork": {
       "locked": {
-        "lastModified": 1724308713,
-        "narHash": "sha256-TqLo/Ayhi6o0N6R1P2moULnJ99GkBU44v14w63zFBqc=",
+        "lastModified": 1728106645,
+        "narHash": "sha256-3l+OlUlzrGkLTop7cx1xmDaL/DaM3OIkx81Cu9C55yU=",
         "ref": "pinephone-pro",
-        "rev": "d24f6ab704929bfca429e1f107f8bbf985fde0d2",
-        "revCount": 1829,
+        "rev": "20c668736a544fc64e18765ce1db8c22ec1e0b9e",
+        "revCount": 1964,
         "type": "git",
-        "url": "ssh://arcugit:/~/git/nixos-hardware"
+        "url": "ssh://shilagit:/~/git/nixos-hardware"
       },
       "original": {
         "ref": "pinephone-pro",
         "type": "git",
-        "url": "ssh://arcugit:/~/git/nixos-hardware"
+        "url": "ssh://shilagit:/~/git/nixos-hardware"
       }
     },
     "nixpkgs": {
@@ -257,6 +257,22 @@
     },
     "nixpkgs_4": {
       "locked": {
+        "lastModified": 1729880355,
+        "narHash": "sha256-RP+OQ6koQQLX5nw0NmcDrzvGL8HDLnyXt/jHhL1jwjM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "18536bf04cd71abd345f9579158841376fdd0c5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
         "lastModified": 1729951556,
         "narHash": "sha256-bpb6r3GjzhNW8l+mWtRtLNg5PhJIae041sPyqcFNGb4=",
         "owner": "NixOS",
@@ -289,6 +305,24 @@
         "type": "github"
       }
     },
+    "ppp-kernel": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1730355820,
+        "narHash": "sha256-fjeIW3YUTxPe8EUM5onmjh9E+qv3te8O27H34hPdWcA=",
+        "ref": "refs/heads/master",
+        "rev": "5cc66aad953f288594dc709ecb1143c13fa3a6db",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://shilagit:/~/git/ppp-kernel"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://shilagit:/~/git/ppp-kernel"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -301,12 +335,13 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-small": "nixpkgs-small",
         "pid-fan-controller": "pid-fan-controller",
+        "ppp-kernel": "ppp-kernel",
         "sops-nix": "sops-nix"
       }
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {

@@ -57,17 +57,27 @@
       "rtc_rk808"
     ];
 
-    boot.kernelPatches = [
-      {
-        name = "DMC patch";
-        patch = ./0001-arm64-dts-rockchip-rk3399-pinephone-pro-Enable-DMC.patch;
-      }
-    ];
+    # boot.kernelPatches = [
+    #   {
+    #     name = "DMC patch";
+    #     patch = ./0001-arm64-dts-rockchip-rk3399-pinephone-pro-Enable-DMC.patch;
+    #   }
+    # ];
+    boot.kernelPackages = lib.mkForce (
+      pkgs.linuxPackagesFor inputs.ppp-kernel.packages.aarch64-linux.ppp-kernel-with-dmc
+    );
     boot.supportedFilesystems = lib.mkForce { zfs = false; };
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.powersave = true;
 
     nix.gc.automatic = lib.mkForce false; # causes image to eat itself when no rebuild switch is invoked
+    nix.settings = {
+      trusted-substituters = [ "https://pinephonepro-hwsupport.cachix.org" ];
+      trusted-public-keys = [
+        "pinephonepro-hwsupport.cachix.org-1:il42+PtnRvtFSv/Blwr/y7GIoZRudDnhoNIxuYhdzcY="
+      ];
+      require-sigs = false;
+    };
 
     hardware.enableRedistributableFirmware = true;
     security.apparmor.enable = lib.mkForce false;
@@ -121,6 +131,7 @@
       pkgs.gnome-console
       pkgs.powersupply
       pkgs.bookworm
+      pkgs.sof-firmware
     ];
 
     system.stateVersion = "24.05";
