@@ -6,7 +6,7 @@
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixos-hardware-fork.url = "github:zimward/nixos-hardware/pinephone-pro";
-    nixos-hardware-fork.url = "git+ssh://arcugit:/~/git/nixos-hardware?ref=pinephone-pro";
+    nixos-hardware-fork.url = "git+ssh://shilagit:/~/git/nixos-hardware?ref=pinephone-pro";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -23,6 +23,8 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
     };
+
+    ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
 
     pid-fan-controller.url = "github:zimward/PID-fan-control";
 
