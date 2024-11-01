@@ -98,6 +98,8 @@
       "git+ssh://git@arcu.dyndns.org:223"
       "git+ssh://arcugit:/"
       "git+ssh://arcugit:"
+      "git+ssh://shilagit:/"
+      "git+ssh://shilagit:"
     ];
     systemd.services.nix-daemon.environment.TMPDIR = "/nix/tmp";
 
