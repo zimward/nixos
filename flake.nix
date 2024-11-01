@@ -139,26 +139,6 @@
             ./hosts/kirishika/configuration.nix
           ];
         };
-        shila.sdcard = nixos-generators.nixosGenerate {
-          system = "aarch64-linux";
-          format = "sd-aarch64";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { ... }:
-              {
-                nixpkgs.config.allowUnsupportedSystem = true;
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-                nixpkgs.buildPlatform.system = "aarch64-linux";
-
-                sdImage.compressImage = false;
-              }
-            )
-            ./hosts/shila/configuration.nix
-          ];
-        };
       };
       hydraJobs = {
         kirishika = packages.aarch64-linux.kirishika.sdcard;
