@@ -107,6 +107,12 @@
       enable = true;
       enableSystemSlice = true;
     };
+
+    boot.kernel.sysctl = {
+      "vm.overcommit_memory" = 2; # malloc fails if no memory is available
+      "vm.overcommit_ratio" = 90; # only allow allocation of 90% ram+swap as swap also lives on ram
+    };
+
     #dont oom sshd
     systemd.services.sshd.serviceConfig.OOMScoreAdjust = -1000;
     system.stateVersion = "24.05";
