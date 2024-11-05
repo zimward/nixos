@@ -39,7 +39,7 @@
 
     services.hydra = {
       enable = true;
-      hydraURL = "https://arcu.dyndns.org";
+      hydraURL = "https://arcureid.de";
       port = 3000;
       notificationSender = "hydra@localhost";
       buildMachinesFiles = [ ];
@@ -49,7 +49,7 @@
 
     services.nginx = {
       enable = true;
-      virtualHosts."arcu.dyndns.org" = {
+      virtualHosts."arcureid.de" = {
         forceSSL = true;
         enableACME = true;
         locations = {

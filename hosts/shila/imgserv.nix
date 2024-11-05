@@ -5,7 +5,7 @@
 }:
 let
   cfgFile = pkgs.writeText "config.toml" ''
-    url = "https://arcu.dyndns.org/imgserv"
+    url = "https://arcureid.de/imgserv"
     data_dir = "/var/lib/imgserv/"
     image_ttl = "14d"
     paste_ttl = "1y"
