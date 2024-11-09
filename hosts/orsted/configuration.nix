@@ -22,7 +22,10 @@
     programs.virt-manager.enable = true;
 
     #for zoom
-    environment.systemPackages = [ pkgs.chromium ];
+    environment.systemPackages = with pkgs; [
+      chromium
+      warpinator
+    ];
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
@@ -31,8 +34,8 @@
       "x-scheme-handler/about" = "librewolf.desktop";
       "x-scheme-handler/unknown" = "librewolf.desktop";
     };
-    graphical.kicad.enable = lib.mkForce false;
-    graphical.kicad.minimal = false;
+    graphical.kicad.enable = true;
+    graphical.kicad.minimal = true;
     graphical.obsidian.enable = true;
 
     networking.hostName = "orsted"; # Define your hostname.
@@ -41,6 +44,7 @@
       enable = true;
       device = "nodev";
       enableCryptodisk = true;
+      memtest86.enable = true;
     };
     programs.gnupg.agent = {
       enable = true;
