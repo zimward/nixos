@@ -44,7 +44,6 @@
       enable = true;
       device = "nodev";
       enableCryptodisk = true;
-      memtest86.enable = true;
     };
     programs.gnupg.agent = {
       enable = true;
