@@ -21,11 +21,17 @@
 
     programs.virt-manager.enable = true;
 
+    # boot.binfmt.emulatedSystems = [ "riscv64-linux" ];
+    boot.initrd.checkJournalingFS=false;
+     # system.rebuild.enableNg = true;
+
     #for zoom
     environment.systemPackages = with pkgs; [
       chromium
       warpinator
+      freecad
     ];
+    graphical.steam.enable = true;
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
