@@ -2,6 +2,7 @@
   description = "Nixos config flake";
 
   inputs = {
+    nixpkgs-fork.url = "git+file:///home/zimward/gits/nixpkgs?ref=fully-hysterical-screaming-pin";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -19,7 +20,8 @@
 
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # url = "git+file:///home/zimward/gits/nix-matlab";
+      inputs.nixpkgs.follows = "nixpkgs-fork";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
