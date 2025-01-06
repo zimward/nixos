@@ -7,7 +7,7 @@
       liberation_ttf
       fira-code
       fira-code-symbols
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      nerd-fonts.fira-code
     ];
     fontDir.enable = true;
   };
