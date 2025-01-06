@@ -11,7 +11,6 @@
     };
   };
   config = lib.mkIf config.sys.sound.enable {
-    hardware.pulseaudio.enable = false;
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = config.sys.sound.allowRTsched;
     services.pipewire = {
