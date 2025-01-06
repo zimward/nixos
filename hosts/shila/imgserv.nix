@@ -7,7 +7,7 @@ let
   cfgFile = pkgs.writeText "config.toml" ''
     url = "https://arcureid.de/imgserv"
     data_dir = "/var/lib/imgserv/"
-    image_ttl = "14d"
+    image_ttl = "30d"
     paste_ttl = "1y"
     cleanup_interval = "6h"
   '';
