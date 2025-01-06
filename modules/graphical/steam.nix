@@ -17,6 +17,7 @@
     nixpkgs.allowUnfreePackages = [
       "steam"
       "steam-original"
+      "steam-unwrapped"
       "steam-run"
     ];
     programs.steam.enable = true;
