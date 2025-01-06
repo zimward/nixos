@@ -19,7 +19,7 @@ let
 
     [[block]]
     block = "time"
-    format = "$timestamp.datetime(f:'%Y.%m.%d %a曜日 %H:%M:%S',l:ja_JP)"
+    format = "$timestamp.datetime(f:'%Y.%m.%d %a %H:%M:%S',l:ja_JP)"
     interval = 1
   '';
   shell = lib.optionalString config.cli.nushell.enable "-e '${lib.getExe pkgs.nushell}'";
