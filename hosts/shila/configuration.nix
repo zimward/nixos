@@ -109,7 +109,6 @@
     };
 
     boot.kernel.sysctl = {
-      "vm.overcommit_memory" = 2; # malloc fails if no memory is available
       "vm.overcommit_ratio" = 90; # only allow allocation of 90% ram+swap as swap also lives on ram
     };
 
