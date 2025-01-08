@@ -45,6 +45,9 @@
                   skip-levels = 1;
                   character = "⸽";
                 };
+                inline-diagnostics = {
+                  cursor-line = "error";
+                };
               };
               theme = "tokyonight";
               keys.insert = {
