@@ -45,6 +45,8 @@
                   skip-levels = 1;
                   character = "⸽";
                 };
+                #show warns end of line
+                end-of-line-diagnostics = "hint";
                 inline-diagnostics = {
                   cursor-line = "error";
                 };
