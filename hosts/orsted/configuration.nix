@@ -19,8 +19,6 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    programs.virt-manager.enable = true;
-
     # boot.binfmt.emulatedSystems = [ "riscv64-linux" ];
     boot.initrd.checkJournalingFS = false;
     # system.rebuild.enableNg = true;
