@@ -27,7 +27,6 @@
     environment.systemPackages = with pkgs; [
       chromium
       warpinator
-      freecad
     ];
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
