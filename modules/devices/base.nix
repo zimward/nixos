@@ -65,6 +65,8 @@
     sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
     services.logind.powerKey = "suspend";
 
+    #enable sysrq
+    boot.kernel.sysctl."kernel.sysrq" = 598;
     #DONT USE PROVIDER DNS
     networking.nameservers = [
       "1.1.1.1"
