@@ -8,14 +8,11 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules
-    ../../modules/hardware/poweropt.nix
-    ../../modules/net/wifi.nix
   ];
 
   config = {
     device.class = "desktop"; # its a laptop but it doesnt matter
     net.wifi.enable = true;
-    time.timeZone = "Asia/Tokyo";
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -30,11 +27,13 @@
       "x-scheme-handler/about" = "librewolf.desktop";
       "x-scheme-handler/unknown" = "librewolf.desktop";
     };
-    graphical.kicad.enable = true;
-    graphical.kicad.minimal = true;
+    graphical.kicad = {
+      enable = true;
+      minimal = true;
+    };
     graphical.obsidian.enable = true;
 
-    networking.hostName = "orsted"; # Define your hostname.
+    networking.hostName = "orsted";
     networking.networkmanager.enable = true;
     boot.loader.grub = {
       enable = true;
@@ -79,6 +78,6 @@
     #dont auto garbage collect to prevent having to recompile build tools constantly
     nix.gc.dates = lib.mkForce "monthly";
 
-    system.stateVersion = "23.11"; # Did you read the comment?
+    system.stateVersion = "23.11";
   };
 }
