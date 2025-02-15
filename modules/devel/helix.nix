@@ -20,7 +20,7 @@
             extraPackages = with pkgs; [
               # nixfmt-rfc-style
               nixd
-              python311Packages.python-lsp-server
+              # python311Packages.python-lsp-server
               texlab # latex
               lldb_18
               clang-tools
