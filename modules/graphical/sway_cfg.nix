@@ -56,7 +56,7 @@ in
                 };
               };
               output = {
-                "DP-1" = {
+                "DP-0" = {
                   position = "0 +1920";
                 };
               };
@@ -66,10 +66,13 @@ in
                 "${modifier}+Shift+j" = "kill";
                 "${modifier}+BackSpace" = "input type:keyboard xkb_switch_layout next";
 
-                "${modifier}+j" = ''exec ${lib.getExe pkgs.slurp} |${lib.getExe pkgs.grim} -g - - | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy'';
-                "${modifier}+Print" = ''exec ${lib.getExe pkgs.grim} - | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy'';
-                "${modifier}+Shift+i" = "exec ${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom";
-                "${modifier}+Shift+y" = "exec swaymsg output DP-1 transform 90 clockwise";
+                "${modifier}+j" =
+                  ''exec ${lib.getExe pkgs.slurp} |${lib.getExe pkgs.grim} -g - - | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy'';
+                "${modifier}+Print" =
+                  ''exec ${lib.getExe pkgs.grim} - | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy'';
+                "${modifier}+Shift+i" =
+                  "exec ${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom";
+                "${modifier}+Shift+y" = "exec swaymsg output DP-3 transform 90 clockwise";
 
                 "${modifier}+${left}" = "focus left";
                 "${modifier}+${down}" = "focus down";

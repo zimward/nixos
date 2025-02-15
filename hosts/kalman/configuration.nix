@@ -24,8 +24,6 @@
 
     networking.hostName = "kalman";
 
-    environment.systemPackages = with pkgs; [ docker ];
-
     virtualisation.libvirtd = {
       enable = true;
       #user mode networking
