@@ -46,7 +46,7 @@
         device = "/dev/disk/by-uuid/e6f68287-6f65-423a-8bf9-890692e2e63a";
         fsType = "btrfs";
         options = [
-          "discard"
+          "discard=async"
           "compress=zstd:6"
         ];
       };
