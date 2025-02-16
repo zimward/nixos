@@ -86,6 +86,12 @@
           };
           modules = [ ./hosts/doga/configuration.nix ];
         };
+        aisha = nixpkgs-small.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [ ./hosts/aisha/configuration.nix ];
+        };
 
         kirishika = nixpkgs.lib.nixosSystem {
           specialArgs = {
