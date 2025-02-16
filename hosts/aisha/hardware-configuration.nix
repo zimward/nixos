@@ -5,33 +5,54 @@
 }:
 {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
     ../../modules/hardware/tmpfsroot.nix
   ];
 
   config = {
 
+    boot.initrd.availableKernelModules = [
+      "xhci_pci"
+      "virtio_scsi"
+      "sr_mod"
+    ];
+
+    boot.initrd.kernelModules = [ "virtio_gpu" ];
+    boot.kernelParams = [ "console=tty" ];
+
+    systemd.network.enable = true;
+    networking.useNetworkd = true;
+    systemd.network.networks."10-wan" = {
+      networkConfig.DHCP = "ipv4";
+      matchConfig.Name = "enp1";
+      address = [
+        "95.217.217.249"
+        "2a01:4f9:c012:36f5::1/64"
+      ];
+      routes = [
+        {
+          Gateway = "fe80::1";
+        }
+      ];
+    };
+
     tmpfsroot = {
       enable = true;
       boot = {
-        device = "/dev/disk/by-uuid/6028-CED0";
+        device = "/dev/disk/by-uuid/80E8-2ED9";
         fsType = "vfat";
       };
       nixstore = {
-        device = "/dev/disk/by-uuid/c9f746d0-b1b5-4f52-bc27-869d4a2601ce";
-        fsType = "f2fs";
-        options = [ "discard" ];
-      };
-      home = {
-        device = "/dev/disk/by-uuid/24b73bb4-2da4-4669-b5e2-f4bc31017e13";
-        fsType = "f2fs";
-        options = [ "discard" ];
+        device = "/dev/disk/by-uuid/e6f68287-6f65-423a-8bf9-890692e2e63a";
+        fsType = "btrfs";
+        options = [
+          "discard"
+          "compress=zstd:6"
+        ];
       };
     };
 
-    swapDevices = [ ];
-
-    networking.useDHCP = lib.mkDefault true;
+    # networking.useDHCP = lib.mkDefault true;
 
     nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   };
