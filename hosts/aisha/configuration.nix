@@ -10,6 +10,8 @@
     main-user.userName = "aisha";
     main-user.hashedPassword = "$y$j9T$wmstfO.Yhb3p4XyS84lDy/$GDLXO3PNgb4GQsHmPBpixsbke/wzs/fY6x0EOBjK395";
 
+    updateScript.cfgRef = "/nix/persist/config";
+
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
