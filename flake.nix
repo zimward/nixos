@@ -30,7 +30,7 @@
 
     imgserv = {
       url = "github:zimward/imgserv";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-generators = {
