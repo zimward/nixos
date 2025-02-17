@@ -13,7 +13,7 @@
 
     ethernet.share.device = "enp49s0f3u3";
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     boot.loader.systemd-boot.enable = true;
