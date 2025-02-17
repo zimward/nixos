@@ -11,6 +11,7 @@
       description = ''
         username
       '';
+      type = lib.types.nonEmptyStr;
     };
     main-user.hashedPassword = lib.mkOption {
       default = null;
