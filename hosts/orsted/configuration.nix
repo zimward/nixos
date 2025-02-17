@@ -19,13 +19,7 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    # boot.binfmt.emulatedSystems = [ "riscv64-linux" ];
-    boot.initrd.checkJournalingFS = false;
-    # system.rebuild.enableNg = true;
-
-    #for zoom
     environment.systemPackages = with pkgs; [
-      chromium
       warpinator
     ];
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
