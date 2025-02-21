@@ -31,8 +31,10 @@
     };
 
     users.users.${config.main-user.userName}.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZ4iv3QwB03x5UlteFjPmTymPb29ruuKiMdZLn8jIem mobian@pinephone"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg modsog@mainpc"
     ];
+
+    ethernet.share.device = "enp49s0f3u3";
 
     #zfs auto scrubbing
     services.zfs.autoScrub.enable = true;
@@ -43,7 +45,7 @@
       mountdPort = 4002;
       statdPort = 4000;
       exports = ''
-        /mnt/nas/nas/mainpc    192.168.0.1(rw,fsid=0,no_subtree_check)
+        /mnt/nas/nas/mainpc    192.168.0.20(rw,fsid=0,no_subtree_check)
       '';
     };
 

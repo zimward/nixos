@@ -11,8 +11,6 @@
     #gets wiped due to tmpfs
     main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
-    ethernet.share.device = "enp49s0f3u3";
-
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
