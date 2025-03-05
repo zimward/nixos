@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -51,11 +51,15 @@
     # since no services are supposed to run on this machine a firewall would only wase memory
     networking.firewall.enable = false;
 
-    specialisation.freizeit.configuration = {
-      graphical.steam.enable = true;
-      graphical.deluge.enable = true;
-      graphical.minecraft.enable = true;
-      graphical.ereader.enable = true;
+    graphical.steam.enable = true;
+    graphical.deluge.enable = true;
+    graphical.minecraft.enable = true;
+    graphical.ereader.enable = true;
+    specialisation.arbeit.configuration = {
+      graphical.steam.enable = lib.mkForce false;
+      graphical.deluge.enable = lib.mkForce false;
+      graphical.minecraft.enable = lib.mkForce false;
+      graphical.ereader.enable = lib.mkForce false;
     };
     graphical.irc.enable = true;
     graphical.ime.enable = true;
