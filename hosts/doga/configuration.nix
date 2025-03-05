@@ -34,7 +34,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg modsog@mainpc"
     ];
 
-    ethernet.share.device = "enp49s0f3u3";
+    ethernet.share.device = "enp0s20u3";
 
     #zfs auto scrubbing
     services.zfs.autoScrub.enable = true;
