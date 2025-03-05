@@ -51,6 +51,21 @@
 
     services.logind.powerKeyLongPress = "reboot";
 
+    #dlna media server
+    services.minidlna = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        friendly_name = config.networking.hostName;
+        media_dir = [
+          "V,/mnt/nas/nas/mainpc/Anime"
+        ];
+        log_level = "error";
+      };
+    };
+
+    users.users.minidlna.extraGroups = [ "users" ];
+
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22
