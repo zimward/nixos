@@ -60,6 +60,7 @@
         media_dir = [
           "V,/mnt/nas/nas/mainpc/Anime"
         ];
+        inotify = "yes";
         log_level = "error";
       };
     };
