@@ -3,6 +3,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules
+    ./searx.nix
+    ./matrix.nix
   ];
 
   config = {
