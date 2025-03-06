@@ -45,7 +45,7 @@ in
               bars = [
                 {
                   position = "top";
-                  statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status_cfg}";
+                  statusCommand = "${lib.getExe pkgs.i3status} ${status_cfg}";
                 }
               ];
               input = {
