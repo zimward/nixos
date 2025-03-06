@@ -35,9 +35,7 @@
     };
     virtualisation.spiceUSBRedirection.enable = true;
     programs.virt-manager.enable = true;
-    virtualisation.docker.enable = true;
     users.users."zimward".extraGroups = [
-      "docker"
       "libvirtd"
       "dialout"
     ];

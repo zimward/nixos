@@ -45,7 +45,7 @@
       mountdPort = 4002;
       statdPort = 4000;
       exports = ''
-        /mnt/nas/nas/mainpc    192.168.178.52(rw,fsid=0,no_subtree_check)
+        /mnt/nas/nas/mainpc    192.168.0.0/24(rw,fsid=0,no_subtree_check)
       '';
     };
 

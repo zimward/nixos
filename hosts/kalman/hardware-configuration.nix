@@ -59,7 +59,7 @@
 
     #nfs
     fileSystems."/mnt/nas" = {
-      device = "192.168.0.238:/mnt/nas/nas/mainpc";
+      device = "192.168.0.1:/mnt/nas/nas/mainpc";
       fsType = "nfs";
       options = [
         "x-systemd.automount"
