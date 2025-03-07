@@ -10,26 +10,19 @@
       server.image_proxy = true;
       server.default_locale = "de";
 
-      engines = lib.singleton [
+      engines = [
         {
           name = "bing";
           disabled = false;
         }
         {
           name = "bing images";
+          engine = "bing_images";
           disabled = false;
         }
         {
           name = "startpage";
           disabled = false;
-          engine = "startpage";
-          shortcut = "sp";
-          startpage_categ = "web";
-          categories = [
-            "general"
-            "web"
-          ];
-          additional_tests.rosebud = "*test_rosebud";
         }
       ];
       default_http_headers = {
