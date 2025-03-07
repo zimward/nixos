@@ -8,7 +8,7 @@ let
   updScript = pkgs.writeShellScriptBin "update.sh" ''
     cd /tmp
     git clone --depth 1 ${config.updateScript.cfgRef}
-    nixos-rebuild switch --flake ./nixos/. --use-remote-sudo
+    nixos-rebuild switch --flake ./${lib.lists.last (lib.strings.splitString "/" config.updateScript.cfgRef)}/. --use-remote-sudo
     rm -rf /tmp/nixos
   '';
 in
