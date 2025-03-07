@@ -30,6 +30,47 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg"
     ];
 
+    # ssl cert
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "janick-andresen@web.de";
+      certs =
+        let
+          sub = t: s: "${s}.${t}";
+        in
+        {
+          "zimward.moe" = {
+            webroot = "/var/lib/acme/acme-challenge/";
+            extraDomainNames = map (sub "zimward.moe") [
+              "mx1"
+              "search"
+            ];
+          };
+        };
+    };
+
+    services.nginx = {
+      enable = true;
+      virtualHosts."zimward.moe" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          extraConfig = "
+          return 402;
+        ";
+        };
+      };
+      virtualHosts."search.zimward.moe" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations."/" = {
+          proxyPass = "http://localhost:8080/";
+          recommendedProxySettings = true;
+        };
+
+      };
+    };
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22
