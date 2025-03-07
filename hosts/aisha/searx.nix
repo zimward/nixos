@@ -10,10 +10,28 @@
       server.image_proxy = true;
       server.default_locale = "de";
 
-      engines = lib.singleton {
-        name = "bing";
-        disabled = false;
-      };
+      engines = lib.singleton [
+        {
+          name = "bing";
+          disabled = false;
+        }
+        {
+          name = "bing images";
+          disabled = false;
+        }
+        {
+          name = "startpage";
+          disabled = false;
+          engine = "startpage";
+          shortcut = "sp";
+          startpage_categ = "web";
+          categories = [
+            "general"
+            "web"
+          ];
+          additional_tests.rosebud = "*test_rosebud";
+        }
+      ];
       default_http_headers = {
         "X-Content-Type-Options" = "nosniff";
         "X-XSS-Protection" = "1; mode=block";
