@@ -45,7 +45,13 @@
     boot.zfs.extraPools = [ "Pool1_20TB" ];
     boot.zfs.forceImportRoot = false;
 
-    swapDevices = [ ];
+    hardware.hddIdle = [
+      "sdb"
+      "sdc"
+      "sdc"
+      "sde"
+      "sdf"
+    ];
 
     networking.useDHCP = lib.mkDefault true;
 
