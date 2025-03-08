@@ -5,5 +5,6 @@
     ./poweropt.nix
     ./tmpfsroot.nix
     ./automounting.nix
+    ./hddIdle.nix
   ];
 }
