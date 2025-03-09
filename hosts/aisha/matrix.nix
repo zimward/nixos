@@ -105,6 +105,7 @@ in
     cert = "${certDir}/full.pem";
     pkey = "${certDir}/key.pem";
     extraConfig = ''
+      verbose
       # ban private IP ranges
       no-multicast-peers
       denied-peer-ip=0.0.0.0-0.255.255.255
