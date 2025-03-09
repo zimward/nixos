@@ -48,6 +48,9 @@
           };
         };
     };
+    environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
+      directories = [ "/var/lib/acme/" ];
+    };
 
     services.nginx = {
       enable = true;
