@@ -38,6 +38,7 @@
       "discard"
       "noatime"
     ];
+    noCheck = true;
   };
 
   boot.initrd.luks.devices."root" = {
