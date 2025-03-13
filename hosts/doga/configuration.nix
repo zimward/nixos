@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -67,6 +72,12 @@
 
     users.users.minidlna.extraGroups = [ "users" ];
 
+    services.ethercalc.enable = true;
+
+    environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
+      directories = [ "/var/lib/private/ethercalc" ];
+    };
+
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22
@@ -76,6 +87,8 @@
       4001
       4002
       20048
+      #ethercalc
+      8000
     ];
     networking.firewall.allowedUDPPorts = [
       2049
