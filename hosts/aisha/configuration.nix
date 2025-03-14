@@ -62,6 +62,10 @@
           return 402;
         ";
         };
+        extraConfig = "
+          access_log /dev/null;
+          error_log /dev/null;
+        ";
       };
       virtualHosts."search.zimward.moe" = {
         forceSSL = true;
@@ -71,7 +75,6 @@
           proxyPass = "http://localhost:8080/";
           recommendedProxySettings = true;
         };
-
       };
     };
     # Open ports in the firewall.
