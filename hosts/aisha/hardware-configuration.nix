@@ -23,16 +23,18 @@
     systemd.network.enable = true;
     networking.useNetworkd = true;
     systemd.network.networks."10-wan" = {
-      networkConfig.DHCP = "ipv4";
-      matchConfig.Name = "enp1";
+      networkConfig.DHCP = "no";
+      matchConfig.Name = "enp1*";
       address = [
-        "95.217.217.249"
+        "95.217.217.249/32"
         "2a01:4f9:c012:36f5::1/64"
       ];
       routes = [
         {
-          Gateway = "fe80::1";
+          Gateway = "172.31.1.1";
+          GatewayOnLink = true;
         }
+        { Gateway = "fe80::1"; }
       ];
     };
 
