@@ -51,7 +51,43 @@
       statdPort = 4000;
       exports = ''
         /mnt/nas/nas/mainpc    192.168.0.0/24(rw,fsid=0,no_subtree_check)
+        /mnt/nas/nas/basti     192.168.178.39/24(rw,fsid=0,no_subtree_check)
+        /mnt/nas/nas/basti     192.168.178.22/24(rw,fsid=0,no_subtree_check)
       '';
+    };
+
+    services.samba = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        global = {
+          "workgroup" = "WORKGROUP";
+          "server string" = "smbnix";
+          "netbios name" = "smbnix";
+          "security" = "user";
+          "guest account" = "nobody";
+        };
+        private = {
+          path = "/mnt/nas/nas/basti";
+          browsable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "basti";
+          "force group" = "users";
+        };
+      };
+    };
+
+    services.samba-wsdd = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    users.users.basti = {
+      isNormalUser = true;
+      hashedPassword = "$y$j9T$Zb4MwzGPklZnR/MBpQ7g01$Q1P7ci7xXFLM7W19ctvojiomdn8WxGmg46KKTP1DzZD";
     };
 
     services.logind.powerKeyLongPress = "reboot";
@@ -64,6 +100,9 @@
         friendly_name = config.networking.hostName;
         media_dir = [
           "V,/mnt/nas/nas/mainpc/Anime"
+          "V,/mnt/nas/nas/mainpc/Serien"
+          "V,/mnt/nas/nas/mainpc/Filme"
+          "V,/mnt/nas/nas/basti/media"
         ];
         inotify = "yes";
         log_level = "error";
