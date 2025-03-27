@@ -65,13 +65,12 @@
           "server string" = "smbnix";
           "netbios name" = "smbnix";
           "security" = "user";
-          "guest account" = "nobody";
         };
         private = {
           path = "/mnt/nas/nas/basti";
           browsable = "yes";
           "read only" = "no";
-          "guest ok" = "yes";
+          "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
           "force user" = "basti";
@@ -99,13 +98,16 @@
       settings = {
         friendly_name = config.networking.hostName;
         media_dir = [
-          "V,/mnt/nas/nas/mainpc/Anime"
-          "V,/mnt/nas/nas/mainpc/Serien"
-          "V,/mnt/nas/nas/mainpc/Filme"
-          "V,/mnt/nas/nas/basti/media"
+          "/mnt/nas/nas/mainpc/Anime"
+          "/mnt/nas/nas/mainpc/Serien"
+          "/mnt/nas/nas/mainpc/Filme"
+          "/mnt/nas/nas/basti/media"
         ];
         inotify = "yes";
-        log_level = "error";
+        enable_tivo = "yes";
+        wide_links = "yes";
+        db_dir = "/nix/persist/system/minidlna/";
+        log_level = "warn";
       };
     };
 
@@ -113,9 +115,16 @@
 
     services.ethercalc.enable = true;
 
-    environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
-      directories = [ "/var/lib/private/ethercalc" ];
-    };
+    environment.persistence."/nix/persist/system" =
+      let
+        varDir = d: "/var/lib/${d}";
+      in
+      lib.mkIf config.tmpfsroot.enable {
+        directories = map varDir [
+          "private/ethercalc"
+          "samba"
+        ];
+      };
 
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
