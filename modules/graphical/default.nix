@@ -14,6 +14,6 @@
     ./kicad.nix
     ./matlab.nix
     ./steam.nix
-    ./sway.nix
+    ./sway
   ];
 }
