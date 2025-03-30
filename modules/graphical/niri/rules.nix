@@ -6,6 +6,7 @@
       matches = [ { app-id = ".*"; } ];
       excludes = [ { app-id = "org.keepassxc.KeePassXC"; } ];
       open-focused = false;
+      open-floating = false;
     }
     #disallow screencapture for keepass,etc.
     {
@@ -15,6 +16,11 @@
         { app-id = "nheko"; }
       ];
       block-out-from = "screen-capture";
+    }
+    {
+      matches = [ { title = "^.+Zugriffsanfrage$"; } ];
+      open-focused = true;
+      open-floating = true;
     }
     {
       matches = [
@@ -42,7 +48,6 @@
       default-column-width.proportion = 0.18;
       default-window-height.proportion = 0.5;
       open-on-output = "DP-1";
-      open-floating = false;
     }
     {
       matches = [
