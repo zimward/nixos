@@ -69,6 +69,8 @@
 
     "Mod+H".action = focus-column-or-monitor-left;
     "Mod+N".action = focus-column-or-monitor-right;
+    "Mod+Ctrl+H".action = focus-monitor-left;
+    "Mod+Ctrl+N".action = focus-monitor-right;
     "Mod+D".action = focus-window-or-workspace-down;
     "Mod+R".action = focus-window-or-workspace-up;
     "Mod+Home".action = focus-column-first;
