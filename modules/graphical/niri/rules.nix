@@ -18,7 +18,10 @@
       block-out-from = "screen-capture";
     }
     {
-      matches = [ { title = "^.+Zugriffsanfrage$"; } ];
+      matches = [
+        { title = "^.+Zugriffsanfrage$"; }
+        { title = "^Datenbank+.*$"; }
+      ];
       open-focused = true;
       open-floating = true;
     }
@@ -74,7 +77,7 @@
     {
       matches = [ { namespace = "^notifications$"; } ];
       block-out-from = "screen-capture";
-      opacity = 0.7;
+      opacity = 0.8;
     }
   ];
 }
