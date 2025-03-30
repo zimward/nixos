@@ -13,20 +13,41 @@
     # "XF86AudioPrev".action = playerctl "previous";
     # "XF86AudioNext".action = playerctl "next";
 
-    "XF86AudioRaiseVolume".action = spawn "swayosd-client" "--output-volume=raise";
-    "XF86AudioLowerVolume".action = spawn "swayosd-client" "--output-volume=lower";
+    "XF86AudioRaiseVolume".action.spawn = [
+      "swayosd-client"
+      "--output-volume=raise"
+    ];
+    "XF86AudioLowerVolume".action.spawn = [
+      "swayosd-client"
+      "--output-volume=lower"
+    ];
 
-    "XF86MonBrightnessUp".action = spawn "swayosd-client" "--brightness=raise";
-    "XF86MonBrightnessDown".action = spawn "swayosd-client" "--brightness=lower";
+    "XF86MonBrightnessUp".action.spawn = [
+      "swayosd-client"
+      "--brightness=raise"
+    ];
+    "XF86MonBrightnessDown".action.spawn = [
+      "swayosd-client"
+      "--brightness=lower"
+    ];
 
     # "Print".action = screenshot-screen false;
     "Mod+Print".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
-    "Mod+P".action = spawn "${lib.getExe pkgs.anyrun}";
-    "Mod+Shift+T".action = spawn "${lib.getExe pkgs.alacritty}";
+    "Mod+P".action.spawn = lib.getExe pkgs.anyrun;
+    "Mod+Shift+T".action.spawn =
+      let
+        terminal = lib.getExe pkgs.alacritty;
+        shell = lib.getExe pkgs.nushell;
+      in
+      [
+        "sh"
+        "-c"
+        "(${terminal} msg create-window -e ${shell}) || ${terminal} -e ${shell}"
+      ];
     # "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
-    "Mod+Shift+J".action = close-window;
+    "Mod+Shift+J".action.close-window = [ ];
     "Mod+G".action = switch-preset-column-width;
     "Mod+Shift+P".action = switch-preset-window-height;
     "Mod+Ctrl+R".action = reset-window-height;

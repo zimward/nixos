@@ -4,7 +4,7 @@
     #prevent starting applications from grabbing focus
     {
       matches = [ { app-id = ".*"; } ];
-      excludes = [ { app-id = "org.keepassxc.KeePassKC"; } ];
+      excludes = [ { app-id = "org.keepassxc.KeePassXC"; } ];
       open-focused = false;
     }
     #disallow screencapture for keepass,etc.
@@ -19,14 +19,20 @@
     {
       matches = [
         { app-id = "thunderbird"; }
+        { app-id = "nheko"; }
       ];
-      open-on-workspace = "2";
+      open-on-workspace = "com";
       open-on-output = "DP-3";
+      default-column-width.proportion = 1.0;
     }
     {
-      matches = [ { app-id = "steam"; } ];
-      open-on-workspace = "3";
+      matches = [
+        { app-id = "steam"; }
+        { app-id = "org.prismlauncher.PrismLauncher"; }
+      ];
+      open-on-workspace = "games";
       open-on-output = "DP-3";
+      default-column-width.proportion = 1.0;
     }
     #mumble proportions
     {
@@ -40,11 +46,17 @@
     }
     {
       matches = [
-        { app-id = "freetube"; }
+        { app-id = "FreeTube"; }
       ];
       default-column-width.proportion = (1.0 - 0.18);
       default-window-height.proportion = 1.0;
       open-on-output = "DP-1";
+    }
+    {
+      matches = [ { app-id = "librewolf"; } ];
+      open-maximized = true;
+      open-on-output = "DP-3";
+      open-on-workspace = "1";
     }
   ];
 }

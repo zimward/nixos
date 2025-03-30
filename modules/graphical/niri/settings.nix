@@ -52,6 +52,15 @@
                 (command "keepassxc")
               ];
 
+            workspaces = {
+              "com" = {
+                open-on-output = "DP-3";
+              };
+              "games" = {
+                open-on-output = "DP-3";
+              };
+            };
+
             layout = {
               focus-ring.enable = false;
               border = {
