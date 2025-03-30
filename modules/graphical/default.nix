@@ -6,7 +6,6 @@
       description = "enable graphical applications";
     };
   };
-  config.graphical.sway.enable = true;
   imports = [
     ./applications.nix
     ./fonts.nix
@@ -15,5 +14,22 @@
     ./matlab.nix
     ./steam.nix
     ./sway
+    ./niri
   ];
+  config = {
+    assertions =
+      let
+        cfg = config.graphical;
+      in
+      [
+        {
+          assertion = (cfg.enable == (cfg.niri.enable || cfg.sway.enable));
+          message = "One window manager has to be enabled for graphical applications to work";
+        }
+        {
+          assertion = (!cfg.enable || (cfg.niri.enable != cfg.sway.enable));
+          message = "Only one window manager is supposed to be enabled at once";
+        }
+      ];
+  };
 }
