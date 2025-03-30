@@ -16,6 +16,7 @@
     ./steam.nix
     ./sway
     ./niri
+    ./waybar
   ];
   config = {
     assertions =

@@ -57,6 +57,7 @@
                     "~/.bg.jpg"
                   ];
                 }
+                (command (lib.getExe pkgs.waybar))
                 (command "librewolf")
                 (command "thunderbird")
                 (command "keepassxc")
@@ -125,5 +126,6 @@
     niri-flake.cache.enable = false;
     programs.niri.package = pkgs.niri;
     cli.nushell.graphical_startup = "niri";
+    graphical.waybar.enable = true;
   };
 }
