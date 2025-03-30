@@ -58,6 +58,7 @@
                   ];
                 }
                 (command "librewolf")
+                (command "thunderbird")
                 (command "keepassxc")
               ];
 
@@ -80,22 +81,32 @@
               };
 
               preset-column-widths = [
-                { proportion = 1.0 / 3.0; }
-                { proportion = 1.0 / 2.0; }
-                { proportion = 2.0 / 3.0; }
                 { proportion = 1.0; }
+                { proportion = 1.0 / 2.0; }
+                { proportion = 1.0 / 3.0; }
+                { proportion = 1.0 / 4.0; }
+              ];
+              preset-window-heights = [
+                { proportion = 1.0; }
+                { proportion = 1.0 / 2.0; }
+                { proportion = 1.0 / 3.0; }
               ];
               default-column-width = {
                 proportion = 0.5 / 1.0;
               };
 
-              gaps = 8;
+              gaps = 0;
               struts = {
                 left = 0;
                 right = 0;
                 top = 0;
                 bottom = 0;
               };
+            };
+            cursor = {
+              hide-when-typing = true;
+              size = 16;
+
             };
             prefer-no-csd = true;
           };
