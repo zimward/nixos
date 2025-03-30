@@ -38,12 +38,11 @@
     "Mod+Shift+T".action.spawn =
       let
         terminal = lib.getExe pkgs.alacritty;
-        shell = lib.getExe pkgs.nushell;
       in
       [
         "sh"
         "-c"
-        "(${terminal} msg create-window -e ${shell}) || ${terminal} -e ${shell}"
+        "(${terminal} msg create-window) || ${terminal}"
       ];
     # "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
