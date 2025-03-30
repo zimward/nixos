@@ -8,6 +8,7 @@
   };
   imports = [
     ./applications.nix
+    ./alacritty.nix
     ./fonts.nix
     ./ime.nix
     ./kicad.nix
