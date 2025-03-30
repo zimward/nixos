@@ -52,6 +52,8 @@
       "sde"
       "sdf"
     ];
+    #the server is only running trusted code, so no rist of LPE
+    boot.kernelParams = [ "mitigations=off" ];
 
     networking.useDHCP = lib.mkDefault true;
 
