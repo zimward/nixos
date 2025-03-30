@@ -119,13 +119,15 @@
             };
             prefer-no-csd = true;
           };
+          #provided by keepassxc
+          services.gnome-keyring.enable = lib.mkForce false;
         }
       )
     ];
     programs.niri.enable = true;
     niri-flake.cache.enable = false;
     programs.niri.package = pkgs.niri;
-    cli.nushell.graphical_startup = "niri";
+    cli.nushell.graphical_startup = "${config.systemd.package}/bin/systemctl --user start niri.service";
     graphical.waybar.enable = true;
   };
 }
