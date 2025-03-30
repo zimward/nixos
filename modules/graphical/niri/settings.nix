@@ -60,6 +60,14 @@
                 (command "librewolf")
                 (command "thunderbird")
                 (command "keepassxc")
+              ]
+              ++ lib.optionals config.graphical.ime.enable [
+                {
+                  command = [
+                    (lib.getExe pkgs.fcitx5)
+                    "-d"
+                  ];
+                }
               ];
 
             workspaces = {
