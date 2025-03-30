@@ -49,23 +49,21 @@
 
     "Mod+Shift+J".action.close-window = [ ];
     "Mod+G".action = switch-preset-column-width;
-    "Mod+Shift+P".action = switch-preset-window-height;
+    "Mod+Shift+G".action = switch-preset-window-height;
     "Mod+Ctrl+R".action = reset-window-height;
     "Mod+F".action = maximize-column;
     "Mod+Shift+F".action = fullscreen-window;
     "Mod+Space".action = toggle-window-floating;
 
-    "Mod+Shift+BracketLeft".action = consume-window-into-column;
-    "Mod+Shift+BracketRight".action = expel-window-from-column;
-    "Mod+BracketLeft".action = consume-or-expel-window-left;
-    "Mod+BracketRight".action = consume-or-expel-window-right;
+    "Mod+Shift+Ctrl+H".action = consume-window-into-column;
+    "Mod+Shift+Ctrl+N".action = expel-window-from-column;
     "Mod+C".action = center-window;
     "Mod+Tab".action = switch-focus-between-floating-and-tiling;
 
     "Mod+Minus".action = set-column-width "-10%";
     "Mod+Plus".action = set-column-width "+10%";
     "Mod+Shift+Plus".action = set-window-height "-10%";
-    "Mod+Shift+Equal".action = set-window-height "+10%";
+    "Mod+Shift+Minus".action = set-window-height "+10%";
 
     "Mod+H".action = focus-column-or-monitor-left;
     "Mod+N".action = focus-column-or-monitor-right;
@@ -101,8 +99,5 @@
     "Mod+Ctrl+7".action.move-column-to-workspace = 7;
     "Mod+Ctrl+8".action.move-column-to-workspace = 8;
     "Mod+Ctrl+9".action.move-column-to-workspace = 9;
-
-    "Mod+Shift+Ctrl+D".action = move-column-to-monitor-down;
-    "Mod+Shift+Ctrl+R".action = move-column-to-monitor-up;
   };
 }
