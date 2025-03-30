@@ -48,6 +48,15 @@
               in
               [
                 (command (lib.getExe pkgs.xwayland-satellite))
+                {
+                  command = [
+                    (lib.getExe pkgs.swaybg)
+                    "-m"
+                    "fill"
+                    "-i"
+                    "~/.bg.jpg"
+                  ];
+                }
                 (command "librewolf")
                 (command "keepassxc")
               ];
