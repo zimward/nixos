@@ -63,5 +63,18 @@
       open-on-output = "DP-3";
       open-on-workspace = "1";
     }
+    {
+      matches = [ { app-id = "librewolf"; } ];
+      excludes = [ { title = "^.*LibreWolf$"; } ];
+      open-floating = true;
+      open-focused = true;
+    }
+  ];
+  programs.niri.settings.layer-rules = [
+    {
+      matches = [ { namespace = "^notifications$"; } ];
+      block-out-from = "screen-capture";
+      opacity = 0.7;
+    }
   ];
 }
