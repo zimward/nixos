@@ -10,6 +10,7 @@
     graphical.sway.enable = lib.mkEnableOption "sway";
   };
   config = lib.mkIf (config.graphical.enable && config.graphical.sway.enable) {
+    cli.nushell.graphical_startup = "sway";
     environment.systemPackages = with pkgs; [
       alacritty
       xdg-utils

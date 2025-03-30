@@ -27,6 +27,8 @@
       "x-scheme-handler/about" = "librewolf.desktop";
       "x-scheme-handler/unknown" = "librewolf.desktop";
     };
+
+    graphical.niri.enable = true;
     graphical.kicad = {
       enable = true;
       minimal = true;

@@ -49,6 +49,7 @@
     # since no services are supposed to run on this machine a firewall would only wase memory
     networking.firewall.enable = false;
 
+    graphical.niri.enable = true;
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
     graphical.minecraft.enable = true;

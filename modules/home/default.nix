@@ -19,7 +19,9 @@
       };
     };
   };
-  imports = [ inputs.home-manager.nixosModules.default ];
+  imports = [
+    inputs.home-manager.nixosModules.default
+  ];
   config = {
     home-manager = {
       users.${config.main-user.userName}.imports = [

@@ -20,13 +20,19 @@
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
     };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
     };
 
-    ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
-
     pid-fan-controller.url = "github:zimward/PID-fan-control";
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
 
     imgserv = {
       url = "github:zimward/imgserv";
@@ -93,21 +99,21 @@
           modules = [ ./hosts/aisha/configuration.nix ];
         };
 
-        kirishika = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { ... }:
-              {
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-              }
-            )
-            ./hosts/kirishika/configuration.nix
-            ./hosts/kirishika/hardware-configuration.nix
-          ];
-        };
+        # kirishika = nixpkgs.lib.nixosSystem {
+        #   specialArgs = {
+        #     inherit inputs;
+        #   };
+        #   modules = [
+        #     (
+        #       { ... }:
+        #       {
+        #         nixpkgs.hostPlatform.system = "aarch64-linux";
+        #       }
+        #     )
+        #     ./hosts/kirishika/configuration.nix
+        #     ./hosts/kirishika/hardware-configuration.nix
+        #   ];
+        # };
 
         shila = nixpkgs-small.lib.nixosSystem {
           specialArgs = {
@@ -125,29 +131,29 @@
           ];
         };
       };
-      packages.aarch64-linux = {
-        kirishika.sdcard = nixos-generators.nixosGenerate {
-          system = "aarch64-linux";
-          format = "sd-aarch64";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { ... }:
-              {
-                sdImage.compressImage = true;
-                nixpkgs.config.allowUnsupportedSystem = true;
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-                nixpkgs.buildPlatform.system = "aarch64-linux";
-              }
-            )
-            ./hosts/kirishika/configuration.nix
-          ];
-        };
-      };
-      hydraJobs = {
-        kirishika = packages.aarch64-linux.kirishika.sdcard;
-      };
+      # packages.aarch64-linux = {
+      #   kirishika.sdcard = nixos-generators.nixosGenerate {
+      #     system = "aarch64-linux";
+      #     format = "sd-aarch64";
+      #     specialArgs = {
+      #       inherit inputs;
+      #     };
+      #     modules = [
+      #       (
+      #         { ... }:
+      #         {
+      #           sdImage.compressImage = true;
+      #           nixpkgs.config.allowUnsupportedSystem = true;
+      #           nixpkgs.hostPlatform.system = "aarch64-linux";
+      #           nixpkgs.buildPlatform.system = "aarch64-linux";
+      #         }
+      #       )
+      #       ./hosts/kirishika/configuration.nix
+      #     ];
+      #   };
+      # };
+      # hydraJobs = {
+      #   kirishika = packages.aarch64-linux.kirishika.sdcard;
+      # };
     };
 }
