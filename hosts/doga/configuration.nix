@@ -93,9 +93,7 @@
       isNormalUser = true;
       home = "/mnt/nas/nas/lucy";
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINDkICurJPjZb7ePF/6+3B/oyGWOi/SWd7K9w9rSzIPB"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQsl9/wtyo2om849jqtnOYXMsLiCuv8oMAQ2xFC8LdA"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEfEm4Uo5UgQ7c7gVey5mcCVWEHEas2xRA+HRBL7Nobo"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMbg58E2ZZL3Pipvt+ajeAeShOgawJkno4uMW+aJ/cVy"
       ];
     };
 
