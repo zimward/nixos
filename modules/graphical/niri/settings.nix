@@ -82,6 +82,12 @@
               "games" = {
                 open-on-output = "DP-3";
               };
+              "browser-l" = {
+                open-on-output = "DP-3";
+              };
+              "browser-r" = {
+                open-on-output = "DP-1";
+              };
             };
 
             layout = {
@@ -117,6 +123,7 @@
               };
             };
             cursor = {
+              theme = "Adwaita";
               hide-when-typing = true;
               size = 16;
 
@@ -128,6 +135,9 @@
           services.gnome-keyring.enable = lib.mkForce false;
         }
       )
+    ];
+    environment.systemPackages = with pkgs; [
+      adwaita-icon-theme
     ];
     programs.niri.enable = true;
     niri-flake.cache.enable = false;
