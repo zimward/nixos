@@ -51,6 +51,7 @@
       default-column-width.proportion = 0.18;
       default-window-height.proportion = 0.5;
       open-on-output = "DP-1";
+      open-on-workspace = "browser-r";
     }
     {
       matches = [
@@ -59,12 +60,13 @@
       default-column-width.proportion = (1.0 - 0.18);
       default-window-height.proportion = 1.0;
       open-on-output = "DP-1";
+      open-on-workspace = "browser-r";
     }
     {
       matches = [ { app-id = "librewolf"; } ];
       open-maximized = true;
       open-on-output = "DP-3";
-      open-on-workspace = "1";
+      open-on-workspace = "browser-l";
     }
     {
       matches = [ { app-id = "librewolf"; } ];
