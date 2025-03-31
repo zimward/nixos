@@ -18,9 +18,9 @@
       fcitx5.addons = with pkgs; [ fcitx5-mozc ];
     };
     environment.sessionVariables = {
-      QT_IM_MODULE = "fcitx";
-      GTK_IM_MODULE = "fcitx";
-      XMODIFIERS = "@im=fcitx";
+      # QT_IM_MODULE = "fcitx";
+      # GTK_IM_MODULE = "fcitx";
+      # XMODIFIERS = "@im=fcitx";
     };
   };
 }
