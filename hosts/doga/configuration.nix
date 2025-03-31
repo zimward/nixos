@@ -89,6 +89,16 @@
       hashedPassword = "$y$j9T$Zb4MwzGPklZnR/MBpQ7g01$Q1P7ci7xXFLM7W19ctvojiomdn8WxGmg46KKTP1DzZD";
     };
 
+    users.users.lucy = {
+      isNormalUser = true;
+      home = "/mnt/nas/nas/lucy";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINDkICurJPjZb7ePF/6+3B/oyGWOi/SWd7K9w9rSzIPB"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQsl9/wtyo2om849jqtnOYXMsLiCuv8oMAQ2xFC8LdA"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEfEm4Uo5UgQ7c7gVey5mcCVWEHEas2xRA+HRBL7Nobo"
+      ];
+    };
+
     services.logind.powerKeyLongPress = "reboot";
 
     #dlna media server
