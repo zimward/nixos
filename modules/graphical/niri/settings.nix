@@ -33,6 +33,9 @@
               _JAVA_AWT_WM_NONREPARENTING = "1";
               TERM = "alacritty";
               TERMINAL = "alacritty";
+              QT_IM_MODULE = "fcitx";
+              # GTK_IM_MODULE = "fcitx";
+              XMODIFIERS = "@im=fcitx";
             };
             input = {
               keyboard.xkb.layout = "de(dvorak)";
@@ -48,16 +51,17 @@
               in
               [
                 (command (lib.getExe pkgs.xwayland-satellite))
+                (command (lib.getExe pkgs.waybar))
                 {
                   command = [
                     (lib.getExe pkgs.swaybg)
                     "-m"
                     "fill"
                     "-i"
-                    "~/.bg.jpg"
+                    "${config.users.users.${config.main-user.userName}.home}/.bg.jpg"
                   ];
                 }
-                (command (lib.getExe pkgs.waybar))
+                (command (lib.getExe pkgs.mako))
                 (command "librewolf")
                 (command "thunderbird")
                 (command "keepassxc")
@@ -118,6 +122,7 @@
 
             };
             prefer-no-csd = true;
+            hotkey-overlay.skip-at-startup = true;
           };
           #provided by keepassxc
           services.gnome-keyring.enable = lib.mkForce false;
@@ -127,7 +132,7 @@
     programs.niri.enable = true;
     niri-flake.cache.enable = false;
     programs.niri.package = pkgs.niri;
-    cli.nushell.graphical_startup = "${config.systemd.package}/bin/systemctl --user start niri.service";
+    cli.nushell.graphical_startup = "niri";
     graphical.waybar.enable = true;
   };
 }
