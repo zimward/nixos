@@ -5,6 +5,7 @@
     ../../modules
     ./searx.nix
     ./matrix.nix
+    ./mail.nix
   ];
 
   config = {
@@ -58,10 +59,14 @@
       virtualHosts."zimward.moe" = {
         forceSSL = true;
         enableACME = true;
+        # locations."/" = {
+        #   extraConfig = "
+        #   return 402;
+        # ";
+        # };
         locations."/" = {
-          extraConfig = "
-          return 402;
-        ";
+          proxyPass = "http://localhost:8000/";
+          recommendedProxySettings = true;
         };
         extraConfig = "
           access_log /dev/null;
