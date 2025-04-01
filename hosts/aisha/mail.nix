@@ -2,8 +2,10 @@
 {
   #actually save the certs
   environment.persistence."/nix/persist/system".directories = [ "/var/lib/acme" ];
-  #mail service
 
+  users.users."stalwart-mail".extraGroups = [ "nginx" ];
+
+  #mail service
   services.stalwart-mail = {
     enable = true;
     openFirewall = true;
@@ -23,10 +25,16 @@
           smpts = {
             protocol = "smtp";
             bind = "[::]:465";
+            tls = true;
           };
           imaps = {
             bind = "[::]:993";
             protocol = "imap";
+            tls = true;
+          };
+          web = {
+            protocol = "http";
+            bind = "[::]:8000";
           };
         };
       };
@@ -42,10 +50,32 @@
         enable = true;
         append = true;
       };
-      webadmin = {
-        resource = "file:///nix/persist/mail/webadmin.zip";
-        auto-update = true;
+      # session.auth = {
+      #   mechanisms = "[plain]";
+      #   directory = "'in-memory'";
+      # };
+      # storage.directory = "in-memory";
+      # directory."in-memory" = {
+      #   type = "memory";
+      #   principals = [
+      #     {
+      #       class = "individual";
+      #       name = "Aisha";
+      #       secret = "%{file:/nix/persist/mail/aisha-pw}%";
+      #       email = [ "aisha@zimward.moe" ];
+      #     }
+      #   ];
+      # };
+      authentication.fallback-admin = {
+        user = "admin";
+        secret = "%{file:/nix/persist/mail/admin-pw}%";
       };
     };
   };
+
+  networking.firewall.allowedTCPPorts = [
+    25
+    465
+    993
+  ];
 }
