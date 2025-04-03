@@ -46,9 +46,34 @@
         cert = "%{file:/var/lib/acme/zimward.moe/cert.pem}%";
         private-key = "%{file:/var/lib/acme/zimward.moe/key.pem}%";
       };
-      storage.encryption = {
-        enable = true;
-        append = true;
+      storage = {
+        encryption = {
+          enable = true;
+          append = true;
+        };
+        data = "postgresql";
+        blob = "postgresql";
+        fts = "postgresql";
+        lookup = "postgresql";
+        directory = "internal";
+      };
+      store."postgresql" = {
+        type = "postgresql";
+        host = "localhost";
+        port = 5432;
+        database = "stalwart";
+        user = "stalwart";
+        password = "whydoyouneedone";
+        compression = "lz4";
+        query = {
+          name = "SELECT name, type, secret, description, quota FROM accounts WHERE name = $1 AND active = true";
+          members = "SELECT member_of FROM group_members WHERE name = $1";
+          recipients = "SELECT name FROM emails WHERE address = $1 ORDER BY name ASC";
+          emails = "SELECT address FROM emails WHERE name = $1 ORDER BY type DESC, address ASC";
+        };
+      };
+      directory."internal" = {
+        store = "postgresql";
       };
       # session.auth = {
       #   mechanisms = "[plain]";
