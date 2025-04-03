@@ -9,7 +9,7 @@
     devel.git = {
       enable = lib.mkEnableOption "git";
       userEmail = lib.mkOption {
-        default = "96021122+zimward@users.noreply.github.com";
+        default = "zimward@zimward.moe";
         type = lib.types.str;
         description = "Email address used when commiting (maybe use sops and don't leak name)";
       };
