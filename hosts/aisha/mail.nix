@@ -83,7 +83,43 @@
             "else" = false;
           }
         ];
+        verify = "relaxed";
       };
+      auth.sfp.verify = {
+        mail-from = [
+          {
+            "if" = "listener != 'smtp'";
+            "then" = "strict";
+          }
+          {
+            "else" = "disable";
+          }
+        ];
+        ehlo = [
+          {
+            "if" = "listener = 'smtp'";
+            "then" = "strict";
+          }
+          {
+            "else" = "disable";
+          }
+
+        ];
+      };
+      auth.arc = {
+        seal = "ed25519";
+        verify = "relaxed";
+      };
+      auth.dmarc.verify = [
+        {
+          "if" = "listener != 'smtp'";
+          "then" = "relaxed";
+        }
+        {
+          "else" = "disable";
+        }
+      ];
+
       signature.rsa = {
         private-key = "%{file:/nix/persist/mail/dkim_priv_rsa.pem}%";
         domain = "zimward.moe";
@@ -134,6 +170,31 @@
         canonicalization = "relaxed/relaxed";
         report = true;
       };
+      report =
+        let
+          mkReport = sub: {
+            from-name = "'Automatic Report Subsystem'";
+            from-address = "'noreply-reports@zimward.moe'";
+            reply-to = "'zimward@zimward.moe'";
+            subject = "'${sub}'";
+            sign = [
+              {
+                "if" = "listener != 'smtp'";
+                "then" = "['rsa','ed25519']";
+              }
+              {
+                "else" = false;
+              }
+            ];
+            send = "1/1d";
+          };
+        in
+        {
+          dkim = mkReport "DKIM Authentication Failure Report";
+          sfp = mkReport "SFP Authentication Failure Report";
+          arc = mkReport "ARC Authentication Failure Report";
+          dmarc = mkReport "DMARC Authentication Failure Report";
+        };
     };
   };
 
