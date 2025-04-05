@@ -65,35 +65,74 @@
         user = "stalwart";
         password = "whydoyouneedone";
         compression = "lz4";
-        query = {
-          name = "SELECT name, type, secret, description, quota FROM accounts WHERE name = $1 AND active = true";
-          members = "SELECT member_of FROM group_members WHERE name = $1";
-          recipients = "SELECT name FROM emails WHERE address = $1 ORDER BY name ASC";
-          emails = "SELECT address FROM emails WHERE name = $1 ORDER BY type DESC, address ASC";
-        };
       };
       directory."internal" = {
         store = "postgresql";
       };
-      # session.auth = {
-      #   mechanisms = "[plain]";
-      #   directory = "'in-memory'";
+      # authentication.fallback-admin = {
+      #   user = "admin";
+      #   secret = "%{file:/nix/persist/mail/admin-pw}%";
       # };
-      # storage.directory = "in-memory";
-      # directory."in-memory" = {
-      #   type = "memory";
-      #   principals = [
-      #     {
-      #       class = "individual";
-      #       name = "Aisha";
-      #       secret = "%{file:/nix/persist/mail/aisha-pw}%";
-      #       email = [ "aisha@zimward.moe" ];
-      #     }
-      #   ];
-      # };
-      authentication.fallback-admin = {
-        user = "admin";
-        secret = "%{file:/nix/persist/mail/admin-pw}%";
+      auth.dkim = {
+        sign = [
+          {
+            "if" = "listener != 'smtp'";
+            "then" = "['rsa','ed25519']";
+          }
+          {
+            "else" = false;
+          }
+        ];
+      };
+      signature.rsa = {
+        private-key = "%{file:/nix/persist/mail/dkim_priv_rsa.pem}%";
+        domain = "zimward.moe";
+        selector = "rsamail";
+        headers = [
+          "From"
+          "To"
+          "Cc"
+          "Date"
+          "Subject"
+          "Message-ID"
+          "Organization"
+          "MIME-Version"
+          "Content-Type"
+          "In-Reply-To"
+          "References"
+          "List-Id"
+          "User-Agent"
+          "Thread-Topic"
+          "Thread-Index"
+        ];
+        algorithm = "rsa-sha256";
+        canonicalization = "relaxed/relaxed";
+        report = true;
+      };
+      signature.ed25519 = {
+        private-key = "%{file:/nix/persist/mail/dkim_priv_ed25519.pem}%";
+        domain = "zimward.moe";
+        selector = "edmail";
+        headers = [
+          "From"
+          "To"
+          "Cc"
+          "Date"
+          "Subject"
+          "Message-ID"
+          "Organization"
+          "MIME-Version"
+          "Content-Type"
+          "In-Reply-To"
+          "References"
+          "List-Id"
+          "User-Agent"
+          "Thread-Topic"
+          "Thread-Index"
+        ];
+        algorithm = "ed25519-sha256";
+        canonicalization = "relaxed/relaxed";
+        report = true;
       };
     };
   };
