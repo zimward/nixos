@@ -21,9 +21,11 @@
       matches = [
         { title = "^.+Zugriffsanfrage$"; }
         { title = "^Datenbank+.*$"; }
-        { title = "^Write:+.*$"; }
-        { title = "^Save+.*$"; }
         { title = "^.+Error$"; }
+        { app-id = "thunderbird"; }
+      ];
+      excludes = [
+        { title = "^.*Mozilla Thunderbird$"; }
       ];
       open-focused = true;
       open-floating = true;
