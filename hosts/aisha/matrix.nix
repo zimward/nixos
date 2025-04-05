@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 let
   port = 8448;
   fqdn = "zimward.moe";
@@ -74,6 +74,28 @@ in
       turn_shared_secret = config.services.coturn.static-auth-secret;
       turn_user_lifetime = "1h";
       turn_allow_guests = true;
+      log_config = (pkgs.formats.yaml { }).generate "log_config" {
+        disable_existing_loggers = true;
+        formatters = {
+          journal_fmt = {
+            format = "%(name)s: [%(request)s] %(message)s";
+          };
+        };
+        handlers = {
+          journal = {
+            SYSLOG_IDENTIFIER = "synapse";
+            class = "systemd.journal.JournalHandler";
+            formatter = "journal_fmt";
+          };
+        };
+        root = {
+          handlers = [
+            "journal"
+          ];
+          level = "WARN";
+        };
+        version = 1;
+      };
     };
   };
   #auto-discovery via .well-known
@@ -105,7 +127,6 @@ in
     cert = "${certDir}/full.pem";
     pkey = "${certDir}/key.pem";
     extraConfig = ''
-      verbose
       # ban private IP ranges
       no-multicast-peers
       denied-peer-ip=0.0.0.0-0.255.255.255
