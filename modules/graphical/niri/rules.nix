@@ -21,6 +21,9 @@
       matches = [
         { title = "^.+Zugriffsanfrage$"; }
         { title = "^Datenbank+.*$"; }
+        { title = "^Write:+.*$"; }
+        { title = "^Save+.*$"; }
+        { title = "^.+Error$"; }
       ];
       open-focused = true;
       open-floating = true;
