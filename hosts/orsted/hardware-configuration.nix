@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   modulesPath,
   ...
@@ -47,8 +46,8 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/36c718d5-db0a-4584-9879-f3652fcc6b2c";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/CD87-F21B";
+    fsType = "vfat";
   };
 
   fileSystems."/tmp" = {
