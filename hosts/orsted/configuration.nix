@@ -37,11 +37,15 @@
 
     networking.hostName = "orsted";
     networking.networkmanager.enable = true;
+
+    boot.initrd.checkJournalingFS = lib.mkForce false;
     boot.loader.grub = {
       enable = true;
-      device = "nodev";
+      device = "/dev/sda";
+      efiSupport = false;
       enableCryptodisk = true;
     };
+
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
