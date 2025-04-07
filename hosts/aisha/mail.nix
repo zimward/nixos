@@ -195,15 +195,7 @@
           arc = mkReport "ARC Authentication Failure Report";
           dmarc = mkReport "DMARC Authentication Failure Report";
         };
-      session.rcpt.rewrite = [
-        {
-          "if" = "is_local_domain('internal', rcpt_domain) & matches('^([^+]+)\+([^.@]+)@(.+)$', rcpt)";
-          "then" = "$1 + '@' + $3";
-        }
-        {
-          "else" = false;
-        }
-      ];
+      session.rcpt.subaddressing = true;
     };
   };
 
