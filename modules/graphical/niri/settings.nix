@@ -123,7 +123,7 @@
               };
             };
             cursor = {
-              theme = "Adwaita";
+              theme = "miku-cursor";
               hide-when-typing = true;
               size = 16;
 
@@ -138,6 +138,7 @@
     ];
     environment.systemPackages = with pkgs; [
       adwaita-icon-theme
+      (pkgs.callPackage (import ../miku-cursors.nix) { })
     ];
     programs.niri.enable = true;
     niri-flake.cache.enable = false;
