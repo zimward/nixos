@@ -4,7 +4,9 @@
     #prevent starting applications from grabbing focus
     {
       matches = [ { app-id = ".*"; } ];
-      excludes = [ { app-id = "org.keepassxc.KeePassXC"; } ];
+      excludes = [
+        { app-id = "org.keepassxc.KeePassXC"; }
+      ];
       open-focused = false;
       open-floating = false;
     }
@@ -12,7 +14,7 @@
     {
       matches = [
         { app-id = "org.keepassxc.KeePassXC"; }
-        { app-id = "thunderbind"; }
+        { app-id = "thunderbird"; }
         { app-id = "nheko"; }
       ];
       block-out-from = "screen-capture";
@@ -23,6 +25,7 @@
         { title = "^Datenbank+.*$"; }
         { title = "^.+Error$"; }
         { app-id = "thunderbird"; }
+        { app-id = "xdg-desktop-portal-gnome"; }
       ];
       excludes = [
         { title = "^.*Mozilla Thunderbird$"; }

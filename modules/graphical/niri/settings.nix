@@ -45,7 +45,7 @@
 
             spawn-at-startup =
               let
-                command = cmd: { command = [ cmd ]; };
+                command = cmd: { command = lib.lists.flatten [ cmd ]; };
               in
               [
                 (command (lib.getExe pkgs.xwayland-satellite))
@@ -59,7 +59,10 @@
                     "${config.users.users.${config.main-user.userName}.home}/.bg.jpg"
                   ];
                 }
-                (command (lib.getExe pkgs.mako))
+                (command [
+                  (lib.getExe pkgs.mako)
+                  "--default-timeout 20000"
+                ])
                 (command "librewolf")
                 (command "thunderbird")
                 (command "keepassxc")
@@ -144,7 +147,10 @@
     programs.niri.package = pkgs.niri;
     services.gnome.gnome-keyring.enable = lib.mkForce false;
 
-    xdg.portal.wlr.enable = true;
+    xdg.portal = {
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    };
 
     services.displayManager = {
       enable = true;
