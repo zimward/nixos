@@ -79,6 +79,9 @@
         pkgs.networkmanager-openconnect
       ];
     };
+
+    services.fprintd.enable = true;
+
     #dont update during uni
     system.autoUpgrade.dates = lib.mkForce "19:00";
     #dont auto garbage collect to prevent having to recompile build tools constantly
