@@ -3,7 +3,6 @@
   options.net.wifi.enable = lib.mkEnableOption "wifi";
   config = lib.mkIf config.net.wifi.enable {
     sops.secrets = {
-      "wifi/GvR" = { };
       "wifi/easyroam_ca" = { };
     };
     sops.secrets.easyroam_client_cert = {
