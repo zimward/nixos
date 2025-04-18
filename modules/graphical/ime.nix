@@ -20,6 +20,7 @@
         fcitx5-gtk
         fcitx5-tokyonight
       ];
+      fcitx5.waylandFrontend = true;
     };
   };
 }
