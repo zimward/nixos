@@ -67,7 +67,7 @@
               ++ lib.optionals config.graphical.ime.enable [
                 {
                   command = [
-                    (lib.getExe pkgs.fcitx5)
+                    "fcitx5"
                     "-d"
                     "-r"
                   ];
@@ -140,18 +140,18 @@
       (pkgs.callPackage (import ../miku-cursors.nix) { })
     ];
     programs.niri.enable = true;
-    niri-flake.cache.enable = false;
+    # niri-flake.cache.enable = false;
     programs.niri.package = pkgs.niri;
     services.gnome.gnome-keyring.enable = lib.mkForce false;
 
-    # cli.nushell.graphical_startup = "niri";
+    xdg.portal.wlr.enable = true;
+
     services.displayManager = {
       enable = true;
       autoLogin = {
         user = config.main-user.userName;
         enable = true;
       };
-      # execCmd = lib.getExe pkgs.niri;
       sddm = {
         enable = true;
         wayland.enable = true;
