@@ -33,8 +33,6 @@
               _JAVA_AWT_WM_NONREPARENTING = "1";
               TERM = "alacritty";
               TERMINAL = "alacritty";
-              QT_IM_MODULE = "fcitx";
-              # GTK_IM_MODULE = "fcitx";
               XMODIFIERS = "@im=fcitx";
             };
             input = {
@@ -71,6 +69,7 @@
                   command = [
                     (lib.getExe pkgs.fcitx5)
                     "-d"
+                    "-r"
                   ];
                 }
               ];
@@ -143,7 +142,21 @@
     programs.niri.enable = true;
     niri-flake.cache.enable = false;
     programs.niri.package = pkgs.niri;
-    cli.nushell.graphical_startup = "niri";
+    services.gnome.gnome-keyring.enable = lib.mkForce false;
+
+    # cli.nushell.graphical_startup = "niri";
+    services.displayManager = {
+      enable = true;
+      autoLogin = {
+        user = config.main-user.userName;
+        enable = true;
+      };
+      # execCmd = lib.getExe pkgs.niri;
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+    };
     graphical.waybar.enable = true;
   };
 }
