@@ -61,7 +61,8 @@
                 }
                 (command [
                   (lib.getExe pkgs.mako)
-                  "--default-timeout 20000"
+                  "--default-timeout"
+                  "20000"
                 ])
                 (command "librewolf")
                 (command "thunderbird")
