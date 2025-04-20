@@ -56,11 +56,12 @@
 
     users.users.${config.main-user.userName} = {
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZ4iv3QwB03x5UlteFjPmTymPb29ruuKiMdZLn8jIem mobian@pinephone"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg"
       ];
       extraGroups = [
         "libvirtd"
         "dialout"
+        "networkmanager"
       ];
     };
     # only ssh is running with pubkey auth so a firewall would only waste memory
@@ -76,10 +77,17 @@
         pkgs.networkmanager-openconnect
       ];
     };
-
     services.fprintd.enable = true;
 
-    #dont update during uni
+    main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
+    environment.persistence."/nix/persist/system" = {
+      directories = [
+        "/var/lib/fprint"
+        "/etc/NetworkManager/system-connections"
+        "/etc/NetworkManager/VPN"
+      ];
+    };
+    # dont update during uni
     system.autoUpgrade.dates = lib.mkForce "19:00";
     #dont auto garbage collect to prevent having to recompile build tools constantly
     nix.gc.dates = lib.mkForce "monthly";
