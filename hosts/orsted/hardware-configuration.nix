@@ -30,26 +30,76 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  tmpfsroot.impermanence = true;
+
+  boot.initrd.postDeviceCommands = lib.mkBefore ''
+    mkdir -p /mnt
+    mount /dev/mapper/root /mnt
+
+    btrfs subvolume list -o /mnt/root |
+    cut -f9 -d' ' |
+    while read subvolume; do
+      echo "deleting /$subvolume subvolume..."
+      btrfs subvolume delete "/mnt/$subvolume"
+    done &&
+    echo "deleting /root subvolume..." &&
+    btrfs subvolume delete /mnt/root
+
+    echo "restoring clean /root subvolume..."
+    btrfs subvolume snapshot /mnt/root-clean /mnt/root
+    umount /mnt
+  '';
+
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ea530a69-5ef7-4481-adad-f51a5c20bf11";
-    fsType = "f2fs";
+    device = "/dev/disk/by-uuid/9be3bce1-661b-4b41-9388-07ea5422cb55";
+    fsType = "btrfs";
     options = [
-      "discard"
+      "subvol=root"
+      "compress=zstd"
       "noatime"
     ];
-    noCheck = true;
   };
 
-  boot.initrd.luks.devices."root" = {
-    device = "/dev/disk/by-uuid/1a109f47-8ea4-4724-ae18-390d6c50320f";
-    allowDiscards = true;
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/841cd5c7-0685-40b2-a395-f231e859211a";
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/9be3bce1-661b-4b41-9388-07ea5422cb55";
+    fsType = "btrfs";
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/nix/persist" = {
+    device = "/dev/disk/by-uuid/9be3bce1-661b-4b41-9388-07ea5422cb55";
+    fsType = "btrfs";
+    options = [
+      "subvol=persist"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/9be3bce1-661b-4b41-9388-07ea5422cb55";
+    fsType = "btrfs";
+    options = [
+      "subvol=home"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/CD87-F21B";
+    device = "/dev/disk/by-uuid/9CAE-81DE";
     fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
-
   fileSystems."/tmp" = {
     device = "tmpfs";
     fsType = "tmpfs";

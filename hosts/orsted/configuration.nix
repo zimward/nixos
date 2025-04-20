@@ -16,9 +16,6 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    environment.systemPackages = with pkgs; [
-      warpinator
-    ];
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
@@ -41,7 +38,7 @@
     boot.initrd.checkJournalingFS = lib.mkForce false;
     boot.loader.grub = {
       enable = true;
-      device = "/dev/sda";
+      device = "nodev";
       efiSupport = false;
       enableCryptodisk = true;
     };
