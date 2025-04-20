@@ -48,17 +48,19 @@
         persist = true;
       }
     ];
-    environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
-      hideMounts = true;
-      directories = [ "/var/lib/nixos" ];
-      files = [
-        "/etc/machine-id"
-        "/etc/ssh/ssh_host_ed25519_key"
-        "/etc/ssh/ssh_host_ed25519_key.pub"
-        "/etc/ssh/ssh_host_rsa_key"
-        "/etc/ssh/ssh_host_rsa_key.pub"
-      ];
-    };
+    environment.persistence."/nix/persist/system" =
+      lib.mkIf (config.tmpfsroot.enable || config.tmpfsroot.impermanence)
+        {
+          hideMounts = true;
+          directories = [ "/var/lib/nixos" ];
+          files = [
+            "/etc/machine-id"
+            "/etc/ssh/ssh_host_ed25519_key"
+            "/etc/ssh/ssh_host_ed25519_key.pub"
+            "/etc/ssh/ssh_host_rsa_key"
+            "/etc/ssh/ssh_host_rsa_key.pub"
+          ];
+        };
     # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";

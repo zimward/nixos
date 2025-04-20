@@ -5,6 +5,7 @@
       default = false;
       description = "enable Tmpfs root fs";
     };
+    tmpfsroot.impermanence = lib.mkEnableOption "impermanence";
     tmpfsroot.nixstore = lib.mkOption {
       type = lib.types.attrs;
       description = "mount point of the nixos store";
