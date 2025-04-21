@@ -31,9 +31,22 @@
       "--brightness=lower"
     ];
 
-    # "Print".action = screenshot-screen false;
     "Mod+Print".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
+
+    "Mod+Shift+i".action.spawn = [
+      "sh"
+      "-c"
+      "${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom"
+    ];
+
+    #upload clipboard
+    "Mod+j".action.spawn = [
+      "sh"
+      "-c"
+      "${pkgs.wl-clipboard-rs}/bin/wl-paste | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy"
+    ];
+
     "Mod+P".action.spawn = lib.getExe pkgs.anyrun;
     "Mod+Shift+T".action.spawn =
       let
