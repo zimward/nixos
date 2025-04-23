@@ -15,6 +15,7 @@
     net.wifi.enable = true;
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    sops.age.keyFile = lib.mkForce "/nix/sops/age/keys.txt";
 
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
