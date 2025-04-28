@@ -20,34 +20,64 @@
       };
     };
   };
-  config = lib.mkIf config.devel.git.enable {
-    environment.systemPackages = [ pkgs.git ];
-    hm.modules = [
-      (
-        { ... }:
-        {
-          programs.git = {
-            enable = config.devel.git.enable;
-            userName = config.main-user.userName;
-            userEmail = config.devel.git.userEmail;
-            aliases = {
-              "commit" = "commit -S";
+  config =
+    let
+      enablePijul = config.device.class == "desktop";
+    in
+    lib.mkIf config.devel.git.enable {
+      environment.systemPackages = [ pkgs.git ] ++ (lib.optionals enablePijul [ pkgs.pijul ]);
+
+      # nix.settings.plugin-files = lib.optionalString enablePijul "${pkgs.nix-plugin-pijul}/lib/nix/plugins/pijul.so";
+
+      hm.modules = [
+        (
+          { ... }:
+          {
+            home.file.".config/pijul/config.toml" = {
+              enable = enablePijul;
+              source =
+                let
+                  aw = "always";
+                in
+                (pkgs.formats.toml { }).generate "config.toml"
+
+                  {
+                    colors = aw;
+                    pager = aw;
+                    author = {
+                      name = "zimward";
+                      full_name = "zimward";
+                      email = "zimward@zimward.moe";
+                      key_path = "${config.users.users.${config.main-user.userName}.home}/.ssh/id_ed25519";
+                    };
+                    ignore_kinds = {
+                      rust = [
+                        "target"
+                        "result"
+                      ];
+                    };
+                  };
+
             };
-            extraConfig = {
-              push.autoSetupRemote = true;
-              commit = {
-                gpgsign = true;
+            programs.git = {
+              enable = config.devel.git.enable;
+              userName = config.main-user.userName;
+              userEmail = config.devel.git.userEmail;
+              aliases = {
+                "commit" = "commit -S";
               };
-              safe = {
-                directory = "/etc/nixos/";
-              };
-              user = {
-                signingkey = config.devel.git.signingkey;
+              extraConfig = {
+                push.autoSetupRemote = true;
+                commit = {
+                  gpgsign = true;
+                };
+                user = {
+                  signingkey = config.devel.git.signingkey;
+                };
               };
             };
-          };
-        }
-      )
-    ];
-  };
+          }
+        )
+      ];
+    };
 }
