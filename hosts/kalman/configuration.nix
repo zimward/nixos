@@ -63,6 +63,12 @@
     graphical.irc.enable = true;
     graphical.ime.enable = true;
 
+    environment.systemPackages = [
+      (pkgs.writeShellScriptBin "ollama" ''
+        HSA_OVERRIDE_GFX_VERSION=10.3.0 ${lib.getExe pkgs.ollama-rocm} $@
+      '')
+    ];
+
     # nix.buildMachines = [
     #   {
     #     hostName = "shila";
