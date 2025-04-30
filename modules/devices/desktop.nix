@@ -26,5 +26,7 @@
     '';
     environment.systemPackages = [ pkgs.nh ];
     nix.package = pkgs.lixPackageSets.latest.lix;
+    boot.initrd.systemd.network.wait-online.enable = false;
+    systemd.network.wait-online.enable = false;
   };
 }
