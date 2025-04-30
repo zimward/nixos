@@ -82,6 +82,13 @@
       open-floating = true;
       open-focused = true;
     }
+    {
+      matches = [
+        { app-id = "^MATLAB+.*$"; }
+        { app-id = "kicad"; }
+      ];
+      open-floating = true;
+    }
   ];
   programs.niri.settings.layer-rules = [
     {
