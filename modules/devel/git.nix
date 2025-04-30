@@ -33,7 +33,7 @@
         (
           { ... }:
           {
-            home.file.".config/pijul/config.toml" = {
+            home.file.".config/pijul/config" = {
               enable = enablePijul;
               source =
                 let
