@@ -83,6 +83,7 @@
       flags = [
         "--update-input"
         "nixpkgs"
+        "nixpkgs-small"
       ];
       persistent = true;
       dates = "10:00";
