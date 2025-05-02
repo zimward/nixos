@@ -144,6 +144,8 @@
       (pkgs.callPackage (import ../miku-cursors.nix) { })
     ];
     programs.niri.enable = true;
+    programs.niri.package = pkgs.niri;
+    niri-flake.cache.enable = false;
     services.gnome.gnome-keyring.enable = lib.mkForce false;
 
     xdg.portal = {
