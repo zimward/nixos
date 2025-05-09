@@ -72,15 +72,15 @@
     };
 
     #fan settings
-    pid-fan-controller = {
+    services.pid-fan-controller = {
       enable = true;
       settings = {
-        heat_srcs = [
+        heatSources = [
           {
             name = "cpu";
-            wildcard_path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
-            PID_params = {
-              set_point = 60;
+            wildcardPath = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
+            pidParams = {
+              setPoint = 60;
               P = -5.0e-3;
               I = -2.0e-3;
               D = -6.0e-3;
@@ -88,9 +88,9 @@
           }
           {
             name = "gpu";
-            wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
-            PID_params = {
-              set_point = 65;
+            wildcardPath = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
+            pidParams = {
+              setPoint = 65;
               P = -5.0e-3;
               I = -2.0e-3;
               D = -6.0e-3;
@@ -99,61 +99,61 @@
         ];
         fans = [
           {
-            name = "front intake";
-            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
-            min_pwm = 60;
-            max_pwm = 255;
-            heat_pressure_srcs = [
+            #name = "front intake";
+            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
+            minPwm = 60;
+            maxPwm = 255;
+            heatPressureSrcs = [
               "cpu"
               "gpu"
             ];
           }
           {
-            name = "top exhaust";
-            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
-            min_pwm = 60;
-            max_pwm = 255;
+            #name = "top exhaust";
+            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
+            minPwm = 60;
+            maxPwm = 255;
             cutoff = true;
-            heat_pressure_srcs = [
+            heatPressureSrcs = [
               "cpu"
               "gpu"
             ];
           }
           {
-            name = "back exhaust";
-            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm5";
-            min_pwm = 60;
-            max_pwm = 255;
+            #name = "back exhaust";
+            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm5";
+            minPwm = 60;
+            maxPwm = 255;
             cutoff = true;
-            heat_pressure_srcs = [
+            heatPressureSrcs = [
               "cpu"
               "gpu"
             ];
           }
           {
-            name = "front intake 2";
-            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
-            min_pwm = 100;
-            max_pwm = 255;
-            heat_pressure_srcs = [
+            #name = "front intake 2";
+            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
+            minPwm = 100;
+            maxPwm = 255;
+            heatPressureSrcs = [
               "cpu"
               "gpu"
             ];
           }
           {
-            name = "pump";
-            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm2";
-            min_pwm = 100;
-            max_pwm = 255;
-            heat_pressure_srcs = [ "cpu" ];
+            #name = "pump";
+            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm2";
+            minPwm = 100;
+            maxPwm = 255;
+            heatPressureSrcs = [ "cpu" ];
           }
           {
-            name = "gpu";
-            wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/pwm1";
-            min_pwm = 10;
-            max_pwm = 255;
+            #name = "gpu";
+            wildcardPath = "/sys/class/drm/card*/device/hwmon/hwmon*/pwm1";
+            minPwm = 10;
+            maxPwm = 255;
             cutoff = true;
-            heat_pressure_srcs = [ "gpu" ];
+            heatPressureSrcs = [ "gpu" ];
           }
         ];
       };

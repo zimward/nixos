@@ -25,8 +25,6 @@
       url = "github:Mic92/sops-nix";
     };
 
-    pid-fan-controller.url = "github:zimward/PID-fan-control";
-
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,7 +60,7 @@
         }
       );
     in
-    rec {
+    {
       nixosConfigurations = {
         kalman = nixpkgs.lib.nixosSystem {
           specialArgs = {
@@ -71,7 +69,6 @@
           modules = [
             overlays
             ./hosts/kalman/configuration.nix
-            inputs.pid-fan-controller.nixosModules.default
           ];
         };
 
