@@ -81,9 +81,8 @@
       enable = true;
       flake = inputs.self.outPath;
       flags = [
-        "--update-input"
-        "nixpkgs"
-        "nixpkgs-small"
+        "--recreate-lock-file"
+        "--no-write-lock-file"
       ];
       persistent = true;
       dates = "10:00";
