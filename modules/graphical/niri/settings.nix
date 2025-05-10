@@ -141,7 +141,7 @@
     ];
     environment.systemPackages = with pkgs; [
       adwaita-icon-theme
-      (pkgs.callPackage (import ../miku-cursors.nix) { })
+      (pkgs.callPackage ../miku-cursors.nix { })
     ];
     programs.niri.enable = true;
     programs.niri.package = pkgs.niri;
