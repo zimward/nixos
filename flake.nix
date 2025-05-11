@@ -6,7 +6,7 @@
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixos-hardware-fork.url = "github:zimward/nixos-hardware/pinephone-pro";
-    nixos-hardware-fork.url = "git+ssh://shilagit:/~/git/nixos-hardware?ref=pinephone-pro";
+    # nixos-hardware-fork.url = "git+ssh://shilagit:/~/git/nixos-hardware?ref=pinephone-pro";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,7 +30,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
+    # ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
 
     imgserv = {
       url = "github:zimward/imgserv";
