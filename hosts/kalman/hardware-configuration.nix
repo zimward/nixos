@@ -25,7 +25,10 @@
       "dm-snapshot"
       "dm-cache"
     ];
-    boot.kernelModules = [ "kvm-amd" ];
+    boot.kernelModules = [
+      "kvm-amd"
+      "nct6775"
+    ];
     boot.extraModulePackages = [ ];
 
     tmpfsroot = {
