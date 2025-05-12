@@ -36,7 +36,10 @@
               XMODIFIERS = "@im=fcitx";
             };
             input = {
-              keyboard.xkb.layout = "de(dvorak)";
+              keyboard.xkb = {
+                layout = "de(dvorak)";
+                options = "numlock";
+              };
               focus-follows-mouse.enable = true;
               warp-mouse-to-focus = true;
               workspace-auto-back-and-forth = true;
