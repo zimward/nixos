@@ -37,10 +37,10 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixos-generators = {
+    #   url = "github:nix-community/nixos-generators";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
   };
 
@@ -48,7 +48,7 @@
     {
       nixpkgs,
       nixpkgs-small,
-      nixos-generators,
+      # nixos-generators,
       nix-matlab,
       ...
     }@inputs:
