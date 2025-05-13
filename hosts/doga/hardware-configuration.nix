@@ -48,7 +48,7 @@
     hardware.hddIdle = [
       "sdb"
       "sdc"
-      "sdc"
+      "sdd"
       "sde"
       "sdf"
     ];
