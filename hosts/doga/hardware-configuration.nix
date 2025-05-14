@@ -7,7 +7,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../modules/hardware/tmpfsroot.nix
   ];
 
   config = {
@@ -23,22 +22,58 @@
     boot.extraModulePackages = [ ];
     boot.supportedFilesystems = [ "zfs" ];
 
-    tmpfsroot = {
-      enable = true;
-      boot = {
-        device = "/dev/disk/by-uuid/6028-CED0";
-        fsType = "vfat";
-      };
-      nixstore = {
-        device = "/dev/disk/by-uuid/c9f746d0-b1b5-4f52-bc27-869d4a2601ce";
-        fsType = "f2fs";
-        options = [ "discard" ];
-      };
-      home = {
-        device = "/dev/disk/by-uuid/24b73bb4-2da4-4669-b5e2-f4bc31017e13";
-        fsType = "f2fs";
-        options = [ "discard" ];
-      };
+    tmpfsroot.impermanence = true;
+    sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
+
+    boot.initrd.postDeviceCommands = lib.mkBefore ''
+      mkdir -p /mnt
+      mount ${config.fileSystems."/".device} /mnt
+
+      btrfs subvolume list -o /mnt/root |
+      cut -f9 -d' ' |
+      while read subvolume; do
+        echo "deleting /$subvolume subvolume..."
+        btrfs subvolume delete "/mnt/$subvolume"
+      done &&
+      echo "deleting /root subvolume..." &&
+      btrfs subvolume delete /mnt/root
+
+      echo "restoring clean /root subvolume..."
+      btrfs subvolume snapshot /mnt/root-clean /mnt/root
+      umount /mnt
+    '';
+
+    fileSystems."/" = {
+      device = "/dev/disk/by-uuid/bda74b6a-91f2-4dfc-9e55-bce9bf5d9d60";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
+    };
+
+    fileSystems."/nix" = {
+      device = "/dev/disk/by-uuid/bda74b6a-91f2-4dfc-9e55-bce9bf5d9d60";
+      fsType = "btrfs";
+      options = [
+        "subvol=nix"
+        "compress=zstd"
+        "noatime"
+      ];
+    };
+    fileSystems."/nix/persist" = {
+      device = "/dev/disk/by-uuid/bda74b6a-91f2-4dfc-9e55-bce9bf5d9d60";
+      fsType = "btrfs";
+      options = [
+        "subvol=persist"
+        "compress=zstd"
+      ];
+    };
+
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-uuid/F84C-36B9";
+      fsType = "vfat";
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
 
     #import zfs pool on boot
