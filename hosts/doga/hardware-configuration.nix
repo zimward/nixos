@@ -61,6 +61,7 @@
     fileSystems."/nix/persist" = {
       device = "/dev/disk/by-uuid/bda74b6a-91f2-4dfc-9e55-bce9bf5d9d60";
       fsType = "btrfs";
+      neededForBoot = true;
       options = [
         "subvol=persist"
         "compress=zstd"
