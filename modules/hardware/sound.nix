@@ -10,7 +10,7 @@
       };
     };
   };
-  config = lib.mkIf config.sys.sound.enable {
+  config = lib.mkIf (config.sys.sound.enable && config.device.class != "server") {
     #allow user processes to run with realitme scheduling
     security.rtkit.enable = config.sys.sound.allowRTsched;
     services.pipewire = {
