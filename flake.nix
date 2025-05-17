@@ -32,11 +32,6 @@
 
     # ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
 
-    imgserv = {
-      url = "github:zimward/imgserv";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # nixos-generators = {
     #   url = "github:nix-community/nixos-generators";
     #   inputs.nixpkgs.follows = "nixpkgs";

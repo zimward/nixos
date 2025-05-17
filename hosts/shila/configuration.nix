@@ -9,7 +9,6 @@
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../../modules
     ./git.nix
-    ./imgserv.nix
   ];
   config = {
     device.class = "server";
@@ -53,7 +52,6 @@
       enable = true;
       virtualHosts."arcureid.de" = {
         forceSSL = true;
-        enableACME = true;
         locations = {
           "/" = {
             proxyPass = "http://localhost:3000/";
@@ -63,26 +61,8 @@
             proxyPass = "http://localhost:3000";
             recommendedProxySettings = true;
           };
-          "/imgserv/" = {
-            proxyPass = "http://[::]:8000/";
-            recommendedProxySettings = true;
-            extraConfig = ''
-              proxy_redirect  http://[::]:8000/ /;
-              proxy_read_timeout 60s;
-            '';
-          };
-          "/stat" = {
-            extraConfig = ''
-              root /var/lib/static/;
-              autoindex on;
-            '';
-          };
         };
       };
-    };
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "minespeed200@gmail.com";
     };
 
     systemd.services.hydra-evaluator.environment = {
