@@ -122,6 +122,11 @@
     users.users.minidlna.extraGroups = [ "users" ];
 
     services.ethercalc.enable = true;
+    systemd.services.ethercalc.serviceConfig = {
+      StateDirectory = null;
+      WorkingDirectory = "/nix/persist/system/ethercalc";
+      ReadWritePaths = "/nix/persist/system/ethercalc";
+    };
 
     environment.persistence."/nix/persist/system" =
       let
@@ -129,7 +134,6 @@
       in
       lib.mkIf config.tmpfsroot.enable {
         directories = map varDir [
-          "private/ethercalc"
           "samba"
         ];
       };
