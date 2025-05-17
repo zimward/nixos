@@ -123,8 +123,8 @@
 
     services.ethercalc.enable = true;
     systemd.services.ethercalc.serviceConfig = {
-      StateDirectory = null;
-      WorkingDirectory = "/nix/persist/system/ethercalc";
+      StateDirectory = lib.mkForce null;
+      WorkingDirectory = lib.mkForce "/nix/persist/system/ethercalc";
       ReadWritePaths = "/nix/persist/system/ethercalc";
     };
 
