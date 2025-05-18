@@ -16,11 +16,29 @@
       nushell
       starship
       helix
-      yazi # file manager
       ripgrep
       bottom # process manager
       du-dust
       sshfs
+      fd
+      fzf
+    ];
+    hm.modules = [
+      (
+        { ... }:
+        {
+          programs.yazi.enable = true;
+          programs.yazi.package = (
+            pkgs.yazi.override {
+              optionalDeps = with pkgs; [
+                ripgrep
+                fd
+                fzf
+              ];
+            }
+          );
+        }
+      )
     ];
   };
 }
