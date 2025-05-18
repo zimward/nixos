@@ -48,22 +48,22 @@
       minimumDiskFree = 1;
     };
 
-    services.nginx = {
-      enable = true;
-      virtualHosts."arcureid.de" = {
-        forceSSL = true;
-        locations = {
-          "/" = {
-            proxyPass = "http://localhost:3000/";
-            recommendedProxySettings = true;
-          };
-          "/static" = {
-            proxyPass = "http://localhost:3000";
-            recommendedProxySettings = true;
-          };
-        };
-      };
-    };
+    # services.nginx = {
+    #   enable = true;
+    # virtualHosts."arcureid.de" = {
+    #   forceSSL = true;
+    #   locations = {
+    #     "/" = {
+    #       proxyPass = "http://localhost:3000/";
+    #       recommendedProxySettings = true;
+    #     };
+    #     "/static" = {
+    #       proxyPass = "http://localhost:3000";
+    #       recommendedProxySettings = true;
+    #     };
+    #   };
+    # };
+    # };
 
     systemd.services.hydra-evaluator.environment = {
       GC_DONT_GC = "true";
