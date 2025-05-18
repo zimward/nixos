@@ -9,6 +9,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
+    ../misc/main-user.nix
   ];
   config = lib.mkIf (config.device.class != "none") {
     #needed to rebuild system

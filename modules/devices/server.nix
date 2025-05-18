@@ -8,6 +8,7 @@
       icons.enable = false;
       menus.enable = false;
       sounds.enable = false;
+      mime.enable = false;
     };
     system.autoUpgrade.allowReboot = true;
     system.autoUpgrade.dates = lib.mkForce "4:00";

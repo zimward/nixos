@@ -19,6 +19,13 @@
     ./waybar
   ];
   config = {
+    #running ssh agent on graphical hosts is most often needed
+    cli.ssh.enableAgent = true;
+    devel = {
+      helix.enable = true;
+      git.enable = true;
+      zellij.enable = true;
+    };
     assertions =
       let
         cfg = config.graphical;
