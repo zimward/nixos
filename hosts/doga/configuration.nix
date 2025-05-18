@@ -28,7 +28,6 @@
 
     networking.hostName = "doga";
     networking.hostId = "bc365a3a";
-    networking.networkmanager.enable = true;
 
     services.openssh = {
       enable = true;
