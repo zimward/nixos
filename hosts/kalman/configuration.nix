@@ -60,7 +60,6 @@
       graphical.minecraft.enable = lib.mkForce false;
       graphical.ereader.enable = lib.mkForce false;
     };
-    graphical.irc.enable = true;
     graphical.ime.enable = true;
 
     environment.systemPackages = [
