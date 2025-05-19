@@ -7,7 +7,7 @@
 {
   options = {
     devel.latex = lib.mkOption {
-      default = false;
+      default = config.device.class == "desktop";
       description = "Enable TexLive";
     };
   };

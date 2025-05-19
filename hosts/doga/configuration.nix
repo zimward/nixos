@@ -138,6 +138,12 @@
         ];
       };
 
+    services.nix-serve = {
+      enable = true;
+      openFirewall = true;
+      secretKeyFile = "/nix/persist/store-keys/secret-key-file";
+    };
+
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22

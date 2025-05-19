@@ -4,6 +4,7 @@
     ./cli
     ./devel
     ./devices
+    ./graphical
     ./hardware
     ./home
     ./misc
