@@ -71,6 +71,13 @@
       pkgs.prusa-slicer
     ];
 
+    nix.settings.substituters = [
+      "http:192.168.0.1:5000"
+    ];
+    nix.settings.trusted-public-keys = [
+      "doga:y1nuiJdAESNfSTOJz+pna+PoCtNe/cvVUddkD2jAsmI="
+    ];
+
     # nix.buildMachines = [
     #   {
     #     hostName = "shila";
