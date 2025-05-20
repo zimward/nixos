@@ -64,6 +64,9 @@
         #   return 402;
         # ";
         # };
+        locations."/static" = {
+          root = "/nix/persist/static";
+        };
         locations."/" = {
           proxyPass = "http://localhost:8000/";
           recommendedProxySettings = true;
