@@ -60,6 +60,23 @@
     # "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
     "Mod+Shift+J".action.close-window = [ ];
+    "Mod+Y".action.spawn = [
+      (lib.getExe config.programs.niri.package)
+      "msg"
+      "output"
+      "DP-3"
+      "transform"
+      "90"
+    ];
+    "Mod+Shift+Y".action.spawn = [
+      (lib.getExe config.programs.niri.package)
+      "msg"
+      "output"
+      "DP-3"
+      "transform"
+      "normal"
+    ];
+
     "Mod+G".action = switch-preset-column-width;
     "Mod+Shift+G".action = switch-preset-window-height;
     "Mod+Ctrl+R".action = reset-window-height;
