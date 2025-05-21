@@ -40,6 +40,7 @@
                 layout = "de(dvorak)";
                 options = "numlock";
               };
+              keyboard.numlock = true;
               focus-follows-mouse.enable = true;
               warp-mouse-to-focus = true;
               workspace-auto-back-and-forth = true;
