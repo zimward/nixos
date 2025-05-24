@@ -6,6 +6,7 @@
     ./searx.nix
     ./matrix.nix
     ./mail.nix
+    ./git.nix
   ];
 
   config = {
