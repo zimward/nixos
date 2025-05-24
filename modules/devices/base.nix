@@ -80,11 +80,7 @@
     # auto system upgrade
     system.autoUpgrade = {
       enable = true;
-      flake = inputs.self.outPath;
-      flags = [
-        "--recreate-lock-file"
-        "--no-write-lock-file"
-      ];
+      flake = config.updateScript.cfgRef;
       persistent = true;
       dates = "10:00";
     };
