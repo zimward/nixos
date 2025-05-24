@@ -14,7 +14,7 @@
     main-user.userName = lib.mkForce "aisha";
     main-user.hashedPassword = "$y$j9T$wmstfO.Yhb3p4XyS84lDy/$GDLXO3PNgb4GQsHmPBpixsbke/wzs/fY6x0EOBjK395";
 
-    updateScript.cfgRef = "/nix/persist/config";
+    updateScript.cfgRef = "git://git@zimward.moe:nixos";
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
