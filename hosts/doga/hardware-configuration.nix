@@ -81,13 +81,6 @@
     boot.zfs.extraPools = [ "Pool1_20TB" ];
     boot.zfs.forceImportRoot = false;
 
-    hardware.hddIdle = [
-      "sda"
-      "sdb"
-      "sdc"
-      "sdd"
-      "sde"
-    ];
     #the server is only running trusted code, so no rist of LPE
     boot.kernelParams = [ "mitigations=off" ];
 
