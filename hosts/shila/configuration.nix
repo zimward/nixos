@@ -8,7 +8,6 @@
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../../modules
-    ./git.nix
   ];
   config = {
     device.class = "server";

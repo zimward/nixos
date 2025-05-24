@@ -1,9 +1,15 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [ inputs.home-manager.nixosModules.default ];
   users.extraUsers."git" = {
     shell = "${pkgs.git}/bin/git-shell";
     createHome = true;
+    home = "/nix/persist/git";
     homeMode = "700";
     ignoreShellProgramCheck = true;
     isNormalUser = true;
@@ -22,17 +28,16 @@
       { ... }:
       {
         home.username = "git";
-        home.homeDirectory = "/home/git";
+        # home.homeDirectory = lib.mkForce "/nix/persist/git";
 
         home.stateVersion = "24.05";
 
         home.file."git-shell-commands/newrepo" = {
           text = ''
-            #!${pkgs.bash}/bin/bash
-            cd git
+            #!${lib.getExe pkgs.bash}
             mkdir $1
             cd $1
-            ${pkgs.git}/bin/git init --bare
+            ${lib.getExe pkgs.git} init --bare
           '';
           executable = true;
         };
