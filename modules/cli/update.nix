@@ -9,7 +9,7 @@ let
   updScript = pkgs.writeShellScriptBin "update.sh" ''
     cd /tmp
     git clone --depth 1 ${config.updateScript.cfgRef}
-    nixos-rebuild switch --flake ./${path}/. --use-remote-sudo
+    nixos-rebuild switch --flake ./nixos/. --use-remote-sudo
     rm -rf /tmp/${path}
   '';
 in
@@ -17,6 +17,7 @@ in
   options = {
     updateScript.cfgRef = lib.mkOption {
       type = lib.types.nonEmptyStr;
+      default = "git+ssh://git@zimward.moe/~/nixos";
       description = "reference to nix flake";
     };
   };
