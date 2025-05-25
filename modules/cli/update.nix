@@ -5,12 +5,8 @@
   ...
 }:
 let
-  path = lib.lists.last (lib.strings.splitString "/" config.updateScript.cfgRef);
   updScript = pkgs.writeShellScriptBin "update.sh" ''
-    cd /tmp
-    git clone --depth 1 ${config.updateScript.cfgRef}
-    nixos-rebuild switch --flake ./nixos/. --use-remote-sudo
-    rm -rf /tmp/${path}
+    nixos-rebuild switch --flake ${config.updateScript.cfgRef} --use-remote-sudo
   '';
 in
 {
