@@ -38,7 +38,6 @@
             input = {
               keyboard.xkb = {
                 layout = "de(dvorak)";
-                options = "numlock";
               };
               keyboard.numlock = true;
               focus-follows-mouse.enable = true;
