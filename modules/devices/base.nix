@@ -90,6 +90,11 @@
     ];
     networking.useNetworkd = true;
 
+    services.openssh.knownHosts = {
+      "zimward.moe" = {
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAI36kh/wRoNrwraNaKRtiM4b9j5HY3NwzNfE2OqGQT";
+      };
+    };
     # auto system upgrade
     system.autoUpgrade = {
       enable = true;
