@@ -11,6 +11,19 @@
     inputs.impermanence.nixosModules.impermanence
     ../misc/main-user.nix
   ];
+  options = {
+    update = {
+      cfgRef = lib.mkOption {
+        type = lib.types.nonEmptyStr;
+        default = "git+ssh://git@zimward.moe/~/nixos";
+        description = "reference to nix flake";
+      };
+      accessKey = lib.mkOption {
+        type = lib.types.nullOr lib.types.path;
+        default = null;
+      };
+    };
+  };
   config = lib.mkIf (config.device.class != "none") {
     #needed to rebuild system
     environment.systemPackages = with pkgs; [
@@ -80,7 +93,7 @@
     # auto system upgrade
     system.autoUpgrade = {
       enable = true;
-      flake = config.updateScript.cfgRef;
+      flake = config.update.cfgRef;
       persistent = true;
       dates = "10:00";
     };
@@ -89,6 +102,11 @@
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 5d";
+    };
+    systemd.services.nixos-upgrade.environment = {
+      GIT_SSH_COMMAND = lib.optionalString (
+        config.update.accessKey != null
+      ) "ssh -i ${config.update.accessKey}";
     };
   };
 }

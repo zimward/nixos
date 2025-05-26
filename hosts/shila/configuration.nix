@@ -19,7 +19,7 @@
     ];
     boot.supportedFilesystems = lib.mkForce { zfs = false; };
 
-    updateScript.cfgRef = "shilagit:git/nixos";
+    update.cfgRef = "shilagit:git/nixos";
 
     networking.hostName = "shila";
     services.openssh = {
