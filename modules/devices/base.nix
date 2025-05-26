@@ -20,7 +20,7 @@
       };
       accessKey = lib.mkOption {
         type = lib.types.nullOr lib.types.path;
-        default = null;
+        default = "/etc/ssh/ssh_host_ed25519_key";
       };
     };
   };

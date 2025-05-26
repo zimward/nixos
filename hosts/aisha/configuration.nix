@@ -20,8 +20,6 @@
     networking.hostName = "aisha";
     networking.hostId = "01EF6C8D";
 
-    update.accessKey = "/etc/ssh/ssh_host_ed25519_key";
-
     services.openssh = {
       enable = true;
       settings.PasswordAuthentication = false;
