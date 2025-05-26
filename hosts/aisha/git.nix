@@ -22,6 +22,8 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg modsog@mainpc"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtFwpCXl8dkPEZTBloKTkJbSWmIzjFJE/29sDEwQVI/ zimward@doga"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAI36kh/wRoNrwraNaKRtiM4b9j5HY3NwzNfE2OqGQT root@nixos" # aisha
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJVZ6ubHsaqWj2eyjEjS08zEHoFDmFhnV1xWaF0K+L9M root@kalman" # kalman
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZeN06ZB6hsWpWutEQQlGf0t/MBWSpu9jSYnVlOfKqj root@nas" # doga
     ];
   };
   home-manager.users."git".imports = [
