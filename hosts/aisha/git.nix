@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   lib,
+  config,
   ...
 }:
 {
@@ -26,6 +27,42 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZeN06ZB6hsWpWutEQQlGf0t/MBWSpu9jSYnVlOfKqj root@nas" # doga
     ];
   };
+  systemd.timers.updateFlake = {
+    enable = true;
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "3:30";
+      Unit = "updateFlake.service";
+    };
+  };
+  systemd.services.updateFlake = {
+    enable = true;
+    serviceConfig = {
+      Type = "simple";
+      User = "git";
+      ExecStart = lib.getExe (
+        pkgs.writeShellApplication {
+          name = "updateFlake";
+          runtimeInputs = [
+            pkgs.git
+            config.nix.package
+          ];
+          text = ''
+            cd "$(mktemp -d)"
+            git clone ~/nixos nixos
+            cd nixos
+            nix flake update
+            git add flake.lock
+            git commit -m "flake: update lock"
+            git push
+            cd ..
+            rm -rf nixos
+          '';
+        }
+      );
+    };
+  };
+
   home-manager.users."git".imports = [
     (
       { ... }:
@@ -34,6 +71,12 @@
         # home.homeDirectory = lib.mkForce "/nix/persist/git";
 
         home.stateVersion = "24.05";
+
+        programs.git = {
+          enable = true;
+          userName = "aisha";
+          userEmail = "auto-git@zimward.moe";
+        };
 
         home.file."git-shell-commands/newrepo" = {
           text = ''
