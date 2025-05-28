@@ -42,6 +42,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nixpkgs-small,
       # nixos-generators,
@@ -83,7 +84,15 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/doga/configuration.nix ];
+          modules = [
+            ./hosts/doga/configuration.nix
+            (
+              { ... }:
+              {
+                environment.systemPackages = [ self.nixosConfigurations.kalman.config.system.build.toplevel ];
+              }
+            )
+          ];
         };
         aisha = nixpkgs-small.lib.nixosSystem {
           specialArgs = {
