@@ -14,7 +14,7 @@
         description = "Email address used when commiting (maybe use sops and don't leak name)";
       };
       signingkey = lib.mkOption {
-        default = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
+        default = "E22F760EE074E57A21CB17338DD29BB52C25EA09";
         type = lib.types.str;
         description = "GPG-Key Signature to be used when signing commits";
       };
