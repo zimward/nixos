@@ -82,7 +82,10 @@
     boot.zfs.forceImportRoot = false;
 
     #the server is only running trusted code, so no rist of LPE
-    boot.kernelParams = [ "mitigations=off" ];
+    boot.kernelParams = [
+      "mitigations=off"
+      "ia32_emulation=false"
+    ];
 
     networking.useDHCP = lib.mkDefault true;
     systemd.network.enable = true;
