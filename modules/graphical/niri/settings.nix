@@ -53,15 +53,13 @@
               [
                 (command (lib.getExe pkgs.xwayland-satellite))
                 (command (lib.getExe pkgs.waybar))
-                {
-                  command = [
-                    (lib.getExe pkgs.swaybg)
-                    "-m"
-                    "fill"
-                    "-i"
-                    "${config.users.users.${config.main-user.userName}.home}/.bg.jpg"
-                  ];
-                }
+                (command [
+                  (lib.getExe pkgs.swaybg)
+                  "-m"
+                  "fill"
+                  "-i"
+                  "${config.users.users.${config.main-user.userName}.home}/.bg.jpg"
+                ])
                 (command [
                   (lib.getExe pkgs.mako)
                   "--default-timeout"
@@ -72,13 +70,11 @@
                 (command "keepassxc")
               ]
               ++ lib.optionals config.graphical.ime.enable [
-                {
-                  command = [
-                    "fcitx5"
-                    "-d"
-                    "-r"
-                  ];
-                }
+                (command [
+                  "fcitx5"
+                  "-d"
+                  "-r"
+                ])
               ];
 
             workspaces = {
