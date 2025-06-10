@@ -37,9 +37,10 @@
                 color-modes = true;
                 #dvorak home row etc
                 jump-label-alphabet = "aoeidrnsuhlqwt";
-                lsp = {
-                  display-inlay-hints = true;
-                };
+                # lsp = {
+                #   display-inlay-hints = true;
+                # };
+                idle-timeout = 24000;
                 indent-guides = {
                   render = true;
                   skip-levels = 1;
