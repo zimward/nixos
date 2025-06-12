@@ -55,6 +55,11 @@
 
     services.nginx = {
       enable = true;
+      virtualHosts."data.zimward.moe" = {
+        root = "/nix/persist/static";
+        forceSSL = true;
+        enableACME = true;
+      };
       virtualHosts."zimward.moe" = {
         forceSSL = true;
         enableACME = true;
@@ -63,9 +68,6 @@
         #   return 402;
         # ";
         # };
-        locations."/static" = {
-          root = "/nix/persist/static";
-        };
         locations."/" = {
           proxyPass = "http://localhost:8000/";
           recommendedProxySettings = true;
