@@ -94,6 +94,13 @@
 
     graphical.matlab.enable = true;
 
+    services.scx = {
+      enable = true;
+      package = pkgs.scx.rustscheds;
+      scheduler = "scx_lavd";
+      extraArgs = [ "--autopilot" ];
+    };
+
     system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
