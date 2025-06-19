@@ -39,12 +39,12 @@
         options = [ "compress=zstd:3" ];
       };
       nixstore = {
-        device = "/dev/disk/by-uuid/8455ca75-43e5-4a7d-9d0f-96950408f262";
-        fsType = "f2fs";
+        device = "/dev/disk/by-uuid/31ecb0fe-1c05-48e8-b9e3-0554e8f14ef0";
+        fsType = "xfs";
         options = [ "discard" ];
       };
       boot = {
-        device = "/dev/disk/by-uuid/E939-E650";
+        device = "/dev/disk/by-uuid/C8C3-A169";
         fsType = "vfat";
       };
     };
@@ -56,7 +56,7 @@
     '';
 
     boot.initrd.luks.devices."root" = {
-      device = "/dev/disk/by-uuid/a4cb3149-6939-4416-8cdd-0d9bf3a8306f";
+      device = "/dev/disk/by-uuid/63b531df-fb4a-4c14-8668-8faa34cda107";
       allowDiscards = true;
     };
 
