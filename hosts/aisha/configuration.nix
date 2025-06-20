@@ -69,7 +69,7 @@
         # ";
         # };
         locations."/" = {
-          proxyPass = "http://localhost:8000/";
+          # proxyPass = "http://localhost:8000/";
           recommendedProxySettings = true;
         };
         extraConfig = "
