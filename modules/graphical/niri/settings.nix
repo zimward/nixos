@@ -41,7 +41,7 @@
               };
               keyboard.numlock = true;
               focus-follows-mouse.enable = true;
-              warp-mouse-to-focus = true;
+              warp-mouse-to-focus.enable = true;
               workspace-auto-back-and-forth = true;
             };
             screenshot-path = "~/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
