@@ -14,8 +14,16 @@
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-    boot.loader.systemd-boot.enable = true;
+    boot.loader.systemd-boot.enable = lib.mkForce false;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.lanzaboote = {
+      enable = true;
+      pkiBundle = "/nix/persist/system/var/lib/sbctl/";
+    };
+
+    environment.persistence."/nix/persist/system" = {
+      directories = [ "/var/lib/sbctl" ];
+    };
 
     #workaround
     services.logrotate.checkConfig = false;
@@ -68,6 +76,7 @@
       '')
       pkgs.freecad
       pkgs.prusa-slicer
+      pkgs.sbctl
     ];
 
     nix.settings.substituters = [
