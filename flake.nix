@@ -29,6 +29,10 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
 
@@ -65,6 +69,7 @@
           modules = [
             overlays
             ./hosts/kalman/configuration.nix
+            inputs.lanzaboote.nixosModules.lanzaboote
           ];
         };
 
