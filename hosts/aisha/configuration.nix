@@ -94,10 +94,17 @@
     };
 
     #prevent OOM on cache fail
-    systemd.services.nix-daemon.serviceConfig = {
-      MemoryHigh = "1G";
-      MemoryMax = "2.5G";
+    systemd.services.nix-daemon = {
+      serviceConfig = {
+        MemoryHigh = "1G";
+        MemoryMax = "2.5G";
+      };
+      environment.TMPDIR = "/nix/tmp";
     };
+    systemd.tmpfiles.rules = [
+      "d /nix/tmp 1640 root root 1d"
+      "d /var/log/nginx 1777 nginx nginx 1d"
+    ];
 
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
