@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -56,7 +61,9 @@
 
     services.nginx = {
       enable = true;
+      package = pkgs.nginxQuic;
       virtualHosts."data.zimward.moe" = {
+        quic = true;
         root = "/nix/persist/static";
         forceSSL = true;
         enableACME = true;
@@ -64,6 +71,8 @@
       virtualHosts."zimward.moe" = {
         forceSSL = true;
         enableACME = true;
+        quic = true;
+        reuseport = true;
         locations."/" = {
           proxyPass = "http://[::1]:8000/";
           recommendedProxySettings = true;
@@ -76,7 +85,7 @@
       virtualHosts."search.zimward.moe" = {
         forceSSL = true;
         enableACME = true;
-
+        quic = true;
         locations."/" = {
           proxyPass = "http://localhost:8080/";
           recommendedProxySettings = true;
