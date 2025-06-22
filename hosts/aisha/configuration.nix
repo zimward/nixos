@@ -83,6 +83,13 @@
         };
       };
     };
+
+    #prevent OOM on cache fail
+    systemd.services.nix-daemon.serviceConfig = {
+      MemoryHigh = "1G";
+      MemoryMax = "2.5G";
+    };
+
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22
