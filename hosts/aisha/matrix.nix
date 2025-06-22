@@ -96,6 +96,7 @@ in
     sslCertificateKey = "${certDir}/key.pem";
     sslTrustedCertificate = "${certDir}/chain.pem";
     forceSSL = true;
+    quic = true;
     listen = lib.lists.flatten (
       map
         (addr: [
