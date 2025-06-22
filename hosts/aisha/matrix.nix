@@ -1,7 +1,12 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   port = 8448;
-  fqdn = "zimward.moe";
+  fqdn = "matrix.zimward.moe";
   url = "https://${fqdn}";
   clientConfig."m.homeserver".base_url = url;
   serverConfig."m.server" = "${fqdn}:${builtins.toString port}";
@@ -10,7 +15,7 @@ let
     add_header Access-Control-Allow-Origin *;
     return 200 '${builtins.toJSON data}';
   '';
-  certDir = config.security.acme.certs.${fqdn}.directory;
+  certDir = config.security.acme.certs."zimward.moe".directory; # has a sub cert for fqdn
 in
 {
   services.postgresql = {
@@ -24,30 +29,10 @@ in
       registration_shared_secret = "Y2q16w4KrsXxwsE1QvBBMb4a716I3qhaZxzUR6uVcNdVOmKhCLoDCTngkMJk99Ot";
       server_name = "zimward.moe";
       public_baseurl = "https://zimward.moe";
-      tls_certificate_path = "${certDir}/fullchain.pem";
-      tls_private_key_path = "${certDir}/key.pem";
       extraConfig = ''
         max_upload_size: "100M"
       '';
       listeners = [
-        {
-          inherit port;
-          bind_addresses = [
-            "zimward.moe"
-          ];
-          type = "http";
-          tls = true;
-          x_forwarded = false;
-          resources = [
-            {
-              names = [
-                "client"
-                "federation"
-              ];
-              compress = true;
-            }
-          ];
-        }
         {
           port = 8008;
           bind_addresses = [
@@ -99,11 +84,51 @@ in
     };
   };
   #auto-discovery via .well-known
-  services.nginx.virtualHosts."${fqdn}" = {
+  services.nginx.virtualHosts."zimward.moe" = {
     locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
     locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+    #for some reason clients insist on not using the sub domain
     locations."/_matrix".proxyPass = "http://[::1]:8008";
     locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+  };
+  services.nginx.virtualHosts.${fqdn} = {
+    sslCertificate = "${certDir}/fullchain.pem";
+    sslCertificateKey = "${certDir}/key.pem";
+    sslTrustedCertificate = "${certDir}/chain.pem";
+    forceSSL = true;
+    listen = lib.lists.flatten (
+      map
+        (addr: [
+          {
+            inherit addr;
+            port = 8448;
+            ssl = true;
+          }
+          #clients should access via normal https
+          {
+            inherit addr;
+            port = 443;
+            ssl = true;
+          }
+          #for redirects
+          {
+            inherit addr;
+            port = 80;
+            ssl = false;
+          }
+        ])
+        [
+          "0.0.0.0"
+          "[::0]"
+        ]
+    );
+    locations."/_matrix".proxyPass = "http://[::1]:8008";
+    locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+
+    extraConfig = "
+          access_log /dev/null;
+          error_log /dev/null;
+        ";
   };
   #restart matrix after cert change
   security.acme.certs = {
@@ -170,6 +195,7 @@ in
     5349
   ];
   networking.firewall.allowedUDPPorts = [
+    port # quic
     3478
     5349
   ];

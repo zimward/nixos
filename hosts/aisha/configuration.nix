@@ -43,6 +43,7 @@
           "zimward.moe" = {
             webroot = "/var/lib/acme/acme-challenge/";
             extraDomainNames = map (sub "zimward.moe") [
+              "matrix"
               "mx1"
               "search"
             ];
@@ -63,19 +64,14 @@
       virtualHosts."zimward.moe" = {
         forceSSL = true;
         enableACME = true;
-        # locations."/" = {
-        #   extraConfig = "
-        #   return 402;
-        # ";
-        # };
         locations."/" = {
-          # proxyPass = "http://localhost:8000/";
+          proxyPass = "http://[::1]:8000/";
           recommendedProxySettings = true;
         };
-        extraConfig = "
-          access_log /dev/null;
-          error_log /dev/null;
-        ";
+        # extraConfig = "
+        #   access_log /dev/null;
+        #   error_log /dev/null;
+        # ";
       };
       virtualHosts."search.zimward.moe" = {
         forceSSL = true;
