@@ -375,6 +375,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-small": "nixpkgs-small",
+        "secrets": "secrets",
         "sops-nix": "sops-nix"
       }
     },
@@ -397,6 +398,21 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
+      }
+    },
+    "secrets": {
+      "locked": {
+        "lastModified": 1750600009,
+        "narHash": "sha256-cQqU6hxYeJl3vlB8oQG1xxTRkveLQUYy21P176P8kpc=",
+        "ref": "refs/heads/master",
+        "rev": "d947c20ef03d9d4312597ba26f7983e6441c9b8c",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@zimward.moe/~/secrets"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@zimward.moe/~/secrets"
       }
     },
     "sops-nix": {

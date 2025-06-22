@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
 let
@@ -26,7 +27,7 @@ in
     enable = true;
     dataDir = "/nix/persist/system/matrix-synapse/";
     settings = {
-      registration_shared_secret = "Y2q16w4KrsXxwsE1QvBBMb4a716I3qhaZxzUR6uVcNdVOmKhCLoDCTngkMJk99Ot";
+      registration_shared_secret = inputs.secrets.matrix.registration;
       server_name = "zimward.moe";
       public_baseurl = "https://zimward.moe";
       extraConfig = ''
@@ -148,7 +149,7 @@ in
     min-port = 49000;
     max-port = 50000;
     use-auth-secret = true;
-    static-auth-secret = "YS8MDZEFOe4BF6N8DVsPVUmQWfdCe4XxVIbJVKzGbn3zssZdoc1tGTlfDZ575VeU";
+    static-auth-secret = inputs.secrets.matrix.turn;
     realm = fqdn;
     cert = "${certDir}/full.pem";
     pkey = "${certDir}/key.pem";
