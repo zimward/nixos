@@ -165,15 +165,6 @@
     #local intranet interface
     networking.firewall.trustedInterfaces = [ config.ethernet.share.device ];
 
-    services.ddclient = {
-      enable = true;
-      domains = [ "rfjk.zimward.moe" ];
-      passwordFile = "/nix/persist/ddns";
-      protocol = "namecheap";
-      server = "dynamicdns.park-your-domain.com";
-      username = "zimward.moe";
-    };
-
     system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
