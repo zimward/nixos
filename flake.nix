@@ -33,6 +33,9 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    secrets = {
+      url = "git+ssh://git@zimward.moe/~/secrets";
+    };
 
     # ppp-kernel.url = "git+ssh://shilagit:/~/git/ppp-kernel";
 
