@@ -48,6 +48,6 @@ in
     nixpkgs.config.permittedInsecurePackages = [
       "olm-3.2.16"
     ];
-    nixpkgs.allowUnfreePackages = enLst cfg.obsidian [ "obsidian" ];
+    nixpkgs.allowUnfreePackages = [ "obsidian" ];
   };
 }
