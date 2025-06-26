@@ -47,16 +47,9 @@ in
   };
   config = lib.mkIf config.devel.zellij.enable {
     environment.systemPackages = [ pkgs.zellij ];
-    hm.modules = [
-      (
-        { ... }:
-        {
-          home.file = {
-            ".config/zellij/config.kdl".text = zconf;
-            ".config/zellij/layouts/default.kdl".text = layout;
-          };
-        }
-      )
-    ];
+    hm.home.file = {
+      ".config/zellij/config.kdl".text = zconf;
+      ".config/zellij/layouts/default.kdl".text = layout;
+    };
   };
 }

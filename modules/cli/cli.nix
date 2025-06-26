@@ -23,22 +23,15 @@
       fd
       fzf
     ];
-    hm.modules = [
-      (
-        { ... }:
-        {
-          programs.yazi.enable = true;
-          programs.yazi.package = (
-            pkgs.yazi.override {
-              optionalDeps = with pkgs; [
-                ripgrep
-                fd
-                fzf
-              ];
-            }
-          );
-        }
-      )
-    ];
+    hm.programs.yazi.enable = true;
+    hm.programs.yazi.package = (
+      pkgs.yazi.override {
+        optionalDeps = with pkgs; [
+          ripgrep
+          fd
+          fzf
+        ];
+      }
+    );
   };
 }

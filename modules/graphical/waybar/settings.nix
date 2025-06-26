@@ -28,7 +28,7 @@ let
   };
 in
 {
-  programs.waybar = {
+  hm.programs.waybar = {
     settings = with custom; [
       {
         layer = "top";
