@@ -20,7 +20,7 @@
   ];
   config = {
     #running ssh agent on graphical hosts is most often needed
-    cli.ssh.enableAgent = true;
+    hm.services.ssh-agent.enable = true;
     devel = {
       helix.enable = true;
       git.enable = true;

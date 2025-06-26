@@ -29,55 +29,49 @@
 
       # nix.settings.plugin-files = lib.optionalString enablePijul "${pkgs.nix-plugin-pijul}/lib/nix/plugins/pijul.so";
 
-      hm.modules = [
-        (
-          { ... }:
-          {
-            home.file.".config/pijul/config" = {
-              enable = enablePijul;
-              source =
-                let
-                  aw = "always";
-                in
-                (pkgs.formats.toml { }).generate "config.toml"
+      hm.home.file.".config/pijul/config" = {
+        enable = enablePijul;
+        source =
+          let
+            aw = "always";
+          in
+          (pkgs.formats.toml { }).generate "config.toml"
 
-                  {
-                    colors = aw;
-                    pager = aw;
-                    author = {
-                      name = "zimward";
-                      full_name = "zimward";
-                      email = "zimward@zimward.moe";
-                      key_path = "${config.users.users.${config.main-user.userName}.home}/.ssh/id_ed25519";
-                    };
-                    ignore_kinds = {
-                      rust = [
-                        "target"
-                        "result"
-                      ];
-                    };
-                  };
-
-            };
-            programs.git = {
-              enable = config.devel.git.enable;
-              userName = config.main-user.userName;
-              userEmail = config.devel.git.userEmail;
-              aliases = {
-                "commit" = "commit -S";
+            {
+              colors = aw;
+              pager = aw;
+              author = {
+                name = "zimward";
+                full_name = "zimward";
+                email = "zimward@zimward.moe";
+                key_path = "${config.users.users.${config.main-user.userName}.home}/.ssh/id_ed25519";
               };
-              extraConfig = {
-                push.autoSetupRemote = true;
-                commit = {
-                  gpgsign = true;
-                };
-                user = {
-                  signingkey = config.devel.git.signingkey;
-                };
+              ignore_kinds = {
+                rust = [
+                  "target"
+                  "result"
+                ];
               };
             };
-          }
-        )
-      ];
+
+      };
+      hm.programs.git = {
+        enable = config.devel.git.enable;
+        userName = config.main-user.userName;
+        userEmail = config.devel.git.userEmail;
+        aliases = {
+          "commit" = "commit -S";
+        };
+        extraConfig = {
+          push.autoSetupRemote = true;
+          commit = {
+            gpgsign = true;
+          };
+          user = {
+            signingkey = config.devel.git.signingkey;
+          };
+        };
+      };
+
     };
 }

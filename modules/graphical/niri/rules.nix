@@ -1,6 +1,5 @@
-{ ... }:
 {
-  programs.niri.settings.window-rules = [
+  hm.programs.niri.settings.window-rules = [
     #prevent starting applications from grabbing focus
     {
       matches = [ { app-id = ".*"; } ];
@@ -90,7 +89,7 @@
       open-floating = true;
     }
   ];
-  programs.niri.settings.layer-rules = [
+  hm.programs.niri.settings.layer-rules = [
     {
       matches = [ { namespace = "^notifications$"; } ];
       block-out-from = "screen-capture";

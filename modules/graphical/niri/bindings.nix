@@ -1,10 +1,11 @@
 {
   lib,
   pkgs,
+  config,
+  ...
 }:
-{ config, ... }:
 {
-  programs.niri.settings.binds = with config.lib.niri.actions; {
+  hm.programs.niri.settings.binds = with config.hm.lib.niri.actions; {
     "XF86AudioMute".action = spawn "swayosd-client" "--output-volume=mute-toggle";
     "XF86AudioMicMute".action = spawn "swayosd-client" "--input-volume=mute-toggle";
 
@@ -61,7 +62,7 @@
 
     "Mod+Shift+J".action.close-window = [ ];
     "Mod+Y".action.spawn = [
-      (lib.getExe config.programs.niri.package)
+      (lib.getExe config.hm.programs.niri.package)
       "msg"
       "output"
       "DP-3"
@@ -69,7 +70,7 @@
       "90"
     ];
     "Mod+Shift+Y".action.spawn = [
-      (lib.getExe config.programs.niri.package)
+      (lib.getExe config.hm.programs.niri.package)
       "msg"
       "output"
       "DP-3"
