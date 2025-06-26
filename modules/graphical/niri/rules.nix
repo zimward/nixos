@@ -1,4 +1,5 @@
-{
+{ lib, config, ... }:
+lib.mkIf config.graphical.niri.enable {
   hm.programs.niri.settings.window-rules = [
     #prevent starting applications from grabbing focus
     {
