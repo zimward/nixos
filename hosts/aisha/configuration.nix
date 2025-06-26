@@ -102,8 +102,8 @@
       environment.TMPDIR = "/nix/tmp";
     };
     systemd.tmpfiles.rules = [
-      "d /nix/tmp 1640 root root 1d"
-      "d /var/log/nginx 1777 nginx nginx 1d"
+      "d /nix/tmp 1777 root root 1d"
+      "d /var/log/nginx 1640 nginx nginx 1d"
     ];
 
     # Open ports in the firewall.
