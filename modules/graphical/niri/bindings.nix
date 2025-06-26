@@ -4,7 +4,7 @@
   config,
   ...
 }:
-{
+lib.mkIf config.graphical.niri.enable {
   hm.programs.niri.settings.binds = with config.hm.lib.niri.actions; {
     "XF86AudioMute".action = spawn "swayosd-client" "--output-volume=mute-toggle";
     "XF86AudioMicMute".action = spawn "swayosd-client" "--input-volume=mute-toggle";
