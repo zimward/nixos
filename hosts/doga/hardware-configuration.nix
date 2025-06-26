@@ -81,7 +81,7 @@
     boot.zfs.extraPools = [ "Pool1_20TB" ];
     boot.zfs.forceImportRoot = false;
 
-    #the server is only running trusted code, so no rist of LPE
+    #the server is only running trusted code, so no risk of LPE
     boot.kernelParams = [
       "mitigations=off"
       "ia32_emulation=false"
