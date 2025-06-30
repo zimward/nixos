@@ -54,9 +54,9 @@ lib.mkIf config.graphical.niri.enable {
         terminal = lib.getExe pkgs.alacritty;
       in
       [
-        "sh"
-        "-c"
-        "(${terminal} msg create-window) || ${terminal}"
+        "${terminal}"
+        "msg"
+        "create-window"
       ];
     # "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
