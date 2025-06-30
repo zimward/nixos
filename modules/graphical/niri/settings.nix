@@ -45,6 +45,10 @@
           (command (lib.getExe pkgs.xwayland-satellite))
           (command (lib.getExe pkgs.waybar))
           (command [
+            (lib.getExe pkgs.alacritty)
+            "--daemon"
+          ])
+          (command [
             (lib.getExe pkgs.swaybg)
             "-m"
             "fill"
