@@ -42,7 +42,6 @@
           command = cmd: { command = lib.lists.flatten [ cmd ]; };
         in
         [
-          (command (lib.getExe pkgs.xwayland-satellite))
           (command (lib.getExe pkgs.waybar))
           (command [
             (lib.getExe pkgs.alacritty)
@@ -131,6 +130,7 @@
     #provided by keepassxc
     hm.services.gnome-keyring.enable = lib.mkForce false;
     environment.systemPackages = with pkgs; [
+      xwayland-satellite # xwl-s now get auto started by niri when in path
       adwaita-icon-theme
       (pkgs.callPackage ../miku-cursors.nix { })
     ];
