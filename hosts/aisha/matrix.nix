@@ -128,8 +128,8 @@ in
     locations."/_synapse/client".proxyPass = "http://[::1]:8008";
 
     extraConfig = "
-          access_log /dev/null;
-          error_log /dev/null;
+          access_log /var/log/nginx/matrix_access.log;
+          error_log /var/log/nginx/matrix_error.log;
         ";
   };
   #restart matrix after cert change
