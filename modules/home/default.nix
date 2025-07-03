@@ -7,15 +7,15 @@
 {
   imports = [
     inputs.home-manager.nixosModules.default
-    (lib.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" config.main-user.userName ])
+    (lib.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" config.mainUser.userName ])
   ];
   config = {
     home-manager = {
-      users.${config.main-user.userName}.imports = [
+      users.${config.mainUser.userName}.imports = [
 
         {
-          home.username = config.main-user.userName;
-          home.homeDirectory = "/home/${config.main-user.userName}";
+          home.username = config.mainUser.userName;
+          home.homeDirectory = "/home/${config.mainUser.userName}";
           programs.home-manager.enable = true;
 
           home.sessionVariables = {

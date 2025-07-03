@@ -11,7 +11,7 @@
     default = null;
   };
   config = lib.mkIf (config.cli.nushell.enable && config.cli.nushell.graphical_startup != null) {
-    users.users."${config.main-user.userName}".shell = lib.mkForce pkgs.bash;
+    users.users."${config.mainUser.userName}".shell = lib.mkForce pkgs.bash;
     programs.bash = {
       loginShellInit = ''
         if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then

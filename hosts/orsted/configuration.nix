@@ -56,7 +56,7 @@
       settings.KbdInteractiveAuthentication = false;
     };
 
-    users.users.${config.main-user.userName} = {
+    users.users.${config.mainUser.userName} = {
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg"
       ];
@@ -81,7 +81,7 @@
     };
     services.fprintd.enable = true;
 
-    main-user.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
+    mainUser.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
     environment.persistence."/nix/persist/system" = {
       directories = [
         "/var/lib/fprint"
