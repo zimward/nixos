@@ -16,8 +16,8 @@
 
   config = {
     device.class = "server";
-    main-user.userName = lib.mkForce "aisha";
-    main-user.hashedPassword = "$y$j9T$wmstfO.Yhb3p4XyS84lDy/$GDLXO3PNgb4GQsHmPBpixsbke/wzs/fY6x0EOBjK395";
+    mainUser.userName = lib.mkForce "aisha";
+    mainUser.hashedPassword = "$y$j9T$wmstfO.Yhb3p4XyS84lDy/$GDLXO3PNgb4GQsHmPBpixsbke/wzs/fY6x0EOBjK395";
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -31,7 +31,7 @@
       settings.KbdInteractiveAuthentication = false;
     };
 
-    users.users.${config.main-user.userName}.openssh.authorizedKeys.keys = [
+    users.users.${config.mainUser.userName}.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL6wkiD+2gXU8TwEmBld1/2RdBJ4na2FnkYSYIjx4Ua zimward@nixos"
     ];

@@ -44,7 +44,7 @@
                 name = "zimward";
                 full_name = "zimward";
                 email = "zimward@zimward.moe";
-                key_path = "${config.users.users.${config.main-user.userName}.home}/.ssh/id_ed25519";
+                key_path = "${config.users.users.${config.mainUser.userName}.home}/.ssh/id_ed25519";
               };
               ignore_kinds = {
                 rust = [
@@ -57,7 +57,7 @@
       };
       hm.programs.git = {
         enable = config.devel.git.enable;
-        userName = config.main-user.userName;
+        userName = config.mainUser.userName;
         userEmail = config.devel.git.userEmail;
         aliases = {
           "commit" = "commit -S";

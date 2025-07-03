@@ -6,23 +6,23 @@
 }:
 {
   options = {
-    main-user.userName = lib.mkOption {
+    mainUser.userName = lib.mkOption {
       default = "mainuser";
       description = ''
         username
       '';
       type = lib.types.nonEmptyStr;
     };
-    main-user.hashedPassword = lib.mkOption {
+    mainUser.hashedPassword = lib.mkOption {
       default = null;
       description = "hashed password of main user";
     };
   };
   config = {
-    users.users.${config.main-user.userName} = {
+    users.users.${config.mainUser.userName} = {
       isNormalUser = true;
-      initialPassword = lib.mkIf (config.main-user.hashedPassword == null) "password";
-      hashedPassword = config.main-user.hashedPassword;
+      initialPassword = lib.mkIf (config.mainUser.hashedPassword == null) "password";
+      hashedPassword = config.mainUser.hashedPassword;
       description = "main user";
       shell = pkgs.nushell;
     };

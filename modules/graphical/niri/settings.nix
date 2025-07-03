@@ -52,7 +52,7 @@
             "-m"
             "fill"
             "-i"
-            "${config.users.users.${config.main-user.userName}.home}/.bg.jpg"
+            "${config.users.users.${config.mainUser.userName}.home}/.bg.jpg"
           ])
           (command [
             (lib.getExe pkgs.mako)
@@ -147,7 +147,7 @@
     services.displayManager = {
       enable = true;
       autoLogin = {
-        user = config.main-user.userName;
+        user = config.mainUser.userName;
         enable = true;
       };
       sddm = {

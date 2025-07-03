@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./main-user.nix
+    ./mainUser.nix
     ./undesired.nix
     ./unfree.nix
     ./wine.nix

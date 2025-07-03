@@ -9,7 +9,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
-    ../misc/main-user.nix
+    ../misc/mainUser.nix
   ];
   options = {
     update = {
@@ -50,14 +50,14 @@
       keyMap = "dvorak-de";
     };
 
-    main-user.userName = "zimward";
-    services.getty.autologinUser = config.main-user.userName;
+    mainUser.userName = "zimward";
+    services.getty.autologinUser = config.mainUser.userName;
 
     security.doas.enable = true;
     security.sudo.enable = false;
     security.doas.extraRules = [
       {
-        users = [ config.main-user.userName ];
+        users = [ config.mainUser.userName ];
         keepEnv = true;
         persist = true;
       }
@@ -78,7 +78,7 @@
     # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";
-    sops.age.keyFile = "/home/${config.main-user.userName}/.config/sops/age/keys.txt";
+    sops.age.keyFile = "/home/${config.mainUser.userName}/.config/sops/age/keys.txt";
     services.logind.powerKey = "suspend";
 
     #enable sysrq

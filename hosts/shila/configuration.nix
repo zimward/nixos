@@ -30,7 +30,7 @@
 
     security.apparmor.enable = lib.mkForce false;
 
-    users.users.${config.main-user.userName}.openssh.authorizedKeys.keys = [
+    users.users.${config.mainUser.userName}.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZ4iv3QwB03x5UlteFjPmTymPb29ruuKiMdZLn8jIem mobian@pinephone"
     ];
 

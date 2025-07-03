@@ -99,7 +99,7 @@
     networking.firewall.enable = false;
     security.polkit.enable = true;
 
-    users.users."${config.main-user.userName}".extraGroups = [
+    users.users."${config.mainUser.userName}".extraGroups = [
       "dialout"
       "feedbackd"
       "networkmanager"
@@ -114,12 +114,12 @@
     services.xserver = {
       desktopManager.phosh = {
         enable = true;
-        user = config.main-user.userName;
+        user = config.mainUser.userName;
         group = "users";
 
       };
     };
-    main-user.hashedPassword = "$y$j9T$tLtgJK7n2chx0mGQNUT/d/$2SJiFUqYsiYxbKaISRNCCKZ9Q7scfx.//MmqeVqxIHB";
+    mainUser.hashedPassword = "$y$j9T$tLtgJK7n2chx0mGQNUT/d/$2SJiFUqYsiYxbKaISRNCCKZ9Q7scfx.//MmqeVqxIHB";
 
     fonts.enableDefaultPackages = true; # enable default fonts
     programs.calls.enable = true;
