@@ -13,14 +13,16 @@
     hm.programs.helix = {
       enable = true;
       defaultEditor = true;
-      extraPackages = with pkgs; [
-        # nixfmt-rfc-style
-        nixd
-        # python311Packages.python-lsp-server
-        texlab # latex
-        lldb_18
-        clang-tools
-      ];
+      extraPackages =
+        with pkgs;
+        [
+          nixd
+        ]
+        ++ lib.optionals config.graphical.enable [
+          texlab # latex lsp
+          lldb_18
+          clang-tools
+        ];
       settings = {
         editor = {
           line-number = "relative";
@@ -88,48 +90,68 @@
           "C-5" = ":run-shell-command cargo run";
         };
       };
-      languages = {
-        language-server.rust-analyzer = {
-          config = {
-            check = {
-              command = "clippy";
-              extraArgs = [
-                "--"
-                "-D"
-                "clippy::pedantic"
-                "-W"
-                "clippy::nursery"
-              ];
+      languages =
+        let
+          gattrs = x: lib.optionalAttrs config.graphical.enable x;
+        in
+        {
+          #RA gets only installed via flake dev env so config is ok
+          language-server.rust-analyzer = {
+            config = {
+              check = {
+                command = "clippy";
+                extraArgs = [
+                  "--"
+                  "-D"
+                  "clippy::pedantic"
+                  "-W"
+                  "clippy::nursery"
+                ];
+              };
             };
           };
-        };
-        language-server.nixd = {
-          command = lib.getExe pkgs.nixd;
-        };
-        language = [
-          {
-            name = "nix";
-            auto-format = true;
-            formatter = {
-              command = lib.getExe pkgs.nixfmt-rfc-style;
-            };
-            language-servers = [ "nixd" ];
-          }
-          {
-            name = "html";
-            auto-format = true;
-            file-types = [
-              "html"
-              "css"
+          language-server.nixd = {
+            command = lib.getExe pkgs.nixd;
+          };
+          #doesn't make sense to have on a server
+          language-server.superhtml = gattrs {
+            command = lib.getExe pkgs.superhtml;
+            args = [ "lsp" ];
+          };
+          language-server.ltexpp = gattrs {
+            command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
+          };
+          language =
+            [
+              {
+                name = "nix";
+                auto-format = true;
+                formatter = {
+                  command = lib.getExe pkgs.nixfmt-rfc-style;
+                };
+                language-servers = [ "nixd" ];
+              }
+            ]
+            ++ lib.optionals config.graphical.enable [
+              {
+                name = "html";
+                auto-format = true;
+                file-types = [
+                  "html"
+                  "css"
+                ];
+                language-servers = [ "superhtml" ];
+              }
+              {
+                name = "latex";
+                auto-format = true;
+                language-servers = [
+                  "texlab"
+                  "ltexpp"
+                ];
+              }
             ];
-            language-servers = [ "superhtml" ];
-          }
-        ];
-        language-server.superhtml = {
-          command = lib.getExe pkgs.superhtml;
-          args = [ "lsp" ];
         };
-      };
     };
     hm.home.file.".config/helix/themes/tokyonight.toml".source =
       (pkgs.formats.toml { }).generate "tokyonight.toml"
