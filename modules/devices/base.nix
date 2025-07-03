@@ -113,5 +113,7 @@
         config.update.accessKey != null
       ) "ssh -i ${config.update.accessKey}";
     };
+    #oldest possible state
+    system.stateVersion = lib.mkDefault "23.11";
   };
 }

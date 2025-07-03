@@ -165,7 +165,5 @@
     networking.firewall.enable = true;
     #local intranet interface
     networking.firewall.trustedInterfaces = [ config.ethernet.share.device ];
-
-    system.stateVersion = "23.11"; # Did you read the comment?
   };
 }
