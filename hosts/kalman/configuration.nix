@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./filter-chain-siberia.nix
     ../../modules
     ../../modules/net/eth_share.nix
   ];
