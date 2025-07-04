@@ -26,7 +26,7 @@
       settings = {
         editor = {
           line-number = "relative";
-          completion-replace = true;
+          # completion-replace = true;
           true-color = true;
           rulers = [
             80
