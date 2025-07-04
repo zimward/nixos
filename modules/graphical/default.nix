@@ -17,6 +17,7 @@
     ./sway
     ./niri
     ./waybar
+    ./launcher.nix
   ];
   config = {
     #running ssh agent on graphical hosts is most often needed

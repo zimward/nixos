@@ -45,7 +45,7 @@ lib.mkIf config.graphical.niri.enable {
         "${pkgs.wl-clipboard-rs}/bin/wl-paste | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy"
       ];
 
-      "Mod+P".action.spawn = lib.getExe pkgs.anyrun;
+      "Mod+P".action.spawn = lib.getExe config.graphical.launcher;
       "Mod+Shift+T".action.spawn = [
         (lib.getExe pkgs.alacritty)
         "msg"
