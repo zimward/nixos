@@ -74,7 +74,6 @@
 
     # vpn stuff
     networking.networkmanager = {
-      enableStrongSwan = true;
       plugins = [
         pkgs.networkmanager-openconnect
       ];
