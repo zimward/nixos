@@ -88,6 +88,14 @@
       "1.1.1.1"
       "2606:4700:4700::1111"
     ];
+    services.resolved = {
+      enable = true;
+      dnssec = "true";
+      dnsovertls = "true";
+      llmnr = "false";
+      domains = [ "~." ];
+      fallbackDns = config.networking.nameservers;
+    };
     networking.useNetworkd = true;
 
     services.openssh.knownHosts = {
