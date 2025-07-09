@@ -80,6 +80,15 @@
       pkgs.sbctl
     ];
 
+    systemd.network.networks."10-lan" = {
+      matchConfig.Name = "enp39s0";
+      networkConfig = {
+        DHCP = "ipv4";
+        IPv6AcceptRA = true;
+        DHCPPrefixDelegation = true;
+      };
+    };
+
     nix.settings.substituters = [
       "http:192.168.0.1:5000"
     ];

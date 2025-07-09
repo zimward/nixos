@@ -165,5 +165,16 @@
     networking.firewall.enable = true;
     #local intranet interface
     networking.firewall.trustedInterfaces = [ config.ethernet.share.device ];
+
+    #public interface with ipv6 config
+    systemd.network.networks."10-public" = {
+      matchConfig.Name = "enp2s0f0";
+      networkConfig = {
+        DHCP = "ipv4";
+        IPv6AcceptRA = true;
+        DHCPPrefixDelegation = true;
+      };
+      linkConfig.RequiredForOnline = "routable";
+    };
   };
 }
