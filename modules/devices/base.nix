@@ -90,7 +90,7 @@
     ];
     services.resolved = {
       enable = true;
-      dnssec = "true";
+      dnssec = lib.mkDefault "true";
       dnsovertls = "true";
       llmnr = "false";
       domains = [ "~." ];
