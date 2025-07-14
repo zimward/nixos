@@ -61,7 +61,7 @@ in
       turn_user_lifetime = "1h";
       turn_allow_guests = true;
       log_config = (pkgs.formats.yaml { }).generate "log_config" {
-        disable_existing_loggers = true;
+        disable_existing_loggers = false;
         formatters = {
           journal_fmt = {
             format = "%(name)s: [%(request)s] %(message)s";
