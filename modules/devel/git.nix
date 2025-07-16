@@ -25,9 +25,12 @@
       enablePijul = config.device.class == "desktop";
     in
     lib.mkIf config.devel.git.enable {
-      environment.systemPackages = [ pkgs.git ] ++ (lib.optionals enablePijul [ pkgs.pijul ]);
-
-      # nix.settings.plugin-files = lib.optionalString enablePijul "${pkgs.nix-plugin-pijul}/lib/nix/plugins/pijul.so";
+      environment.systemPackages =
+        [ pkgs.git ]
+        ++ (lib.optionals enablePijul [
+          pkgs.pijul
+          pkgs.jujutsu
+        ]);
 
       hm.home.file.".config/pijul/config" = {
         enable = enablePijul;
