@@ -33,7 +33,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "YaLTeR";
     repo = "niri";
     rev = "main";
-    hash = "sha256-F5iVU/hjoSHSSe0gllxm0PcAaseEtGNanYK5Ha3k2Tg=";
+    hash = "sha256-4gvHMrsjUMtu1ieTT9+cf3F4DhiLj4fh4c5BxAVw0xA=";
   };
 
   postPatch = ''
@@ -43,7 +43,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   '';
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-fT0L/OTlQ9BnKHnckKsLi+tN+oevEU+eJWrh1INqQhA=";
+  cargoHash = "sha256-9xmvMiK/cOAgu+0jsNGoZGZ8yUncncEgLyYzJVy7uxE=";
 
   strictDeps = true;
 
