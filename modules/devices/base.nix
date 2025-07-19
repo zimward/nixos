@@ -113,7 +113,8 @@
     # nixos garbage collection automation
     nix.gc = {
       automatic = true;
-      dates = "weekly";
+      #gc profiles before update if /boot is full
+      dates = "9:00";
       options = "--delete-older-than 5d";
     };
     systemd.services.nixos-upgrade.environment = {
