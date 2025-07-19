@@ -21,8 +21,10 @@ in
 {
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_17;
     dataDir = "/nix/persist/system/postgresql/";
   };
+
   services.matrix-synapse = {
     enable = true;
     dataDir = "/nix/persist/system/matrix-synapse/";
