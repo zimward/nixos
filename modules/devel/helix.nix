@@ -23,6 +23,13 @@
           lldb_18
           clang-tools
         ];
+      themes = {
+        tokyonight = {
+          inherits = "tokyonight";
+          "ui.background" = { };
+          "ui.text" = { };
+        };
+      };
       settings = {
         editor = {
           line-number = "relative";
@@ -153,12 +160,5 @@
             ];
         };
     };
-    hm.home.file.".config/helix/themes/tokyonight.toml".source =
-      (pkgs.formats.toml { }).generate "tokyonight.toml"
-        {
-          inherits = "tokyonight";
-          "ui.background" = { };
-          "ui.text" = { };
-        };
   };
 }
