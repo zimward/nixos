@@ -22,8 +22,9 @@
           layer = "overlay";
         };
         colors = {
-          background = "#1a1b26";
-          text = "#a9b1d6";
+          #apparently fuzzel wants an alpha channel too?
+          background = "1a1b26ff";
+          text = "a9b1d6ff";
         };
       };
     };
