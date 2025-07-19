@@ -17,7 +17,8 @@
       "sr_mod"
     ];
 
-    # boot.initrd.kernelModules = [ "virtio_gpu" ];
+    #not really needed
+    boot.blacklistedKernelModules = [ "virtio_gpu" ];
     boot.kernelParams = [ "console=tty" ];
 
     systemd.network.enable = true;
