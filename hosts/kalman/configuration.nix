@@ -81,11 +81,14 @@
     ];
 
     systemd.network.networks."10-lan" = {
-      matchConfig.Name = "enp39s0";
+      matchConfig.Name = "enp35s0f*";
       networkConfig = {
         DHCP = "ipv4";
         IPv6AcceptRA = true;
         DHCPPrefixDelegation = true;
+      };
+      linkConfig = {
+        MTUBytes = 9000;
       };
     };
 

@@ -41,6 +41,10 @@
           Prefix = "fd98:c5af:e1bc:0::/64";
         }
       ];
+      linkConfig = {
+        #jumbo frames
+        MTUBytes = 9000;
+      };
       dhcpServerConfig = {
         EmitDNS = true;
         PoolOffset = 100;
