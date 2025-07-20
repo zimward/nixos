@@ -32,6 +32,9 @@
 
   tmpfsroot.impermanence = true;
 
+  #needed for postDeviceCommands
+  system.etc.overlay.enable = false;
+  boot.initrd.systemd.enable = false;
   boot.initrd.postDeviceCommands = lib.mkBefore ''
     mkdir -p /mnt
     mount /dev/mapper/root /mnt

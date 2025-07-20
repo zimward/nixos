@@ -21,11 +21,11 @@
   ];
   config = {
     #running ssh agent on graphical hosts is most often needed
-    hm.services.ssh-agent.enable = true;
+    hm.services.ssh-agent.enable = config.graphical.enable;
     devel = {
-      helix.enable = true;
-      git.enable = true;
-      zellij.enable = true;
+      helix.enable = config.graphical.enable;
+      git.enable = config.graphical.enable;
+      zellij.enable = config.graphical.enable;
     };
     assertions =
       let
