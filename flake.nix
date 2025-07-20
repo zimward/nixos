@@ -102,18 +102,6 @@
           modules = [ ./hosts/aisha/configuration.nix ];
         };
 
-        shila = nixpkgs-small.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            {
-              nixpkgs.hostPlatform.system = "aarch64-linux";
-            }
-            ./hosts/shila/configuration.nix
-            ./hosts/shila/hardware-configuration.nix
-          ];
-        };
       };
     };
 }
