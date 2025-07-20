@@ -56,12 +56,9 @@
       ...
     }@inputs:
     let
-      overlays = (
-        { ... }:
-        {
-          nixpkgs.overlays = [ nix-matlab.overlay ];
-        }
-      );
+      overlays = {
+        nixpkgs.overlays = [ nix-matlab.overlay ];
+      };
     in
     {
       nixosConfigurations = {
@@ -93,12 +90,9 @@
           };
           modules = [
             ./hosts/doga/configuration.nix
-            (
-              { ... }:
-              {
-                environment.systemPackages = [ self.nixosConfigurations.kalman.config.system.build.toplevel ];
-              }
-            )
+            {
+              environment.systemPackages = [ self.nixosConfigurations.kalman.config.system.build.toplevel ];
+            }
           ];
         };
         aisha = nixpkgs-small.lib.nixosSystem {
@@ -108,61 +102,18 @@
           modules = [ ./hosts/aisha/configuration.nix ];
         };
 
-        # kirishika = nixpkgs.lib.nixosSystem {
-        #   specialArgs = {
-        #     inherit inputs;
-        #   };
-        #   modules = [
-        #     (
-        #       { ... }:
-        #       {
-        #         nixpkgs.hostPlatform.system = "aarch64-linux";
-        #       }
-        #     )
-        #     ./hosts/kirishika/configuration.nix
-        #     ./hosts/kirishika/hardware-configuration.nix
-        #   ];
-        # };
-
         shila = nixpkgs-small.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
           modules = [
-            (
-              { ... }:
-              {
-                nixpkgs.hostPlatform.system = "aarch64-linux";
-              }
-            )
+            {
+              nixpkgs.hostPlatform.system = "aarch64-linux";
+            }
             ./hosts/shila/configuration.nix
             ./hosts/shila/hardware-configuration.nix
           ];
         };
       };
-      # packages.aarch64-linux = {
-      #   kirishika.sdcard = nixos-generators.nixosGenerate {
-      #     system = "aarch64-linux";
-      #     format = "sd-aarch64";
-      #     specialArgs = {
-      #       inherit inputs;
-      #     };
-      #     modules = [
-      #       (
-      #         { ... }:
-      #         {
-      #           sdImage.compressImage = true;
-      #           nixpkgs.config.allowUnsupportedSystem = true;
-      #           nixpkgs.hostPlatform.system = "aarch64-linux";
-      #           nixpkgs.buildPlatform.system = "aarch64-linux";
-      #         }
-      #       )
-      #       ./hosts/kirishika/configuration.nix
-      #     ];
-      #   };
-      # };
-      # hydraJobs = {
-      #   kirishika = packages.aarch64-linux.kirishika.sdcard;
-      # };
     };
 }
