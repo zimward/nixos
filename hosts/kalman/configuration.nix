@@ -26,9 +26,6 @@
       directories = [ "/var/lib/sbctl" ];
     };
 
-    #workaround
-    services.logrotate.checkConfig = false;
-
     networking.hostName = "kalman";
 
     virtualisation.libvirtd = {
