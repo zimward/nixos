@@ -25,11 +25,25 @@
     };
   };
   config = lib.mkIf (config.device.class != "none") {
+    # Remove perl from activation
+    boot.initrd.systemd.enable = lib.mkDefault true;
+    system.etc.overlay.enable = lib.mkDefault true;
+    services.userborn.enable = lib.mkDefault true;
+    system.disableInstallerTools = true;
+    system.rebuild.enableNg = true;
+    system.tools.nixos-rebuild.enable = true;
+    system.tools.nixos-version.enable = true;
+    boot.enableContainers = lib.mkDefault false;
+
+    environment.defaultPackages = lib.mkDefault [ ];
+
     #needed to rebuild system
-    environment.systemPackages = with pkgs; [
-      git
-      doas-sudo-shim
-    ];
+    environment.systemPackages =
+      with pkgs;
+      [
+        doas-sudo-shim
+      ]
+      ++ lib.optionals config.devel.git.enable [ gitMinimal ];
 
     nix.settings.experimental-features = [
       "nix-command"

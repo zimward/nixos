@@ -25,6 +25,9 @@
     tmpfsroot.impermanence = true;
     sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
 
+    #needed for postDeviceCommands
+    system.etc.overlay.enable = false;
+    boot.initrd.systemd.enable = false;
     boot.initrd.postDeviceCommands = lib.mkBefore ''
       mkdir -p /mnt
       mount ${config.fileSystems."/".device} /mnt
