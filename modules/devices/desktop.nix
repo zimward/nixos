@@ -8,6 +8,7 @@
   config = lib.mkIf (config.device.class == "desktop") {
     system.tools.nixos-build-vms.enable = lib.mkDefault true;
     devel.git.enable = true;
+    cli.applications.enable = true;
 
     environment.sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
