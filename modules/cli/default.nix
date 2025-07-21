@@ -5,6 +5,5 @@
     ./cli.nix
     ./motd.nix
     ./nushell
-    ./update.nix
   ];
 }
