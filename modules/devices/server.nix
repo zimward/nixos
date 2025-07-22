@@ -12,6 +12,9 @@
       sounds.enable = false;
       mime.enable = false;
     };
+
+    fonts.fontconfig.enable = false;
+
     system.autoUpgrade.allowReboot = true;
     system.autoUpgrade.dates = lib.mkForce "4:00";
   };
