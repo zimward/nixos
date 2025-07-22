@@ -53,10 +53,6 @@
     #doesn't hurt
     zramSwap.enable = true;
 
-    environment.sessionVariables = {
-      EDITOR = "${pkgs.helix}/bin/hx";
-    };
-
     time.timeZone = lib.mkDefault "Europe/Berlin";
     i18n.defaultLocale = "de_DE.UTF-8";
     console = {

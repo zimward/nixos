@@ -15,7 +15,6 @@
     environment.systemPackages = with pkgs; [
       nushell
       starship
-      helix
       ripgrep
       bottom # process manager
       du-dust
@@ -23,7 +22,8 @@
       fd
       fzf
     ];
-    hm.programs.yazi.enable = true;
+    #rarely needed on servers
+    hm.programs.yazi.enable = config.graphical.enable;
     hm.programs.yazi.package = (
       pkgs.yazi.override {
         optionalDeps = with pkgs; [
