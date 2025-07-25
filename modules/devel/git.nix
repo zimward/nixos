@@ -23,14 +23,19 @@
   config =
     let
       enablePijul = config.device.class == "desktop";
+      jjIntegration = pkgs.runCommandNoCC "jj-nu" { buildInputs = [ pkgs.jujutsu ]; } ''
+        mkdir $out
+        jj util completion nushell > $out/completions-jj.nu
+      '';
     in
     lib.mkIf config.devel.git.enable {
-      environment.systemPackages =
-        [ pkgs.git ]
-        ++ (lib.optionals enablePijul [
-          pkgs.pijul
-          pkgs.jujutsu
-        ]);
+      environment.systemPackages = [
+        pkgs.git
+      ]
+      ++ (lib.optionals enablePijul [
+        pkgs.pijul
+        pkgs.jujutsu
+      ]);
 
       hm.home.file.".config/pijul/config" = {
         enable = enablePijul;
@@ -58,6 +63,21 @@
             };
 
       };
+
+      cli.nushell.extraConfig = lib.strings.optionalString enablePijul "use ${jjIntegration}/completions-jj.nu";
+      hm.programs.jujutsu.enable = enablePijul;
+      hm.programs.jujutsu.settings = {
+        user = {
+          name = "zimward";
+          email = config.devel.git.userEmail;
+        };
+        signing = {
+          behaviour = "keep";
+          backend = "gpg";
+          key = config.devel.git.signingkey;
+        };
+      };
+
       hm.programs.git = {
         enable = config.devel.git.enable;
         userName = config.mainUser.userName;

@@ -38,19 +38,18 @@
     hm.programs.nushell = {
       enable = true;
 
-      extraConfig =
-        ''
-          $env.config = {
-            show_banner: false
-            cursor_shape:{
-              vi_insert:line
-              vi_normal:underscore
-            }
-            edit_mode:vi
+      extraConfig = ''
+        $env.config = {
+          show_banner: false
+          cursor_shape:{
+            vi_insert:line
+            vi_normal:underscore
           }
-          source ${./commands.nu}
-        ''
-        + config.cli.nushell.extraConfig;
+          edit_mode:vi
+        }
+        source ${./commands.nu}
+      ''
+      + config.cli.nushell.extraConfig;
     };
 
     hm.programs.starship = {
