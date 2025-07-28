@@ -72,7 +72,7 @@
           email = config.devel.git.userEmail;
         };
         signing = {
-          behaviour = "keep";
+          behaviour = "own";
           backend = "gpg";
           key = config.devel.git.signingkey;
         };
