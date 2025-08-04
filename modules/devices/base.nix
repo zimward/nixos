@@ -113,6 +113,9 @@
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAI36kh/wRoNrwraNaKRtiM4b9j5HY3NwzNfE2OqGQT";
       };
     };
+    #fails too often in certain configs
+    services.logrotate.checkConfig = false;
+
     # auto system upgrade
     system.autoUpgrade = {
       enable = true;
