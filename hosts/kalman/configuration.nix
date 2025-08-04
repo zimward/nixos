@@ -59,12 +59,10 @@
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
     graphical.minecraft.enable = true;
-    graphical.ereader.enable = true;
     specialisation.arbeit.configuration = {
       graphical.steam.enable = lib.mkForce false;
       graphical.deluge.enable = lib.mkForce false;
       graphical.minecraft.enable = lib.mkForce false;
-      graphical.ereader.enable = lib.mkForce false;
     };
     graphical.ime.enable = true;
 
