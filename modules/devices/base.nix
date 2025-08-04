@@ -115,6 +115,10 @@
     };
     #fails too often in certain configs
     services.logrotate.checkConfig = false;
+    #prevent shutdown hanging for minutes
+    systemd.settings.Manager = {
+      DefaultTimeoutStopSec = "10s";
+    };
 
     # auto system upgrade
     system.autoUpgrade = {
