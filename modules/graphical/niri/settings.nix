@@ -24,6 +24,7 @@
         TERM = "alacritty";
         TERMINAL = "alacritty";
         XMODIFIERS = "@im=fcitx";
+        DISPLAY = ":0"; # should automatically be set, but xwl-s hasn't been realased with that fix yet
       };
       input = {
         keyboard.xkb = {
@@ -132,6 +133,7 @@
     environment.systemPackages = with pkgs; [
       adwaita-icon-theme
       (pkgs.callPackage ../miku-cursors.nix { })
+      # xwayland-satellite, wait till next release
     ];
     programs.niri.enable = true;
     programs.niri.package = pkgs.callPackage ./package-git.nix { };
