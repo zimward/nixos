@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
@@ -24,7 +25,6 @@
         TERM = "alacritty";
         TERMINAL = "alacritty";
         XMODIFIERS = "@im=fcitx";
-        DISPLAY = ":0"; # should automatically be set, but xwl-s hasn't been realased with that fix yet
       };
       input = {
         keyboard.xkb = {
@@ -42,7 +42,6 @@
           command = cmd: { command = lib.lists.flatten [ cmd ]; };
         in
         [
-          (command (lib.getExe pkgs.xwayland-satellite))
           (command (lib.getExe pkgs.waybar))
           (command [
             (lib.getExe pkgs.alacritty)
@@ -127,13 +126,15 @@
       };
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
+      xwayland-satellite.path =
+        lib.getExe
+          inputs.niri.packages.${config.nixpkgs.hostPlatform.system}.xwayland-satellite-unstable;
     };
     #provided by keepassxc
     hm.services.gnome-keyring.enable = lib.mkForce false;
     environment.systemPackages = with pkgs; [
       adwaita-icon-theme
       (pkgs.callPackage ../miku-cursors.nix { })
-      # xwayland-satellite, wait till next release
     ];
     programs.niri.enable = true;
     programs.niri.package = pkgs.callPackage ./package-git.nix { };
