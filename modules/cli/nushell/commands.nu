@@ -3,7 +3,7 @@ def genplay [start:int = 1] {
       |it|
       $it | append "\n" | str join
     } | str join | save -f /tmp/playlist.m3u
-    mpv /tmp/playlist.m3u
+    mpv --vo=gpu-next /tmp/playlist.m3u
 }
 
 def dlvid [url:string] {
