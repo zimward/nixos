@@ -9,6 +9,7 @@
     devel.helix.enable = lib.mkEnableOption "Helix editor";
   };
   config = lib.mkIf config.devel.helix.enable {
+    environment.systemPackages = [ pkgs.helix ];
     #options provided by hm
     hm.programs.helix = {
       enable = true;
@@ -128,36 +129,35 @@
           language-server.ltexpp = gattrs {
             command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
           };
-          language =
-            [
-              {
-                name = "nix";
-                auto-format = true;
-                formatter = {
-                  command = lib.getExe pkgs.nixfmt-rfc-style;
-                };
-                language-servers = [ "nixd" ];
-              }
-            ]
-            ++ lib.optionals config.graphical.enable [
-              {
-                name = "html";
-                auto-format = true;
-                file-types = [
-                  "html"
-                  "css"
-                ];
-                language-servers = [ "superhtml" ];
-              }
-              {
-                name = "latex";
-                auto-format = true;
-                language-servers = [
-                  "texlab"
-                  "ltexpp"
-                ];
-              }
-            ];
+          language = [
+            {
+              name = "nix";
+              auto-format = true;
+              formatter = {
+                command = lib.getExe pkgs.nixfmt-rfc-style;
+              };
+              language-servers = [ "nixd" ];
+            }
+          ]
+          ++ lib.optionals config.graphical.enable [
+            {
+              name = "html";
+              auto-format = true;
+              file-types = [
+                "html"
+                "css"
+              ];
+              language-servers = [ "superhtml" ];
+            }
+            {
+              name = "latex";
+              auto-format = true;
+              language-servers = [
+                "texlab"
+                "ltexpp"
+              ];
+            }
+          ];
         };
     };
   };
