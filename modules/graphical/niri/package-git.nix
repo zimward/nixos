@@ -33,7 +33,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "YaLTeR";
     repo = "niri";
     rev = "main";
-    hash = "sha256-xnPPjASWt4/u+GmRdrHADBKKSCtIhTFY53CSKM+Xtfk=";
+    hash = "sha256-I7uSAOosX79BLVTWRHWHvT9z3Lv8rDYY3RogV/0Gne0=";
   };
 
   postPatch = ''
@@ -42,7 +42,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       --replace-fail '/usr/bin' "$out/bin"
   '';
 
-  cargoHash = "sha256-sijPe0LLoTs3PRaNte4VoSc4oZnL8UBls/k8lzAuSjo=";
+  cargoHash = "sha256-b66EB6EUsGylUrPXT5l7v+Fg4K2vzmHiJtDJhZcMpFU=";
 
   strictDeps = true;
 
@@ -52,20 +52,21 @@ rustPlatform.buildRustPackage (finalAttrs: {
     rustPlatform.bindgenHook
   ];
 
-  buildInputs = [
-    libdisplay-info
-    libglvnd # For libEGL
-    libinput
-    libxkbcommon
-    libgbm
-    pango
-    seatd
-    wayland # For libwayland-client
-  ]
-  ++ lib.optional (withDbus || withScreencastSupport || withSystemd) dbus
-  ++ lib.optional withScreencastSupport pipewire
-  ++ lib.optional withSystemd systemd # Includes libudev
-  ++ lib.optional (!withSystemd) eudev; # Use an alternative libudev implementation when building w/o systemd
+  buildInputs =
+    [
+      libdisplay-info
+      libglvnd # For libEGL
+      libinput
+      libxkbcommon
+      libgbm
+      pango
+      seatd
+      wayland # For libwayland-client
+    ]
+    ++ lib.optional (withDbus || withScreencastSupport || withSystemd) dbus
+    ++ lib.optional withScreencastSupport pipewire
+    ++ lib.optional withSystemd systemd # Includes libudev
+    ++ lib.optional (!withSystemd) eudev; # Use an alternative libudev implementation when building w/o systemd
 
   buildFeatures =
     lib.optional withDbus "dbus"
@@ -74,27 +75,28 @@ rustPlatform.buildRustPackage (finalAttrs: {
     ++ lib.optional withSystemd "systemd";
   buildNoDefaultFeatures = true;
 
-  postInstall = ''
-    install -Dm0644 resources/niri.desktop -t $out/share/wayland-sessions
-  ''
-  + lib.optionalString withDbus ''
-    install -Dm0644 resources/niri-portals.conf -t $out/share/xdg-desktop-portal
-  ''
-  + lib.optionalString (withSystemd || withDinit) ''
-    install -Dm0755 resources/niri-session -t $out/bin
-  ''
-  + lib.optionalString withSystemd ''
-    install -Dm0644 resources/niri{-shutdown.target,.service} -t $out/lib/systemd/user
-  ''
-  + lib.optionalString withDinit ''
-    install -Dm0644 resources/dinit/niri{-shutdown,} -t $out/lib/dinit.d/user
-  ''
-  + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
-    installShellCompletion --cmd $pname \
-      --bash <($out/bin/niri completions bash) \
-      --fish <($out/bin/niri completions fish) \
-      --zsh <($out/bin/niri completions zsh)
-  '';
+  postInstall =
+    ''
+      install -Dm0644 resources/niri.desktop -t $out/share/wayland-sessions
+    ''
+    + lib.optionalString withDbus ''
+      install -Dm0644 resources/niri-portals.conf -t $out/share/xdg-desktop-portal
+    ''
+    + lib.optionalString (withSystemd || withDinit) ''
+      install -Dm0755 resources/niri-session -t $out/bin
+    ''
+    + lib.optionalString withSystemd ''
+      install -Dm0644 resources/niri{-shutdown.target,.service} -t $out/lib/systemd/user
+    ''
+    + lib.optionalString withDinit ''
+      install -Dm0644 resources/dinit/niri{-shutdown,} -t $out/lib/dinit.d/user
+    ''
+    + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
+      installShellCompletion --cmd $pname \
+        --bash <($out/bin/niri completions bash) \
+        --fish <($out/bin/niri completions fish) \
+        --zsh <($out/bin/niri completions zsh)
+    '';
 
   env = {
     # Force linking with libEGL and libwayland-client

@@ -27,7 +27,7 @@
     };
 
     graphical.niri.enable = true;
-    programs.niri.package = lib.mkForce pkgs.niri;
+    # programs.niri.package = lib.mkForce pkgs.niri;
     graphical.kicad = {
       enable = true;
       minimal = true;
