@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   services.searx = {
     enable = true;
@@ -9,6 +9,10 @@
       server.base_url = "https://search.zimward.moe";
       server.image_proxy = true;
       server.default_locale = "de";
+      search.formats = [
+        "html"
+        "json"
+      ];
 
       engines = [
         {
