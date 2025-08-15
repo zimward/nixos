@@ -94,6 +94,13 @@
           name = "matlab";
           language-servers = [ "gpt" ];
         }
+        {
+          name = "rust";
+          language-servers = [
+            "rust-analyzer"
+            "gpt"
+          ];
+        }
       ];
     };
 
