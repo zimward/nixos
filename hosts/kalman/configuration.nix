@@ -66,6 +66,15 @@
     };
     graphical.ime.enable = true;
 
+    services.open-webui = {
+      enable = true;
+      environment = {
+        OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
+        WEBUI_AUTH = "False";
+      };
+    };
+
+    nixpkgs.allowUnfreePackages = [ "open-webui" ];
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "ollama" ''
         HSA_OVERRIDE_GFX_VERSION=10.3.0 ${lib.getExe pkgs.ollama-rocm} $@
