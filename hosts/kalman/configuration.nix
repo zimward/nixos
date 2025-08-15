@@ -75,6 +75,28 @@
       pkgs.sbctl
     ];
 
+    hm.programs.helix.package = pkgs.symlinkJoin {
+      name = "helix";
+      paths = [ pkgs.helix ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/hx \
+          --set HANDLER "ollama" \
+          --set OLLAMA_MODEL "gemma3n:e2b"
+      '';
+    };
+    hm.programs.helix.languages = {
+      language-server.gpt = {
+        command = lib.getExe pkgs.helix-gpt;
+      };
+      language = [
+        {
+          name = "matlab";
+          language-servers = [ "gpt" ];
+        }
+      ];
+    };
+
     systemd.network.networks."10-lan" = {
       matchConfig.Name = "enp35s0f*";
       networkConfig = {
