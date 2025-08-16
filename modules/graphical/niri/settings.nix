@@ -125,6 +125,9 @@
 
       };
       prefer-no-csd = true;
+
+      overview.zoom = 0.25;
+
       hotkey-overlay.skip-at-startup = true;
       xwayland-satellite.path =
         lib.getExe
