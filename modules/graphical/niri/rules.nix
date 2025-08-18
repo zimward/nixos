@@ -85,9 +85,16 @@ lib.mkIf config.graphical.niri.enable {
     {
       matches = [
         { app-id = "^MATLAB+.*$"; }
-        { app-id = "kicad"; }
       ];
       open-floating = true;
+    }
+    {
+      matches = [
+        { title = "^Feld.*$"; }
+        { title = "^.*eigenschaften$"; }
+      ];
+      open-floating = true;
+      open-focused = true;
     }
   ];
   hm.programs.niri.settings.layer-rules = [
