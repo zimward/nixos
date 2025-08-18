@@ -16,6 +16,19 @@
   };
   config = lib.mkIf (config.graphical.enable && config.graphical.kicad.enable) {
     environment.systemPackages =
-      if config.graphical.kicad.minimal then [ pkgs.kicad-small ] else [ pkgs.kicad ];
+      let
+        withAddons =
+          p:
+          p.override {
+            addons = with pkgs.kicadAddons; [
+              kikit
+              kikit-library
+            ];
+          };
+      in
+      if config.graphical.kicad.minimal then
+        [ (withAddons pkgs.kicad-small) ]
+      else
+        [ (withAddons pkgs.kicad) ];
   };
 }
