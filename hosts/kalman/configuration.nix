@@ -45,7 +45,9 @@
       "libvirtd"
       "dialout"
     ];
-
+    services.udev.extraRules = ''
+      SUBSYSTEM=="usb", ATTR{product}=="USBasp", ATTR{idProduct}=="05dc", ATTRS{idVendor}=="16c0", MODE="0666"
+    '';
     hardware.opentabletdriver.enable = true;
 
     programs.gnupg.agent = {
