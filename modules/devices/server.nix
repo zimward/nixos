@@ -5,6 +5,13 @@
     documentation.enable = false;
     hardware.hddIdle.enable = true;
     services.resolved.dnssec = "false";
+
+    services.openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+      settings.KbdInteractiveAuthentication = false;
+    };
+
     xdg = {
       autostart.enable = false;
       icons.enable = false;
