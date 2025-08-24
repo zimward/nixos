@@ -37,6 +37,19 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL6wkiD+2gXU8TwEmBld1/2RdBJ4na2FnkYSYIjx4Ua" # T400
     ];
 
+    users.users.nixremote = {
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUiddXuQtZL/cr+luVOh+GKQVWS/y4jPjdVrBLYnTQb root@kalman"
+      ];
+      group = "users";
+    };
+    nix.settings.trusted-users = [
+      "nixremote"
+      "@builders"
+      "zimward"
+    ];
+
     ethernet.share.device = "enp2s0f1";
 
     #zfs auto scrubbing

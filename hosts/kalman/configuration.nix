@@ -23,7 +23,10 @@
     };
 
     environment.persistence."/nix/persist/system" = {
-      directories = [ "/var/lib/sbctl" ];
+      directories = [
+        "/var/lib/sbctl"
+        "/root/.ssh"
+      ];
     };
 
     networking.hostName = "kalman";
@@ -134,20 +137,22 @@
       "doga:y1nuiJdAESNfSTOJz+pna+PoCtNe/cvVUddkD2jAsmI="
     ];
 
-    # nix.buildMachines = [
-    #   {
-    #     hostName = "shila";
-    #     system = "aarch64-linux";
-    #     protocol = "ssh-ng";
-    #     maxJobs = 4;
-    #     speedFactor = 1;
-    #     supportedFeatures = [ "big-parallel" ];
-    #   }
-    # ];
-    # nix.distributedBuilds = true;
-    # nix.extraOptions = ''
-    #   builders-use-substitutes=true
-    # '';
+    nix.buildMachines = [
+      {
+        hostName = "doga";
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        maxJobs = 8;
+        speedFactor = 1;
+        sshUser = "nixremote";
+        sshKey = "/roo/.ssh/id_ed25516";
+        supportedFeatures = [
+          "kvm"
+          "big-parallel"
+        ];
+      }
+    ];
+    nix.distributedBuilds = true;
 
     graphical.matlab.enable = true;
 
