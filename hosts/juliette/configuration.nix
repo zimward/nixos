@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   config,
@@ -8,9 +7,18 @@
 {
   imports = [
     ../../modules
-    inputs.nixos-hardware.nixosModules.raspberry-pi-4
   ];
   device.class = "server";
+  boot.initrd.systemd.tpm2.enable = false; # rpi dosn't have that module
+  boot.loader.generic-extlinux-compatible.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+  boot.kernelParams = [
+    "console=ttyS0,115200"
+    "console=tty0"
+  ];
 
   mainUser.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
@@ -22,26 +30,25 @@
   networking.hostName = "juliette";
   networking.hostId = "105366CC";
 
-  hardware = {
-    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-    deviceTree = {
-      enable = true;
-      filter = "*rpi-4-*.dtb";
-    };
-  };
-  console.enable = false;
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
   ];
 
   networking.useNetworkd = lib.mkForce true;
+  systemd.network.enable = lib.mkForce false;
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
+  networking.useDHCP = lib.mkDefault true;
+
   fileSystems = {
     "/boot" = {
       device = "/dev/disk/by-uuid/FEFB-74C3";
       fsType = "vfat";
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
     "/" = {
       device = "/dev/disk/by-uuid/b59aaaff-7b5e-4630-b7b3-1c86c3f3f283";
@@ -68,8 +75,16 @@
       ];
     };
   };
+
+  services.btrfs.autoScrub.fileSystems = [ "/nix" ];
+
   nixpkgs.hostPlatform = {
     system = "aarch64-linux";
   };
+  nixpkgs.buildPlatform = {
+    system = "aarch64-linux";
+  };
+
+  hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.11";
 }
