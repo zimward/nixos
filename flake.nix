@@ -102,6 +102,13 @@
           modules = [ ./hosts/aisha/configuration.nix ];
         };
 
+        juliette = nixpkgs-small.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [ ./hosts/juliette ];
+        };
+
       };
     };
 }
