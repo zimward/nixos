@@ -7,6 +7,7 @@
 {
   imports = [
     ../../modules
+    ./3dp.nix
   ];
   device.class = "server";
   boot.initrd.systemd.tpm2.enable = false; # rpi dosn't have that module
