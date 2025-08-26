@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
@@ -34,11 +35,18 @@
     raspberrypi-eeprom
   ];
 
-  networking.useNetworkd = lib.mkForce true;
-  systemd.network.enable = lib.mkForce false;
-  networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.powersave = false;
   networking.useDHCP = lib.mkDefault true;
+  networking.wireless = {
+    enable = true;
+    networks = inputs.secrets.wifi;
+  };
+  systemd.network.networks."10-wifi" = {
+    matchConfig.Name = "wlan0";
+    networkConfig = {
+      DHCP = true;
+      IPv6AccpetRA = true;
+    };
+  };
 
   fileSystems = {
     "/boot" = {
