@@ -108,7 +108,7 @@
       ];
     };
 
-    services.logind.powerKeyLongPress = "reboot";
+    services.logind.settings.Login.HandlePowerKeyLongPress = "reboot";
 
     #dlna media server
     services.minidlna = {

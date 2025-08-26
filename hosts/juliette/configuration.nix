@@ -11,11 +11,9 @@
   ];
   device.class = "server";
   boot.initrd.systemd.tpm2.enable = false; # rpi dosn't have that module
-  boot.loader.generic-extlinux-compatible.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
   boot.kernelParams = [
     "console=ttyS0,115200"
     "console=tty0"

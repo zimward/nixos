@@ -89,7 +89,7 @@
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";
     sops.age.keyFile = "/home/${config.mainUser.userName}/.config/sops/age/keys.txt";
-    services.logind.powerKey = "suspend";
+    services.logind.settings.Login.HandlePowerKey = "suspend";
 
     services.btrfs.autoScrub.enable = true;
 
