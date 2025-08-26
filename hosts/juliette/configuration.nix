@@ -33,6 +33,7 @@
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
+    gitMinimal
   ];
 
   networking.useDHCP = lib.mkDefault true;
@@ -44,7 +45,7 @@
     matchConfig.Name = "wlan0";
     networkConfig = {
       DHCP = true;
-      IPv6AccpetRA = true;
+      IPv6AcceptRA = true;
     };
   };
 
@@ -88,9 +89,9 @@
   nixpkgs.hostPlatform = {
     system = "aarch64-linux";
   };
-  nixpkgs.buildPlatform = {
-    system = "aarch64-linux";
-  };
+
+  #don't want sudden problems during boot due to updates
+  system.autoUpgrade.enable = lib.mkForce false;
 
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.11";
