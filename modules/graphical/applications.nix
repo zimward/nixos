@@ -39,7 +39,7 @@ in
         pavucontrol
         freetube
         nheko
-        anki
+        # anki
       ]);
     #as long as nheko hasnt transitioned away from olm
     #related: https://github.com/Nheko-Reborn/nheko/issues/1786

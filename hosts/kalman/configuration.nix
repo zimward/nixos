@@ -72,7 +72,7 @@
     graphical.ime.enable = true;
 
     services.open-webui = {
-      enable = true;
+      # enable = true;
       environment = {
         OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
         WEBUI_AUTH = "False";
@@ -156,11 +156,11 @@
 
     graphical.matlab.enable = true;
 
-    services.scx = {
-      enable = true;
-      package = pkgs.scx.rustscheds;
-      scheduler = "scx_lavd";
-      extraArgs = [ "--autopilot" ];
-    };
+    # services.scx = {
+    #   enable = true;
+    #   package = pkgs.scx.rustscheds;
+    #   scheduler = "scx_lavd";
+    #   extraArgs = [ "--autopilot" ];
+    # };
   };
 }
