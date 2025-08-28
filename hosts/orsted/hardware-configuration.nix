@@ -32,13 +32,13 @@
 
   tmpfsroot.impermanence = true;
 
-  boot.initrd.systemd.services.cleanroot = {
+  boot.initrd.systemd.services.rollback = {
     wantedBy = [ "initrd.target" ];
-    before = [ "systroot.mount" ];
-    requires = [ "dev-disk-by\\x2duuid-9be3bce1\\x2d661b\\x2d4b41\\x2d9388\\x2d07ea5422cb55.device" ];
-    after = [ "dev-disk-by\\x2duuid-9be3bce1\\x2d661b\\x2d4b41\\x2d9388\\x2d07ea5422cb55.device" ];
+    before = [ "sysroot.mount" ];
+    after = [ "systemd-cryptsetup@root.service" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
+    serviceConfig.RemainAfterExit = "yes";
     script = ''
       mkdir -p /mnt
       mount /dev/mapper/root /mnt

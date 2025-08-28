@@ -5,6 +5,7 @@
   ...
 }:
 {
+  imports = [ ../graphical ];
   config = lib.mkIf (config.device.class == "desktop") {
     system.tools.nixos-build-vms.enable = lib.mkDefault true;
     devel.git.enable = true;
