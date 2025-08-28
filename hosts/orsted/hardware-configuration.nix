@@ -32,26 +32,31 @@
 
   tmpfsroot.impermanence = true;
 
-  #needed for postDeviceCommands
-  system.etc.overlay.enable = false;
-  boot.initrd.systemd.enable = false;
-  boot.initrd.postDeviceCommands = lib.mkBefore ''
-    mkdir -p /mnt
-    mount /dev/mapper/root /mnt
+  boot.initrd.systemd.services.cleanroot = {
+    wantedBy = [ "initrd.target" ];
+    before = [ "systroot.mount" ];
+    requires = [ "dev-disk-by\\x2duuid-9be3bce1\\x2d661b\\x2d4b41\\x2d9388\\x2d07ea5422cb55.device" ];
+    after = [ "dev-disk-by\\x2duuid-9be3bce1\\x2d661b\\x2d4b41\\x2d9388\\x2d07ea5422cb55.device" ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      mkdir -p /mnt
+      mount /dev/mapper/root /mnt
 
-    btrfs subvolume list -o /mnt/root |
-    cut -f9 -d' ' |
-    while read subvolume; do
-      echo "deleting /$subvolume subvolume..."
-      btrfs subvolume delete "/mnt/$subvolume"
-    done &&
-    echo "deleting /root subvolume..." &&
-    btrfs subvolume delete /mnt/root
+      btrfs subvolume list -o /mnt/root |
+      cut -f9 -d' ' |
+      while read subvolume; do
+        echo "deleting /$subvolume subvolume..."
+        btrfs subvolume delete "/mnt/$subvolume"
+      done &&
+      echo "deleting /root subvolume..." &&
+      btrfs subvolume delete /mnt/root
 
-    echo "restoring clean /root subvolume..."
-    btrfs subvolume snapshot /mnt/root-clean /mnt/root
-    umount /mnt
-  '';
+      echo "restoring clean /root subvolume..."
+      btrfs subvolume snapshot /mnt/root-clean /mnt/root
+      umount /mnt
+    '';
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9be3bce1-661b-4b41-9388-07ea5422cb55";
@@ -73,6 +78,7 @@
       "compress=zstd"
       "noatime"
     ];
+    neededForBoot = true;
   };
 
   fileSystems."/nix/persist" = {
@@ -83,6 +89,7 @@
       "compress=zstd"
       "noatime"
     ];
+    neededForBoot = true;
   };
 
   fileSystems."/home" = {

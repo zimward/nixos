@@ -29,6 +29,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSveEMHezj5v/JPfl9ES+00Z+lT4y4+m80ItAdXXSIV" # friendi
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN157bDKVBfVzkdDb0xxHtvKN/leIwXKiWmBvcAEqTf" # git - self ssh for updates
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnnZsVj7xIf4tqoK7foCj3dT8OMnyjgKZTsW6Q/Fvvm zimward@juliette"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHD1nysJ0LC+tg4r02bCaIRJ+3ZsJEh+91X7irPhtbn0 root@orsted"
     ];
   };
   systemd.timers.updateFlake = {

@@ -33,7 +33,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "YaLTeR";
     repo = "niri";
     rev = "main";
-    hash = "sha256-47npABswK3/pRZ/CpF+lqZdEMbstNDgN+zMyOIje4g4=";
+    hash = "sha256-XOR+SyrASQQ2DnQvK2pcPx67sPyGdG3wwmZGlgpoJu8=";
   };
 
   postPatch = ''
