@@ -100,6 +100,7 @@ in
     sslTrustedCertificate = "${certDir}/chain.pem";
     forceSSL = true;
     quic = true;
+    enableACME = true;
     listen = lib.lists.flatten (
       map
         (addr: [
