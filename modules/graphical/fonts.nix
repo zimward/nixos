@@ -16,6 +16,7 @@
       helvetica-neue-lt-std # non MS font thats almost arial, nobody should notice the difference
     ];
     fontDir.enable = true;
+    fontconfig.subpixel.rgba = "rgb";
   };
   nixpkgs.allowUnfreePackages = [ "helvetica-neue-lt-std" ];
 
