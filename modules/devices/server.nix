@@ -24,5 +24,10 @@
 
     system.autoUpgrade.allowReboot = true;
     system.autoUpgrade.dates = lib.mkForce "4:00";
+
+    #disable ptrace
+    boot.kernel.sysctl = {
+      "kernel.yama.ptrace_scope" = lib.mkDefault 3;
+    };
   };
 }
