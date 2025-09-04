@@ -27,7 +27,7 @@
 
     #disable ptrace
     boot.kernel.sysctl = {
-      "kernel.yama.ptrace_scope" = lib.mkDefault 3;
+      "kernel.yama.ptrace_scope" = 3;
     };
   };
 }
