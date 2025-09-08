@@ -141,10 +141,6 @@
         config.update.accessKey != null
       ) "ssh -i ${config.update.accessKey}";
     };
-    #only allow debugging by root
-    boot.kernel.sysctl = {
-      "kernel.yama.ptrace_scope" = lib.mkDefault 2;
-    };
 
     #oldest possible state
     system.stateVersion = lib.mkDefault "23.11";
