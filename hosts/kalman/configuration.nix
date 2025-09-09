@@ -137,30 +137,74 @@
       "doga:y1nuiJdAESNfSTOJz+pna+PoCtNe/cvVUddkD2jAsmI="
     ];
 
-    nix.buildMachines = [
-      {
-        hostName = "doga";
+    services.openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+      settings.KbdInteractiveAuthentication = false;
+    };
+
+    users.users.nixremote = {
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUiddXuQtZL/cr+luVOh+GKQVWS/y4jPjdVrBLYnTQb root@kalman"
+      ];
+      group = "users";
+    };
+    nix.settings.trusted-users = [
+      "nixremote"
+      "@builders"
+      "zimward"
+    ];
+    nix.buildMachines =
+      let
         system = "x86_64-linux";
         protocol = "ssh-ng";
-        maxJobs = 8;
-        speedFactor = 1;
         sshUser = "nixremote";
         sshKey = "/roo/.ssh/id_ed25516";
-        supportedFeatures = [
-          "kvm"
-          "big-parallel"
-        ];
-      }
-    ];
+      in
+      [
+        {
+          inherit
+            system
+            protocol
+            sshUser
+            sshKey
+            ;
+          hostName = "doga";
+          maxJobs = 3;
+          speedFactor = 1;
+          supportedFeatures = [
+            "kvm"
+            "big-parallel"
+          ];
+        }
+        {
+          inherit
+            system
+            protocol
+            sshUser
+            sshKey
+            ;
+          hostName = "kalman";
+          maxJobs = 3;
+          speedFactor = 5;
+          supportedFeatures = [
+            "kvm"
+            "big-parallel"
+            "benchmark"
+            "nixos-test"
+          ];
+        }
+      ];
     nix.distributedBuilds = true;
 
     graphical.matlab.enable = true;
 
-    # services.scx = {
-    #   enable = true;
-    #   package = pkgs.scx.rustscheds;
-    #   scheduler = "scx_lavd";
-    #   extraArgs = [ "--autopilot" ];
-    # };
+    services.scx = {
+      enable = true;
+      package = pkgs.scx.rustscheds;
+      scheduler = "scx_lavd";
+      extraArgs = [ "--autopilot" ];
+    };
   };
 }
