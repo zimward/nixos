@@ -10,6 +10,8 @@
     system.tools.nixos-build-vms.enable = lib.mkDefault true;
     devel.git.enable = true;
     cli.applications.enable = true;
+    #nitrokey support
+    services.udev.packages = [ pkgs.nitrokey-udev-rules ];
 
     environment.sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
