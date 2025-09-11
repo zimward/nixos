@@ -1,5 +1,5 @@
 {
-  pkgs,
+  inputs,
   lib,
   config,
   ...
@@ -19,6 +19,6 @@
       };
     };
     #provided by the matlab overlay
-    environment.systemPackages = [ pkgs.matlab ];
+    environment.systemPackages = [ inputs.nix-matlab.packages.x86_64-linux.matlab ];
   };
 }
