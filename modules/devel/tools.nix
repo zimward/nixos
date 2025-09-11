@@ -18,7 +18,7 @@
         python-pkgs.numpy
         python-pkgs.matplotlib
       ]))
-      linuxPackages_latest.perf
+      perf
     ];
   };
 }
