@@ -76,6 +76,7 @@
           backend = "gpg";
           key = config.devel.git.signingkey;
         };
+        git.sign-on-push = true;
       };
 
       hm.programs.git = {
