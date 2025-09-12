@@ -86,6 +86,8 @@
     enable = true;
   };
 
+  services.nginx.clientMaxBodySize = "100M";
+
   users.groups.gpio = { };
 
   # Change permissions gpio devices
