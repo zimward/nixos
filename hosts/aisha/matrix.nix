@@ -94,6 +94,8 @@ in
     locations."/_matrix".proxyPass = "http://[::1]:8008";
     locations."/_synapse/client".proxyPass = "http://[::1]:8008";
   };
+  #max nginx request size is 8mb
+  services.nginx.clientMaxBodySize = "100M";
   services.nginx.virtualHosts.${fqdn} = {
     sslCertificate = "${certDir}/fullchain.pem";
     sslCertificateKey = "${certDir}/key.pem";
