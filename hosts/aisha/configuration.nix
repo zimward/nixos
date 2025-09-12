@@ -72,6 +72,13 @@
     services.nginx = {
       enable = true;
       package = pkgs.nginxQuic;
+      #add headers to make browsers actually use quic
+      commonHttpConfig = ''
+        add_header Alt-Svc  'h3=":443"; ma=3600, h2=":443"; ma=3600';
+        add_header Alt-Svc  'h2=":443"; ma=2592000; persist=1';
+        add_header Alt-Svc  'h2=":443"; ma=2592000;';
+        ssl_early_data on;
+      '';
       virtualHosts."data.zimward.moe" = {
         quic = true;
         root = "/nix/persist/static";
