@@ -84,6 +84,9 @@ in
         };
         version = 1;
       };
+      media_retention = {
+        remote_media_lifetime = "30d";
+      };
     };
   };
   #auto-discovery via .well-known
