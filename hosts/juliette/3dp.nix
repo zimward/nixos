@@ -80,6 +80,7 @@
         cors_domains = [ "*" ];
       };
     };
+    allowSystemControl = true;
   };
 
   services.mainsail = {
