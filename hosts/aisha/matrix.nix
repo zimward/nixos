@@ -11,6 +11,12 @@ let
     proxyPass = "http://unix:${unixMatrix}";
     recommendedProxySettings = true;
   };
+  compressionConf = ''
+    gzip "on";
+    gzip_types  "text/plain" "text/html" "application/json" "application/xml"
+    gzip_proxied "no-cache" "no-store" "private" "expired" "auth";
+    gzip_min_length 500;
+  '';
   port = 8448;
   fqdn = "matrix.zimward.moe";
   url = "https://${fqdn}";
@@ -112,6 +118,7 @@ in
     #for some reason clients insist on not using the sub domain
     locations."/_matrix" = proxyConf;
     locations."/_synapse/client" = proxyConf;
+    extraConfig = compressionConf;
   };
   #max nginx request size is 8mb
   services.nginx.clientMaxBodySize = "100M";
@@ -151,10 +158,11 @@ in
     locations."/_matrix" = proxyConf;
     locations."/_synapse/client" = proxyConf;
 
-    extraConfig = "
-          access_log /var/log/nginx/matrix_access.log;
-          error_log /var/log/nginx/matrix_error.log;
-        ";
+    extraConfig = ''
+      ${compressionConf}
+      access_log /var/log/nginx/matrix_access.log;
+      error_log /var/log/nginx/matrix_error.log;
+    '';
   };
   #restart matrix after cert change
   security.acme.certs = {
