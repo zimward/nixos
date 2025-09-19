@@ -7,6 +7,10 @@
 }:
 let
   unixMatrix = "/run/matrix-synapse/matrix-synapse.sock";
+  proxyConf = {
+    proxyPass = "http://unix:${unixMatrix}";
+    recommendedProxySettings = true;
+  };
   port = 8448;
   fqdn = "matrix.zimward.moe";
   url = "https://${fqdn}";
@@ -106,8 +110,8 @@ in
     locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
     locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
     #for some reason clients insist on not using the sub domain
-    locations."/_matrix".proxyPass = "http://unix:${unixMatrix}";
-    locations."/_synapse/client".proxyPass = "http://unix:${unixMatrix}";
+    locations."/_matrix" = proxyConf;
+    locations."/_synapse/client" = proxyConf;
   };
   #max nginx request size is 8mb
   services.nginx.clientMaxBodySize = "100M";
@@ -144,8 +148,8 @@ in
           "[::0]"
         ]
     );
-    locations."/_matrix".proxyPass = "http://unix:${unixMatrix}";
-    locations."/_synapse/client".proxyPass = "http://unix:${unixMatrix}";
+    locations."/_matrix" = proxyConf;
+    locations."/_synapse/client" = proxyConf;
 
     extraConfig = "
           access_log /var/log/nginx/matrix_access.log;
