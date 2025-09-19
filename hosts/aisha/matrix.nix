@@ -6,6 +6,7 @@
   ...
 }:
 let
+  unixMatrix = "/run/matrix-synapse/matrix-synapse.sock";
   port = 8448;
   fqdn = "matrix.zimward.moe";
   url = "https://${fqdn}";
@@ -27,6 +28,7 @@ in
 
   services.matrix-synapse = {
     enable = true;
+    enableRegistrationScript = false;
     dataDir = "/nix/persist/system/matrix-synapse/";
     settings = {
       registration_shared_secret = inputs.secrets.matrix.registration;
@@ -37,12 +39,8 @@ in
       '';
       listeners = [
         {
-          port = 8008;
-          bind_addresses = [
-            "::1"
-          ];
+          path = unixMatrix;
           type = "http";
-          tls = false;
           x_forwarded = true;
           resources = [
             {
@@ -50,7 +48,21 @@ in
                 "client"
                 "federation"
               ];
-              compress = true;
+              compress = false;
+            }
+          ];
+        }
+        {
+          port = 8008;
+          bind_addresses = [ "::1" ];
+          type = "http";
+          tls = false;
+          resources = [
+            {
+              names = [
+                "client"
+              ];
+              compress = false;
             }
           ];
         }
@@ -94,8 +106,8 @@ in
     locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
     locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
     #for some reason clients insist on not using the sub domain
-    locations."/_matrix".proxyPass = "http://[::1]:8008";
-    locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+    locations."/_matrix".proxyPass = "http://unix:${unixMatrix}";
+    locations."/_synapse/client".proxyPass = "http://unix:${unixMatrix}";
   };
   #max nginx request size is 8mb
   services.nginx.clientMaxBodySize = "100M";
@@ -132,8 +144,8 @@ in
           "[::0]"
         ]
     );
-    locations."/_matrix".proxyPass = "http://[::1]:8008";
-    locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+    locations."/_matrix".proxyPass = "http://unix:${unixMatrix}";
+    locations."/_synapse/client".proxyPass = "http://unix:${unixMatrix}";
 
     extraConfig = "
           access_log /var/log/nginx/matrix_access.log;
@@ -190,6 +202,7 @@ in
   };
 
   users.users."turnserver".extraGroups = [ "nginx" ];
+  users.users."nginx".extraGroups = [ "matrix-synapse" ];
 
   networking.firewall.allowedUDPPortRanges = [
     {
