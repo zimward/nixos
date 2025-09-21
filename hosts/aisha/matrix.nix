@@ -13,9 +13,13 @@ let
   };
   compressionConf = ''
     gzip "on";
-    gzip_types  "text/plain" "text/html" "application/json" "application/xml"
+    gzip_types  "text/plain" "text/html" "application/json" "application/xml";
     gzip_proxied "no-cache" "no-store" "private" "expired" "auth";
-    gzip_min_length 500;
+    gzip_min_length 256;
+    zstd "on";
+    zstd_comp_level 8;
+    zstd_min_length 256;
+    zstd_types  "text/plain" "text/html" "application/json" "application/xml";
   '';
   port = 8448;
   fqdn = "matrix.zimward.moe";
@@ -111,6 +115,8 @@ in
       };
     };
   };
+
+  services.nginx.additionalModules = [ pkgs.nginxModules.zstd ];
   #auto-discovery via .well-known
   services.nginx.virtualHosts."zimward.moe" = {
     locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
