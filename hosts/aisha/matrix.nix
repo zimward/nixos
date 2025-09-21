@@ -116,7 +116,6 @@ in
     };
   };
 
-  services.nginx.additionalModules = [ pkgs.nginxModules.zstd ];
   #auto-discovery via .well-known
   services.nginx.virtualHosts."zimward.moe" = {
     locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;

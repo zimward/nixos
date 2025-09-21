@@ -1,12 +1,16 @@
-{ ... }:
 {
   services.searx = {
     enable = true;
+    domain = "search.zimward.moe";
+    configureNginx = true;
+    configureUwsgi = true;
+    uwsgiConfig = {
+      disable-logging = true;
+      socket = "/run/searx/searx.sock";
+      chmod-socket = "660";
+    };
     settings = {
-      server.port = 8080;
-      server.bind_address = "127.0.0.1";
       server.secret_key = "6isGu4KiUg90Zth1W7cG5K91TJ7iGUQg";
-      server.base_url = "https://search.zimward.moe";
       server.image_proxy = true;
       server.default_locale = "de";
       search.formats = [
@@ -37,6 +41,16 @@
         "Referrer-Policy" = "no-referrer";
       };
     };
-
+  };
+  services.nginx.virtualHosts."search.zimward.moe" = {
+    forceSSL = true;
+    enableACME = true;
+    quic = true;
+    extraConfig = ''
+      zstd "on";
+      zstd_comp_level 8;
+      zstd_min_length 256;
+      zstd_types  "text/plain" "text/html" "application/json" "application/xml" "text/css" "text/javascript" "image/svg+xml";
+    '';
   };
 }

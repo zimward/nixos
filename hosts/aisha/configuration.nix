@@ -60,7 +60,6 @@
             extraDomainNames = map (sub "zimward.moe") [
               "matrix"
               "mx1"
-              "search"
             ];
           };
         };
@@ -69,6 +68,7 @@
       directories = [ "/var/lib/acme/" ];
     };
 
+    services.nginx.additionalModules = [ pkgs.nginxModules.zstd ];
     services.nginx = {
       enable = true;
       package = pkgs.nginxQuic;
@@ -98,15 +98,6 @@
         #   access_log /dev/null;
         #   error_log /dev/null;
         # ";
-      };
-      virtualHosts."search.zimward.moe" = {
-        forceSSL = true;
-        enableACME = true;
-        quic = true;
-        locations."/" = {
-          proxyPass = "http://localhost:8080/";
-          recommendedProxySettings = true;
-        };
       };
     };
 
