@@ -48,9 +48,7 @@ in
       registration_shared_secret = inputs.secrets.matrix.registration;
       server_name = "zimward.moe";
       public_baseurl = "https://zimward.moe";
-      extraConfig = ''
-        max_upload_size: "100M"
-      '';
+      max_upload_size = "100M";
       listeners = [
         {
           path = unixMatrix;
