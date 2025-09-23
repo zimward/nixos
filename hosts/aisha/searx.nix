@@ -51,6 +51,9 @@
       zstd_comp_level 8;
       zstd_min_length 256;
       zstd_types  "text/plain" "text/html" "application/json" "application/xml" "text/css" "text/javascript" "image/svg+xml";
+      # disable logging
+      access_log /dev/null;
+      error_log /dev/null;
     '';
   };
 }
