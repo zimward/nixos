@@ -126,9 +126,6 @@ in
   #max nginx request size is 8mb
   services.nginx.clientMaxBodySize = "100M";
   services.nginx.virtualHosts.${fqdn} = {
-    sslCertificate = "${certDir}/fullchain.pem";
-    sslCertificateKey = "${certDir}/key.pem";
-    sslTrustedCertificate = "${certDir}/chain.pem";
     forceSSL = true;
     quic = true;
     enableACME = true;
