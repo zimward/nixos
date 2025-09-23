@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../modules
     ./searx.nix
+    ./ntfy.nix
     ./matrix.nix
     ./mail.nix
     ./git.nix
