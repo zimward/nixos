@@ -79,6 +79,10 @@ in
           ];
         }
       ];
+      ip_range_whitelist = [
+        "127.0.0.0/8"
+        "::1"
+      ];
       turn_uris = [
         "turn:${fqdn}:3478?transport=udp"
         "turn:${fqdn}:3478?transport=tcp"
