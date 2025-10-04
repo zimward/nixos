@@ -22,6 +22,9 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    #fails sometimes due to nginx permissions
+    systemd.services.logrotate-checkconf.enable = false;
+
     networking.hostName = "aisha";
     networking.hostId = "01EF6C8D";
 
