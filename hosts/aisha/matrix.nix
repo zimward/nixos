@@ -112,6 +112,7 @@ in
         };
         version = 1;
       };
+      forgotten_room_retention_period = "7d";
       media_retention = {
         remote_media_lifetime = "30d";
       };
