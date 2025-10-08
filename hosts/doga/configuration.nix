@@ -144,6 +144,17 @@
       configDir = "/nix/persist/system/homeassistant";
       configWritable = true;
       openFirewall = true;
+      extraComponents = [
+        "analytics"
+        "default_config"
+        "esphome"
+        "my"
+        "met"
+        "wled"
+        "fritz"
+        "fritzbox"
+        "fritzbox_callmonitor"
+      ];
       config = {
         homeassistant = {
           name = "DB Service Center";
