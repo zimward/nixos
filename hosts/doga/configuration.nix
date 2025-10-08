@@ -139,6 +139,23 @@
       ReadWritePaths = "/nix/persist/system/ethercalc";
     };
 
+    services.home-assistant = {
+      enable = true;
+      configDir = "/nix/persist/system/homeassistant";
+      configWritable = true;
+      openFirewall = true;
+      config = {
+        homeassistant = {
+          name = "DB Service Center";
+          unit_system = "metric";
+          latitude = 52.52;
+          longitude = 13.45;
+          time_zone = "Europe/Berlin";
+        };
+        http = { };
+      };
+    };
+
     environment.persistence."/nix/persist/system" =
       let
         varDir = d: "/var/lib/${d}";
