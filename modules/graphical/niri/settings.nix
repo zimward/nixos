@@ -129,9 +129,7 @@
       overview.zoom = 0.25;
 
       hotkey-overlay.skip-at-startup = true;
-      xwayland-satellite.path =
-        lib.getExe
-          inputs.niri.packages.${config.nixpkgs.hostPlatform.system}.xwayland-satellite-unstable;
+      xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
     };
     #provided by keepassxc
     hm.services.gnome-keyring.enable = lib.mkForce false;
