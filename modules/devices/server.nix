@@ -1,10 +1,17 @@
-{ lib, config, ... }:
 {
+  lib,
+  config,
+  modulesPath,
+  ...
+}:
+{
+  imports = [ "${modulesPath}/profiles/minimal.nix" ];
   config = lib.mkIf (config.device.class == "server") {
     motd.enable = true;
     documentation.enable = false;
     hardware.hddIdle.enable = true;
     services.resolved.dnssec = "false";
+    services.logrotate.enable = true;
 
     services.openssh = {
       enable = true;
