@@ -6,7 +6,6 @@
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
-    ../../modules/hardware/tmpfsroot.nix
   ];
 
   config = {

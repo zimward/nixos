@@ -1,10 +1,14 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./hardware-configuration.nix
     ./filter-chain-siberia.nix
-    ../../modules
-    ../../modules/net/eth_share.nix
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   config = {

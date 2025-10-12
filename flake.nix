@@ -58,69 +58,21 @@
             inherit name;
             value = nixp.lib.nixosSystem {
               specialArgs = { inherit inputs; };
-              modules = [ (./hosts + "/${name}/configuration.nix") ];
+              modules = [
+                (./hosts + "/${name}/config.nix")
+                ./modules
+              ];
             };
           };
+          getDirs =
+            path:
+            builtins.readDir path |> nixpkgs.lib.filterAttrs (n: v: v == "directory") |> builtins.attrNames;
+          dirs = getDirs ./hosts;
+          isSmall =
+            dir: builtins.readFile (./hosts + "/${dir}/config.nix") |> nixpkgs.lib.strings.hasPrefix "#!small";
+          small = (builtins.filter isSmall dirs);
+          big = builtins.filter (d: !(isSmall d)) dirs;
         in
-        {
-          kalman = nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/kalman/configuration.nix
-              inputs.lanzaboote.nixosModules.lanzaboote
-            ];
-          };
-          arumanfi = nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/arumanfi/configuration.nix
-            ];
-          };
-
-          orsted = nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/orsted/configuration.nix
-              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
-            ];
-          };
-
-          doga = nixpkgs-small.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/doga/configuration.nix
-              {
-                environment.systemPackages = [ self.nixosConfigurations.kalman.config.system.build.toplevel ];
-              }
-            ];
-          };
-          aisha = nixpkgs-small.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [ ./hosts/aisha/configuration.nix ];
-          };
-
-          juliette = nixpkgs-small.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [ ./hosts/juliette ];
-          };
-
-        }
-        // builtins.listToAttrs (
-          map (mkSys nixpkgs) [
-            "arumanfi"
-          ]
-        );
+        builtins.listToAttrs ((map (mkSys nixpkgs) big) ++ (map (mkSys nixpkgs-small) small));
     };
 }

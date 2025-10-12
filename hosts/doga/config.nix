@@ -1,3 +1,4 @@
+#!small
 {
   config,
   lib,

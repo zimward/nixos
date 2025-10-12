@@ -1,3 +1,4 @@
+#!small
 {
   pkgs,
   config,
@@ -7,7 +8,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules
     ./searx.nix
     ./matrix.nix
     ./mail.nix
