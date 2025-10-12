@@ -15,6 +15,11 @@
       url = "github:nix-community/impermanence";
     };
 
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,52 +52,75 @@
       ...
     }@inputs:
     {
-      nixosConfigurations = {
-        kalman = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+      nixosConfigurations =
+        let
+          mkSys = nixp: name: {
+            inherit name;
+            value = nixp.lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [ (./hosts + "/${name}/configuration.nix") ];
+            };
           };
-          modules = [
-            ./hosts/kalman/configuration.nix
-            inputs.lanzaboote.nixosModules.lanzaboote
-          ];
-        };
+        in
+        {
+          kalman = nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./hosts/kalman/configuration.nix
+              inputs.lanzaboote.nixosModules.lanzaboote
+            ];
+          };
+          arumanfi = nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./hosts/arumanfi/configuration.nix
+            ];
+          };
 
-        orsted = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+          orsted = nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./hosts/orsted/configuration.nix
+              inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
+            ];
           };
-          modules = [
-            ./hosts/orsted/configuration.nix
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t410
-          ];
-        };
 
-        doga = nixpkgs-small.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+          doga = nixpkgs-small.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./hosts/doga/configuration.nix
+              {
+                environment.systemPackages = [ self.nixosConfigurations.kalman.config.system.build.toplevel ];
+              }
+            ];
           };
-          modules = [
-            ./hosts/doga/configuration.nix
-            {
-              environment.systemPackages = [ self.nixosConfigurations.kalman.config.system.build.toplevel ];
-            }
-          ];
-        };
-        aisha = nixpkgs-small.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+          aisha = nixpkgs-small.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [ ./hosts/aisha/configuration.nix ];
           };
-          modules = [ ./hosts/aisha/configuration.nix ];
-        };
 
-        juliette = nixpkgs-small.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+          juliette = nixpkgs-small.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [ ./hosts/juliette ];
           };
-          modules = [ ./hosts/juliette ];
-        };
 
-      };
+        }
+        // builtins.listToAttrs (
+          map (mkSys nixpkgs) [
+            "arumanfi"
+          ]
+        );
     };
 }
