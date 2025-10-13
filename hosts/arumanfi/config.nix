@@ -16,7 +16,7 @@
     net.wifi.enable = true;
     mainUser.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
-    sops.age.keyFile = lib.mkForce "/nix/sops/age/keys.txt";
+    tmpfsroot.impermanence = true;
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
