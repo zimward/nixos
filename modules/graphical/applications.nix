@@ -38,14 +38,8 @@ in
         mumble
         pavucontrol
         freetube
-        nheko
         comma
       ]);
-    #as long as nheko hasnt transitioned away from olm
-    #related: https://github.com/Nheko-Reborn/nheko/issues/1786
-    nixpkgs.config.permittedInsecurePackages = [
-      "olm-3.2.16"
-    ];
     nixpkgs.allowUnfreePackages = [ "obsidian" ];
   };
 }
