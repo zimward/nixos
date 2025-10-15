@@ -26,6 +26,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJVZ6ubHsaqWj2eyjEjS08zEHoFDmFhnV1xWaF0K+L9M root@kalman" # kalman
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZeN06ZB6hsWpWutEQQlGf0t/MBWSpu9jSYnVlOfKqj root@nas" # doga
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMiyoos/yBEK/jdJdF+2gzjfX6FQD8+kyg/Q/eLMr4HK root@juliette"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILG1gWO9yWvsjgO/L7mWnZGgLsSvlhElW3dafBJW8QRE zimward@arumanfi"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSveEMHezj5v/JPfl9ES+00Z+lT4y4+m80ItAdXXSIV" # friendi
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN157bDKVBfVzkdDb0xxHtvKN/leIwXKiWmBvcAEqTf" # git - self ssh for updates
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnnZsVj7xIf4tqoK7foCj3dT8OMnyjgKZTsW6Q/Fvvm zimward@juliette"
