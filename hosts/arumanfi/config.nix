@@ -13,13 +13,14 @@
   config = {
 
     device.class = "desktop"; # its a laptop but it doesnt matter
-    net.wifi.enable = true;
+    # net.wifi.enable = true;
     mainUser.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
 
     tmpfsroot.impermanence = true;
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.memtest86.enable = true;
     # boot.lanzaboote = {
     #   enable = true;
     #   pkiBundle = "/persist/system/var/lib/sbctl/";
@@ -42,7 +43,7 @@
     };
     graphical.obsidian.enable = true;
 
-    networking.hostName = "arumenfi";
+    networking.hostName = "arumanfi";
     networking.useDHCP = lib.mkDefault true;
     networking.networkmanager.enable = true;
 
@@ -73,13 +74,58 @@
     graphical.matlab.enable = true;
     motd.enable = lib.mkForce false;
 
+    hardware.graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vpl-gpu-rt
+      ];
+    };
+    environment.sessionVariables = {
+      LIBVA_DRIVER_NAME = "iHD";
+    };
+
     environment.persistence."/persist/system" = {
       directories = [
         "/etc/NetworkManager/system-connections"
         "/etc/NetworkManager/VPN"
       ];
     };
-
+    environment.persistence."/persist/home" = {
+      #private dirs
+      directories =
+        (map
+          (d: {
+            directory = "/home/${config.mainUser.userName}/${d}";
+            user = config.mainUser.userName;
+            group = "users";
+            mode = "0700";
+          })
+          [
+            ".ssh"
+            ".gnupg"
+          ]
+        )
+        ++
+          #normal ones, group readable
+          map
+            (d: {
+              directory = "/home/${config.mainUser.userName}/${d}";
+              user = config.mainUser.userName;
+              group = "users";
+            })
+            [
+              "Downloads"
+              "gits"
+              "Dokumente"
+              ".librewolf"
+              ".thunderbird"
+              ".cache/librewolf"
+              ".cache/thunderbird"
+              ".cache/llama.cpp"
+            ];
+    };
+    sops.age.keyFile = lib.mkForce "/persist/age/key";
     #dont auto garbage collect to prevent having to recompile build tools constantly
     nix.gc.dates = lib.mkForce "monthly";
 
@@ -93,25 +139,25 @@
       serviceConfig.RemainAfterExit = "yes";
       script = ''
         mkdir -p /mnt
-        mount /dev/mapper/root /mnt
+        mount /dev/mapper/root /mnt -o subvol=/
 
-        btrfs subvolume list -o /mnt/root |
+        btrfs subvolume list -o /mnt/rootfs |
         cut -f9 -d' ' |
         while read subvolume; do
           echo "deleting /$subvolume subvolume..."
           btrfs subvolume delete "/mnt/$subvolume"
         done &&
-        echo "deleting /root subvolume..." &&
-        btrfs subvolume delete /mnt/root
+        echo "deleting /rootfs subvolume..." &&
+        btrfs subvolume delete /mnt/rootfs
 
         echo "restoring clean /root subvolume..."
-        btrfs subvolume snapshot /mnt/root-clean /mnt/root
+        btrfs subvolume snapshot /mnt/rootfs-clean /mnt/rootfs
         umount /mnt
       '';
     };
 
     nixpkgs.hostPlatform = "x86_64-linux";
     hardware.cpu.intel.updateMicrocode = true;
-
+    hardware.enableRedistributableFirmware = true;
   };
 }
