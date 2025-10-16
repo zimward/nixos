@@ -46,6 +46,7 @@
       minimal = true;
     };
     graphical.obsidian.enable = true;
+    graphical.minecraft.enable = true;
 
     networking.hostName = "arumanfi";
     networking.useDHCP = lib.mkDefault true;
@@ -128,6 +129,7 @@
               ".thunderbird"
               ".cache" # change this later once permissions have been figured out properly
               ".config" # same as above
+              ".local" # ""
             ];
     };
     sops.age.keyFile = lib.mkForce "/persist/age/key";
