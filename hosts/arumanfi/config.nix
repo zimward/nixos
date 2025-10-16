@@ -127,6 +127,7 @@
               ".librewolf"
               ".thunderbird"
               ".cache" # change this later once permissions have been figured out properly
+              ".config" # same as above
             ];
     };
     sops.age.keyFile = lib.mkForce "/persist/age/key";
