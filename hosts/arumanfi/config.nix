@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.disko.nixosModules.disko
+    inputs.lanzaboote.nixosModules.lanzaboote
     ./disko.nix
   ];
   config = {
@@ -18,13 +19,16 @@
 
     tmpfsroot.impermanence = true;
 
-    boot.loader.systemd-boot.enable = true;
+    documentation.nixos.enable = true;
+    services.fwupd.enable = true;
+
+    boot.loader.systemd-boot.enable = lib.mkForce false;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.systemd-boot.memtest86.enable = true;
-    # boot.lanzaboote = {
-    #   enable = true;
-    #   pkiBundle = "/persist/system/var/lib/sbctl/";
-    # };
+    boot.lanzaboote = {
+      enable = true;
+      pkiBundle = "/persist/system/var/lib/sbctl/";
+    };
 
     devel.git.signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
@@ -89,6 +93,8 @@
       directories = [
         "/etc/NetworkManager/system-connections"
         "/etc/NetworkManager/VPN"
+        "/var/lib/sbctl"
+        "/root/.ssh"
       ];
     };
     environment.persistence."/persist/home" = {
@@ -120,9 +126,7 @@
               "Dokumente"
               ".librewolf"
               ".thunderbird"
-              ".cache/librewolf"
-              ".cache/thunderbird"
-              ".cache/llama.cpp"
+              ".cache" # change this later once permissions have been figured out properly
             ];
     };
     sops.age.keyFile = lib.mkForce "/persist/age/key";
