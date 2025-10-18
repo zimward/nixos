@@ -19,7 +19,6 @@
 
     tmpfsroot.impermanence = true;
 
-    documentation.nixos.enable = true;
     services.fwupd.enable = true;
 
     boot.loader.systemd-boot.enable = lib.mkForce false;

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = [ "${modulesPath}/profiles/minimal.nix" ];
+  # imports = [ "${modulesPath}/profiles/minimal.nix" ];
   config = lib.mkIf (config.device.class == "server") {
     motd.enable = true;
     documentation.enable = false;
