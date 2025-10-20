@@ -29,8 +29,8 @@ lib.mkIf config.graphical.niri.enable {
         "--brightness=lower"
       ];
 
-      "Mod+Print".action = screenshot-window;
-      "Mod+Shift+S".action = screenshot;
+      "Mod+Print".action.screenshot-window = [ ];
+      "Mod+Shift+S".action.screenshot = [ ];
 
       "Mod+Shift+i".action.spawn = [
         "sh"
