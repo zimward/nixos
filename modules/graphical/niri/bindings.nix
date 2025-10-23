@@ -8,24 +8,30 @@ lib.mkIf config.graphical.niri.enable {
   hm.programs.niri.settings.binds =
     with config.hm.lib.niri.actions;
     {
-      "XF86AudioMute".action = spawn "swayosd-client" "--output-volume=mute-toggle";
-      "XF86AudioMicMute".action = spawn "swayosd-client" "--input-volume=mute-toggle";
+      "XF86AudioMute".action = spawn [
+        "${pkgs.swayosd}/bin/swayosd-client"
+        "--output-volume=mute-toggle"
+      ];
+      "XF86AudioMicMute".action = spawn [
+        "${pkgs.swayosd}/bin/swayosd-client"
+        "--input-volume=mute-toggle"
+      ];
 
       "XF86AudioRaiseVolume".action.spawn = [
-        "swayosd-client"
+        "${pkgs.swayosd}/bin/swayosd-client"
         "--output-volume=raise"
       ];
       "XF86AudioLowerVolume".action.spawn = [
-        "swayosd-client"
+        "${pkgs.swayosd}/bin/swayosd-client"
         "--output-volume=lower"
       ];
 
       "XF86MonBrightnessUp".action.spawn = [
-        "swayosd-client"
+        "${pkgs.swayosd}/bin/swayosd-client"
         "--brightness=raise"
       ];
       "XF86MonBrightnessDown".action.spawn = [
-        "swayosd-client"
+        "${pkgs.swayosd}/bin/swayosd-client"
         "--brightness=lower"
       ];
 

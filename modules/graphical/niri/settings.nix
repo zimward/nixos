@@ -131,6 +131,7 @@
       hotkey-overlay.skip-at-startup = true;
       xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
     };
+    hm.services.swayosd.enable = true;
     #provided by keepassxc
     hm.services.gnome-keyring.enable = lib.mkForce false;
     environment.systemPackages = with pkgs; [
