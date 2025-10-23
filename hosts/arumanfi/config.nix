@@ -80,6 +80,11 @@
 
     motd.enable = lib.mkForce false;
 
+    #switch to Xe driver
+    boot.kernelParams = [
+      "modprobe.blacklist=i915"
+      "xe.force_probe=7d55"
+    ];
     hardware.graphics = {
       enable = true;
       extraPackages = with pkgs; [
