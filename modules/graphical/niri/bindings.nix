@@ -38,6 +38,8 @@ lib.mkIf config.graphical.niri.enable {
         "${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom"
       ];
 
+      "Mod+Shift+L".action.spawn = [ (lib.getExe config.programs.gtklock.package) ];
+
       #upload clipboard
       "Mod+j".action.spawn = [
         "sh"

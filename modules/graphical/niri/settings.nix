@@ -52,7 +52,7 @@
             "-m"
             "fill"
             "-i"
-            "${config.users.users.${config.mainUser.userName}.home}/.bg.jpg"
+            "${config.graphical.background}"
           ])
           (command [
             (lib.getExe pkgs.mako)

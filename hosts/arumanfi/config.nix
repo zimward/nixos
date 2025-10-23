@@ -40,6 +40,7 @@
     };
 
     graphical.niri.enable = true;
+    graphical.locker.enable = true;
     graphical.kicad = {
       enable = true;
       minimal = true;
@@ -74,7 +75,7 @@
     };
     # only ssh is running with pubkey auth so a firewall would only waste memory
     networking.firewall.enable = false;
-    graphical.ime.enable = true;
+    # graphical.ime.enable = true;
     graphical.matlab.enable = true;
     environment.systemPackages = with pkgs; [ freecad-wayland ];
 

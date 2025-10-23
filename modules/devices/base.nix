@@ -63,6 +63,7 @@
 
     mainUser.userName = "zimward";
     services.getty.autologinUser = config.mainUser.userName;
+    services.getty.autologinOnce = true;
 
     security.doas.enable = true;
     security.sudo.enable = false;

@@ -1,9 +1,18 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options = {
     graphical.enable = lib.mkOption {
       default = config.device.class == "desktop";
       description = "enable graphical applications";
+    };
+    graphical.background = lib.mkOption {
+      default = import ./background.nix { inherit (pkgs) fetchurl; };
+      description = "background image";
     };
   };
   imports = [
@@ -18,6 +27,7 @@
     ./niri
     ./waybar
     ./launcher.nix
+    ./locker.nix
   ];
   config = {
     #running ssh agent on graphical hosts is most often needed
