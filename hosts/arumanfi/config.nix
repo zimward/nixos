@@ -81,11 +81,17 @@
 
     motd.enable = lib.mkForce false;
 
-    #switch to Xe driver
     boot.kernelParams = [
-      "modprobe.blacklist=i915"
+      #switch to Xe driver
       "xe.force_probe=7d55"
     ];
+    #disable intel management engine due to HAP bit
+    boot.blacklistedKernelModules = [
+      "mei"
+      "mei_me"
+      "i915"
+    ];
+
     hardware.graphics = {
       enable = true;
       extraPackages = with pkgs; [
