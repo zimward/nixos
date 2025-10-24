@@ -30,6 +30,7 @@
       "nct6775"
     ];
     boot.extraModulePackages = [ ];
+    boot.kernelParams = [ "mem_encrypt=on" ];
 
     tmpfsroot = {
       enable = true;
