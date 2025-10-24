@@ -84,8 +84,10 @@
 
         programs.git = {
           enable = true;
-          userName = "aisha";
-          userEmail = "auto-git@zimward.moe";
+          settings.user = {
+            name = "aisha";
+            email = "auto-git@zimward.moe";
+          };
         };
 
         home.file."git-shell-commands/newrepo" = {

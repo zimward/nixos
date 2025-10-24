@@ -81,18 +81,22 @@
 
       hm.programs.git = {
         enable = config.devel.git.enable;
-        userName = config.mainUser.userName;
-        userEmail = config.devel.git.userEmail;
-        aliases = {
-          "commit" = "commit -S";
-        };
-        extraConfig = {
-          push.autoSetupRemote = true;
-          commit = {
-            gpgsign = true;
-          };
+        settings = {
           user = {
-            signingkey = config.devel.git.signingkey;
+            name = config.mainUser.userName;
+            email = config.devel.git.userEmail;
+          };
+          aliases = {
+            "commit" = "commit -S";
+          };
+          extraConfig = {
+            push.autoSetupRemote = true;
+            commit = {
+              gpgsign = true;
+            };
+            user = {
+              signingkey = config.devel.git.signingkey;
+            };
           };
         };
       };
