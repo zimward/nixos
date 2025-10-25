@@ -103,6 +103,20 @@
       LIBVA_DRIVER_NAME = "iHD";
     };
 
+    services.auto-cpufreq = {
+      enable = true;
+      settings = {
+        charger = {
+          turbo = "auto";
+          energy_performance_preference = "balance_performance";
+        };
+        battery = {
+          turbo = "never";
+          energy_performance_preference = "power";
+        };
+      };
+    };
+
     environment.persistence."/persist/system" = {
       directories = [
         "/etc/NetworkManager/system-connections"
