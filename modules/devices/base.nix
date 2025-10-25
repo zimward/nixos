@@ -138,6 +138,8 @@
       dates = "9:00";
       options = "--delete-older-than 5d";
     };
+    nix.registry.n.to = config.nix.registry.nixpkgs.to;
+
     systemd.services.nixos-upgrade.environment = {
       GIT_SSH_COMMAND = lib.optionalString (
         config.update.accessKey != null
