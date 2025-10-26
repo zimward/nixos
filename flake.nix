@@ -46,7 +46,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-small,
       ...

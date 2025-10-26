@@ -29,7 +29,6 @@
       pkiBundle = "/persist/system/var/lib/sbctl/";
     };
 
-    devel.git.signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
     environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
