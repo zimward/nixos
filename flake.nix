@@ -6,6 +6,11 @@
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    wrappers = {
+      url = "github:lassulus/wrappers/pull/11/head";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

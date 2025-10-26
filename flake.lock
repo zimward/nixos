@@ -370,7 +370,8 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-small": "nixpkgs-small",
         "secrets": "secrets",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "wrappers": "wrappers"
       }
     },
     "rust-overlay": {
@@ -426,6 +427,27 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761484162,
+        "narHash": "sha256-b22tjb3SIuxBEPqiXkWxyN2dTDhE/P9+aG3jFSLLGl0=",
+        "owner": "lassulus",
+        "repo": "wrappers",
+        "rev": "053fed0c14da8262f3d524ce88ecd1d9b96d61ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lassulus",
+        "ref": "pull/11/head",
+        "repo": "wrappers",
         "type": "github"
       }
     },
