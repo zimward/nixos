@@ -72,7 +72,7 @@
       graphical.deluge.enable = lib.mkForce false;
       graphical.minecraft.enable = lib.mkForce false;
     };
-    # graphical.ime.enable = true;
+    graphical.ime.enable = true;
 
     services.open-webui = {
       # enable = true;
