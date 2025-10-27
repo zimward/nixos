@@ -141,6 +141,13 @@ let
             };
             language-servers = [ "nixd" ];
           }
+          {
+            name = "rust";
+            auto-format = true;
+            formatter = {
+              command = lib.getExe pkgs.rustfmt;
+            };
+          }
         ]
         ++ lib.optionals config.graphical.enable [
           {
