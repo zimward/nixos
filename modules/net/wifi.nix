@@ -33,12 +33,15 @@
         };
         "802-1x" = {
           altsubject-matches = "DNS:easyroam.eduroam.de";
-          ca-cert = "${config.sops.secrets.easyroam_root_ca.path}";
-          client-cert = "${config.sops.secrets.easyroam_client_cert.path}";
+          # ca-cert = "${config.sops.secrets.easyroam_root_ca.path}";
+          # client-cert = "${config.sops.secrets.easyroam_client_cert.path}";
+          ca-cert = "/etc/NetworkManager/system-connection/easyroam_root_ca.pem";
+          client-cert = "/etc/NetworkManager/system-connection/easyroam_client_cert.pem";
           eap = "tls";
           # identity = "secret:${config.sops.secrets."wifi/easyroam_ca".path}";
           identity = "1903138690423339638@easyroam-pca.htw-berlin.de";
-          private-key = "${config.sops.secrets.easyroam_client_key.path}";
+          # private-key = "${config.sops.secrets.easyroam_client_key.path}";
+          private-key = "/etc/NetworkManager/system-connection/easyroam_client_key.pem";
           private-key-password = "none";
         };
         ipv4.method = "auto";
