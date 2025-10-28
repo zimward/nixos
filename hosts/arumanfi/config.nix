@@ -78,9 +78,6 @@
     graphical.matlab.enable = true;
     environment.systemPackages = with pkgs; [
       freecad-wayland
-      (inputs.wrappers-git.wrapperModules.anyrun.apply {
-        inherit pkgs;
-      })
     ];
 
     motd.enable = lib.mkForce false;
