@@ -128,6 +128,8 @@
 
       overview.zoom = 0.25;
 
+      switch-events.lid-close.action.spawn = [ (lib.getExe config.programs.gtklock.package) ];
+
       hotkey-overlay.skip-at-startup = true;
       xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
     };
