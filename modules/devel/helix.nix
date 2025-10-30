@@ -176,9 +176,9 @@ in
     devel.helix.enable = lib.mkEnableOption "Helix editor";
   };
   config = lib.mkIf config.devel.helix.enable {
-    environment.systemPackages = [ hx ];
+    environment.systemPackages = [ hx.wrapper ];
     environment.sessionVariables = {
-      EDITOR = lib.getExe hx;
+      EDITOR = lib.getExe (hx.wrapper);
     };
   };
 }

@@ -17,7 +17,7 @@
       starship
       ripgrep
       bottom # process manager
-      du-dust
+      dust
       sshfs
       fd
       fzf
