@@ -39,10 +39,10 @@
           client-cert = "/etc/NetworkManager/system-connection/easyroam_client_cert.pem";
           eap = "tls";
           # identity = "secret:${config.sops.secrets."wifi/easyroam_ca".path}";
-          identity = "1903138690423339638@easyroam-pca.htw-berlin.de";
+          identity = "1895306900139341368@easyroam-pca.htw-berlin.de";
           # private-key = "${config.sops.secrets.easyroam_client_key.path}";
           private-key = "/etc/NetworkManager/system-connection/easyroam_client_key.pem";
-          private-key-password = "none";
+          private-key-password = "pkcs12";
         };
         ipv4.method = "auto";
         ipv6 = {
