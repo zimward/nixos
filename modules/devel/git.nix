@@ -23,7 +23,7 @@
   config =
     let
       enablePijul = config.device.class == "desktop";
-      jjIntegration = pkgs.runCommandNoCC "jj-nu" { buildInputs = [ pkgs.jujutsu ]; } ''
+      jjIntegration = pkgs.runCommand "jj-nu" { buildInputs = [ pkgs.jujutsu ]; } ''
         mkdir $out
         jj util completion nushell > $out/completions-jj.nu
       '';
