@@ -7,7 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules
+    ./minecraft.nix
   ];
 
   config = {
