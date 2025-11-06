@@ -37,6 +37,7 @@ in
         pavucontrol
         freetube
         comma
+        signal-desktop
       ]);
     nixpkgs.allowUnfreePackages = [ "obsidian" ];
   };
