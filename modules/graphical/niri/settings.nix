@@ -44,7 +44,7 @@
         [
           (command (lib.getExe pkgs.waybar))
           (command [
-            (lib.getExe pkgs.alacritty)
+            "alacritty"
             "--daemon"
           ])
           (command [

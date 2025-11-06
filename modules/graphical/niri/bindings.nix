@@ -55,7 +55,7 @@ lib.mkIf config.graphical.niri.enable {
 
       "Mod+P".action.spawn = lib.getExe config.graphical.launcher;
       "Mod+Shift+T".action.spawn = [
-        (lib.getExe pkgs.alacritty)
+        "alacritty"
         "msg"
         "create-window"
       ];
