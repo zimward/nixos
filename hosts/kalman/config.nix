@@ -34,6 +34,8 @@
     };
 
     networking.hostName = "kalman";
+    ethernet.share.device = "enp39s0";
+    ethernet.share.addr = [ "192.168.9.1/24" ];
 
     virtualisation.libvirtd = {
       enable = true;

@@ -6,20 +6,25 @@
       type = lib.types.nullOr lib.types.str;
       description = "Interface to masqerade";
     };
+    ethernet.share.addr = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "192.168.0.1/24"
+        "fd98:c5af:e1bc:0::1/64"
+      ];
+    };
   };
 
   config = lib.mkIf (config.ethernet.share.device != null) {
     systemd.network.enable = true;
     networking.useNetworkd = true;
-    systemd.network.networks."10-share" = {
+    systemd.network.networks."5-share" = {
       enable = true;
       matchConfig = {
         Name = config.ethernet.share.device;
       };
-      address = [
-        "192.168.0.1/24"
-        "fd98:c5af:e1bc:0::1/64"
-      ];
+      address = config.ethernet.share.addr;
+
       networkConfig = {
         DHCPServer = true;
         IPMasquerade = "both";
