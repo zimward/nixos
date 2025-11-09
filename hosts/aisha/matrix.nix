@@ -42,7 +42,7 @@ in
 
   services.matrix-synapse = {
     enable = true;
-    enableRegistrationScript = false;
+    enableRegistrationScript = true;
     dataDir = "/nix/persist/system/matrix-synapse/";
     settings = {
       registration_shared_secret = inputs.secrets.matrix.registration;
@@ -50,20 +50,6 @@ in
       public_baseurl = "https://zimward.moe";
       max_upload_size = "100M";
       listeners = [
-        {
-          path = unixMatrix;
-          type = "http";
-          x_forwarded = true;
-          resources = [
-            {
-              names = [
-                "client"
-                "federation"
-              ];
-              compress = false;
-            }
-          ];
-        }
         {
           port = 8008;
           bind_addresses = [ "::1" ];
@@ -73,6 +59,20 @@ in
             {
               names = [
                 "client"
+              ];
+              compress = false;
+            }
+          ];
+        }
+        {
+          path = unixMatrix;
+          type = "http";
+          x_forwarded = true;
+          resources = [
+            {
+              names = [
+                "client"
+                "federation"
               ];
               compress = false;
             }
