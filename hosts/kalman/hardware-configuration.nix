@@ -8,7 +8,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../modules/hardware/tmpfsroot.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];

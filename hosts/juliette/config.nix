@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    ../../modules
     ./3dp.nix
   ];
   device.class = "server";
