@@ -17,6 +17,9 @@
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
     };
 
+    security.soteria.enable = true;
+    systemd.user.services.niri-flake-polkit.enable = lib.mkForce false;
+
     net.filter.enable = true;
     #sound
     sys.sound.enable = true;
