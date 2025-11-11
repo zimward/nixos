@@ -12,14 +12,14 @@ def dlvid [url:string] {
 
 def auto-chroot [path:string, executable:string] {
   if (ls $path |length) != 0 {
-  doas mount --rbind /dev $"($path)dev"
-  doas mount --make-rslave $"($path)dev"
-  doas mount --rbind /sys $"($path)sys"
-  doas mount --make-rslave $"($path)dev"
-  doas mount -t proc /proc $"($path)proc"
-  doas mount --rbind /tmp $"($path)tmp"
-  doas mount --bind /run $"($path)run"
-  doas chroot $"($path)" $"($executable)"
+  sudo mount --rbind /dev $"($path)dev"
+  sudo mount --make-rslave $"($path)dev"
+  sudo mount --rbind /sys $"($path)sys"
+  sudo mount --make-rslave $"($path)dev"
+  sudo mount -t proc /proc $"($path)proc"
+  sudo mount --rbind /tmp $"($path)tmp"
+  sudo mount --bind /run $"($path)run"
+  sudo chroot $"($path)" $"($executable)"
   } else {
       echo "Invalid path" 
   }

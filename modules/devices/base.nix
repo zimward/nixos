@@ -38,12 +38,7 @@
     environment.defaultPackages = lib.mkDefault [ ];
 
     #needed to rebuild system
-    environment.systemPackages =
-      with pkgs;
-      [
-        doas-sudo-shim
-      ]
-      ++ lib.optionals config.devel.git.enable [ gitMinimal ];
+    environment.systemPackages = lib.optionals config.devel.git.enable [ pkgs.gitMinimal ];
 
     nix.settings.experimental-features = [
       "nix-command"
@@ -65,15 +60,6 @@
     services.getty.autologinUser = config.mainUser.userName;
     services.getty.autologinOnce = true;
 
-    security.doas.enable = true;
-    security.sudo.enable = false;
-    security.doas.extraRules = [
-      {
-        users = [ config.mainUser.userName ];
-        keepEnv = true;
-        persist = true;
-      }
-    ];
     environment.persistence."/nix/persist/system" =
       lib.mkIf (config.tmpfsroot.enable || config.tmpfsroot.impermanence)
         {

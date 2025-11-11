@@ -1,8 +1,23 @@
-{ pkgs, ... }:
 {
-  security.polkit.enable = true;
-  security.apparmor = {
-    enableCache = true;
-    packages = [ pkgs.apparmor-profiles ];
+  pkgs,
+  inputs,
+  config,
+  lib,
+  ...
+}:
+{
+  imports = [ inputs.run0-sudo-shim.nixosModules.default ];
+  config = {
+    security.polkit = {
+      enable = true;
+      adminIdentities = [ "unix-user:${config.mainUser.userName}" ];
+      persistentAuthentication = true;
+      package = lib.mkForce pkgs.polkit;
+    };
+    security.run0-sudo-shim.enable = true;
+    security.apparmor = {
+      enableCache = true;
+      packages = [ pkgs.apparmor-profiles ];
+    };
   };
 }
