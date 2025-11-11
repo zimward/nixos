@@ -52,7 +52,7 @@
       zstd_min_length 256;
       zstd_types  "text/plain" "text/html" "application/json" "application/xml" "text/css" "text/javascript" "image/svg+xml";
       # disable logging
-      access_log /dev/null;
+      access_log /var/log/nginx/searxng;
       error_log /dev/null;
     '';
   };
