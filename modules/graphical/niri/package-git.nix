@@ -33,7 +33,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "YaLTeR";
     repo = "niri";
     rev = "wip/move-view-on-horizontal-drag";
-    hash = "sha256-z4Oe7xHE5i7B1U1lhLqJgomguvVU0ph54SIAacyMiYU=";
+    hash = "sha256-mco94NKcQhsAtYKJtQAGbh9PvTp5FS90oH9quzMTt90=";
   };
 
   outputs = [
@@ -47,7 +47,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       --replace-fail '/usr/bin' "$out/bin"
   '';
 
-  cargoHash = "sha256-z+6PwrTdzakuhkhXJt/u5FYWaqPWzZ4UExAUGRkJoR0=";
+  cargoHash = "sha256-Me8woNt30B77K3NPnEaB7YoT+2o64AiiYBhGzHfSUNM=";
 
   strictDeps = true;
 
