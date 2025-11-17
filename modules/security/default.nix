@@ -12,7 +12,6 @@
       enable = true;
       adminIdentities = [ "unix-user:${config.mainUser.userName}" ];
       persistentAuthentication = true;
-      package = lib.mkForce pkgs.polkit;
     };
     security.run0-sudo-shim.enable = true;
     security.apparmor = {
