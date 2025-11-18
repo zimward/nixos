@@ -96,6 +96,14 @@ lib.mkIf config.graphical.niri.enable {
       open-floating = true;
       open-focused = true;
     }
+    {
+      matches = [
+        { app-id = "gay.vaskel.soteria"; }
+      ];
+      open-floating = true;
+      open-focused = true;
+      block-out-from = "screen-capture";
+    }
   ];
   hm.programs.niri.settings.layer-rules = [
     {
