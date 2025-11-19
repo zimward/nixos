@@ -30,6 +30,7 @@
       directories = [
         "/var/lib/sbctl"
         "/root/.ssh"
+        "/var/lib/private"
       ];
     };
 
@@ -76,19 +77,18 @@
     };
     graphical.ime.enable = true;
 
-    services.open-webui = {
-      # enable = true;
-      environment = {
-        OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
-        WEBUI_AUTH = "False";
+    services.nextjs-ollama-llm-ui = {
+      enable = true;
+    };
+    services.ollama = {
+      enable = true;
+      acceleration = "rocm";
+      environmentVariables = {
+        HSA_OVERRIDE_GFX_VERSION = "10.3.0";
       };
     };
 
-    nixpkgs.allowUnfreePackages = [ "open-webui" ];
     environment.systemPackages = [
-      (pkgs.writeShellScriptBin "ollama" ''
-        HSA_OVERRIDE_GFX_VERSION=10.3.0 ${lib.getExe pkgs.ollama-rocm} $@
-      '')
       pkgs.freecad
       pkgs.prusa-slicer
       pkgs.sbctl

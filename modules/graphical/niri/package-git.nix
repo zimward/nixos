@@ -32,8 +32,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "YaLTeR";
     repo = "niri";
-    rev = "7f19d268b3563e3683eaca02d9665fed66ce862e";
-    hash = "sha256-Y4IYBfaTxffpm6UIbhY1Xfpij+aVh/C+tF9Tdg6nYig=";
+    rev = "c722634c269ae97a5ea185691bcd0b8c73a600e5";
+    hash = "sha256-cMi8tz+0+gWtlYqVnyMv7phOeQ0/4WmzZ/lxCyraUVw=";
   };
 
   outputs = [
@@ -47,7 +47,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       --replace-fail '/usr/bin' "$out/bin"
   '';
 
-  cargoHash = "sha256-Me8woNt30B77K3NPnEaB7YoT+2o64AiiYBhGzHfSUNM=";
+  cargoHash = "sha256-z+6PwrTdzakuhkhXJt/u5FYWaqPWzZ4UExAUGRkJoR0=";
 
   strictDeps = true;
 
