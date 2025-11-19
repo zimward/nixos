@@ -32,8 +32,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "YaLTeR";
     repo = "niri";
-    rev = "wip/move-view-on-horizontal-drag";
-    hash = "sha256-mco94NKcQhsAtYKJtQAGbh9PvTp5FS90oH9quzMTt90=";
+    rev = "7f19d268b3563e3683eaca02d9665fed66ce862e";
+    hash = "sha256-Y4IYBfaTxffpm6UIbhY1Xfpij+aVh/C+tF9Tdg6nYig=";
   };
 
   outputs = [
