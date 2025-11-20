@@ -18,6 +18,11 @@ in
     minecraft.enable = lib.mkEnableOption "minecraft launcher";
     deluge.enable = lib.mkEnableOption "Deluge torrent client";
     obsidian.enable = lib.mkEnableOption "Obsidian";
+    _freetime = lib.mkOption {
+      description = "programs that keep me from doing any work";
+      type = lib.types.bool;
+      default = true;
+    };
   };
   config = lib.mkIf (config.graphical.default.applications.enable && config.graphical.enable) {
     environment.systemPackages =
@@ -31,14 +36,19 @@ in
         hunspellDicts.de_DE
         hunspellDicts.en_US
         keepassxc
-        mpv
         thunderbird
-        mumble
         pavucontrol
-        freetube
         comma
-        signal-desktop
-      ]);
+      ])
+      ++ (lib.optionals cfg._freetime (
+        with pkgs;
+        [
+          freetube
+          signal-desktop
+          mpv
+          mumble
+        ]
+      ));
     nixpkgs.allowUnfreePackages = [ "obsidian" ];
   };
 }

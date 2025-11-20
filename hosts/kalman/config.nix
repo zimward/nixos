@@ -74,6 +74,7 @@
       graphical.steam.enable = lib.mkForce false;
       graphical.deluge.enable = lib.mkForce false;
       graphical.minecraft.enable = lib.mkForce false;
+      graphical._freetime = false;
     };
     graphical.ime.enable = true;
 
