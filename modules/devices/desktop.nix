@@ -30,6 +30,7 @@
     environment.systemPackages = [ pkgs.nh ];
     nix.package = pkgs.nixVersions.latest;
     boot.initrd.systemd.network.wait-online.enable = false;
+    boot.bootspec.enable = true;
     systemd.network.wait-online.enable = false;
   };
 }
