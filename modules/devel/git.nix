@@ -2,8 +2,26 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
+let
+  jj = inputs.wrappers.wrapperModules.jujutsu.apply {
+    inherit pkgs;
+    settings = {
+      user = {
+        name = "zimward";
+        email = config.devel.git.userEmail;
+      };
+      signing = {
+        behaviour = "own";
+        backend = "gpg";
+        key = config.devel.git.signingkey;
+      };
+      git.sign-on-push = true;
+    };
+  };
+in
 {
   options = {
     devel.git = {
@@ -22,7 +40,7 @@
   };
   config =
     let
-      enablePijul = config.device.class == "desktop";
+      enableJJ = config.device.class == "desktop";
       jjIntegration = pkgs.runCommand "jj-nu" { buildInputs = [ pkgs.jujutsu ]; } ''
         mkdir $out
         jj util completion nushell > $out/completions-jj.nu
@@ -32,74 +50,9 @@
       environment.systemPackages = [
         pkgs.git
       ]
-      ++ (lib.optionals enablePijul [
-        pkgs.pijul
-        pkgs.jujutsu
+      ++ (lib.optionals enableJJ [
+        jj.wrapper
       ]);
-
-      hm.home.file.".config/pijul/config" = {
-        enable = enablePijul;
-        source =
-          let
-            aw = "always";
-          in
-          (pkgs.formats.toml { }).generate "config.toml"
-
-            {
-              colors = aw;
-              pager = aw;
-              author = {
-                name = "zimward";
-                full_name = "zimward";
-                email = "zimward@zimward.moe";
-                key_path = "${config.users.users.${config.mainUser.userName}.home}/.ssh/id_ed25519";
-              };
-              ignore_kinds = {
-                rust = [
-                  "target"
-                  "result"
-                ];
-              };
-            };
-
-      };
-
-      cli.nushell.extraConfig = lib.strings.optionalString enablePijul "use ${jjIntegration}/completions-jj.nu";
-      hm.programs.jujutsu.enable = enablePijul;
-      hm.programs.jujutsu.settings = {
-        user = {
-          name = "zimward";
-          email = config.devel.git.userEmail;
-        };
-        signing = {
-          behaviour = "own";
-          backend = "gpg";
-          key = config.devel.git.signingkey;
-        };
-        git.sign-on-push = true;
-      };
-
-      hm.programs.git = {
-        enable = config.devel.git.enable;
-        settings = {
-          user = {
-            name = config.mainUser.userName;
-            email = config.devel.git.userEmail;
-          };
-          aliases = {
-            "commit" = "commit -S";
-          };
-          extraConfig = {
-            push.autoSetupRemote = true;
-            commit = {
-              gpgsign = true;
-            };
-            user = {
-              signingkey = config.devel.git.signingkey;
-            };
-          };
-        };
-      };
-
+      cli.nushell.extraConfig = lib.strings.optionalString enableJJ "use ${jjIntegration}/completions-jj.nu";
     };
 }
