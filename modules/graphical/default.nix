@@ -31,7 +31,14 @@
   ];
   config = {
     #running ssh agent on graphical hosts is most often needed
-    hm.services.ssh-agent.enable = config.graphical.enable;
+    systemd.user.services.ssh-agent = {
+      enable = true;
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        ExecStart = "${config.programs.ssh.package}/bin/ssh-agent -D -a %t/ssh-agent";
+      };
+      description = "SSH authentication agent";
+    };
     devel = {
       helix.enable = config.graphical.enable;
       git.enable = config.graphical.enable;
