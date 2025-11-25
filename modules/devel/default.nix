@@ -5,6 +5,5 @@
     ./helix.nix
     ./tex.nix
     ./tools.nix
-    ./zellij.nix
   ];
 }

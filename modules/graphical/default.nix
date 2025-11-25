@@ -35,7 +35,6 @@
     devel = {
       helix.enable = config.graphical.enable;
       git.enable = config.graphical.enable;
-      zellij.enable = config.graphical.enable;
     };
     assertions =
       let
