@@ -23,7 +23,6 @@
     ./kicad.nix
     ./matlab.nix
     ./steam.nix
-    ./sway
     ./niri
     ./waybar
     ./launcher.nix
@@ -49,11 +48,11 @@
       in
       [
         {
-          assertion = (cfg.enable == (cfg.niri.enable || cfg.sway.enable));
+          assertion = (cfg.enable == cfg.niri.enable);
           message = "One window manager has to be enabled for graphical applications to work";
         }
         {
-          assertion = (!cfg.enable || (cfg.niri.enable != cfg.sway.enable));
+          assertion = (!cfg.enable || cfg.niri.enable);
           message = "Only one window manager is supposed to be enabled at once";
         }
       ];
