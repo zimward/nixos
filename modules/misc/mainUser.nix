@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 {
@@ -24,7 +23,7 @@
       initialPassword = lib.mkIf (config.mainUser.hashedPassword == null) "password";
       hashedPassword = config.mainUser.hashedPassword;
       description = "benevolent dictator for life";
-      shell = pkgs.nushell;
+      shell = config.cli.nushell.package;
     };
   };
 }

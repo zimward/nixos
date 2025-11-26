@@ -9,7 +9,7 @@ let
   alacritty = inputs.wrappers.wrapperModules.alacritty.apply {
     inherit pkgs;
     settings.window.opacity = 0.4;
-    settings.terminal.shell = lib.getExe pkgs.nushell;
+    settings.terminal.shell = lib.getExe config.cli.nushell.package;
     settings.colors.bright = {
       black = "#444b6a";
       blue = "#7da6ff";
