@@ -16,7 +16,7 @@
     sops.age.keyFile = lib.mkForce "/nix/sops/age/keys.txt";
 
     devel.git.signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
-    environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
+    environment.sessionVariables.DEFAULT_BROWSER = "librewolf";
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
       "x-scheme-handler/http" = "librewolf.desktop";

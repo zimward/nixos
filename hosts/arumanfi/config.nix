@@ -29,7 +29,7 @@
       pkiBundle = "/persist/system/var/lib/sbctl/";
     };
 
-    environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
+    environment.sessionVariables.DEFAULT_BROWSER = "librewolf";
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
       "x-scheme-handler/http" = "librewolf.desktop";
