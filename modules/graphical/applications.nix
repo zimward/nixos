@@ -39,6 +39,7 @@ in
         thunderbird
         pavucontrol
         comma
+        ltspice
       ])
       ++ (lib.optionals cfg._freetime (
         with pkgs;
@@ -49,6 +50,9 @@ in
           mumble
         ]
       ));
-    nixpkgs.allowUnfreePackages = [ "obsidian" ];
+    nixpkgs.allowUnfreePackages = [
+      "obsidian"
+      "ltspice"
+    ];
   };
 }
