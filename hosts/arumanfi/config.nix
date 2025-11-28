@@ -29,6 +29,10 @@
       pkiBundle = "/persist/system/var/lib/sbctl/";
     };
 
+    services.logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+    };
+
     environment.sessionVariables.DEFAULT_BROWSER = "librewolf";
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";

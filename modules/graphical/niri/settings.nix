@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }:
 {
@@ -128,7 +127,11 @@
 
       overview.zoom = 0.25;
 
-      switch-events.lid-close.action.spawn = [ (lib.getExe config.programs.gtklock.package) ];
+      switch-events.lid-close.action.spawn = [
+        "sh"
+        "-c"
+        "${(lib.getExe config.programs.gtklock.package)} -d; sleep 3; systemctl suspend"
+      ];
 
       hotkey-overlay.skip-at-startup = true;
       xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
