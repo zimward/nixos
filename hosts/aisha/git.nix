@@ -5,8 +5,17 @@
   config,
   ...
 }:
+let
+  configuredGit = inputs.wrappers.wrapperModules.git.apply {
+    inherit pkgs;
+    package = lib.mkForce pkgs.gitMinimal;
+    settings.user = {
+      name = "aisha";
+      email = "auto-git@zimward.moe";
+    };
+  };
+in
 {
-  imports = [ inputs.home-manager.nixosModules.default ];
   users.extraUsers."git" = {
     shell = "${pkgs.git}/bin/git-shell";
     createHome = true;
@@ -44,6 +53,7 @@
       Unit = "updateFlake.service";
     };
   };
+  environment.systemPackages = [ configuredGit.wrapper ];
   systemd.services.updateFlake = {
     enable = true;
     serviceConfig = {
@@ -53,7 +63,7 @@
         pkgs.writeShellApplication {
           name = "updateFlake";
           runtimeInputs = [
-            pkgs.git
+            configuredGit.wrapper
             config.services.openssh.package
             config.nix.package
           ];
@@ -72,34 +82,4 @@
       );
     };
   };
-
-  home-manager.users."git".imports = [
-    (
-      { ... }:
-      {
-        home.username = "git";
-        # home.homeDirectory = lib.mkForce "/nix/persist/git";
-
-        home.stateVersion = "24.05";
-
-        programs.git = {
-          enable = true;
-          settings.user = {
-            name = "aisha";
-            email = "auto-git@zimward.moe";
-          };
-        };
-
-        home.file."git-shell-commands/newrepo" = {
-          text = ''
-            #!${lib.getExe pkgs.bash}
-            mkdir $1
-            cd $1
-            ${lib.getExe pkgs.git} init --bare
-          '';
-          executable = true;
-        };
-      }
-    )
-  ];
 }

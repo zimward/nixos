@@ -75,7 +75,7 @@
     services.nginx.additionalModules = [ pkgs.nginxModules.zstd ];
     services.nginx = {
       enable = true;
-      package = pkgs.nginxQuic;
+      package = pkgs.nginx;
       #add headers to make browsers actually use quic
       commonHttpConfig = ''
         add_header Alt-Svc  'h3=":443"; ma=3600, h2=":443"; ma=3600';
