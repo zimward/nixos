@@ -1,4 +1,3 @@
-#!small
 {
   pkgs,
   config,

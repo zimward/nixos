@@ -23,7 +23,7 @@
       isNormalUser = true;
       initialPassword = lib.mkIf (config.mainUser.hashedPassword == null) "password";
       hashedPassword = config.mainUser.hashedPassword;
-      description = "main user";
+      description = "benevolent dictator for life";
       shell = pkgs.nushell;
     };
   };

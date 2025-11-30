@@ -78,10 +78,22 @@
             path:
             builtins.readDir path |> nixpkgs.lib.filterAttrs (n: v: v == "directory") |> builtins.attrNames;
           dirs = getDirs ./hosts;
+          # servers should use nixpkgs-small
           isSmall =
-            dir: builtins.readFile (./hosts + "/${dir}/config.nix") |> nixpkgs.lib.strings.hasPrefix "#!small";
-          small = (builtins.filter isSmall dirs);
-          big = builtins.filter (d: !(isSmall d)) dirs;
+            dir:
+            let
+              conf = import (./hosts + "/${dir}/config.nix");
+              evaluated = (conf (builtins.functionArgs conf));
+              # in case a config.nix has a top-level config attr
+              config = evaluated.config or evaluated;
+            in
+            config.device.class == "server";
+          small-checkout = map (d: {
+            small = isSmall d;
+            dir = d;
+          }) dirs;
+          small = map (s: s.dir) (builtins.filter (s: s.small) small-checkout);
+          big = map (s: s.dir) (builtins.filter (s: !s.small) small-checkout);
         in
         builtins.listToAttrs ((map (mkSys nixpkgs) big) ++ (map (mkSys nixpkgs-small) small));
     };
