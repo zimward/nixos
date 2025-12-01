@@ -41,7 +41,7 @@
           command = cmd: { command = lib.lists.flatten [ cmd ]; };
         in
         [
-          (command (lib.getExe pkgs.waybar))
+          (command (lib.getExe config.graphical.waybar.package))
           (command [
             "alacritty"
             "--daemon"

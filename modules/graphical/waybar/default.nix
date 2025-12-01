@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   inputs,
   pkgs,
@@ -15,8 +14,10 @@ let
 in
 {
 
-  options.graphical.waybar.enable = lib.mkEnableOption "waybar";
-  config = lib.mkIf config.graphical.waybar.enable {
-    environment.systemPackages = [ waybar.wrapper ];
+  options.graphical.waybar = {
+    enable = lib.mkEnableOption "waybar";
+    package = lib.mkOption {
+      default = waybar.wrapper;
+    };
   };
 }
