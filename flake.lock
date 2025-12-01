@@ -541,16 +541,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1764627357,
-        "narHash": "sha256-meebf58j5IIsb55OjwgI2S171bKHPtYVHH3x41NFivY=",
+        "lastModified": 1764630799,
+        "narHash": "sha256-hv13cs9VPhROeahz/qewe0eR8bUKTB94PHwNJoYbI3w=",
         "owner": "zimward",
         "repo": "wrappers",
-        "rev": "b5b071c4e58cd8e7323d413874bc1f2a4a0d331d",
+        "rev": "1d7510733e6fa2b015c95443f07dff9513ae6bb3",
         "type": "github"
       },
       "original": {
         "owner": "zimward",
-        "ref": "push-kukkouznyxpn",
+        "ref": "push-lyoqpptlznxq",
         "repo": "wrappers",
         "type": "github"
       }

@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+pkgs:
 let
   custom = {
     font = "Adwaita Sans";
@@ -28,505 +25,503 @@ let
   };
 in
 {
-  hm.programs.waybar = {
-    settings = with custom; [
-      {
-        layer = "top";
-        position = "top";
-        exclusive = true;
-        fixed-center = true;
-        gtk-layer-shell = true;
-        spacing = 0;
-        margin-top = 0;
-        margin-bottom = 0;
-        margin-left = 0;
-        margin-right = 0;
-        height = 24;
-        modules-left = [
-          # "niri/workspaces"
-          # "idle_inhibitor"
-          "niri/window"
+  settings = with custom; [
+    {
+      layer = "top";
+      position = "top";
+      exclusive = true;
+      fixed-center = true;
+      gtk-layer-shell = true;
+      spacing = 0;
+      margin-top = 0;
+      margin-bottom = 0;
+      margin-left = 0;
+      margin-right = 0;
+      height = 24;
+      modules-left = [
+        # "niri/workspaces"
+        # "idle_inhibitor"
+        "niri/window"
+      ];
+      modules-center = [
+        "clock"
+      ];
+      modules-right = [
+        "group/network-modules"
+        "group/wireplumber-modules"
+        #          "group/backlight-modules"
+        "group/battery-modules"
+        "tray"
+        # "custom/notifications"
+        "group/powermenu"
+      ];
+
+      "niri/workspaces" = {
+        format = "{icon}";
+        on-click = "activate";
+        all-outputs = true;
+        format-icons = {
+          "default" = "";
+          "urgent" = "";
+          "focused" = "";
+        };
+      };
+
+      "niri/window" = {
+        format = "󰣆 {title}";
+        max-length = 40;
+        separate-outputs = true;
+      };
+
+      "group/network-modules" = {
+        modules = [
+          "network#icon"
+          "network#address"
         ];
-        modules-center = [
-          "clock"
+        orientation = "inherit";
+      };
+      "network#icon" = {
+        format-disconnected = "󰤮";
+        format-ethernet = "󰈀";
+        format-wifi = "󰤨";
+        tooltip-format-wifi = "WiFi: {essid} ({signalStrength}%)\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
+        tooltip-format-ethernet = "Ethernet: {ifname}\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
+        tooltip-format-disconnected = "Disconnected";
+      };
+      "network#address" = {
+        format-disconnected = "Disconnected";
+        format-ethernet = "{ipaddr}/{cidr}";
+        format-wifi = "{essid}";
+        tooltip-format-wifi = "WiFi: {essid} ({signalStrength}%)\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
+        tooltip-format-ethernet = "Ethernet: {ifname}\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
+        tooltip-format-disconnected = "Disconnected";
+      };
+
+      "group/wireplumber-modules" = {
+        modules = [
+          "wireplumber#icon"
+          "wireplumber#volume"
         ];
-        modules-right = [
-          "group/network-modules"
-          "group/wireplumber-modules"
-          #          "group/backlight-modules"
-          "group/battery-modules"
-          "tray"
-          # "custom/notifications"
-          "group/powermenu"
+        orientation = "inherit";
+      };
+      "wireplumber#icon" = {
+        format = "{icon}";
+        format-muted = "󰖁";
+        format-icons = [
+          "󰕿"
+          "󰖀"
+          "󰕾"
         ];
+        on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle &> /dev/null";
+        on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 1%+ &> /dev/null";
+        on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 1%- &> /dev/null";
+        tooltip-format = "Volume: {volume}%";
+      };
+      "wireplumber#volume" = {
+        format = "{volume}%";
+        tooltip-format = "Volume: {volume}%";
+      };
 
-        "niri/workspaces" = {
-          format = "{icon}";
-          on-click = "activate";
-          all-outputs = true;
-          format-icons = {
-            "default" = "";
-            "urgent" = "";
-            "focused" = "";
+      "group/backlight-modules" = {
+        modules = [
+          "backlight#icon"
+          "backlight#percent"
+        ];
+        orientation = "inherit";
+      };
+      "backlight#icon" = {
+        format = "{icon}";
+        format-icons = [
+          "󰃞"
+          "󰃟"
+          "󰃠"
+        ];
+        on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 1%+ &> /dev/null";
+        on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 1%- &> /dev/null";
+        tooltip-format = "Backlight: {percent}%";
+      };
+      "backlight#percent" = {
+        format = "{percent}%";
+        tooltip-format = "Backlight: {percent}%";
+      };
+
+      "group/battery-modules" = {
+        modules = [
+          "battery#icon"
+          "battery#capacity"
+        ];
+        orientation = "inherit";
+      };
+      "battery#icon" = {
+        format = "{icon}";
+        format-charging = "󱐋";
+        format-icons = [
+          "󰂎"
+          "󰁺"
+          "󰁻"
+          "󰁼"
+          "󰁽"
+          "󰁾"
+          "󰁿"
+          "󰂀"
+          "󰂁"
+          "󰂂"
+          "󰁹"
+        ];
+        format-plugged = "󰚥";
+        states = {
+          warning = 30;
+          critical = 15;
+        };
+        tooltip-format = "{timeTo}, {capacity}%";
+      };
+      "battery#capacity" = {
+        format = "{capacity}%";
+        tooltip-format = "{timeTo}, {capacity}%";
+      };
+
+      tray = {
+        icon-size = 15;
+        spacing = 10;
+        show-passive-items = false;
+      };
+
+      clock = {
+        actions = {
+          on-scroll-down = "shift_down";
+          on-scroll-up = "shift_up";
+        };
+        calendar = {
+          format = {
+            days = "<span color='${color8}'><b>{}</b></span>";
+            months = "<span color='${color7}'><b>{}</b></span>";
+            today = "<span color='${color7}'><b><u>{}</u></b></span>";
+            weekdays = "<span color='${colord}'><b>{}</b></span>";
           };
+          mode = "month";
+          on-scroll = 1;
         };
+        format = "{:%F %a %T}";
+        tooltip-format = "{calendar}";
+      };
 
-        "niri/window" = {
-          format = "󰣆 {title}";
-          max-length = 40;
-          separate-outputs = true;
+      "group/powermenu" = {
+        drawer = {
+          children-class = "powermenu-child";
+          transition-duration = 300;
+          transition-left-to-right = false;
         };
+        modules = [
+          "custom/power"
+          # "custom/lock"
+          "custom/suspend"
+          "custom/exit"
+          "custom/reboot"
+        ];
+        orientation = "inherit";
+      };
+      "custom/power" = {
+        format = "󰐥";
+        on-click = "${pkgs.systemd}/bin/systemctl poweroff";
+        tooltip = false;
+      };
+      # "custom/lock" = {
+      #   format = "󰌾";
+      #   on-click = "${pkgs.systemd}/bin/loginctl lock-session";
+      #   tooltip = false;
+      # };
+      "custom/suspend" = {
+        format = "󰤄";
+        on-click = "${pkgs.systemd}/bin/systemctl suspend";
+        tooltip = false;
+      };
+      "custom/exit" = {
+        format = "󰍃";
+        on-click = "${pkgs.systemd}/bin/loginctl terminate-user $USER";
+        tooltip = false;
+      };
+      "custom/reboot" = {
+        format = "󰜉";
+        on-click = "${pkgs.systemd}/bin/systemctl reboot";
+        tooltip = false;
+      };
+      # "custom/notifications" = {
+      #   tooltip = false;
+      #   format = "{icon}";
+      #   format-icons = {
+      #     notification = "󱅫 ";
+      #     none = "󰂚 ";
+      #     dnd-notification = "󰂛 ";
+      #     dnd-none = "󰂛 ";
+      #     inhibited-notification = "󰂚 ";
+      #     inhibited-none = "󰂚 ";
+      #     dnd-inhibited-notification = "󰂛";
+      #     dnd-inhibited-none = "󰂛 ";
+      #   };
+      #   return-type = "json";
+      #   exec-if = "${pkgs.swaynotificationcenter}/bin/swaync-client";
+      #   exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+      #   on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+      #   on-click-right = "${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw";
+      #   escape = true;
+      # };
+    }
+  ];
 
-        "group/network-modules" = {
-          modules = [
-            "network#icon"
-            "network#address"
-          ];
-          orientation = "inherit";
-        };
-        "network#icon" = {
-          format-disconnected = "󰤮";
-          format-ethernet = "󰈀";
-          format-wifi = "󰤨";
-          tooltip-format-wifi = "WiFi: {essid} ({signalStrength}%)\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
-          tooltip-format-ethernet = "Ethernet: {ifname}\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
-          tooltip-format-disconnected = "Disconnected";
-        };
-        "network#address" = {
-          format-disconnected = "Disconnected";
-          format-ethernet = "{ipaddr}/{cidr}";
-          format-wifi = "{essid}";
-          tooltip-format-wifi = "WiFi: {essid} ({signalStrength}%)\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
-          tooltip-format-ethernet = "Ethernet: {ifname}\n󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}";
-          tooltip-format-disconnected = "Disconnected";
-        };
+  "style.css".content = with custom; ''
+    /* Global */
+    * {
+      all: unset;
+      font-family: ${font};
+      font-size: 9pt;
+      font-weight: bold;
+    }
 
-        "group/wireplumber-modules" = {
-          modules = [
-            "wireplumber#icon"
-            "wireplumber#volume"
-          ];
-          orientation = "inherit";
-        };
-        "wireplumber#icon" = {
-          format = "{icon}";
-          format-muted = "󰖁";
-          format-icons = [
-            "󰕿"
-            "󰖀"
-            "󰕾"
-          ];
-          on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle &> /dev/null";
-          on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 1%+ &> /dev/null";
-          on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 1%- &> /dev/null";
-          tooltip-format = "Volume: {volume}%";
-        };
-        "wireplumber#volume" = {
-          format = "{volume}%";
-          tooltip-format = "Volume: {volume}%";
-        };
+    /* Menu */
+    menu {
+      background: ${color1};
+      border-radius: 12px;
+    }
 
-        "group/backlight-modules" = {
-          modules = [
-            "backlight#icon"
-            "backlight#percent"
-          ];
-          orientation = "inherit";
-        };
-        "backlight#icon" = {
-          format = "{icon}";
-          format-icons = [
-            "󰃞"
-            "󰃟"
-            "󰃠"
-          ];
-          on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 1%+ &> /dev/null";
-          on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 1%- &> /dev/null";
-          tooltip-format = "Backlight: {percent}%";
-        };
-        "backlight#percent" = {
-          format = "{percent}%";
-          tooltip-format = "Backlight: {percent}%";
-        };
+    menu separator {
+      background: ${colore};
+    }
 
-        "group/battery-modules" = {
-          modules = [
-            "battery#icon"
-            "battery#capacity"
-          ];
-          orientation = "inherit";
-        };
-        "battery#icon" = {
-          format = "{icon}";
-          format-charging = "󱐋";
-          format-icons = [
-            "󰂎"
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁽"
-            "󰁾"
-            "󰁿"
-            "󰂀"
-            "󰂁"
-            "󰂂"
-            "󰁹"
-          ];
-          format-plugged = "󰚥";
-          states = {
-            warning = 30;
-            critical = 15;
-          };
-          tooltip-format = "{timeTo}, {capacity}%";
-        };
-        "battery#capacity" = {
-          format = "{capacity}%";
-          tooltip-format = "{timeTo}, {capacity}%";
-        };
+    menu menuitem {
+      background: transparent;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      transition: 300ms linear;
+    }
 
-        tray = {
-          icon-size = 15;
-          spacing = 10;
-          show-passive-items = false;
-        };
+    menu menuitem:hover {
+      background: lighter(${color2});
+    }
 
-        clock = {
-          actions = {
-            on-scroll-down = "shift_down";
-            on-scroll-up = "shift_up";
-          };
-          calendar = {
-            format = {
-              days = "<span color='${color8}'><b>{}</b></span>";
-              months = "<span color='${color7}'><b>{}</b></span>";
-              today = "<span color='${color7}'><b><u>{}</u></b></span>";
-              weekdays = "<span color='${colord}'><b>{}</b></span>";
-            };
-            mode = "month";
-            on-scroll = 1;
-          };
-          format = "{:%F %a %T}";
-          tooltip-format = "{calendar}";
-        };
+    menu menuitem:first-child {
+      border-radius: 12px 12px 0 0;
+    }
 
-        "group/powermenu" = {
-          drawer = {
-            children-class = "powermenu-child";
-            transition-duration = 300;
-            transition-left-to-right = false;
-          };
-          modules = [
-            "custom/power"
-            # "custom/lock"
-            "custom/suspend"
-            "custom/exit"
-            "custom/reboot"
-          ];
-          orientation = "inherit";
-        };
-        "custom/power" = {
-          format = "󰐥";
-          on-click = "${pkgs.systemd}/bin/systemctl poweroff";
-          tooltip = false;
-        };
-        # "custom/lock" = {
-        #   format = "󰌾";
-        #   on-click = "${pkgs.systemd}/bin/loginctl lock-session";
-        #   tooltip = false;
-        # };
-        "custom/suspend" = {
-          format = "󰤄";
-          on-click = "${pkgs.systemd}/bin/systemctl suspend";
-          tooltip = false;
-        };
-        "custom/exit" = {
-          format = "󰍃";
-          on-click = "${pkgs.systemd}/bin/loginctl terminate-user $USER";
-          tooltip = false;
-        };
-        "custom/reboot" = {
-          format = "󰜉";
-          on-click = "${pkgs.systemd}/bin/systemctl reboot";
-          tooltip = false;
-        };
-        # "custom/notifications" = {
-        #   tooltip = false;
-        #   format = "{icon}";
-        #   format-icons = {
-        #     notification = "󱅫 ";
-        #     none = "󰂚 ";
-        #     dnd-notification = "󰂛 ";
-        #     dnd-none = "󰂛 ";
-        #     inhibited-notification = "󰂚 ";
-        #     inhibited-none = "󰂚 ";
-        #     dnd-inhibited-notification = "󰂛";
-        #     dnd-inhibited-none = "󰂛 ";
-        #   };
-        #   return-type = "json";
-        #   exec-if = "${pkgs.swaynotificationcenter}/bin/swaync-client";
-        #   exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
-        #   on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-        #   on-click-right = "${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw";
-        #   escape = true;
-        # };
-      }
-    ];
+    menu menuitem:last-child {
+      border-radius: 0 0 12px 12px;
+    }
 
-    style = with custom; ''
-      /* Global */
-      * {
-        all: unset;
-        font-family: ${font};
-        font-size: 9pt;
-        font-weight: bold;
-      }
+    menu menuitem:only-child {
+      border-radius: 12px;
+    }
 
-      /* Menu */
-      menu {
-        background: ${color1};
-        border-radius: 12px;
-      }
+    /* Tooltip */
+    tooltip {
+      background: ${color1};
+      border-radius: 12px;
+    }
 
-      menu separator {
-        background: ${colore};
-      }
+    tooltip label {
+      margin: 0.5rem;
+    }
 
-      menu menuitem {
-        background: transparent;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        transition: 300ms linear;
-      }
+    /* Waybar */
+    window#waybar {
+      background: ${color1};
+    }
 
-      menu menuitem:hover {
-        background: lighter(${color2});
-      }
+    .modules-left {
+      padding-left: 0.25rem;
+    }
 
-      menu menuitem:first-child {
-        border-radius: 12px 12px 0 0;
-      }
+    .modules-right {
+      padding-right: 0.25rem;
+    }
 
-      menu menuitem:last-child {
-        border-radius: 0 0 12px 12px;
-      }
+    /* Modules */
+    #workspaces,
+    #workspaces button,
+    #idle_inhibitor,
+    #wireplumber-modules,
+    #backlight-modules,
+    #battery-modules,
+    #network-modules,
+    #tray,
+    #clock,
+    #custom-exit,
+    #custom-lock,
+    #custom-suspend,
+    #custom-reboot,
+    #custom-power {
+      background: ${color2};
+      border-radius: 8px;
+      margin: 0.5rem 0.25rem;
+      transition: 300ms linear;
+    }
 
-      menu menuitem:only-child {
-        border-radius: 12px;
-      }
+    #image,
+    #window,
+    #network.address,
+    #wireplumber.volume,
+    #backlight.percent,
+    #battery.capacity,
+    #tray,
+    #clock {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
 
-      /* Tooltip */
-      tooltip {
-        background: ${color1};
-        border-radius: 12px;
-      }
+    #idle_inhibitor,
 
-      tooltip label {
-        margin: 0.5rem;
-      }
+    #network.icon {
+      background: ${colorc};
+      color: ${color2};
+      border-radius: 8px;
+      font-size: 13pt;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      min-width: 1.5rem;
+    }
 
-      /* Waybar */
-      window#waybar {
-        background: ${color1};
-      }
+    #wireplumber.icon {
+      background: ${color8};
+      color: ${color2};
+      border-radius: 8px;
+      font-size: 13pt;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      min-width: 1.5rem;
+    }
 
-      .modules-left {
-        padding-left: 0.25rem;
-      }
+    #backlight.icon,
 
-      .modules-right {
-        padding-right: 0.25rem;
-      }
+    #battery.icon {
+      background: ${colora};
+      color: ${color2};
+      border-radius: 8px;
+      font-size: 9pt;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      min-width: 1.5rem;
+    }
+    #custom-exit,
+    #custom-lock,
+    #custom-suspend,
+    #custom-reboot,
+    #custom-power {
+      background: ${color7};
+      color: ${color2};
+      border-radius: 8px;
+      font-size: 13pt;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      min-width: 1.5rem;
+      transition: 300ms linear;
+    }
 
-      /* Modules */
-      #workspaces,
-      #workspaces button,
-      #idle_inhibitor,
-      #wireplumber-modules,
-      #backlight-modules,
-      #battery-modules,
-      #network-modules,
-      #tray,
-      #clock,
-      #custom-exit,
-      #custom-lock,
-      #custom-suspend,
-      #custom-reboot,
-      #custom-power {
-        background: ${color2};
-        border-radius: 8px;
-        margin: 0.5rem 0.25rem;
-        transition: 300ms linear;
-      }
+    #custom-notifications {
+      background: ${color9};
+      color: ${color2};
+      border-radius: 8px;
+      font-size: 14pt;
+      padding-left: 0.76rem;
+      min-width: 1.5rem;
+      margin: 0.5rem 0.25rem;
+    }
 
-      #image,
-      #window,
-      #network.address,
-      #wireplumber.volume,
-      #backlight.percent,
-      #battery.capacity,
-      #tray,
-      #clock {
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-      }
+    /* Workspaces */
+    #workspaces button {
+      margin: 0;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      min-width: 1.5rem;
+    }
 
-      #idle_inhibitor,
+    #workspaces button label {
+      color: ${color5};
+    }
 
-      #network.icon {
-        background: ${colorc};
-        color: ${color2};
-        border-radius: 8px;
-        font-size: 13pt;
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        min-width: 1.5rem;
-      }
+    #workspaces button.empty label {
+      color: ${color4};
+    }
 
-      #wireplumber.icon {
-        background: ${color8};
-        color: ${color2};
-        border-radius: 8px;
-        font-size: 13pt;
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        min-width: 1.5rem;
-      }
+    #workspaces button.urgent label,
+    #workspaces button.active label {
+      color: ${color2};
+    }
 
-      #backlight.icon,
+    #workspaces button.urgent {
+      background: ${color9};
+    }
 
-      #battery.icon {
-        background: ${colora};
-        color: ${color2};
-        border-radius: 8px;
-        font-size: 9pt;
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        min-width: 1.5rem;
-      }
-      #custom-exit,
-      #custom-lock,
-      #custom-suspend,
-      #custom-reboot,
-      #custom-power {
-        background: ${color7};
-        color: ${color2};
-        border-radius: 8px;
-        font-size: 13pt;
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        min-width: 1.5rem;
-        transition: 300ms linear;
-      }
+    #workspaces button.active {
+      background: ${colore};
+    }
 
-      #custom-notifications {
-        background: ${color9};
-        color: ${color2};
-        border-radius: 8px;
-        font-size: 14pt;
-        padding-left: 0.76rem;
-        min-width: 1.5rem;
-        margin: 0.5rem 0.25rem;
-      }
+    /* Idle Inhibitor */
+    #idle_inhibitor {
+      background: ${color2};
+      color: ${colore};
+    }
 
-      /* Workspaces */
-      #workspaces button {
-        margin: 0;
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        min-width: 1.5rem;
-      }
+    #idle_inhibitor.deactivated {
+      color: ${color4};
+    }
 
-      #workspaces button label {
-        color: ${color5};
-      }
+    /* Systray */
+    #tray > .passive {
+      -gtk-icon-effect: dim;
+    }
 
-      #workspaces button.empty label {
-        color: ${color4};
-      }
+    #tray > .needs-attention {
+      -gtk-icon-effect: highlight;
+      background: ${colora};
+    }
 
-      #workspaces button.urgent label,
-      #workspaces button.active label {
-        color: ${color2};
-      }
+    /* Hover effects */
+    #workspaces button:hover,
+    #idle_inhibitor:hover,
+    #idle_inhibitor.deactivated:hover,
+    #clock:hover {
+      background: lighter(${color2});
+    }
 
-      #workspaces button.urgent {
-        background: ${color9};
-      }
+    #workspaces button.urgent:hover {
+      background: lighter(${colorf});
+    }
 
-      #workspaces button.active {
-        background: ${colore};
-      }
+    #workspaces button.active:hover,
+    #network.icon:hover,
+    #wireplumber.icon:hover,
+    #custom-exit:hover,
+    #custom-lock:hover,
+    #custom-suspend:hover,
+    #custom-reboot:hover,
+    #custom-power:hover {
+      background: lighter(${color6});
+    }
 
-      /* Idle Inhibitor */
-      #idle_inhibitor {
-        background: ${color2};
-        color: ${colore};
-      }
+    #workspaces button.urgent:hover label,
+    #workspaces button.active:hover label,
+    #network.icon:hover label,
+    #wireplumber.icon:hover label,
+    #custom-exit:hover label,
+    #custom-lock:hover label,
+    #custom-suspend:hover label,
+    #custom-reboot:hover label,
+    #custom-power:hover label {
+      color: lighter(${color2});
+    }
 
-      #idle_inhibitor.deactivated {
-        color: ${color4};
-      }
+    #workspaces button:hover label {
+      color: lighter(${color5});
+    }
 
-      /* Systray */
-      #tray > .passive {
-        -gtk-icon-effect: dim;
-      }
+    #workspaces button.empty:hover label {
+      color: lighter(${color4});
+    }
 
-      #tray > .needs-attention {
-        -gtk-icon-effect: highlight;
-        background: ${colora};
-      }
+    #idle_inhibitor:hover {
+      color: lighter(${colorc});
+    }
 
-      /* Hover effects */
-      #workspaces button:hover,
-      #idle_inhibitor:hover,
-      #idle_inhibitor.deactivated:hover,
-      #clock:hover {
-        background: lighter(${color2});
-      }
-
-      #workspaces button.urgent:hover {
-        background: lighter(${colorf});
-      }
-
-      #workspaces button.active:hover,
-      #network.icon:hover,
-      #wireplumber.icon:hover,
-      #custom-exit:hover,
-      #custom-lock:hover,
-      #custom-suspend:hover,
-      #custom-reboot:hover,
-      #custom-power:hover {
-        background: lighter(${color6});
-      }
-
-      #workspaces button.urgent:hover label,
-      #workspaces button.active:hover label,
-      #network.icon:hover label,
-      #wireplumber.icon:hover label,
-      #custom-exit:hover label,
-      #custom-lock:hover label,
-      #custom-suspend:hover label,
-      #custom-reboot:hover label,
-      #custom-power:hover label {
-        color: lighter(${color2});
-      }
-
-      #workspaces button:hover label {
-        color: lighter(${color5});
-      }
-
-      #workspaces button.empty:hover label {
-        color: lighter(${color4});
-      }
-
-      #idle_inhibitor:hover {
-        color: lighter(${colorc});
-      }
-
-      #idle_inhibitor.deactivated:hover {
-        color: lighter(${color4});
-      }
-    '';
-  };
+    #idle_inhibitor.deactivated:hover {
+      color: lighter(${color4});
+    }
+  '';
 }
