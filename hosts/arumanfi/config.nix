@@ -43,7 +43,10 @@
     };
 
     graphical.niri.enable = true;
-    hm.programs.niri.settings.input.keyboard.xkb.options = "caps:escape";
+    programs.niri.package =
+      (config.graphical.niri.wrapper.apply {
+        settings.misc.input.keyboard.xkb.options = "caps:escape";
+      }).wrapper;
     graphical.locker.enable = true;
     graphical.kicad = {
       enable = true;

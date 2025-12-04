@@ -2,120 +2,93 @@
   lib,
   pkgs,
   config,
-  ...
 }:
-lib.mkIf config.graphical.niri.enable {
-  hm.programs.niri.settings.binds =
-    with config.hm.lib.niri.actions;
-    {
-      "XF86AudioMute".action = spawn [
-        "${pkgs.swayosd}/bin/swayosd-client"
-        "--output-volume=mute-toggle"
-      ];
-      "XF86AudioMicMute".action = spawn [
-        "${pkgs.swayosd}/bin/swayosd-client"
-        "--input-volume=mute-toggle"
-      ];
+{
 
-      "XF86AudioRaiseVolume".action.spawn = [
-        "${pkgs.swayosd}/bin/swayosd-client"
-        "--output-volume=raise"
-      ];
-      "XF86AudioLowerVolume".action.spawn = [
-        "${pkgs.swayosd}/bin/swayosd-client"
-        "--output-volume=lower"
-      ];
+  "XF86AudioMute".spawn = [
+    "${pkgs.swayosd}/bin/swayosd-client"
+    "--output-volume=mute-toggle"
+  ];
+  "XF86AudioMicMute".spawn = [
+    "${pkgs.swayosd}/bin/swayosd-client"
+    "--input-volume=mute-toggle"
+  ];
 
-      "XF86MonBrightnessUp".action.spawn = [
-        "${pkgs.swayosd}/bin/swayosd-client"
-        "--brightness=raise"
-      ];
-      "XF86MonBrightnessDown".action.spawn = [
-        "${pkgs.swayosd}/bin/swayosd-client"
-        "--brightness=lower"
-      ];
+  "XF86AudioRaiseVolume".spawn = [
+    "${pkgs.swayosd}/bin/swayosd-client"
+    "--output-volume=raise"
+  ];
+  "XF86AudioLowerVolume".spawn = [
+    "${pkgs.swayosd}/bin/swayosd-client"
+    "--output-volume=lower"
+  ];
 
-      "Mod+Print".action.screenshot-window = [ ];
-      "Mod+Shift+S".action.screenshot = [ ];
+  "XF86MonBrightnessUp".spawn = [
+    "${pkgs.swayosd}/bin/swayosd-client"
+    "--brightness=raise"
+  ];
+  "XF86MonBrightnessDown".spawn = [
+    "${pkgs.swayosd}/bin/swayosd-client"
+    "--brightness=lower"
+  ];
 
-      "Mod+Shift+i".action.spawn = [
-        "sh"
-        "-c"
-        "${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom"
-      ];
+  "Mod+Print".screenshot-window = null;
+  "Mod+Shift+S".screenshot = null;
 
-      "Mod+Shift+L".action.spawn = [ (lib.getExe config.programs.gtklock.package) ];
+  "Mod+Shift+i".spawn = [
+    "sh"
+    "-c"
+    "${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom"
+  ];
 
-      #upload clipboard
-      "Mod+j".action.spawn = [
-        "sh"
-        "-c"
-        "${pkgs.wl-clipboard-rs}/bin/wl-paste | ${lib.getExe pkgs.curl} -4 -X POST https://arcureid.de/imgserv/upload --data-binary @- | ${pkgs.wl-clipboard-rs}/bin/wl-copy"
-      ];
+  "Mod+Shift+L".spawn = [ (lib.getExe config.programs.gtklock.package) ];
 
-      "Mod+P".action.spawn = lib.getExe config.graphical.launcher;
-      "Mod+Shift+T".action.spawn = [
-        "alacritty"
-        "msg"
-        "create-window"
-      ];
+  "Mod+P".spawn = lib.getExe config.graphical.launcher;
+  "Mod+Shift+T".spawn = [
+    "alacritty"
+    "msg"
+    "create-window"
+  ];
 
-      "Mod+Shift+J".action.close-window = [ ];
-      "Mod+Y".action.spawn = [
-        (lib.getExe config.hm.programs.niri.package)
-        "msg"
-        "output"
-        "DP-3"
-        "transform"
-        "90"
-      ];
-      "Mod+Shift+Y".action.spawn = [
-        (lib.getExe config.hm.programs.niri.package)
-        "msg"
-        "output"
-        "DP-3"
-        "transform"
-        "normal"
-      ];
+  "Mod+Shift+J".close-window = null;
 
-      "Mod+G".action = switch-preset-column-width;
-      "Mod+Shift+G".action = switch-preset-window-height;
-      "Mod+Ctrl+R".action = reset-window-height;
-      "Mod+F".action = maximize-column;
-      "Mod+Shift+F".action = fullscreen-window;
-      "Mod+Space".action = toggle-window-floating;
+  "Mod+G".switch-preset-column-width = null;
+  "Mod+Shift+G".switch-preset-window-height = null;
+  "Mod+Ctrl+R".reset-window-height = null;
+  "Mod+F".maximize-column = null;
+  "Mod+Shift+F".fullscreen-window = null;
+  "Mod+Space".toggle-window-floating = null;
 
-      "Mod+Shift+Ctrl+H".action = consume-window-into-column;
-      "Mod+Shift+Ctrl+N".action = expel-window-from-column;
-      "Mod+C".action = center-window;
-      "Mod+Tab".action = switch-focus-between-floating-and-tiling;
+  "Mod+Shift+Ctrl+H".consume-window-into-column = null;
+  "Mod+Shift+Ctrl+N".expel-window-from-column = null;
+  "Mod+C".center-window = null;
+  "Mod+Tab".switch-focus-between-floating-and-tiling = null;
 
-      "Mod+Minus".action = set-column-width "-10%";
-      "Mod+Plus".action = set-column-width "+10%";
-      "Mod+Shift+Plus".action = set-window-height "-10%";
-      "Mod+Shift+Minus".action = set-window-height "+10%";
+  "Mod+Minus".set-column-width = "-10%";
+  "Mod+Plus".set-column-width = "+10%";
+  "Mod+Shift+Plus".set-window-height = "-10%";
+  "Mod+Shift+Minus".set-window-height = "+10%";
 
-      "Mod+H".action = focus-column-or-monitor-left;
-      "Mod+N".action = focus-column-or-monitor-right;
-      "Mod+Ctrl+H".action = focus-monitor-left;
-      "Mod+Ctrl+N".action = focus-monitor-right;
-      "Mod+D".action = focus-window-or-workspace-down;
-      "Mod+R".action = focus-window-or-workspace-up;
-      "Mod+Home".action = focus-column-first;
-      "Mod+End".action = focus-column-last;
-      "Mod+Shift+Home".action = move-column-to-first;
-      "Mod+Shift+End".action = move-column-to-last;
+  "Mod+H".focus-column-or-monitor-left = null;
+  "Mod+N".focus-column-or-monitor-right = null;
+  "Mod+Ctrl+H".focus-monitor-left = null;
+  "Mod+Ctrl+N".focus-monitor-right = null;
+  "Mod+D".focus-window-or-workspace-down = null;
+  "Mod+R".focus-window-or-workspace-up = null;
+  "Mod+Home".focus-column-first = null;
+  "Mod+End".focus-column-last = null;
+  "Mod+Shift+Home".move-column-to-first = null;
+  "Mod+Shift+End".move-column-to-last = null;
 
-      "Mod+Shift+H".action = move-column-left-or-to-monitor-left;
-      "Mod+Shift+N".action = move-column-right-or-to-monitor-right;
-      "Mod+Shift+R".action = move-window-up-or-to-workspace-up;
-      "Mod+Shift+D".action = move-window-down-or-to-workspace-down;
-    }
-    #workspace actions
-    // builtins.foldl' (acc: elem: acc // elem) { } (
-      map (i: {
-        "Mod+${builtins.toString i}".action.focus-workspace = i;
-        "Mod+Ctrl+${builtins.toString i}".action.move-column-to-workspace = i;
-      }) (lib.genList (x: x) 10)
-    );
+  "Mod+Shift+H".move-column-left-or-to-monitor-left = null;
+  "Mod+Shift+N".move-column-right-or-to-monitor-right = null;
+  "Mod+Shift+R".move-window-up-or-to-workspace-up = null;
+  "Mod+Shift+D".move-window-down-or-to-workspace-down = null;
 }
+#workspace
+// builtins.foldl' (acc: elem: acc // elem) { } (
+  map (i: {
+    "Mod+${builtins.toString i}".focus-workspace = i;
+    "Mod+Ctrl+${builtins.toString i}".move-column-to-workspace = i;
+  }) (lib.genList (x: x) 10)
+)

@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }:
 {
@@ -67,6 +68,30 @@
     networking.firewall.enable = false;
 
     graphical.niri.enable = true;
+    programs.niri.package =
+      (config.graphical.niri.wrapper.apply {
+        settings.binds = {
+          "Mod+Y".spawn = [
+            #can't use the wrapped package as that is a infrec
+            (lib.getExe pkgs.niri)
+            "msg"
+            "output"
+            "DP-3"
+            "transform"
+            "90"
+          ];
+          "Mod+Shift+Y".spawn = [
+            (lib.getExe pkgs.niri)
+            "msg"
+            "output"
+            "DP-3"
+            "transform"
+            "normal"
+          ];
+
+        };
+      }).wrapper;
+
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
     graphical.minecraft.enable = true;
