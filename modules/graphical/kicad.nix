@@ -29,6 +29,6 @@
       if config.graphical.kicad.minimal then
         [ (withAddons pkgs.kicad-small) ]
       else
-        [ (withAddons pkgs.kicad) ];
+        [ (withAddons pkgs.kicad-small) ];
   };
 }

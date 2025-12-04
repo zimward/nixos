@@ -32,7 +32,7 @@ in
         RestartSec = 2;
         Restart = "always";
         Type = "simple";
-
+        ExecStart = "${pkgs.swayosd}/bin/swayosd-server --top-margin 0.100000";
       };
       unitConfig = {
         After = "graphical-session.target";
