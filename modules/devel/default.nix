@@ -2,7 +2,7 @@
 {
   imports = [
     ./git.nix
-    ./helix.nix
+    ./helix
     ./tex.nix
     ./tools.nix
   ];
