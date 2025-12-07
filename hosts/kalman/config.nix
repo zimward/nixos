@@ -141,26 +141,93 @@
                       middle = "<|fim_suffix|>";
                       end = "<|fim_middle|>";
                     };
-                    max_context = 4096;
-                    max_tokens = 4096;
+                  };
+                }
+                {
+                  action_display_name = "Code from comment";
+                  model = "qwen";
+                  parameters = {
+                    messages = [
+                      {
+                        role = "system";
+                        content = builtins.readFile ./cfc.md;
+                      }
+                      {
+                        role = "user";
+                        content = ''
+                          <context>
+                          {CODE}
+                          </context>
+                          <input>
+                          {SELECTED_TEXT}
+                          </input>
+                        '';
+                      }
+                    ];
+                  };
+                  post_process = {
+                    extractor = "(?s)<answer>(.*?)</answer>";
+                  };
+                }
+                {
+                  action_display_name = "Code from comment (thinking)";
+                  model = "qwen";
+                  parameters = {
+                    messages = [
+                      {
+                        role = "system";
+                        content = lib.strings.concatLines [
+                          (builtins.readFile ./cfc.md)
+                          (builtins.readFile ./cot.md)
+                        ];
+                      }
+                      {
+                        role = "user";
+                        content = ''
+                          <context>
+                          {CODE}
+                          </context>
+                          <input>
+                          {SELECTED_TEXT}
+                          </input>
+                        '';
+                      }
+                    ];
+                  };
+                  post_process = {
+                    extractor = "(?s)<answer>(.*?)</answer>";
                   };
                 }
               ];
             };
           };
-          language = lib.mkBefore (
-            map
+          language =
+            (map
               (name: {
                 inherit name;
                 language-servers = [ "lsp-ai" ];
               })
               [
-                "rust"
                 "matlab"
-                "nix"
                 "python"
               ]
-          );
+            )
+            ++ [
+              {
+                name = "rust";
+                language-servers = [
+                  "rust-analyzer"
+                  "lsp-ai"
+                ];
+              }
+              {
+                name = "nix";
+                language-servers = [
+                  "nixd"
+                  "lsp-ai"
+                ];
+              }
+            ];
         };
       }).wrapper;
     environment.systemPackages = [
