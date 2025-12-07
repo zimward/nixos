@@ -112,35 +112,57 @@
       package = pkgs.ollama-rocm;
       environmentVariables = {
         HSA_OVERRIDE_GFX_VERSION = "10.3.0";
+        OLLAMA_KEEP_ALIVE = "15m";
       };
     };
     devel.helix.package =
       (config.devel.helix.wrapper.apply {
         languages = {
-          language-server.helix-gpt = {
-            command = lib.getExe pkgs.helix-gpt;
-            args = [
-              "--handler"
-              "ollama"
-              "--ollamaModel"
-              "devstral-s:latest"
-            ];
+          language-server.lsp-ai = {
+            command = lib.getExe pkgs.lsp-ai;
+            timeout = 300;
+            config = {
+              memory = {
+                file_store = { };
+              };
+              models = {
+                qwen = {
+                  type = "ollama";
+                  model = "qwen3-coder:30b";
+                };
+              };
+              actions = [
+                {
+                  action_display_name = "Complete";
+                  model = "qwen";
+                  parameters = {
+                    fim = {
+                      start = "<|fim_prefix|>";
+                      middle = "<|fim_suffix|>";
+                      end = "<|fim_middle|>";
+                    };
+                    max_context = 4096;
+                    max_tokens = 4096;
+                  };
+                }
+              ];
+            };
           };
-          language =
+          language = lib.mkBefore (
             map
               (name: {
                 inherit name;
-                language-servers = [ "helix-gpt" ];
+                language-servers = [ "lsp-ai" ];
               })
               [
                 "rust"
                 "matlab"
                 "nix"
                 "python"
-              ];
+              ]
+          );
         };
       }).wrapper;
-
     environment.systemPackages = [
       pkgs.freecad
       pkgs.prusa-slicer

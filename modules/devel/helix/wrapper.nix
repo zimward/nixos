@@ -137,7 +137,10 @@ inputs.wrappers.wrapperModules.helix.apply {
           formatter = {
             command = lib.getExe pkgs.nixfmt-rfc-style;
           };
-          language-servers = [ "nixd" ];
+          language-servers = [
+            "nixd"
+            "lsp-ai"
+          ];
         }
         {
           name = "rust";
