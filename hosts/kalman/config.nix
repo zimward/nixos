@@ -114,6 +114,32 @@
         HSA_OVERRIDE_GFX_VERSION = "10.3.0";
       };
     };
+    devel.helix.package =
+      (config.devel.helix.wrapper.apply {
+        languages = {
+          language-server.helix-gpt = {
+            command = lib.getExe pkgs.helix-gpt;
+            args = [
+              "--handler"
+              "ollama"
+              "--ollamaModel"
+              "devstral-s:latest"
+            ];
+          };
+          language =
+            map
+              (name: {
+                inherit name;
+                language-servers = [ "helix-gpt" ];
+              })
+              [
+                "rust"
+                "matlab"
+                "nix"
+                "python"
+              ];
+        };
+      }).wrapper;
 
     environment.systemPackages = [
       pkgs.freecad

@@ -27,9 +27,9 @@ in
     };
   };
   config = lib.mkIf config.devel.helix.enable {
-    environment.systemPackages = [ cfg.wrapper.wrapper ];
+    environment.systemPackages = [ cfg.package ];
     environment.sessionVariables = {
-      EDITOR = lib.getExe (cfg.wrapper.wrapper);
+      EDITOR = lib.getExe (cfg.package);
     };
   };
 }
