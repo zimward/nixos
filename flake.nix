@@ -55,6 +55,7 @@
     {
       nixosConfigurations =
         let
+          # create a system configuration for a given host.
           mkSys = nixp: name: {
             inherit name;
             value = nixp.lib.nixosSystem {
@@ -65,27 +66,38 @@
               ];
             };
           };
+
+          # get a list of directories in a given path.
           getDirs =
             path:
             builtins.readDir path |> nixpkgs.lib.filterAttrs (n: v: v == "directory") |> builtins.attrNames;
+
+          # Get the list of host directories.
           dirs = getDirs ./hosts;
-          # servers should use nixpkgs-small
+
+          # determine if a host should use nixpkgs-small based on its configuration.
           isSmall =
             dir:
             let
               conf = import (./hosts + "/${dir}/config.nix");
               evaluated = (conf (builtins.functionArgs conf));
-              # in case a config.nix has a top-level config attr
               config = evaluated.config or evaluated;
             in
             config.device.class == "server";
+
+          # Map over the directories to determine which ones should use nixpkgs-small.
           small-checkout = map (d: {
             small = isSmall d;
             dir = d;
           }) dirs;
+
+          # Get a list of directories that should use nixpkgs-small.
           small = map (s: s.dir) (builtins.filter (s: s.small) small-checkout);
+
+          # Get a list of directories that should use the default nixpkgs.
           big = map (s: s.dir) (builtins.filter (s: !s.small) small-checkout);
         in
+        # Combine the configurations for all hosts into an attributes set, mapping each host to its respective system configuration.
         builtins.listToAttrs ((map (mkSys nixpkgs) big) ++ (map (mkSys nixpkgs-small) small));
     };
 }
