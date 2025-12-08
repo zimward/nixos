@@ -33,7 +33,7 @@
       HandleLidSwitch = "ignore";
     };
 
-    environment.sessionVariables.DEFAULT_BROWSER = "librewolf";
+    environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
     xdg.mime.defaultApplications = {
       "text/html" = "librewolf.desktop";
       "x-scheme-handler/http" = "librewolf.desktop";
