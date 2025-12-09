@@ -1,4 +1,4 @@
-pkgs:
+{ inputs, pkgs }:
 let
   custom = {
     font = "Adwaita Sans";
@@ -24,7 +24,8 @@ let
     colorf = "#f38ba8"; # red
   };
 in
-{
+inputs.wrappers.wrapperModules.waybar.apply {
+  inherit pkgs;
   settings = with custom; [
     {
       layer = "top";

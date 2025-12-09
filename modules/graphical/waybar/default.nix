@@ -5,12 +5,7 @@
   ...
 }:
 let
-  waybar = inputs.wrappers.wrapperModules.waybar.apply (
-    {
-      inherit pkgs;
-    }
-    // (import ./settings.nix pkgs)
-  );
+  waybar = import ./wrapper.nix { inherit inputs pkgs; };
 in
 {
 
