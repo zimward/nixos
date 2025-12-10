@@ -16,7 +16,7 @@ inputs.wrappers.wrapperModules.niri.apply {
         opacity = 0.8;
       }
     ];
-    misc.environment = {
+    environment = {
       CLUTTER_BACKEND = "wayland";
       GDK_BACKEND = "wayland,x11";
       MOZ_ENABLE_WAYLAND = "1";
@@ -29,7 +29,7 @@ inputs.wrappers.wrapperModules.niri.apply {
       TERMINAL = "alacritty";
       XMODIFIERS = "@im=fcitx";
     };
-    misc.input = {
+    input = {
       keyboard.xkb = {
         layout = "de(dvorak)";
       };
@@ -38,7 +38,7 @@ inputs.wrappers.wrapperModules.niri.apply {
       warp-mouse-to-focus = null;
       workspace-auto-back-and-forth = true;
     };
-    misc.screenshot-path = "~/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
+    screenshot-path = "~/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
 
     spawn-at-startup =
       let
@@ -118,25 +118,23 @@ inputs.wrappers.wrapperModules.niri.apply {
         bottom = 0;
       };
     };
-    misc = {
-      cursor = {
-        xcursor-theme = "miku-cursor";
-        xcursor-size = 16;
-        hide-when-typing = true;
+    cursor = {
+      xcursor-theme = "miku-cursor";
+      xcursor-size = 16;
+      hide-when-typing = true;
 
-      };
-      prefer-no-csd = true;
-
-      overview.zoom = 0.25;
-
-      switch-events.lid-close.spawn = [
-        "sh"
-        "-c"
-        "${(lib.getExe config.programs.gtklock.package)} -d; sleep 3; systemctl suspend"
-      ];
-
-      hotkey-overlay.skip-at-startup = true;
-      xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
     };
+    prefer-no-csd = true;
+
+    overview.zoom = 0.25;
+
+    switch-events.lid-close.spawn = [
+      "sh"
+      "-c"
+      "${(lib.getExe config.programs.gtklock.package)} -d; sleep 3; systemctl suspend"
+    ];
+
+    hotkey-overlay.skip-at-startup = true;
+    xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
   };
 }

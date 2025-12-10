@@ -45,7 +45,7 @@
     graphical.niri.enable = true;
     programs.niri.package =
       (config.graphical.niri.wrapper.apply {
-        settings.misc.input.keyboard.xkb.options = "caps:escape";
+        settings.input.keyboard.xkb.options = "caps:escape";
       }).wrapper;
     graphical.locker.enable = true;
     graphical.kicad = {

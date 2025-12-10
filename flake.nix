@@ -7,7 +7,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     wrappers = {
-      url = "github:zimward/wrappers/push-lyoqpptlznxq";
+      url = "github:zimward/wrappers/main-next";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
