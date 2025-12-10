@@ -128,7 +128,7 @@
               models = {
                 qwen = {
                   type = "ollama";
-                  model = "qwen3-coder:30b";
+                  model = "qwen3-quant";
                 };
               };
               actions = [
@@ -230,10 +230,12 @@
             ];
         };
       }).wrapper;
-    environment.systemPackages = [
-      pkgs.freecad
-      pkgs.prusa-slicer
-      pkgs.sbctl
+
+    environment.systemPackages = with pkgs; [
+      freecad
+      prusa-slicer
+      sbctl
+      ghidra
     ];
 
     systemd.network.networks."10-lan" = {

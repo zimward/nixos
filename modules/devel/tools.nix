@@ -17,6 +17,8 @@
       (python3.withPackages (python-pkgs: [
         python-pkgs.numpy
         python-pkgs.matplotlib
+        python-pkgs.requests
+        python-pkgs.mcp
       ]))
       perf
     ];
