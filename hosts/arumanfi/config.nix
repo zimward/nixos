@@ -54,6 +54,7 @@
     };
     graphical.obsidian.enable = true;
     graphical.minecraft.enable = true;
+    graphical.steam.enable = true;
 
     networking.hostName = "arumanfi";
     networking.useDHCP = lib.mkDefault true;
@@ -166,6 +167,7 @@
               ".cache" # change this later once permissions have been figured out properly
               ".config" # same as above
               ".local" # ""
+              ".steam"
             ];
     };
     sops.age.keyFile = lib.mkForce "/persist/age/key";
