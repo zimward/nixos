@@ -24,35 +24,45 @@ in
       default = true;
     };
   };
-  config = lib.mkIf (config.graphical.default.applications.enable && config.graphical.enable) {
-    environment.systemPackages =
-      enPkg cfg.minecraft pkgs.prismlauncher
-      ++ enPkg cfg.deluge pkgs.deluge
-      ++ enPkg cfg.obsidian pkgs.obsidian
-      ++ (with pkgs; [
-        librewolf
-        libreoffice-qt
-        hunspell # auto correction
-        hunspellDicts.de_DE
-        hunspellDicts.en_US
-        keepassxc
-        thunderbird
-        pavucontrol
-        comma
-        ltspice
-      ])
-      ++ (lib.optionals cfg._freetime (
-        with pkgs;
-        [
-          freetube
-          signal-desktop
-          mpv
-          mumble
-        ]
-      ));
-    nixpkgs.allowUnfreePackages = [
-      "obsidian"
-      "ltspice"
-    ];
-  };
+  config =
+    let
+      ltspice = pkgs.ltspice.overrideAttrs {
+        src = pkgs.fetchurl {
+          url = "https://ltspice.analog.com/software/LTspice64.msi";
+          hash = "sha256-fw4z9BlkMUR/z7u+wMx6S267jn8y+HzVgDkQ9rJTQ70=";
+        };
+      };
+    in
+    lib.mkIf (config.graphical.default.applications.enable && config.graphical.enable) {
+      environment.systemPackages =
+        enPkg cfg.minecraft pkgs.prismlauncher
+        ++ enPkg cfg.deluge pkgs.deluge
+        ++ enPkg cfg.obsidian pkgs.obsidian
+        ++ (with pkgs; [
+          librewolf
+          libreoffice-qt
+          hunspell # auto correction
+          hunspellDicts.de_DE
+          hunspellDicts.en_US
+          keepassxc
+          thunderbird
+          pavucontrol
+          comma
+          ltspice
+        ])
+        ++ (lib.optionals cfg._freetime (
+          with pkgs;
+          [
+            freetube
+            signal-desktop
+            mpv
+            mumble
+          ]
+        ));
+      system.extraDependencies = [ ltspice.src ];
+      nixpkgs.allowUnfreePackages = [
+        "obsidian"
+        "ltspice"
+      ];
+    };
 }
