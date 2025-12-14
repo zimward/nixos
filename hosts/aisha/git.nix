@@ -73,10 +73,11 @@ in
             cd nixos
             nix flake update
             git add flake.lock
-            git commit -m "flake: update lock"
-            git push
-            cd ..
-            rm -rf nixos
+            git commit -m "flake: update lock" && {
+              git push
+              cd ..
+              rm -rf nixos
+            }
           '';
         }
       );
