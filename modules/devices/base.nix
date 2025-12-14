@@ -30,7 +30,6 @@
     system.etc.overlay.enable = lib.mkDefault true;
     services.userborn.enable = lib.mkDefault true;
     system.disableInstallerTools = true;
-    system.rebuild.enableNg = true;
     system.tools.nixos-rebuild.enable = true;
     system.tools.nixos-version.enable = true;
     boot.enableContainers = lib.mkDefault false;
