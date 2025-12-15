@@ -419,11 +419,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765308012,
-        "narHash": "sha256-0rrcz8iVpce/+TfApdLpchZRHAApwShMSmy2aYtseZs=",
+        "lastModified": 1765827983,
+        "narHash": "sha256-aRsEeV9xdtgCLFewL2Xb4Pwz0D2uio7lw6uc8UI+wyg=",
         "owner": "zimward",
         "repo": "wrappers",
-        "rev": "762e7888a545cf8a1619ad8a974e6cc4ac4f4096",
+        "rev": "a8129890c4408ae66676aad88ba3be950ac527ec",
         "type": "github"
       },
       "original": {
