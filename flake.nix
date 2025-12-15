@@ -111,6 +111,12 @@
       in
       {
         packages = rec {
+          alacritty =
+            (import ./modules/graphical/alacritty/wrapper.nix {
+              inherit (pkgs) lib;
+              inherit pkgs inputs;
+              config.cli.nushell.package = pkgs.nushell;
+            }).wrapper;
           helix =
             (import ./modules/devel/helix/wrapper.nix {
               inherit (pkgs) lib;
@@ -123,19 +129,22 @@
             }).wrapper;
           fuzzel = (import ./modules/graphical/launcher/wrapper.nix { inherit pkgs inputs; }).wrapper;
           niri =
-            (import ./modules/graphical/niri/wrapper.nix {
-              inherit (pkgs) lib;
-              inherit pkgs inputs;
-              config = {
-                graphical = {
-                  background = import ./modules/graphical/background.nix { inherit (pkgs) fetchurl; };
-                  waybar.package = waybar;
-                  launcher = fuzzel;
-                  ime.enable = true;
+            (
+              (import ./modules/graphical/niri/wrapper.nix {
+                inherit (pkgs) lib;
+                inherit pkgs inputs;
+                config = {
+                  graphical = {
+                    background = import ./modules/graphical/background.nix { inherit (pkgs) fetchurl; };
+                    waybar.package = waybar;
+                    launcher = fuzzel;
+                    ime.enable = true;
+                  };
+                  programs.gtklock.package = pkgs.gtklock;
                 };
-                programs.gtklock.package = pkgs.gtklock;
-              };
-            }).wrapper;
+              }).apply
+              { extraPackages = [ alacritty ]; }
+            ).wrapper;
         };
       }
     );
