@@ -263,6 +263,7 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "flake-utils": "flake-utils",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "nix-matlab": "nix-matlab",
@@ -277,7 +278,9 @@
     },
     "run0-sudo-shim": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nix-github-actions": "nix-github-actions",
         "nixpkgs": [
           "nixpkgs"

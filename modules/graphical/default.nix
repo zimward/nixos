@@ -25,7 +25,7 @@
     ./steam.nix
     ./niri
     ./waybar
-    ./launcher.nix
+    ./launcher
     ./locker.nix
   ];
   config = {

@@ -6,6 +6,8 @@
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     wrappers = {
       url = "github:zimward/wrappers/main-next";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +41,7 @@
     run0-sudo-shim = {
       url = "github:lordgrimmauld/run0-sudo-shim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     secrets = {
       url = "git+ssh://git@zimward.moe/~/secrets";
@@ -50,6 +53,7 @@
     {
       nixpkgs,
       nixpkgs-small,
+      flake-utils,
       ...
     }@inputs:
     {
@@ -99,5 +103,40 @@
         in
         # Combine the configurations for all hosts into an attributes set, mapping each host to its respective system configuration.
         builtins.listToAttrs ((map (mkSys nixpkgs) big) ++ (map (mkSys nixpkgs-small) small));
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        packages = rec {
+          helix =
+            (import ./modules/devel/helix/wrapper.nix {
+              inherit (pkgs) lib;
+              inherit pkgs inputs;
+              config.graphical.enable = true;
+            }).wrapper;
+          waybar =
+            (import ./modules/graphical/waybar/wrapper.nix {
+              inherit pkgs inputs;
+            }).wrapper;
+          fuzzel = (import ./modules/graphical/launcher/wrapper.nix { inherit pkgs inputs; }).wrapper;
+          niri =
+            (import ./modules/graphical/niri/wrapper.nix {
+              inherit (pkgs) lib;
+              inherit pkgs inputs;
+              config = {
+                graphical = {
+                  background = import ./modules/graphical/background.nix { inherit (pkgs) fetchurl; };
+                  waybar.package = waybar;
+                  launcher = fuzzel;
+                  ime.enable = true;
+                };
+                programs.gtklock.package = pkgs.gtklock;
+              };
+            }).wrapper;
+        };
+      }
+    );
 }
