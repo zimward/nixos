@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./minecraft.nix
+    ./ethercalc
   ];
 
   config = {
@@ -132,8 +133,8 @@
 
     users.users.minidlna.extraGroups = [ "users" ];
 
-    services.ethercalc.enable = true;
-    systemd.services.ethercalc.serviceConfig = {
+    services.ethercalc2.enable = true;
+    systemd.services.ethercalc2.serviceConfig = {
       StateDirectory = lib.mkForce null;
       WorkingDirectory = lib.mkForce "/nix/persist/system/ethercalc";
       ReadWritePaths = "/nix/persist/system/ethercalc";
