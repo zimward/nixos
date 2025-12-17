@@ -73,20 +73,6 @@ inputs.wrappers.wrapperModules.niri.apply {
           "-r"
         ])
       ];
-    workspaces = {
-      "com" = {
-        open-on-output = "DP-3";
-      };
-      "games" = {
-        open-on-output = "DP-3";
-      };
-      "browser-l" = {
-        open-on-output = "DP-3";
-      };
-      "browser-r" = {
-        open-on-output = "DP-1";
-      };
-    };
     layout = {
       focus-ring.off = null;
       border = {

@@ -13,7 +13,6 @@
     matches = [
       { app-id = "org.keepassxc.KeePassXC"; }
       { app-id = "thunderbird"; }
-      { app-id = "nheko"; }
     ];
     block-out-from = "screen-capture";
   }
@@ -34,10 +33,7 @@
   {
     matches = [
       { app-id = "thunderbird"; }
-      { app-id = "nheko"; }
     ];
-    open-on-workspace = "com";
-    open-on-output = "DP-3";
     default-column-width.proportion = 1.0;
   }
   {
@@ -45,8 +41,6 @@
       { app-id = "steam"; }
       { app-id = "org.prismlauncher.PrismLauncher"; }
     ];
-    open-on-workspace = "games";
-    open-on-output = "DP-3";
     default-column-width.proportion = 1.0;
   }
   #mumble proportions
@@ -56,8 +50,6 @@
     ];
     default-column-width.proportion = 0.18;
     default-window-height.proportion = 0.5;
-    open-on-output = "DP-1";
-    open-on-workspace = "browser-r";
   }
   {
     matches = [
@@ -65,14 +57,10 @@
     ];
     default-column-width.proportion = (1.0 - 0.18);
     default-window-height.proportion = 1.0;
-    open-on-output = "DP-1";
-    open-on-workspace = "browser-r";
   }
   {
     matches = [ { app-id = "librewolf"; } ];
     open-maximized = true;
-    open-on-output = "DP-3";
-    open-on-workspace = "browser-l";
   }
   {
     matches = [ { app-id = "librewolf"; } ];

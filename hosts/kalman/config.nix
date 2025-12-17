@@ -70,23 +70,74 @@
     graphical.niri.enable = true;
     programs.niri.package =
       (config.graphical.niri.wrapper.apply {
-        settings.binds = {
-          "Mod+Y".spawn = [
-            #can't use the wrapped package as that is a infrec
-            (lib.getExe pkgs.niri)
-            "msg"
-            "output"
-            "DP-3"
-            "transform"
-            "90"
-          ];
-          "Mod+Shift+Y".spawn = [
-            (lib.getExe pkgs.niri)
-            "msg"
-            "output"
-            "DP-3"
-            "transform"
-            "normal"
+        settings = {
+          binds = {
+            "Mod+Y".spawn = [
+              #can't use the wrapped package as that is a infrec
+              (lib.getExe pkgs.niri)
+              "msg"
+              "output"
+              "DP-3"
+              "transform"
+              "90"
+            ];
+            "Mod+Shift+Y".spawn = [
+              (lib.getExe pkgs.niri)
+              "msg"
+              "output"
+              "DP-3"
+              "transform"
+              "normal"
+            ];
+
+          };
+
+          workspaces = {
+            "com" = {
+              open-on-output = "DP-3";
+            };
+            "games" = {
+              open-on-output = "DP-3";
+            };
+            "browser-l" = {
+              open-on-output = "DP-3";
+            };
+            "browser-r" = {
+              open-on-output = "DP-1";
+            };
+          };
+
+          window-rules = [
+            {
+              matches = [
+                { app-id = "thunderbird"; }
+              ];
+              open-on-workspace = "com";
+            }
+            {
+              matches = [
+                { app-id = "steam"; }
+                { app-id = "org.prismlauncher.PrismLauncher"; }
+              ];
+              open-on-workspace = "games";
+            }
+
+            {
+              matches = [
+                { app-id = "info.mumble.Mumble"; }
+              ];
+              open-on-workspace = "browser-r";
+            }
+            {
+              matches = [
+                { app-id = "FreeTube"; }
+              ];
+              open-on-workspace = "browser-r";
+            }
+            {
+              matches = [ { app-id = "librewolf"; } ];
+              open-on-workspace = "browser-l";
+            }
           ];
 
         };
