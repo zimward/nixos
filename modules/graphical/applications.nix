@@ -29,7 +29,7 @@ in
       ltspice = pkgs.ltspice.overrideAttrs {
         src = pkgs.fetchurl {
           url = "https://ltspice.analog.com/software/LTspice64.msi";
-          hash = "sha256-fw4z9BlkMUR/z7u+wMx6S267jn8y+HzVgDkQ9rJTQ70=";
+          hash = "sha256-7DUCZpftMtKuV7F746PIh3tjH2QrZjJkkamAjEfsAIE=";
         };
       };
     in
