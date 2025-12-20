@@ -287,6 +287,8 @@
       prusa-slicer
       sbctl
       ghidra
+      #needed for tpm support to function in virt-manager
+      swtpm
     ];
 
     systemd.network.networks."10-lan" = {
