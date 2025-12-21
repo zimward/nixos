@@ -89,11 +89,10 @@
     ];
     services.resolved = {
       enable = true;
-      dnssec = lib.mkDefault "true";
-      dnsovertls = "true";
-      llmnr = "false";
-      domains = [ "~." ];
-      fallbackDns = config.networking.nameservers;
+      fallbackDns = [
+        "8.8.8.8"
+        "2001:4860:4860::8888"
+      ];
     };
     networking.useNetworkd = true;
 

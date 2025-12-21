@@ -17,6 +17,13 @@
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
     };
 
+    services.resolved = {
+      dnssec = lib.mkDefault "true";
+      dnsovertls = "true";
+      llmnr = "false";
+      domains = [ "~." ];
+    };
+
     security.soteria.enable = true;
     systemd.user.services.niri-flake-polkit.enable = lib.mkForce false;
 
