@@ -83,6 +83,22 @@ in
         "127.0.0.0/8"
         "::1"
       ];
+
+      trusted_key_servers = [
+        {
+          server_name = "matrix.org";
+          verify_keys."ed25519:auto" = "l8Hft5qXKn1vfHrg3p4+W8gELQVo8N13JkluMfmn2sQ";
+        }
+        {
+          server_name = "kirottu.com";
+          verify_keys."ed25519:auto" = "Sqr3/9MtCFC4tsDSPzDtHWbbX3KOTiYd9uVQBDzW/Rs";
+        }
+        {
+          server_name = "nhnn.dev";
+          verify_keys."ed25519:auto" = "O2D+nONSox0MpdjyoKlvael4Q2yld7Or4IJjiG+A2Bs";
+        }
+      ];
+
       turn_uris = [
         "turn:${fqdn}:3478?transport=udp"
         "turn:${fqdn}:3478?transport=tcp"
