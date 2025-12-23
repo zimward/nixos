@@ -35,11 +35,12 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJVZ6ubHsaqWj2eyjEjS08zEHoFDmFhnV1xWaF0K+L9M root@kalman" # kalman
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZeN06ZB6hsWpWutEQQlGf0t/MBWSpu9jSYnVlOfKqj root@nas" # doga
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMiyoos/yBEK/jdJdF+2gzjfX6FQD8+kyg/Q/eLMr4HK root@juliette"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHD1nysJ0LC+tg4r02bCaIRJ+3ZsJEh+91X7irPhtbn0 root@orsted"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAM5K72aFwFusw1z8dkJztHbaiWBl7T6s4fTp1Rkw3MC root@arumenfi"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILG1gWO9yWvsjgO/L7mWnZGgLsSvlhElW3dafBJW8QRE zimward@arumanfi"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnnZsVj7xIf4tqoK7foCj3dT8OMnyjgKZTsW6Q/Fvvm zimward@juliette"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSveEMHezj5v/JPfl9ES+00Z+lT4y4+m80ItAdXXSIV" # friendi
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN157bDKVBfVzkdDb0xxHtvKN/leIwXKiWmBvcAEqTf" # git - self ssh for updates
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnnZsVj7xIf4tqoK7foCj3dT8OMnyjgKZTsW6Q/Fvvm zimward@juliette"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHD1nysJ0LC+tg4r02bCaIRJ+3ZsJEh+91X7irPhtbn0 root@orsted"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIPdS0w5zf2JcGuSv4Q6MqvjnREh6FrwtGB0wMEehIwx6AAAABHNzaDo=" # nhnn
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILmnknd6bSmWrhpr+I5j3R5fou8gu8zY4V3oc+gTfVuH" # kirottu
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnhIy51JVnJ5GlkWNqb0yAFPAfnipGXo+CUnc822BKR" # calops
