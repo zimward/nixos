@@ -106,28 +106,28 @@ in
       turn_shared_secret = config.services.coturn.static-auth-secret;
       turn_user_lifetime = "1h";
       turn_allow_guests = true;
-      # log_config = (pkgs.formats.yaml { }).generate "log_config" {
-      #   disable_existing_loggers = false;
-      #   formatters = {
-      #     journal_fmt = {
-      #       format = "%(name)s: [%(request)s] %(message)s";
-      #     };
-      #   };
-      #   handlers = {
-      #     journal = {
-      #       SYSLOG_IDENTIFIER = "synapse";
-      #       class = "systemd.journal.JournalHandler";
-      #       formatter = "journal_fmt";
-      #     };
-      #   };
-      #   root = {
-      #     handlers = [
-      #       "journal"
-      #     ];
-      #     level = "WARN";
-      #   };
-      #   version = 1;
-      # };
+      log_config = (pkgs.formats.yaml { }).generate "log_config" {
+        disable_existing_loggers = false;
+        formatters = {
+          journal_fmt = {
+            format = "%(name)s: [%(request)s] %(message)s";
+          };
+        };
+        handlers = {
+          journal = {
+            SYSLOG_IDENTIFIER = "synapse";
+            class = "systemd.journal.JournalHandler";
+            formatter = "journal_fmt";
+          };
+        };
+        root = {
+          handlers = [
+            "journal"
+          ];
+          level = "WARN";
+        };
+        version = 1;
+      };
       forgotten_room_retention_period = "7d";
       media_retention = {
         remote_media_lifetime = "30d";
