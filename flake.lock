@@ -191,11 +191,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1764440730,
-        "narHash": "sha256-ZlJTNLUKQRANlLDomuRWLBCH5792x+6XUJ4YdFRjtO4=",
+        "lastModified": 1766568855,
+        "narHash": "sha256-UXVtN77D7pzKmzOotFTStgZBqpOcf8cO95FcupWp4Zo=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3",
+        "rev": "c5db9569ac9cc70929c268ac461f4003e3e5ca80",
         "type": "github"
       },
       "original": {
@@ -223,11 +223,11 @@
     },
     "nixpkgs-small": {
       "locked": {
-        "lastModified": 1766514018,
-        "narHash": "sha256-QtmqOXBS2mlIc32skbCM0XHB4GCNlnvNPeccBqvFJpk=",
+        "lastModified": 1766601203,
+        "narHash": "sha256-iCAUuJRNgRoxlcBfH6pFZLU0TDzfBczpliP5iLJYujk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b05ca0c28563c8c50ccfe02242e91202021bf6b3",
+        "rev": "c0532e48685132432f0d6fa751cc2bda0381b8dd",
         "type": "github"
       },
       "original": {
@@ -289,11 +289,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1766418841,
-        "narHash": "sha256-aGkEvS5LhWQHa1rroQ86/dK3yCnxDW7hY6KfY6VvAxY=",
+        "lastModified": 1766568576,
+        "narHash": "sha256-4XMfEw0ugVIzYOOVZ17ctikK1zjoP6UJ/r7/A1buxn4=",
         "owner": "lordgrimmauld",
         "repo": "run0-sudo-shim",
-        "rev": "b8ebb2eafd364e84a877e3f279b9cafa0fc22735",
+        "rev": "63684c217162b94ce15fed68d579e1109ed2753b",
         "type": "github"
       },
       "original": {
