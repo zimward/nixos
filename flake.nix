@@ -60,14 +60,15 @@
       nixosConfigurations =
         let
           # create a system configuration for a given host.
-          mkSys = nixp: name: {
+          mkSys = nixp: extraModules: name: {
             inherit name;
             value = nixp.lib.nixosSystem {
               specialArgs = { inherit inputs; };
               modules = [
                 (./hosts + "/${name}/config.nix")
                 ./modules
-              ];
+              ]
+              ++ extraModules;
             };
           };
 
@@ -100,9 +101,20 @@
 
           # Get a list of directories that should use the default nixpkgs.
           big = map (s: s.dir) (builtins.filter (s: !s.small) small-checkout);
+          minimalProfile = (
+            { modulesPath, ... }:
+            {
+              imports = [ "${modulesPath}/profiles/minimal.nix" ];
+            }
+          );
         in
         # Combine the configurations for all hosts into an attributes set, mapping each host to its respective system configuration.
-        builtins.listToAttrs ((map (mkSys nixpkgs) big) ++ (map (mkSys nixpkgs-small) small));
+        builtins.listToAttrs (
+          (map (mkSys nixpkgs [ ]) big)
+          ++ (map (mkSys nixpkgs-small [
+            minimalProfile
+          ]) small)
+        );
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
