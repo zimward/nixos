@@ -422,16 +422,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1765827983,
-        "narHash": "sha256-aRsEeV9xdtgCLFewL2Xb4Pwz0D2uio7lw6uc8UI+wyg=",
-        "owner": "zimward",
+        "lastModified": 1767020728,
+        "narHash": "sha256-FaCt2okCq5/1rMo6+h/ge+ZOCuYoMj5Me69RwJIF08M=",
+        "owner": "lassulus",
         "repo": "wrappers",
-        "rev": "a8129890c4408ae66676aad88ba3be950ac527ec",
+        "rev": "5199ab895d1d47d781ed6b514528700eaddad04e",
         "type": "github"
       },
       "original": {
-        "owner": "zimward",
-        "ref": "main-next",
+        "owner": "lassulus",
+        "ref": "pull/80/head",
         "repo": "wrappers",
         "type": "github"
       }
