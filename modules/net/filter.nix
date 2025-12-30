@@ -25,6 +25,7 @@ in
         [
           "reddit.com"
           "www.reddit.com"
+          "nixos.wiki"
           "pornhub.com"
           "youporn.com"
         ]
