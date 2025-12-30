@@ -1,4 +1,3 @@
-{ ... }:
 {
   imports = [
     ./sound.nix
@@ -6,5 +5,6 @@
     ./tmpfsroot.nix
     ./automounting.nix
     ./hddIdle.nix
+    ./backlight.nix
   ];
 }
