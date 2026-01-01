@@ -9,7 +9,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     wrappers = {
-      url = "github:lassulus/wrappers/pull/80/head";
+      url = "github:lassulus/wrappers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
