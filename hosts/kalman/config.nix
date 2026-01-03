@@ -55,8 +55,11 @@
       "libvirtd"
       "dialout"
     ];
+
+    #usb controller bootloaders
     services.udev.extraRules = ''
-      SUBSYSTEM=="usb", ATTR{product}=="USBasp", ATTR{idProduct}=="05dc", ATTRS{idVendor}=="16c0", MODE="0666"
+      SUBSYSTEM=="usb", ATTR{product}=="USBasp", ATTR{idProduct}=="05dc", ATTRS{idVendor}=="16c0", GROUP="dialout"
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="4348", ATTRS{idProduct}=="55e0", GROUP="dialout"
     '';
     hardware.opentabletdriver.enable = true;
 
