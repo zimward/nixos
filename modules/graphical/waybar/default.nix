@@ -2,6 +2,7 @@
   lib,
   inputs,
   pkgs,
+  config,
   ...
 }:
 let
@@ -13,6 +14,12 @@ in
     enable = lib.mkEnableOption "waybar";
     package = lib.mkOption {
       default = waybar.wrapper;
+    };
+  };
+  config = lib.mkIf config.graphical.waybar.enable {
+    programs.waybar = {
+      enable = true;
+      package = waybar.wrapper;
     };
   };
 }

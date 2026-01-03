@@ -45,7 +45,6 @@ inputs.wrappers.wrapperModules.niri.apply {
         command = cmd: lib.lists.flatten [ cmd ];
       in
       [
-        (command (lib.getExe config.graphical.waybar.package))
         (command [
           "alacritty"
           "--daemon"
