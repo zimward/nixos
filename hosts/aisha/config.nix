@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  modulesPath,
   ...
 }:
 {
@@ -12,7 +11,7 @@
     ./matrix.nix
     ./mail.nix
     ./git.nix
-    "${modulesPath}/profiles/minimal.nix"
+    ./kanidm.nix
   ];
 
   config = {
