@@ -38,7 +38,7 @@
   "Mod+Shift+i".spawn = [
     "sh"
     "-c"
-    "${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.feh} - --auto-zoom"
+    "${pkgs.wl-clipboard-rs}/bin/wl-paste|${lib.getExe pkgs.qrencode} -o -|${lib.getExe pkgs.swayimg} - --auto-zoom"
   ];
 
   "Mod+Shift+L".spawn = [ (lib.getExe config.programs.gtklock.package) ];

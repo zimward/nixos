@@ -40,6 +40,7 @@ in
         pavucontrol
         comma
         ltspice
+        swayimg
       ])
       ++ (lib.optionals cfg._freetime (
         with pkgs;
