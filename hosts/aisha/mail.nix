@@ -1,4 +1,3 @@
-{ ... }:
 {
   #actually save the certs
   environment.persistence."/nix/persist/system".directories = [ "/var/lib/acme" ];
