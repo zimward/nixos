@@ -80,7 +80,10 @@
     graphical.niri.enable = true;
     programs.niri.package =
       (config.graphical.niri.wrapper.apply {
-        settings.input.keyboard.xkb.options = "caps:escape";
+        settings.input.keyboard.xkb = {
+          layout = "de(dvorak)";
+          options = "caps:escape";
+        };
       }).wrapper;
     graphical.locker.enable = true;
     graphical.kicad = {
