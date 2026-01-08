@@ -38,6 +38,11 @@ in
     enable = true;
     package = pkgs.postgresql_17;
     dataDir = "/nix/persist/system/postgresql/";
+    ensureUsers = [
+      {
+        name = "matrix-synapse";
+      }
+    ];
   };
 
   services.matrix-synapse = {

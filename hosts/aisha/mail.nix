@@ -1,7 +1,4 @@
 {
-  #actually save the certs
-  environment.persistence."/nix/persist/system".directories = [ "/var/lib/acme" ];
-
   users.users."stalwart-mail".extraGroups = [ "nginx" ];
 
   #mail service
