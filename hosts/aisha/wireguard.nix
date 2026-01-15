@@ -27,6 +27,12 @@
       RouteTable = "main";
       FirewallMark = 42;
     };
+    wireguardPeers = [
+      {
+        PublicKey = "5w5ZFLaanz8cmGaMu6tQi3uR4YWdA0BMGWEAyGogSAk=";
+        AllowedIPs = [ "::/0" ];
+      }
+    ];
   };
 
   environment.persistence."/nix/persist/system" = {
