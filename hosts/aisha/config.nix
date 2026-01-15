@@ -12,6 +12,7 @@
     ./mail.nix
     ./git.nix
     ./kanidm.nix
+    ./wireguard.nix
   ];
 
   config = {
