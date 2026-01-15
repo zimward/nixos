@@ -1,20 +1,10 @@
 {
-  networking.nat = {
-    enable = true;
-    enableIPv6 = true;
-    externalInterface = "enp1s0";
-    internalInterfaces = [ "wg0" ];
-  };
   systemd.network.networks."50-wg" = {
     matchConfig.Name = "wg0";
 
     address = [
-      "2a01:4f9:c012:36f5:8008:5000::1/64"
+      "2a01:4f9:c012:36f5:8008:5000::2/64"
     ];
-
-    networkConfig = {
-      IPv6Forwarding = true;
-    };
   };
   systemd.network.netdevs."50-wg" = {
     netdevConfig = {
@@ -24,13 +14,18 @@
     wireguardConfig = {
       ListenPort = 51820;
       PrivateKey = "@network.wireguard.private";
-      RouteTable = "main";
       FirewallMark = 42;
     };
+    wireguardPeers = [
+      {
+        PublicKey = "t3VeC2k0f/9dJSiTFR9Foo2caMkxTYuygnhX67FANUE=";
+        AllowedIPs = [ "::/0" ];
+        Endpoint = "[2a01:4f9:c012:36f5::1]:51820";
+      }
+    ];
   };
 
   environment.persistence."/nix/persist/system" = {
     directories = [ "/etc/credstore" ];
   };
-  networking.firewall.allowedUDPPorts = [ 51820 ];
 }

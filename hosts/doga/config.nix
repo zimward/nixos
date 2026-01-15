@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./minecraft.nix
     ./ethercalc
+    ./wireguard.nix
   ];
 
   config = {
