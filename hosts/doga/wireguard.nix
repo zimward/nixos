@@ -3,7 +3,7 @@
     matchConfig.Name = "wg0";
 
     address = [
-      "2a01:4f9:c012:36f5:8008:5000::2/84"
+      "2a01:4f9:c012:36f5:8008:5::2/128"
     ];
   };
   systemd.network.netdevs."50-wg" = {
@@ -14,7 +14,6 @@
     wireguardConfig = {
       ListenPort = 51820;
       PrivateKey = "@network.wireguard.private";
-      FirewallMark = 42;
     };
     wireguardPeers = [
       {
@@ -22,6 +21,7 @@
         AllowedIPs = [ "::/0" ];
         Endpoint = "[2a01:4f9:c012:36f5::1]:51820";
         RouteTable = 1000;
+        PersistentKeepalive = 25;
       }
     ];
   };
