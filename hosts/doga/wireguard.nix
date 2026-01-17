@@ -20,7 +20,6 @@
         PublicKey = "t3VeC2k0f/9dJSiTFR9Foo2caMkxTYuygnhX67FANUE=";
         AllowedIPs = [ "::/0" ];
         Endpoint = "[2a01:4f9:c012:36f5::1]:51820";
-        RouteTable = 1000;
         PersistentKeepalive = 25;
       }
     ];
