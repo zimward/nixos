@@ -24,6 +24,7 @@
       }
     ];
   };
+  networking.firewall.checkReversePath = "loose";
 
   environment.persistence."/nix/persist/system" = {
     directories = [ "/etc/credstore" ];
