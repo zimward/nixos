@@ -1,17 +1,18 @@
 {
   lib,
   config,
-  modulesPath,
   ...
 }:
 {
-  # imports = [ "${modulesPath}/profiles/minimal.nix" ];
   config = lib.mkIf (config.device.class == "server") {
     motd.enable = true;
     documentation.enable = false;
     hardware.hddIdle.enable = true;
     services.resolved.dnssec = "false";
     services.logrotate.enable = true;
+
+    #causes log to grow too much, doesn't provide much value either
+    networking.firewall.logRefusedConnections = false;
 
     services.openssh = {
       enable = true;
