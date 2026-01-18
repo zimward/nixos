@@ -90,19 +90,19 @@
         forceSSL = true;
         enableACME = true;
       };
-      virtualHosts."zimward.moe" = {
+      virtualHosts."mail.zimward.moe" = {
         forceSSL = true;
         enableACME = true;
         quic = true;
-        reuseport = true;
         locations."/" = {
           proxyPass = "http://[::1]:8000/";
           recommendedProxySettings = true;
         };
-        # extraConfig = "
-        #   access_log /dev/null;
-        #   error_log /dev/null;
-        # ";
+      };
+      virtualHosts."zimward.moe" = {
+        forceSSL = true;
+        enableACME = true;
+        quic = true;
       };
     };
 
