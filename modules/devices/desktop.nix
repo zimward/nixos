@@ -17,11 +17,11 @@
       SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
     };
 
-    services.resolved = {
-      dnssec = lib.mkDefault "true";
-      dnsovertls = "true";
-      llmnr = "false";
-      domains = [ "~." ];
+    services.resolved.settings.Resolve = {
+      DNSSEC = lib.mkDefault "true";
+      DNSOverTLS = "true";
+      LLMNR = "false";
+      Domains = [ "~." ];
     };
 
     security.soteria.enable = true;

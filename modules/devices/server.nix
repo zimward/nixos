@@ -8,7 +8,7 @@
     motd.enable = true;
     documentation.enable = false;
     hardware.hddIdle.enable = true;
-    services.resolved.dnssec = "false";
+    services.resolved.settings.Resolve.DNSSEC = "false";
     services.logrotate.enable = true;
 
     #causes log to grow too much, doesn't provide much value either

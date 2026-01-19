@@ -89,7 +89,7 @@
     ];
     services.resolved = {
       enable = true;
-      fallbackDns = [
+      settings.Resolve.FallbackDNS = [
         "8.8.8.8"
         "2001:4860:4860::8888"
       ];
