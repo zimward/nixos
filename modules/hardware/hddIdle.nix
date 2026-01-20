@@ -10,7 +10,7 @@
     hardware.hddIdle.time = lib.mkOption {
       description = "Time for hdd to go into idle. In multiple of 5s intervals";
       type = lib.types.int;
-      default = 400;
+      default = 200;
     };
   };
   config = lib.mkIf config.hardware.hddIdle.enable {
