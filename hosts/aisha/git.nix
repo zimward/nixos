@@ -44,6 +44,8 @@ in
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIPdS0w5zf2JcGuSv4Q6MqvjnREh6FrwtGB0wMEehIwx6AAAABHNzaDo=" # nhnn
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILmnknd6bSmWrhpr+I5j3R5fou8gu8zY4V3oc+gTfVuH" # kirottu
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnhIy51JVnJ5GlkWNqb0yAFPAfnipGXo+CUnc822BKR" # calops
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINg2WYMRKINwbH5UCqqK2qq/qW0gG1NnaALHqEyU4NzM" # nea
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFgJu1eENEEVRht6bx5X0ZfCGqz5y3KNicXLv4D7skXR" # nea
     ];
   };
   systemd.timers.updateFlake = {
