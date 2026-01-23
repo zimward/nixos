@@ -40,6 +40,11 @@
       ip6tables -A FORWARD -i wg0 -o enp1s0 -s 2a01:4f9:c012:36f5:8008:5::2/128 -j ACCEPT
     '';
   };
+  networking.firewall.checkReversePath = "loose";
+  networking.firewall.logRefusedConnections = true;
+  networking.firewall.logRefusedPackets = true;
+  networking.firewall.logReversePathDrops = true;
+
   boot.kernel.sysctl = {
     "net.ipv6.conf.all.forwarding" = true;
   };

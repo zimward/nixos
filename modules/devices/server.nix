@@ -12,7 +12,7 @@
     services.logrotate.enable = true;
 
     #causes log to grow too much, doesn't provide much value either
-    networking.firewall.logRefusedConnections = false;
+    networking.firewall.logRefusedConnections = lib.mkDefault false;
 
     services.openssh = {
       enable = true;

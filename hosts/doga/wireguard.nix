@@ -25,6 +25,11 @@
     ];
   };
   networking.firewall.checkReversePath = "loose";
+  networking.firewall.logRefusedConnections = true;
+  networking.firewall.logRefusedPackets = true;
+  networking.firewall.logReversePathDrops = true;
+  #dangerous, remove after test!!!
+  networking.firewall.trustedInterfaces = [ "wg0" ];
 
   environment.persistence."/nix/persist/system" = {
     directories = [ "/etc/credstore" ];
