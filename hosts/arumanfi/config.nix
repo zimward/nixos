@@ -151,6 +151,8 @@
       LIBVA_DRIVER_NAME = "iHD";
     };
 
+    hardware.bluetooth.enable = true;
+
     services.auto-cpufreq = {
       enable = true;
       settings = {
