@@ -136,7 +136,7 @@
     users.users.minidlna.extraGroups = [ "users" ];
 
     services.ethercalc2.enable = true;
-    systemd.services.ethercalc2.serviceConfig = {
+    systemd.services.ethercalc.serviceConfig = {
       StateDirectory = lib.mkForce null;
       WorkingDirectory = lib.mkForce "/nix/persist/system/ethercalc";
       ReadWritePaths = "/nix/persist/system/ethercalc";
