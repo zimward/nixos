@@ -130,6 +130,8 @@
       ) "ssh -i ${config.update.accessKey}";
     };
 
+    services.dbus.implementation = "broker";
+
     #oldest possible state
     system.stateVersion = lib.mkDefault "23.11";
   };

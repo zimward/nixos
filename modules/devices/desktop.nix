@@ -25,7 +25,12 @@
     };
 
     security.soteria.enable = true;
-    systemd.user.services.niri-flake-polkit.enable = lib.mkForce false;
+    security.wrappers.polkit-agent-helper-1 = {
+      setuid = true;
+      owner = "root";
+      group = "root";
+      source = "${config.security.polkit.package.out}/lib/polkit-1/polkit-agent-helper-1";
+    };
 
     net.filter.enable = true;
     #sound
