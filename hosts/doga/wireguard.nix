@@ -8,6 +8,9 @@
     routingPolicyRules = [
       {
         Table = 1337;
+        User = "minecraft";
+        Priority = 30000;
+        Family = "ipv6";
       }
     ];
   };
@@ -26,6 +29,7 @@
         AllowedIPs = [ "::/0" ];
         Endpoint = "[2a01:4f9:c012:36f5::1]:51820";
         PersistentKeepalive = 25;
+        RouteTable = 1337;
       }
     ];
   };
