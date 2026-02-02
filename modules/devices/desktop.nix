@@ -25,12 +25,6 @@
     };
 
     security.soteria.enable = true;
-    security.wrappers.polkit-agent-helper-1 = {
-      setuid = true;
-      owner = "root";
-      group = "root";
-      source = "${config.security.polkit.package.out}/lib/polkit-1/polkit-agent-helper-1";
-    };
 
     net.filter.enable = true;
     #sound
