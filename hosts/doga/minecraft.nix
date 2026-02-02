@@ -18,5 +18,4 @@
       user3 = "510f1ed3-3103-41a6-af5a-65c06577fed7";
     };
   };
-  systemd.services.minecraft-server.serviceConfig.NetworkNamespacePath = "/run/netns/wg";
 }
