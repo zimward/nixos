@@ -16,17 +16,9 @@
     sops.age.keyFile = lib.mkForce "/nix/sops/age/keys.txt";
 
     devel.git.signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
-    environment.sessionVariables.DEFAULT_BROWSER = lib.getExe pkgs.librewolf;
-    xdg.mime.defaultApplications = {
-      "text/html" = "librewolf.desktop";
-      "x-scheme-handler/http" = "librewolf.desktop";
-      "x-scheme-handler/https" = "librewolf.desktop";
-      "x-scheme-handler/about" = "librewolf.desktop";
-      "x-scheme-handler/unknown" = "librewolf.desktop";
-    };
 
     graphical.niri.enable = true;
-    # programs.niri.package = lib.mkForce pkgs.niri;
+
     graphical.kicad = {
       enable = true;
       minimal = true;
