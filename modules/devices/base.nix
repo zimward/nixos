@@ -34,6 +34,8 @@
     system.tools.nixos-version.enable = true;
     boot.enableContainers = lib.mkDefault false;
 
+    security.wrappers.pkexec.enable = false;
+
     environment.defaultPackages = lib.mkDefault [ ];
 
     #needed to rebuild system
