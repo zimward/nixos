@@ -32,7 +32,6 @@
     system.disableInstallerTools = true;
     system.tools.nixos-rebuild.enable = true;
     system.tools.nixos-version.enable = true;
-    boot.enableContainers = lib.mkDefault false;
 
     security.wrappers.pkexec.enable = false;
 
