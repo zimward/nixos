@@ -5,6 +5,11 @@
     address = [
       "2a01:4f9:c012:36f5:8008:5::2/128"
     ];
+    routingPolicyRules = [
+      {
+        Table = 1337;
+      }
+    ];
   };
   systemd.network.netdevs."50-wg" = {
     netdevConfig = {
