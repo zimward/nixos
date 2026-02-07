@@ -11,6 +11,7 @@
       difficulty = 3;
       gamemode = 0;
       motd = "NixOS Minecraft server!";
+      white-list = true;
     };
     whitelist = {
       user1 = "050ad88c-78da-4c2a-8b30-f6ca9f45c129";
