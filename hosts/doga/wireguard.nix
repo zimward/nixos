@@ -6,12 +6,12 @@
       "2a01:4f9:c012:36f5:8008:5::2/128"
     ];
     routingPolicyRules = [
-      # {
-      #   Table = 1337;
-      #   User = "minecraft";
-      #   Priority = 30000;
-      #   Family = "ipv6";
-      # }
+      {
+        Table = 1337;
+        User = "minecraft";
+        Priority = 30000;
+        Family = "ipv6";
+      }
     ];
   };
   systemd.network.netdevs."50-wg" = {
@@ -29,7 +29,7 @@
         AllowedIPs = [ "::/0" ];
         Endpoint = "[2a01:4f9:c012:36f5::1]:51820";
         PersistentKeepalive = 25;
-        # RouteTable = 1337;
+        RouteTable = 1337;
       }
     ];
   };
