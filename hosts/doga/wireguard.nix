@@ -1,13 +1,14 @@
 { pkgs, ... }:
 let
   table = 1337;
+  ip = "2a01:4f9:c012:36f5:8008:5::2";
 in
 {
   systemd.network.networks."50-wg" = {
     matchConfig.Name = "wg0";
 
     address = [
-      "2a01:4f9:c012:36f5:8008:5::2/128"
+      "${ip}/128"
     ];
     routingPolicyRules = [
       {
@@ -40,6 +41,9 @@ in
   networking.firewall.extraCommands = ''
     ${pkgs.iproute2}/bin/ip -6 rule add iif wg0 lookup ${toString table}
     ${pkgs.iproute2}/bin/ip -6 rule add oif wg0 lookup ${toString table}
+    # policy routing, maybe this can be done via systemd?
+    ${pkgs.iproute2}/bin/ip -6 rule add from ${ip} table ${toString table}
+    ${pkgs.iproute2}/bin/ip -6 rule add to ${ip} table ${toString table}
   '';
 
   environment.persistence."/nix/persist/system" = {
