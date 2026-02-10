@@ -1,7 +1,7 @@
-{ pkgs, ... }:
 let
-  table = 1337;
+  Table = 1337;
   ip = "2a01:4f9:c012:36f5:8008:5::2";
+  iface = "wg0";
 in
 {
   systemd.network.networks."50-wg" = {
@@ -12,10 +12,20 @@ in
     ];
     routingPolicyRules = [
       {
-        Table = table;
-        User = "minecraft";
-        Priority = 30000;
-        Family = "ipv6";
+        inherit Table;
+        IncomingInterface = iface;
+      }
+      {
+        inherit Table;
+        OutgoingInterface = iface;
+      }
+      {
+        inherit Table;
+        From = ip;
+      }
+      {
+        inherit Table;
+        To = ip;
       }
     ];
   };
@@ -34,17 +44,10 @@ in
         AllowedIPs = [ "::/0" ];
         Endpoint = "[2a01:4f9:c012:36f5::1]:51820";
         PersistentKeepalive = 25;
-        RouteTable = table;
+        RouteTable = Table;
       }
     ];
   };
-  networking.firewall.extraCommands = ''
-    ${pkgs.iproute2}/bin/ip -6 rule add iif wg0 lookup ${toString table}
-    ${pkgs.iproute2}/bin/ip -6 rule add oif wg0 lookup ${toString table}
-    # policy routing, maybe this can be done via systemd?
-    ${pkgs.iproute2}/bin/ip -6 rule add from ${ip} table ${toString table}
-    ${pkgs.iproute2}/bin/ip -6 rule add to ${ip} table ${toString table}
-  '';
 
   environment.persistence."/nix/persist/system" = {
     directories = [ "/etc/credstore" ];
