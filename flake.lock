@@ -248,11 +248,11 @@
     },
     "nixpkgs-small": {
       "locked": {
-        "lastModified": 1770720068,
-        "narHash": "sha256-S8s8l0CfMYsFMNS0hXZaQV9sOTkUB6qdXdTSEs2aTT8=",
+        "lastModified": 1770818322,
+        "narHash": "sha256-tttCN+yrhM7svQW6DqtS3JV9POrRJAaS/e0xuUHBTEM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8ee95bcb238069810a968efbf2bba8e4d6ff11a6",
+        "rev": "d9ca3a4b73f19ea147c9d977d3dde8f612ac648f",
         "type": "github"
       },
       "original": {
@@ -387,11 +387,11 @@
     },
     "secrets": {
       "locked": {
-        "lastModified": 1756227970,
-        "narHash": "sha256-Q+05YgNfqXmt6kvP0uNsfUhmjG7oBsNJekckdEYixv0=",
+        "lastModified": 1770837887,
+        "narHash": "sha256-THZ6DIaJ3vwG4pmtXBPgJPzL3osxiulL6/CsbE4V7G0=",
         "ref": "refs/heads/master",
-        "rev": "63928a79d7321ba580a24a7138ce85976224338e",
-        "revCount": 2,
+        "rev": "17c67eea81ffef97b1c115aaac22300bc1d0526c",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@zimward.moe/~/secrets"
       },
