@@ -122,11 +122,6 @@ inputs.wrappers.wrapperModules.helix.apply {
       language-server.nixd = {
         command = lib.getExe pkgs.nixd;
       };
-      #doesn't make sense to have on a server
-      language-server.superhtml = gattrs {
-        command = lib.getExe pkgs.superhtml;
-        args = [ "lsp" ];
-      };
       language-server.ltexpp = gattrs {
         command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
       };
