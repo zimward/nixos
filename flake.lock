@@ -387,11 +387,11 @@
     },
     "secrets": {
       "locked": {
-        "lastModified": 1770837887,
-        "narHash": "sha256-THZ6DIaJ3vwG4pmtXBPgJPzL3osxiulL6/CsbE4V7G0=",
+        "lastModified": 1771070531,
+        "narHash": "sha256-9ELdfLpheBraP0ufhuyWcvGxu2+LaCOijzNGKH1Q97E=",
         "ref": "refs/heads/master",
-        "rev": "17c67eea81ffef97b1c115aaac22300bc1d0526c",
-        "revCount": 3,
+        "rev": "3a7360cdeeecb6147484fc60c57eae6e8c6514d4",
+        "revCount": 4,
         "type": "git",
         "url": "ssh://git@zimward.moe/~/secrets"
       },

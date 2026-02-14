@@ -9,6 +9,7 @@
     ./minecraft.nix
     ./ethercalc
     ./wireguard.nix
+    ./nginx.nix
   ];
 
   config = {
