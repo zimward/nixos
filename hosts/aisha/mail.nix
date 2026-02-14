@@ -2,7 +2,7 @@
   users.users."stalwart-mail".extraGroups = [ "nginx" ];
 
   #mail service
-  services.stalwart-mail = {
+  services.stalwart = {
     enable = true;
     openFirewall = true;
     dataDir = "/nix/persist/mail";

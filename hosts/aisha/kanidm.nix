@@ -16,7 +16,7 @@ in
       mkdir $CAROOT -p
       cd $CAROOT
       mkcert -install
-      mkcert ${cfg.serverSettings.domain}
+      mkcert ${cfg.server.settings.domain}
       chown kanidm:kanidm /run/kanidm.ca -Rv
       chmod 660 /run/kanidm.ca/* -Rv
     '';
@@ -35,19 +35,19 @@ in
 
   services.kanidm = {
     package = pkgs.kanidm_1_8;
-    enableServer = true;
-    enableClient = true;
-    serverSettings = {
+    server.enable = true;
+    client.enable = true;
+    server.settings = {
       bindaddress = "[::1]:8443";
       # is read only for now for some reason. needs to be fixed
       # db_path = "/nix/persist/system/kanidm/kanidm.db";
       domain = "idm.zimward.moe";
       origin = "https://idm.zimward.moe";
-      tls_chain = "${certDir}/${cfg.serverSettings.domain}.pem";
-      tls_key = "${certDir}/${cfg.serverSettings.domain}-key.pem";
+      tls_chain = "${certDir}/${cfg.server.settings.domain}.pem";
+      tls_key = "${certDir}/${cfg.server.settings.domain}-key.pem";
     };
-    clientSettings = {
-      uri = "https://${cfg.serverSettings.bindaddress}";
+    client.settings = {
+      uri = "https://${cfg.server.settings.bindaddress}";
       ca_path = "${certDir}/rootCA.pem";
       verify_ca = true;
       verify_hostnames = false;
@@ -55,7 +55,7 @@ in
   };
   services.nginx.virtualHosts."idm.zimward.moe" = {
     locations."/" = {
-      proxyPass = "https://${cfg.serverSettings.bindaddress}";
+      proxyPass = "https://${cfg.server.settings.bindaddress}";
       recommendedProxySettings = true;
     };
     quic = true;
