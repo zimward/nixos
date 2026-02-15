@@ -13,6 +13,7 @@
     ./git.nix
     ./kanidm.nix
     ./wireguard.nix
+    ./cinny.nix
   ];
 
   config = {
