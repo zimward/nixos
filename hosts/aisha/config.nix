@@ -78,6 +78,7 @@
     services.nginx = {
       enable = true;
       package = pkgs.nginx;
+      enableReload = true;
       #add headers to make browsers actually use quic
       commonHttpConfig = ''
         add_header Alt-Svc  'h3=":443"; ma=3600, h2=":443"; ma=3600';
