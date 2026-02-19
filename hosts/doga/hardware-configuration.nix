@@ -83,7 +83,6 @@
     #import zfs pool on boot
     boot.zfs.extraPools = [ "Pool1_20TB" ];
     boot.zfs.forceImportRoot = false;
-    systemd.services.zfs-import.requires = [ "sops-install-secrets.service" ];
 
     #the server is only running trusted code, so no risk of LPE
     boot.kernelParams = [
