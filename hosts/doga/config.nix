@@ -54,7 +54,7 @@
       "zimward"
     ];
 
-    ethernet.share.device = "enp2s0f1";
+    ethernet.share.device = "enp8s0f1";
 
     #zfs auto scrubbing
     services.zfs.autoScrub.enable = true;
@@ -213,7 +213,7 @@
 
     #public interface with ipv6 config
     systemd.network.networks."10-public" = {
-      matchConfig.Name = "enp2s0f0";
+      matchConfig.Name = "enp8s0f0";
       networkConfig = {
         DHCP = "ipv4";
         IPv6AcceptRA = true;
