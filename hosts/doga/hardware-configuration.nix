@@ -18,7 +18,10 @@
       "sd_mod"
     ];
     boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-intel" ];
+    boot.kernelModules = [
+      "kvm-intel"
+      "nct6775"
+    ];
     boot.extraModulePackages = [ ];
     boot.supportedFilesystems = [ "zfs" ];
 
@@ -93,6 +96,34 @@
     networking.useDHCP = lib.mkDefault true;
     systemd.network.enable = true;
     networking.useNetworkd = true;
+
+    services.pid-fan-controller = {
+      enable = true;
+      settings = {
+        interval = 100;
+        heatSources = [
+          {
+            name = "cpu";
+            wildcardPath = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input";
+            pidParams = {
+              setPoint = 60;
+              P = -5.0e-3;
+              I = -2.0e-3;
+              D = -6.0e-3;
+            };
+          }
+        ];
+        fans = [
+          {
+            #name = "cpu";
+            wildcardPath = "/sys/devices/platform/nct6775.2608/hwmon/hwmon*/pwm2";
+            minPwm = 0;
+            maxPwm = 255;
+            heatPressureSrcs = [ "cpu" ];
+          }
+        ];
+      };
+    };
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
