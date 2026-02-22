@@ -31,7 +31,7 @@
   config = {
     #running ssh agent on graphical hosts is most often needed
     systemd.user.services.ssh-agent = {
-      enable = true;
+      enable = config.graphical.enable;
       wantedBy = [ "default.target" ];
       serviceConfig = {
         ExecStart = "${config.programs.ssh.package}/bin/ssh-agent -D -a %t/ssh-agent";
