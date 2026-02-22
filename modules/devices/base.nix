@@ -64,8 +64,6 @@
     };
 
     mainUser.userName = "zimward";
-    services.getty.autologinUser = config.mainUser.userName;
-    services.getty.autologinOnce = true;
 
     environment.persistence."/nix/persist/system" =
       lib.mkIf (config.tmpfsroot.enable || config.tmpfsroot.impermanence)

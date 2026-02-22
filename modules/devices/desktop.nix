@@ -10,6 +10,9 @@
     system.tools.nixos-build-vms.enable = lib.mkDefault true;
     devel.git.enable = true;
     cli.applications.enable = true;
+
+    services.getty.autologinUser = config.mainUser.userName;
+    services.getty.autologinOnce = true;
     #nitrokey support
     services.udev.packages = [ pkgs.nitrokey-udev-rules ];
 
