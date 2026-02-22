@@ -71,47 +71,6 @@
       '';
     };
 
-    services.samba = {
-      enable = true;
-      openFirewall = true;
-      settings = {
-        global = {
-          "workgroup" = "WORKGROUP";
-          "server string" = "smbnix";
-          "netbios name" = "smbnix";
-          "security" = "user";
-        };
-        private = {
-          path = "/mnt/nas/nas/basti";
-          browsable = "yes";
-          "read only" = "no";
-          "guest ok" = "no";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "basti";
-          "force group" = "users";
-        };
-      };
-    };
-
-    services.samba-wsdd = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    users.users.basti = {
-      isNormalUser = true;
-      hashedPassword = "$y$j9T$Zb4MwzGPklZnR/MBpQ7g01$Q1P7ci7xXFLM7W19ctvojiomdn8WxGmg46KKTP1DzZD";
-    };
-
-    users.users.lucy = {
-      isNormalUser = true;
-      home = "/mnt/nas/nas/lucy";
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMbg58E2ZZL3Pipvt+ajeAeShOgawJkno4uMW+aJ/cVy"
-      ];
-    };
-
     services.logind.settings.Login.HandlePowerKeyLongPress = "reboot";
 
     #dlna media server
