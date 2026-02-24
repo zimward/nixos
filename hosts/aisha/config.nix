@@ -11,7 +11,6 @@
     ./matrix.nix
     ./mail.nix
     ./git.nix
-    ./kanidm.nix
     ./wireguard.nix
     ./cinny.nix
   ];
