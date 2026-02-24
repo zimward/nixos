@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  pkgs,
+  inputs,
   ...
 }:
 
@@ -32,7 +32,7 @@ in
 
       package = mkOption {
         type = types.package;
-        default = pkgs.callPackage ./package.nix { };
+        default = inputs.ethercalc.packages.x86_64-linux.default;
         description = "package";
       };
 

@@ -47,6 +47,8 @@
       url = "git+ssh://git@zimward.moe/~/secrets";
     };
 
+    ethercalc.url = "git+ssh://git@zimward.moe/~/ethercalc";
+
   };
 
   outputs =
