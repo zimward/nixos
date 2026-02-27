@@ -109,6 +109,7 @@
       lib.mkIf config.tmpfsroot.enable {
         directories = map varDir [
           "samba"
+          "userborn"
         ];
       };
 

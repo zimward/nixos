@@ -70,7 +70,10 @@
         };
     };
     environment.persistence."/nix/persist/system" = lib.mkIf config.tmpfsroot.enable {
-      directories = [ "/var/lib/acme/" ];
+      directories = [
+        "/var/lib/acme/"
+        "/var/lib/userborn/"
+      ];
     };
 
     services.nginx.additionalModules = [ pkgs.nginxModules.zstd ];

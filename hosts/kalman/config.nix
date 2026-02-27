@@ -32,6 +32,7 @@
         "/var/lib/sbctl"
         "/root/.ssh"
         "/var/lib/private"
+        "/var/lib/userborn"
       ];
     };
 
