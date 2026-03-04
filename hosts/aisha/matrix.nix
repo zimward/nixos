@@ -193,6 +193,10 @@ in
     locations."/_matrix" = proxyConf;
     locations."/_synapse/client" = proxyConf;
 
+    locations."^~ /livekit/jwt/" = {
+      priority = 400;
+      proxyPass = "http://[::1]:${toString config.services.lk-jwt-service.port}/";
+    };
     locations."^~ /livekit/sfu/" = {
       extraConfig = ''
         proxy_send_timeout 120;
