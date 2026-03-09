@@ -164,7 +164,7 @@
     };
     services.ollama = {
       enable = true;
-      package = pkgs.ollama-rocm;
+      package = pkgs.ollama-vulkan;
       environmentVariables = {
         HSA_OVERRIDE_GFX_VERSION = "10.3.0";
         OLLAMA_KEEP_ALIVE = "15m";
