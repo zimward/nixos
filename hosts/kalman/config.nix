@@ -159,17 +159,12 @@
     graphical.ime.enable = true;
     graphical.matlab.enable = true;
 
-    services.nextjs-ollama-llm-ui = {
-      enable = true;
+    misc.ollama.enable = true;
+    services.ollama.environmentVariables = {
+      HSA_OVERRIDE_GFX_VERSION = "10.3.0";
+      OLLAMA_KEEP_ALIVE = "15m";
     };
-    services.ollama = {
-      enable = true;
-      package = pkgs.ollama-vulkan;
-      environmentVariables = {
-        HSA_OVERRIDE_GFX_VERSION = "10.3.0";
-        OLLAMA_KEEP_ALIVE = "15m";
-      };
-    };
+
     devel.helix.package =
       (config.devel.helix.wrapper.apply {
         languages = {

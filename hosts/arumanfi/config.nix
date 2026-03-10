@@ -49,6 +49,8 @@
     graphical.minecraft.enable = true;
     graphical.steam.enable = true;
 
+    misc.ollama.enable = true;
+
     networking.hostName = "arumanfi";
     networking.useDHCP = lib.mkDefault true;
     networking.networkmanager.enable = true;
@@ -128,6 +130,7 @@
         "/etc/NetworkManager/VPN"
         "/var/lib/sbctl"
         "/root/.ssh"
+        "/var/lib/private"
       ];
     };
     environment.persistence."/persist/home" = {
