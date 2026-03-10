@@ -165,7 +165,6 @@
               ".steam"
             ];
     };
-    sops.age.keyFile = lib.mkForce "/persist/age/key";
     #dont auto garbage collect to prevent having to recompile build tools constantly
     nix.gc.dates = lib.mkForce "monthly";
 

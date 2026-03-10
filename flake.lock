@@ -348,7 +348,6 @@
         "nixpkgs-small": "nixpkgs-small",
         "run0-sudo-shim": "run0-sudo-shim",
         "secrets": "secrets",
-        "sops-nix": "sops-nix",
         "wrappers": "wrappers"
       }
     },
@@ -433,26 +432,6 @@
       "original": {
         "type": "git",
         "url": "ssh://git@zimward.moe/~/secrets"
-      }
-    },
-    "sops-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773096132,
-        "narHash": "sha256-M3zEnq9OElB7zqc+mjgPlByPm1O5t2fbUrH3t/Hm5Ag=",
-        "owner": "Mic92",
-        "repo": "sops-nix",
-        "rev": "d1ff3b1034d5bab5d7d8086a7803c5a5968cd784",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Mic92",
-        "repo": "sops-nix",
-        "type": "github"
       }
     },
     "systems": {

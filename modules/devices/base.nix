@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
     ../misc/mainUser.nix
   ];
@@ -78,10 +77,6 @@
             "/etc/ssh/ssh_host_rsa_key.pub"
           ];
         };
-    # soppps.files = ["/run/NetworkManager/system-connections/*.nmconnection"];
-    sops.defaultSopsFile = ../../secrets/secrets.yaml;
-    sops.defaultSopsFormat = "yaml";
-    sops.age.keyFile = "/home/${config.mainUser.userName}/.config/sops/age/keys.txt";
     services.logind.settings.Login.HandlePowerKey = "suspend";
 
     services.btrfs.autoScrub.enable = true;

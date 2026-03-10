@@ -15,11 +15,6 @@
   config = {
     device.class = "server";
     mainUser.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
-    #zfs key location
-    sops.secrets.naskey = {
-      "format" = "binary";
-      sopsFile = ../../secrets/naskey;
-    };
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;

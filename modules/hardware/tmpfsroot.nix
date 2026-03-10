@@ -21,35 +21,33 @@
     };
   };
   config = lib.mkIf config.tmpfsroot.enable {
-    fileSystems =
-      {
-        "/" = {
-          device = "tmpfs";
-          fsType = "tmpfs";
-          options = [
-            "noexec"
-            "mode=755"
-          ];
-        };
-        "/tmp" = {
-          device = "tmpfs";
-          fsType = "tmpfs";
-          options = [
-            "defaults"
-            "mode=755"
-          ];
-        };
-        "/nix" = config.tmpfsroot.nixstore;
-        #umask to close potential security hole of stored inital seed
-        "/boot" = lib.mkMerge [
-          config.tmpfsroot.boot
-          { options = [ "umask=0077" ]; }
+    fileSystems = {
+      "/" = {
+        device = "tmpfs";
+        fsType = "tmpfs";
+        options = [
+          "noexec"
+          "mode=755"
         ];
-      }
-      // lib.attrsets.optionalAttrs (config.tmpfsroot.home != null) {
-        "/home" = config.tmpfsroot.home;
       };
-    sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
+      "/tmp" = {
+        device = "tmpfs";
+        fsType = "tmpfs";
+        options = [
+          "defaults"
+          "mode=755"
+        ];
+      };
+      "/nix" = config.tmpfsroot.nixstore;
+      #umask to close potential security hole of stored inital seed
+      "/boot" = lib.mkMerge [
+        config.tmpfsroot.boot
+        { options = [ "umask=0077" ]; }
+      ];
+    }
+    // lib.attrsets.optionalAttrs (config.tmpfsroot.home != null) {
+      "/home" = config.tmpfsroot.home;
+    };
     programs.fuse.userAllowOther = true;
   };
 }

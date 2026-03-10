@@ -26,7 +26,6 @@
     boot.supportedFilesystems = [ "zfs" ];
 
     tmpfsroot.impermanence = true;
-    sops.age.keyFile = lib.mkForce "/nix/persist/system/var/lib/sops-nix/key.txt";
 
     #needed for postDeviceCommands
     system.etc.overlay.enable = false;

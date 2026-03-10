@@ -11,9 +11,6 @@
 
   config = {
     device.class = "desktop"; # its a laptop but it doesnt matter
-    net.wifi.enable = true;
-
-    sops.age.keyFile = lib.mkForce "/nix/sops/age/keys.txt";
 
     devel.git.signingkey = "CBF7FA5EF4B58B6859773E3E4CAC61D6A482FCD9";
 
