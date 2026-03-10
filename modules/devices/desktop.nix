@@ -29,7 +29,6 @@
 
     security.soteria.enable = true;
 
-    net.filter.enable = true;
     #sound
     sys.sound.enable = true;
     #fix for opening links
