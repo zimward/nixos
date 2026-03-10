@@ -71,16 +71,25 @@ in
             config.nix.package
           ];
           text = ''
-            cd "$(mktemp -d)"
+            TEMPDIR="$(mktemp -d)"
+            cd "$TEMPDIR"
+            cleanup () {
+                cd /tmp
+                rm -fr "$TEMPDIR"
+            }
+            trap cleanup EXIT
+
             git clone git@zimward.moe:nixos
             cd nixos
             nix flake update
+
+            if git diff --exit-code --quiet ; then
+              exit 0
+            fi
+
             git add flake.lock
-            git commit -m "flake: update lock" && {
-              git push
-              cd ..
-              rm -rf nixos
-            }
+            git commit -m "flake: update lock"
+            git push
           '';
         }
       );
