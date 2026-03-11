@@ -5,6 +5,6 @@
     ./undesired.nix
     ./unfree.nix
     ./wine.nix
-    ./ollama.nix
+    ./llm.nix
   ];
 }

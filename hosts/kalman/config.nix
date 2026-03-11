@@ -33,6 +33,7 @@
         "/root/.ssh"
         "/var/lib/private"
         "/var/lib/userborn"
+        "/var/lib/llama-cpp/"
       ];
     };
 
@@ -159,11 +160,7 @@
     graphical.ime.enable = true;
     graphical.matlab.enable = true;
 
-    misc.ollama.enable = true;
-    services.ollama.environmentVariables = {
-      HSA_OVERRIDE_GFX_VERSION = "10.3.0";
-      OLLAMA_KEEP_ALIVE = "15m";
-    };
+    misc.llm.enable = true;
 
     devel.helix.package =
       (config.devel.helix.wrapper.apply {

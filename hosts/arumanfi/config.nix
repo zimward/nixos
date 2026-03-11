@@ -49,7 +49,7 @@
     graphical.minecraft.enable = true;
     graphical.steam.enable = true;
 
-    misc.ollama.enable = true;
+    misc.llm.enable = true;
 
     networking.hostName = "arumanfi";
     networking.useDHCP = lib.mkDefault true;
