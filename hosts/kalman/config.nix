@@ -13,6 +13,19 @@
   ];
 
   config = {
+    containers = {
+      niriot = {
+        autoStart = true;
+        ephemeral = true;
+
+        config =
+          { modulesPath, ... }:
+          {
+            imports = [ "${modulesPath}/profiles/minimal.nix" ];
+            system.stateVersion = "26.05";
+          };
+      };
+    };
     device.class = "desktop";
     #gets wiped due to tmpfs
     mainUser.hashedPassword = "$6$qMlVwZLXPsEw1yMa$DveNYjYb8FO.bJXuNbZIr..Iylt4SXsG3s4Njp2sMVokhEAr0E66WsMm.uNPUXsuW/ankujT19cL6vaesmaN9.";
@@ -161,122 +174,6 @@
     graphical.matlab.enable = true;
 
     misc.llm.enable = true;
-
-    devel.helix.package =
-      (config.devel.helix.wrapper.apply {
-        languages = {
-          language-server.lsp-ai = {
-            command = lib.getExe pkgs.lsp-ai;
-            timeout = 300;
-            config = {
-              memory = {
-                file_store = { };
-              };
-              models = {
-                qwen = {
-                  type = "ollama";
-                  model = "qwen3-quant";
-                };
-              };
-              actions = [
-                {
-                  action_display_name = "Complete";
-                  model = "qwen";
-                  parameters = {
-                    fim = {
-                      start = "<|fim_prefix|>";
-                      middle = "<|fim_suffix|>";
-                      end = "<|fim_middle|>";
-                    };
-                  };
-                }
-                {
-                  action_display_name = "Code from comment";
-                  model = "qwen";
-                  parameters = {
-                    messages = [
-                      {
-                        role = "system";
-                        content = builtins.readFile ./cfc.md;
-                      }
-                      {
-                        role = "user";
-                        content = ''
-                          <context>
-                          {CODE}
-                          </context>
-                          <input>
-                          {SELECTED_TEXT}
-                          </input>
-                        '';
-                      }
-                    ];
-                  };
-                  post_process = {
-                    extractor = "(?s)<answer>(.*?)</answer>";
-                  };
-                }
-                {
-                  action_display_name = "Code from comment (thinking)";
-                  model = "qwen";
-                  parameters = {
-                    messages = [
-                      {
-                        role = "system";
-                        content = lib.strings.concatLines [
-                          (builtins.readFile ./cfc.md)
-                          (builtins.readFile ./cot.md)
-                        ];
-                      }
-                      {
-                        role = "user";
-                        content = ''
-                          <context>
-                          {CODE}
-                          </context>
-                          <input>
-                          {SELECTED_TEXT}
-                          </input>
-                        '';
-                      }
-                    ];
-                  };
-                  post_process = {
-                    extractor = "(?s)<answer>(.*?)</answer>";
-                  };
-                }
-              ];
-            };
-          };
-          language =
-            (map
-              (name: {
-                inherit name;
-                language-servers = [ "lsp-ai" ];
-              })
-              [
-                "matlab"
-                "python"
-              ]
-            )
-            ++ [
-              {
-                name = "rust";
-                language-servers = [
-                  "rust-analyzer"
-                  "lsp-ai"
-                ];
-              }
-              {
-                name = "nix";
-                language-servers = [
-                  "nixd"
-                  "lsp-ai"
-                ];
-              }
-            ];
-        };
-      }).wrapper;
 
     environment.systemPackages = with pkgs; [
       freecad

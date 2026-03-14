@@ -134,7 +134,6 @@ inputs.wrappers.wrapperModules.helix.apply {
           };
           language-servers = [
             "nixd"
-            "lsp-ai"
           ];
         }
         {
