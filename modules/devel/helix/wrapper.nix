@@ -13,8 +13,7 @@ inputs.wrappers.wrapperModules.helix.apply {
     ]
     ++ lib.optionals config.graphical.enable [
       texlab # latex lsp
-      lldb_18
-      clang-tools
+      inputs.codel.packages.x86_64-linux.default
     ];
 
   themes = {
@@ -43,9 +42,9 @@ inputs.wrappers.wrapperModules.helix.apply {
       color-modes = true;
       #dvorak home row etc
       jump-label-alphabet = "aoeidrnsuhlqwt";
-      # lsp = {
-      #   display-inlay-hints = true;
-      # };
+      lsp = {
+        display-inlay-hints = true;
+      };
       idle-timeout = 24000;
       indent-guides = {
         render = true;
@@ -106,6 +105,11 @@ inputs.wrappers.wrapperModules.helix.apply {
     {
       #RA gets only installed via flake dev env so config is ok
       language-server.rust-analyzer = {
+        command = "env";
+        args = [
+          "XDG_CONFIG_HOME=/home/zimward/.config"
+          "rust-analyzer"
+        ];
         config = {
           check = {
             command = "clippy";
@@ -125,6 +129,11 @@ inputs.wrappers.wrapperModules.helix.apply {
       language-server.ltexpp = gattrs {
         command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
       };
+      language-server.codel = {
+        command = "codel";
+        args = [
+        ];
+      };
       language = [
         {
           name = "nix";
@@ -134,14 +143,16 @@ inputs.wrappers.wrapperModules.helix.apply {
           };
           language-servers = [
             "nixd"
+            "codel"
           ];
         }
         {
           name = "rust";
           auto-format = true;
-          formatter = {
-            command = lib.getExe pkgs.rustfmt;
-          };
+          language-servers = [
+            "rust-analyzer"
+            "codel"
+          ];
         }
       ]
       ++ lib.optionals config.graphical.enable [
@@ -152,7 +163,7 @@ inputs.wrappers.wrapperModules.helix.apply {
             "html"
             "css"
           ];
-          language-servers = [ "superhtml" ];
+          language-servers = [ "codel" ];
         }
         {
           name = "latex";

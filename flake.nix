@@ -43,7 +43,7 @@
     };
 
     ethercalc.url = "git+ssh://git@zimward.moe/~/ethercalc";
-
+    codel.url = "git+ssh://git@zimward.moe/~/lsp?ref=main";
   };
 
   outputs =

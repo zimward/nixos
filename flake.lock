@@ -1,5 +1,24 @@
 {
   "nodes": {
+    "codel": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1774006927,
+        "narHash": "sha256-M+vDX5iXOPC0SYW+L/akp6pEWcAJnsgk7VFwjsx1rsA=",
+        "ref": "main",
+        "rev": "1e77c0b14b15f119b24ca7c47c92baca6f31ae30",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@zimward.moe/~/lsp"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@zimward.moe/~/lsp"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1765145449,
@@ -38,7 +57,7 @@
     },
     "ethercalc": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1771928486,
@@ -150,7 +169,7 @@
     "impermanence": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1769548169,
@@ -250,16 +269,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771714954,
-        "narHash": "sha256-nhZJPnBavtu40/L2aqpljrfUNb2rxmWTmSjK2c9UKds=",
+        "lastModified": 1773646010,
+        "narHash": "sha256-iYrs97hS7p5u4lQzuNWzuALGIOdkPXvjz7bviiBjUu8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "afbbf774e2087c3d734266c22f96fca2e78d3620",
+        "rev": "5b2c2d84341b2afb5647081c1386a80d7a8d8605",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-25.11",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -282,6 +301,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1771714954,
+        "narHash": "sha256-nhZJPnBavtu40/L2aqpljrfUNb2rxmWTmSjK2c9UKds=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "afbbf774e2087c3d734266c22f96fca2e78d3620",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1768564909,
         "narHash": "sha256-Kell/SpJYVkHWMvnhqJz/8DqQg2b6PguxVWOuadbHCc=",
         "owner": "nixos",
@@ -296,7 +331,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1773821835,
         "narHash": "sha256-TJ3lSQtW0E2JrznGVm8hOQGVpXjJyXY2guAxku2O9A4=",
@@ -337,6 +372,7 @@
     },
     "root": {
       "inputs": {
+        "codel": "codel",
         "disko": "disko",
         "ethercalc": "ethercalc",
         "flake-utils": "flake-utils",
@@ -344,7 +380,7 @@
         "lanzaboote": "lanzaboote",
         "nix-matlab": "nix-matlab",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-small": "nixpkgs-small",
         "run0-sudo-shim": "run0-sudo-shim",
         "secrets": "secrets",

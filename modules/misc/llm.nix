@@ -12,25 +12,24 @@
       enable = true;
       settings =
         let
-          llama-cpp = pkgs.llama-cpp-vulkan;
+          llama-cpp = pkgs.llama-cpp-rocm;
           llama-server = lib.getExe' llama-cpp "llama-server";
 
-          # Helper: build model config from (name, { filename, isMoe ? false })
           buildModel =
             {
               name,
               filename,
               isMoe ? false,
+              extraArgs ? "",
             }:
             {
               ${name} = {
                 cmd =
-                  "${llama-server} --port \${PORT} -m /var/lib/llama-cpp/models/${filename} -ngl 99"
+                  "${llama-server} --port \${PORT} -m /var/lib/llama-cpp/models/${filename} -ngl 99 -fit on ${extraArgs}"
                   + lib.optionalString isMoe " --cpu-moe";
               };
             };
 
-          # Your models: just list the data
           modelList = [
             {
               name = "qwen3.5-2b";
@@ -44,6 +43,11 @@
               name = "qwen3-coder-next";
               filename = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
               isMoe = true;
+            }
+            {
+              name = "qwen3.5-4b-zeta";
+              filename = "Qwen3-4B-Q8-finetune.gguf";
+              extraArgs = "--chat-template-kwargs \'{\"enable_thinking\": false}\'";
             }
           ];
 
