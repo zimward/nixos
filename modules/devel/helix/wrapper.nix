@@ -105,11 +105,6 @@ inputs.wrappers.wrapperModules.helix.apply {
     {
       #RA gets only installed via flake dev env so config is ok
       language-server.rust-analyzer = {
-        command = "env";
-        args = [
-          "XDG_CONFIG_HOME=/home/zimward/.config"
-          "rust-analyzer"
-        ];
         config = {
           check = {
             command = "clippy";
@@ -131,8 +126,9 @@ inputs.wrappers.wrapperModules.helix.apply {
       };
       language-server.codel = {
         command = "codel";
-        args = [
-        ];
+        config = {
+          lines_context = 30;
+        };
       };
       language = [
         {
