@@ -34,10 +34,12 @@
             {
               name = "qwen3.5-2b";
               filename = "Qwen3.5-2B-f16_q8_0.gguf";
+              extraArgs = "--chat-template-kwargs \'{\"enable_thinking\": false}\'";
             }
             {
               name = "qwen2.5-3b";
               filename = "Qwen2.5-Coder-3B-Q8_0.gguf";
+              extraArgs = "-md /var/lib/llama-cpp/models/Qwen2.5-Coder-0.5B-Q8_0.gguf";
             }
             {
               name = "qwen3-coder-next";
