@@ -108,6 +108,12 @@
         enableACME = true;
         quic = true;
       };
+      virtualHosts."wrappers.zimward.moe" = {
+        forceSSL = true;
+        enableACME = true;
+        quic = true;
+        root = "/nix/persist/wrappers";
+      };
     };
 
     #prevent OOM on cache fail
