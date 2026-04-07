@@ -21,8 +21,8 @@
           p:
           p.override {
             addons = with pkgs.kicadAddons; [
-              kikit
-              kikit-library
+              # kikit
+              # kikit-library
             ];
           };
       in
