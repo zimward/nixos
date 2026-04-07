@@ -42,8 +42,10 @@
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
-      "pipe-operators"
+      "pipe-operator"
     ];
+
+    nix.package = pkgs.lixPackageSets.stable.lix;
 
     #doesn't hurt
     zramSwap.enable = true;
