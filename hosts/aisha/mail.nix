@@ -4,6 +4,7 @@
   #mail service
   services.stalwart = {
     enable = true;
+    stateVersion = "25.05";
     openFirewall = true;
     dataDir = "/nix/persist/mail";
     settings = {
