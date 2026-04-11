@@ -1,7 +1,7 @@
 {
   config,
+  pkgs,
   lib,
-  inputs,
   ...
 }:
 
@@ -32,7 +32,16 @@ in
 
       package = mkOption {
         type = types.package;
-        default = inputs.ethercalc.packages.x86_64-linux.default;
+        default =
+          let
+            nixpkgs = import (pkgs.fetchFromGitHub {
+              owner = "NixOS";
+              repo = "nixpkgs";
+              rev = "afbbf774e2087c3d734266c22f96fca2e78d3620";
+              hash = "sha256-nhZJPnBavtu40/L2aqpljrfUNb2rxmWTmSjK2c9UKds=";
+            }) { system = "x86_64-linux"; };
+          in
+          nixpkgs.ethercalc;
         description = "package";
       };
 

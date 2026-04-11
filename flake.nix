@@ -37,12 +37,10 @@
       url = "github:lordgrimmauld/run0-sudo-shim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    secrets = {
-      url = "git+ssh://git@zimward.moe/~/secrets";
+    codel = {
+      url = "github:zimward/codel";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ethercalc.url = "git+ssh://git@zimward.moe/~/ethercalc";
-    codel.url = "git+ssh://git@zimward.moe/~/lsp?ref=main";
   };
 
   outputs =
@@ -59,7 +57,10 @@
           mkSys = nixp: extraModules: name: {
             inherit name;
             value = nixp.lib.nixosSystem {
-              specialArgs = { inherit inputs; };
+              specialArgs = {
+                inherit inputs;
+                secrets = import (import ./secrets.nix);
+              };
               modules = [
                 (./hosts + "/${name}/config.nix")
                 ./modules

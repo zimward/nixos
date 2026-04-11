@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ secrets, ... }:
 let
   ip = "[2a01:4f9:c012:36f5:8008:5::2]";
 in
@@ -21,7 +21,7 @@ in
         listenAddresses = [ ip ];
         locations."/webdav" = {
           basicAuth = {
-            zim = inputs.secrets.webdav.zim;
+            zim = secrets.webdav.zim;
           };
           proxyPass = "http://[::1]:8069";
           recommendedProxySettings = true;

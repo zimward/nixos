@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  inputs,
+  secrets,
   ...
 }:
 {
@@ -38,7 +38,7 @@
   networking.useDHCP = lib.mkDefault true;
   networking.wireless = {
     enable = true;
-    networks = inputs.secrets.wifi;
+    networks = secrets.wifi;
   };
   systemd.network.networks."10-wifi" = {
     matchConfig.Name = "wlan0";
