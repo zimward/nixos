@@ -51,6 +51,36 @@
 
     misc.llm.enable = true;
 
+    networking.networkmanager.ensureProfiles.profiles = {
+      eduroam = {
+        connection = {
+          id = "eduroam";
+          type = "wifi";
+        };
+        wifi = {
+          mode = "infrastructure";
+          ssid = "eduroam";
+        };
+        wifi-security = {
+          key-mgmt = "wpa-eap";
+        };
+        "802-1x" = {
+          altsubject-matches = "DNS:easyroam.eduroam.de";
+          ca-cert = "/etc/NetworkManager/system-connections/easyroam-certs/easyroam_root_ca.pem";
+          client-cert = "/etc/NetworkManager/system-connections/easyroam-certs/easyroam_client_cert.pem";
+          eap = "tls";
+          identity = "5621364064864977341@easyroam-pca.htw-berlin.de";
+          private-key = "/etc/NetworkManager/system-connections/easyroam-certs/easyroam_client_key.pem";
+          private-key-password = "pkcs12";
+        };
+        ipv4.method = "auto";
+        ipv6 = {
+          addr-gen-mode = "default";
+          method = "auto";
+        };
+      };
+    };
+
     networking.hostName = "arumanfi";
     networking.useDHCP = lib.mkDefault true;
     networking.networkmanager.enable = true;
