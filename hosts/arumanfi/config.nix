@@ -192,6 +192,7 @@
               ".config" # same as above
               ".local" # ""
               ".steam"
+              ".matlab"
             ];
     };
     #dont auto garbage collect to prevent having to recompile build tools constantly
