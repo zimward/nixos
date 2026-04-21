@@ -23,7 +23,7 @@
     };
 
     nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
+      url = "github:zimward/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
