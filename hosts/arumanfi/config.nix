@@ -49,8 +49,6 @@
     graphical.minecraft.enable = true;
     graphical.steam.enable = true;
 
-    misc.llm.enable = true;
-
     networking.networkmanager.ensureProfiles.profiles = {
       eduroam = {
         connection = {
@@ -120,10 +118,7 @@
       #switch to Xe driver
       "xe.force_probe=7d55"
     ];
-    #disable intel management engine due to HAP bit
     boot.blacklistedKernelModules = [
-      "mei"
-      "mei_me"
       "i915"
     ];
 
@@ -228,8 +223,8 @@
       '';
     };
 
-    nixpkgs.hostPlatform = "x86_64-linux";
-    hardware.cpu.intel.updateMicrocode = true;
     hardware.enableRedistributableFirmware = true;
+    hardware.facter.enable = true;
+    hardware.facter.reportPath = ./report.json;
   };
 }
