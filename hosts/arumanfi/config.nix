@@ -64,11 +64,11 @@
         };
         "802-1x" = {
           altsubject-matches = "DNS:easyroam.eduroam.de";
-          ca-cert = "/etc/NetworkManager/system-connections/easyroam-certs/easyroam_root_ca.pem";
-          client-cert = "/etc/NetworkManager/system-connections/easyroam-certs/easyroam_client_cert.pem";
+          ca-cert = "/etc/wpa_supplicant/easyroam-certs/easyroam_root_ca.pem";
+          client-cert = "/etc/wpa_supplicant/easyroam-certs/easyroam_client_cert.pem";
           eap = "tls";
           identity = "5621364064864977341@easyroam-pca.htw-berlin.de";
-          private-key = "/etc/NetworkManager/system-connections/easyroam-certs/easyroam_client_key.pem";
+          private-key = "/etc/wpa_supplicant/easyroam-certs/easyroam_client_key.pem";
           private-key-password = "pkcs12";
         };
         ipv4.method = "auto";
@@ -156,6 +156,7 @@
         "/var/lib/sbctl"
         "/root/.ssh"
         "/var/lib/private"
+        "/etc/wpa_supplicant"
       ];
     };
     environment.persistence."/persist/home" = {
