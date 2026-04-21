@@ -8,6 +8,7 @@
   imports = [ ../graphical ];
   config = lib.mkIf (config.device.class == "desktop") {
     system.tools.nixos-build-vms.enable = lib.mkDefault true;
+
     devel.git.enable = true;
     cli.applications.enable = true;
 
@@ -38,6 +39,7 @@
     environment.systemPackages = [ pkgs.nh ];
     boot.initrd.systemd.network.wait-online.enable = false;
     boot.bootspec.enable = true;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     systemd.network.wait-online.enable = false;
   };
 }
