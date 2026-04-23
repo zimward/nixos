@@ -29,24 +29,30 @@
 
     #needed for postDeviceCommands
     system.etc.overlay.enable = false;
-    boot.initrd.systemd.enable = false;
-    boot.initrd.postDeviceCommands = lib.mkBefore ''
-      mkdir -p /mnt
-      mount ${config.fileSystems."/".device} /mnt
+    boot.initrd.systemd.services.rollback = {
+      wantedBy = [ "initrd.target" ];
+      before = [ "sysroot.mount" ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      serviceConfig.RemainAfterExit = "yes";
+      script = ''
+        mkdir -p /mnt
+        mount ${config.fileSystems."/".device} /mnt
 
-      btrfs subvolume list -o /mnt/root |
-      cut -f9 -d' ' |
-      while read subvolume; do
-        echo "deleting /$subvolume subvolume..."
-        btrfs subvolume delete "/mnt/$subvolume"
-      done &&
-      echo "deleting /root subvolume..." &&
-      btrfs subvolume delete /mnt/root
+        btrfs subvolume list -o /mnt/root |
+        cut -f9 -d' ' |
+        while read subvolume; do
+          echo "deleting /$subvolume subvolume..."
+          btrfs subvolume delete "/mnt/$subvolume"
+        done &&
+        echo "deleting /root subvolume..." &&
+        btrfs subvolume delete /mnt/root
 
-      echo "restoring clean /root subvolume..."
-      btrfs subvolume snapshot /mnt/root-clean /mnt/root
-      umount /mnt
-    '';
+        echo "restoring clean /root subvolume..."
+        btrfs subvolume snapshot /mnt/root-clean /mnt/root
+        umount /mnt
+      '';
+    };
 
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/bda74b6a-91f2-4dfc-9e55-bce9bf5d9d60";
