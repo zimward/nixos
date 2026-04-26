@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  inputs,
   secrets,
   ...
 }:
@@ -149,6 +148,8 @@ in
       };
     };
   };
+
+  services.synapse-auto-compressor.enable = true;
 
   #auto-discovery via .well-known
   services.nginx.virtualHosts."zimward.moe" = {
