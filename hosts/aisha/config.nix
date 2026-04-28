@@ -13,6 +13,7 @@
     ./git.nix
     ./wireguard.nix
     ./cinny.nix
+    ./push.nix
   ];
 
   config = {
@@ -73,6 +74,7 @@
       directories = [
         "/var/lib/acme/"
         "/var/lib/userborn/"
+        "/var/lib/private/"
       ];
     };
 
