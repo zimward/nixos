@@ -36,7 +36,7 @@ in
         hunspellDicts.de_DE
         hunspellDicts.en_US
         keepassxc
-        thunderbird
+        thunderbird-latest
         pavucontrol
         comma
         ltspice
