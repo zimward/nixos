@@ -123,7 +123,7 @@
       automatic = true;
       #gc profiles before update if /boot is full
       dates = "9:00";
-      options = "--delete-older-than 5d";
+      options = "--delete-older-than 3d";
     };
     nix.registry.n.to = config.nix.registry.nixpkgs.to;
 

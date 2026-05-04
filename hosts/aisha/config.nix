@@ -131,6 +131,9 @@
       "d /var/log/nginx 1640 nginx nginx 1d"
     ];
 
+    # force GC if upgrade fails due to full /boot
+    systemd.services.nixos-upgrade.serviceConfig.OnFailure = "nix-gc.service";
+
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
       22
