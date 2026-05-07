@@ -21,6 +21,8 @@
       #not really needed
       "module_blacklist=virtio_gpu"
     ];
+    # dynamic module loading should not be needed. ever.
+    security.lockKernelModules = true;
 
     systemd.network.enable = true;
     networking.useNetworkd = true;
