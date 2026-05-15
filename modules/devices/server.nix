@@ -33,6 +33,8 @@
     system.autoUpgrade.allowReboot = true;
     system.autoUpgrade.dates = lib.mkForce "4:00";
 
+    #should never be needed
+    security.lockKernelModules = true;
     #disable ptrace
     boot.kernel.sysctl = {
       "kernel.yama.ptrace_scope" = 3;
