@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./searx.nix
-    ./matrix.nix
+    ./matrix
     ./mail.nix
     ./git.nix
     ./wireguard.nix
