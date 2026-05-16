@@ -148,11 +148,9 @@ in
   services.nginx.virtualHosts."zimward.moe" = {
     locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
     locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
-    #for some reason clients insist on not using the sub domain
-    locations."/_matrix" = proxyConf;
-    locations."/_synapse/client" = proxyConf;
     extraConfig = compressionConf;
   };
+
   #max nginx request size is 8mb
   services.nginx.clientMaxBodySize = "100M";
   services.nginx.virtualHosts.${fqdn} = {
