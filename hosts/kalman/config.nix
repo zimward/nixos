@@ -139,7 +139,7 @@
               open-on-workspace = "browser-r";
             }
             {
-              matches = [ { app-id = "librewolf"; } ];
+              matches = [ { app-id = "firefox"; } ];
               open-on-workspace = "browser-l";
             }
           ];
@@ -162,7 +162,6 @@
     misc.llm.enable = true;
 
     environment.systemPackages = with pkgs; [
-      freecad
       prusa-slicer
       sbctl
       ghidra

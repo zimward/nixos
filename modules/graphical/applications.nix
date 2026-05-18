@@ -30,7 +30,7 @@ in
       ++ enPkg cfg.deluge pkgs.deluge
       ++ enPkg cfg.obsidian pkgs.obsidian
       ++ (with pkgs; [
-        librewolf
+        firefox
         libreoffice-qt
         hunspell # auto correction
         hunspellDicts.de_DE

@@ -61,7 +61,7 @@ inputs.wrappers.wrapperModules.niri.apply {
           "--default-timeout"
           "20000"
         ])
-        (command "librewolf")
+        (command "firefox")
         (command "thunderbird")
         (command "keepassxc")
       ]

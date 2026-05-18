@@ -59,12 +59,12 @@
     default-window-height.proportion = 1.0;
   }
   {
-    matches = [ { app-id = "librewolf"; } ];
+    matches = [ { app-id = "firefox"; } ];
     open-maximized = true;
   }
   {
-    matches = [ { app-id = "librewolf"; } ];
-    excludes = [ { title = "^.*LibreWolf$"; } ];
+    matches = [ { app-id = "firefox"; } ];
+    excludes = [ { title = "^.*Firefox$"; } ];
     open-floating = true;
     open-focused = true;
   }
