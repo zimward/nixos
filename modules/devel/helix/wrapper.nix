@@ -128,6 +128,7 @@ inputs.wrappers.wrapperModules.helix.apply {
         command = "codel";
         config = {
           lines_context = 30;
+          model = "qwen3.5-0.8b";
         };
       };
       language = [

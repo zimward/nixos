@@ -45,8 +45,6 @@
       boot.initrd.systemd.network.wait-online.enable = false;
       boot.kernelPackages = pkgs.linuxPackages_latest;
       systemd.network.wait-online.enable = false;
-
-      networking.firewall.allowedTCPPorts = [ 5000 ];
     }
     // (
       if options.services ? nix-cache-beacon then
@@ -62,9 +60,10 @@
           };
 
           # Make Nix aware of our local network cache
-          nix.settings.substituters = [ "http://localhost:5028" ];
+          # nix.settings.substituters = [ "http://localhost:5028" ];
 
           services.harmonia.cache.enable = true; # Serve up local Nix store
+          networking.firewall.allowedTCPPorts = [ 5000 ]; # Open firewall port for Harmonia
         }
       else
         { }

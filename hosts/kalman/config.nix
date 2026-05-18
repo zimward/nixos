@@ -32,7 +32,6 @@
         "/root/.ssh"
         "/var/lib/private"
         "/var/lib/userborn"
-        "/var/lib/llama-cpp/"
       ];
     };
 

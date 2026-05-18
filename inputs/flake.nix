@@ -39,7 +39,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codel = {
-      url = "github:zimward/codel";
+      url = "github:zimward/codel/push-yqnmoxktuvrq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     cache-beacon = {

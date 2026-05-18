@@ -27,15 +27,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1774562887,
-        "narHash": "sha256-A3PzhmS8dXOIrCmqVX+ULJjL2huRX7WFPKRxbW7O+fM=",
+        "lastModified": 1782476306,
+        "narHash": "sha256-lvoF2uv3pzvxulTt4e/1AJUqKPhk975BOxXU8aXky30=",
         "owner": "zimward",
         "repo": "codel",
-        "rev": "3edaffe182511e82d3f1e05049c4f6c1f3fea541",
+        "rev": "2cbb82729233c42792ca857835ba88cf7a898e44",
         "type": "github"
       },
       "original": {
         "owner": "zimward",
+        "ref": "push-yqnmoxktuvrq",
         "repo": "codel",
         "type": "github"
       }

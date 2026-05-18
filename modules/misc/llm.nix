@@ -4,60 +4,39 @@
   pkgs,
   ...
 }:
+let
+  iniFmt = pkgs.formats.ini { };
+  mkPreset = s: toString (iniFmt.generate "preset.ini" s);
+  models-dir = "/nix/persist/system/var/lib/llama-cpp/models";
+in
 {
   options.misc.llm.enable = lib.mkEnableOption "LLM (via llama-swap)";
-
   config = lib.mkIf config.misc.llm.enable {
-    services.llama-swap = {
+    services.llama-cpp = {
       enable = true;
-      settings =
-        let
-          llama-cpp = pkgs.llama-cpp-rocm;
-          llama-server = lib.getExe' llama-cpp "llama-server";
+      package = pkgs.llama-cpp-vulkan;
+      settings = {
+        inherit models-dir;
 
-          buildModel =
-            {
-              name,
-              filename,
-              isMoe ? false,
-              extraArgs ? "",
-            }:
-            {
-              ${name} = {
-                cmd =
-                  "${llama-server} --port \${PORT} -m /var/lib/llama-cpp/models/${filename} -ngl 99 -fit on ${extraArgs}"
-                  + lib.optionalString isMoe " --cpu-moe";
-              };
-            };
-
-          modelList = [
-            {
-              name = "qwen3.5-2b";
-              filename = "Qwen3.5-2B-f16_q8_0.gguf";
-              extraArgs = "--chat-template-kwargs \'{\"enable_thinking\": false}\'";
-            }
-            {
-              name = "qwen2.5-3b";
-              filename = "Qwen2.5-Coder-3B-Q8_0.gguf";
-              extraArgs = "-md /var/lib/llama-cpp/models/Qwen2.5-Coder-0.5B-Q8_0.gguf";
-            }
-            {
-              name = "qwen3-coder-next";
-              filename = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
-              isMoe = true;
-            }
-            {
-              name = "qwen3.5-4b-zeta";
-              filename = "Qwen3-4B-Q8-finetune.gguf";
-              extraArgs = "--chat-template-kwargs \'{\"enable_thinking\": false}\'";
-            }
-          ];
-
-        in
-        {
-          # Merge all model configs into one attrset
-          models = lib.foldl (acc: m: acc // buildModel m) { } modelList;
+        models-preset = mkPreset {
+          #fim trained model
+          "qwen3.5-0.8b" = {
+            model = "qwen3.5-0.8B-fim-finetune-q4_k_m.gguf";
+            c = 512;
+            n-gpu-layers = 99;
+          };
+          "qwen3-coder-next" = {
+            model = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
+            cpu-moe = 1;
+          };
         };
+
+      };
+    };
+    systemd.services.llama-cpp.serviceConfig = {
+      WorkingDirectory = lib.mkForce models-dir;
+      StateDirectory = lib.mkForce "";
+      CacheDirectory = lib.mkForce "llama-cpp";
     };
   };
 }
