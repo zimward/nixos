@@ -1,4 +1,4 @@
 fetchGit {
   url = "ssh://git@zimward.moe/~/secrets";
-  rev = "2211015eabd80c160baef4e947bade15345e468c";
+  rev = "b9063ae1f151c8ccccb4acd74847d5e9f98ad3f0";
 }

@@ -39,6 +39,8 @@ in
 
   services.postgresql = {
     enable = true;
+    enableJIT = true;
+    enableTCPIP = true;
     package = pkgs.postgresql_17;
     dataDir = "/nix/persist/system/postgresql/";
     ensureUsers = [
@@ -46,6 +48,14 @@ in
         name = "matrix-synapse";
       }
     ];
+    authentication = ''
+      host replication all 2a01:4f9:c012:36f5:8008:5::0/126 scram-sha-256
+    '';
+    settings = {
+      wal_level = "replica";
+      max_wal_senders = 5;
+      wal_keep_size = "200MB";
+    };
   };
 
   services.matrix-synapse = {
@@ -200,6 +210,7 @@ in
   #federation port
   networking.firewall.allowedTCPPorts = [
     port
+    config.services.postgresql.settings.port
   ];
   networking.firewall.allowedUDPPorts = [
     port # quic

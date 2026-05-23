@@ -10,6 +10,7 @@
     ./ethercalc
     ./wireguard.nix
     ./nginx.nix
+    ./postgres.nix
   ];
 
   config = {
