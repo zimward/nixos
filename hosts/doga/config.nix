@@ -1,10 +1,12 @@
 {
   config,
   lib,
+  inputs,
   ...
 }:
 {
   imports = [
+    inputs.cache-beacon.nixosModules.nix-cache-beacon
     ./hardware-configuration.nix
     ./minecraft.nix
     ./ethercalc
@@ -109,11 +111,20 @@
         ];
       };
 
-    services.nix-serve = {
-      enable = true;
-      openFirewall = true;
-      secretKeyFile = "/nix/persist/store-keys/secret-key-file";
+    services.nix-cache-beacon = {
+      advert = {
+        enable = true;
+        port = 5000; # Harmonia port
+      };
+
+      # Enable local binary cache using discovered caches on the local network
+      cache.enable = true;
     };
+
+    # Make Nix aware of our local network cache
+    nix.settings.substituters = [ "http://localhost:5028" ];
+
+    services.harmonia.cache.enable = true; # Serve up local Nix store
 
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [
@@ -126,6 +137,8 @@
       20048
       #ethercalc
       8000
+      # harmonia cache
+      5000
     ];
     networking.firewall.allowedUDPPorts = [
       2049

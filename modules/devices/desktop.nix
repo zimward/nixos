@@ -41,5 +41,21 @@
     boot.bootspec.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
     systemd.network.wait-online.enable = false;
+
+    services.nix-cache-beacon = {
+      advert = {
+        enable = true;
+        port = 5000; # Harmonia port
+      };
+
+      # Enable local binary cache using discovered caches on the local network
+      cache.enable = true;
+    };
+
+    # Make Nix aware of our local network cache
+    nix.settings.substituters = [ "http://localhost:5028" ];
+
+    services.harmonia.cache.enable = true; # Serve up local Nix store
+    networking.firewall.allowedTCPPorts = [ 5000 ];
   };
 }
