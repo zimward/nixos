@@ -24,7 +24,7 @@
     services.resolved.settings.Resolve = {
       DNSSEC = lib.mkDefault "true";
       DNSOverTLS = "true";
-      LLMNR = "false";
+      LLMNR = "true";
       Domains = [ "~." ];
     };
 
