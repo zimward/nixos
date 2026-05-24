@@ -14,6 +14,7 @@
     ./wireguard.nix
     ./cinny.nix
     ./push.nix
+    ./postgres.nix
   ];
 
   config = {
