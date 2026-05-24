@@ -2,60 +2,69 @@
   pkgs,
   lib,
   config,
+  options,
   ...
 }:
 {
   imports = [ ../graphical ];
-  config = lib.mkIf (config.device.class == "desktop") {
-    system.tools.nixos-build-vms.enable = lib.mkDefault true;
+  config =
+    lib.mkIf (config.device.class == "desktop") {
+      system.tools.nixos-build-vms.enable = lib.mkDefault true;
 
-    devel.git.enable = true;
-    cli.applications.enable = true;
+      devel.git.enable = true;
+      cli.applications.enable = true;
 
-    services.getty.autologinUser = config.mainUser.userName;
-    services.getty.autologinOnce = true;
-    #nitrokey support
-    services.udev.packages = [ pkgs.nitrokey-udev-rules ];
+      services.getty.autologinUser = config.mainUser.userName;
+      services.getty.autologinOnce = true;
+      #nitrokey support
+      services.udev.packages = [ pkgs.nitrokey-udev-rules ];
 
-    environment.sessionVariables = {
-      SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
-    };
-
-    services.resolved.settings.Resolve = {
-      DNSSEC = lib.mkDefault "true";
-      DNSOverTLS = "true";
-      LLMNR = "true";
-      Domains = [ "~." ];
-    };
-
-    security.soteria.enable = true;
-
-    #sound
-    sys.sound.enable = true;
-    #fix for opening links
-    systemd.user.extraConfig = ''
-      DefaultEnvironment="PATH=/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
-    '';
-    environment.systemPackages = [ pkgs.nh ];
-    boot.initrd.systemd.network.wait-online.enable = false;
-    boot.bootspec.enable = true;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-    systemd.network.wait-online.enable = false;
-
-    services.nix-cache-beacon = {
-      advert = {
-        enable = true;
-        port = 5000; # Harmonia port
+      environment.sessionVariables = {
+        SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
       };
 
-      # Enable local binary cache using discovered caches on the local network
-      cache.enable = true;
-    };
+      services.resolved.settings.Resolve = {
+        DNSSEC = lib.mkDefault "true";
+        DNSOverTLS = "true";
+        LLMNR = "true";
+        Domains = [ "~." ];
+      };
 
-    # Make Nix aware of our local network cache
-    nix.settings.substituters = [ "http://localhost:5028" ];
+      security.soteria.enable = true;
 
-    services.harmonia.cache.enable = true; # Serve up local Nix store
-    networking.firewall.allowedTCPPorts = [ 5000 ];
-  };
+      #sound
+      sys.sound.enable = true;
+      #fix for opening links
+      systemd.user.extraConfig = ''
+        DefaultEnvironment="PATH=/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+      '';
+      environment.systemPackages = [ pkgs.nh ];
+      boot.initrd.systemd.network.wait-online.enable = false;
+      boot.bootspec.enable = true;
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+      systemd.network.wait-online.enable = false;
+
+      networking.firewall.allowedTCPPorts = [ 5000 ];
+    }
+    // (
+      if options.services ? nix-cache-beacon then
+        {
+          services.nix-cache-beacon = {
+            advert = {
+              enable = true;
+              port = 5000; # Harmonia port
+            };
+
+            # Enable local binary cache using discovered caches on the local network
+            cache.enable = true;
+          };
+
+          # Make Nix aware of our local network cache
+          nix.settings.substituters = [ "http://localhost:5028" ];
+
+          services.harmonia.cache.enable = true; # Serve up local Nix store
+        }
+      else
+        { }
+    );
 }
