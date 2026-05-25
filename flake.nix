@@ -1,58 +1,15 @@
 {
   description = "Nixos config flake";
-
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
-
-    flake-utils.url = "github:numtide/flake-utils";
-
-    wrappers = {
-      url = "github:lassulus/wrappers";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
-
-    disko = {
-      url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-matlab = {
-      url = "github:zimward/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-    run0-sudo-shim = {
-      url = "github:lordgrimmauld/run0-sudo-shim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    codel = {
-      url = "github:zimward/codel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cache-beacon = {
-      url = "github:adisbladis/nix-cache-beacon";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   outputs =
-    {
-      nixpkgs,
-      nixpkgs-small,
-      flake-utils,
-      ...
-    }@inputs:
+    _:
+    let
+      inputs = (import ./inputs).inputs;
+      inherit (inputs)
+        nixpkgs
+        nixpkgs-small
+        flake-utils
+        ;
+    in
     {
       nixosConfigurations =
         let
@@ -73,9 +30,10 @@
           };
 
           # get a list of directories in a given path.
-          getDirs =
-            path:
-            builtins.readDir path |> nixpkgs.lib.filterAttrs (n: v: v == "directory") |> builtins.attrNames;
+          filterAttrs =
+            pred: set:
+            removeAttrs set (builtins.filter (name: !pred name set.${name}) (builtins.attrNames set));
+          getDirs = path: builtins.readDir path |> filterAttrs (n: v: v == "directory") |> builtins.attrNames;
 
           # Get the list of host directories.
           dirs = getDirs ./hosts;

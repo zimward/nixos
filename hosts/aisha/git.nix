@@ -80,7 +80,7 @@ in
             trap cleanup EXIT
 
             git clone git@zimward.moe:nixos
-            cd nixos
+            cd nixos/inputs
             nix flake update
 
             if git diff --exit-code --quiet ; then
