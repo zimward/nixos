@@ -286,11 +286,11 @@
     },
     "nixpkgs-small": {
       "locked": {
-        "lastModified": 1779720184,
-        "narHash": "sha256-dxXvCwkMB2W/ifiKztOJQlj1Q/q913xasNGL0BpNrIc=",
+        "lastModified": 1779807378,
+        "narHash": "sha256-kCz/Q2t0bGykS9yglAt5dKN12u+QC3amGhKTw3dqDFo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b401e19c7941a94b2eca2ae650690156b9e8cb2c",
+        "rev": "d5a98e48a532e0545f8f6c26432dc2bf11a10380",
         "type": "github"
       },
       "original": {
@@ -352,6 +352,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-small": "nixpkgs-small",
         "run0-sudo-shim": "run0-sudo-shim",
+        "secrets": "secrets",
         "wrappers": "wrappers"
       }
     },
@@ -396,6 +397,22 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1779830590,
+        "narHash": "sha256-KBG0RHJNhTlgoT2fgg3NooaaWenNt0Ns3lPT1KGamZY=",
+        "ref": "refs/heads/master",
+        "rev": "b1f27f91dc970ea7a2d4156f997570e230d22f7d",
+        "revCount": 7,
+        "type": "git",
+        "url": "ssh://git@zimward.moe/~/secrets"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@zimward.moe/~/secrets"
       }
     },
     "systems": {

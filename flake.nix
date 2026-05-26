@@ -19,7 +19,7 @@
             value = nixp.lib.nixosSystem {
               specialArgs = {
                 inherit inputs;
-                secrets = import (import ./secrets.nix);
+                secrets = import (inputs.secrets);
               };
               modules = [
                 (./hosts + "/${name}/config.nix")

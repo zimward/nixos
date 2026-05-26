@@ -11,6 +11,11 @@
       flake = false;
     };
 
+    secrets = {
+      url = "git+ssh://git@zimward.moe/~/secrets";
+      flake = false;
+    };
+
     wrappers = {
       url = "github:lassulus/wrappers";
       inputs.nixpkgs.follows = "nixpkgs";
