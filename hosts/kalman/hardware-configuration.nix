@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ...
 }:
 {
@@ -56,8 +57,21 @@
     };
 
     #fan settings
+    systemd.services.pid-fan-controller-sleep.enable = false;
+
     services.pid-fan-controller = {
       enable = true;
+      package = pkgs.pid-fan-controller.overrideAttrs {
+        src = pkgs.fetchFromGitHub {
+          owner = "zimward";
+          repo = "pid-fan-controller";
+          rev = "master";
+          hash = "sha256-eNx0XoxO43C7eLVCYDYURd8A5qqXpqcZUo3sZVnBuT8=";
+        };
+        postInstall = ''
+          install -Dm0644 resources/pid-fan-controller.service $out/lib/systemd/system/pid-fan-controller.service
+        '';
+      };
       settings = {
         heatSources = [
           {
@@ -65,9 +79,9 @@
             wildcardPath = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
             pidParams = {
               setPoint = 60;
-              P = -5.0e-3;
-              I = -2.0e-3;
-              D = -6.0e-3;
+              P = -0.005;
+              I = -0.05;
+              D = -0.01;
             };
           }
           {
@@ -75,9 +89,9 @@
             wildcardPath = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
             pidParams = {
               setPoint = 65;
-              P = -5.0e-3;
-              I = -2.0e-3;
-              D = -6.0e-3;
+              P = -0.005;
+              I = -0.05;
+              D = -0.01;
             };
           }
         ];
