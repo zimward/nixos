@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779419437,
-        "narHash": "sha256-NyAMLWmp3QdChialUPdr6yxJD6uooW4mLQ30R6tR5JQ=",
+        "lastModified": 1780111700,
+        "narHash": "sha256-2oOPl1Kck8DEy2NAKRcpoXZwCIh3FrPnRiJbToXfABQ=",
         "owner": "adisbladis",
         "repo": "nix-cache-beacon",
-        "rev": "657f7730b94b612a14ed0a9b31fcc3829cd6232f",
+        "rev": "410548d52957b6ed370ff1cb42df98014693b42b",
         "type": "github"
       },
       "original": {
@@ -286,11 +286,11 @@
     },
     "nixpkgs-small": {
       "locked": {
-        "lastModified": 1780011192,
-        "narHash": "sha256-luHrZG6I7Mwdt413XoDOYBpp9z1z6X23/5SNktwjM+k=",
+        "lastModified": 1780164493,
+        "narHash": "sha256-kAWygfPvwSp7fFkYABWDL002pb0HNzy6xIKtiwWWTsM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3242faf14b7611a62ce0f0071619438a08b65c12",
+        "rev": "01c8df74197a537d728921214ac2fd70e4ce1666",
         "type": "github"
       },
       "original": {
@@ -365,11 +365,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1779902501,
-        "narHash": "sha256-llpSeqQmNtFu+FHXNlt7FvZxIHX9a9Et4PDzZPpVajs=",
+        "lastModified": 1780170201,
+        "narHash": "sha256-la9NmkQnoiYy6KEPfoZgn3rRfKO8X/Gy4JD0h54SMkE=",
         "owner": "lordgrimmauld",
         "repo": "run0-sudo-shim",
-        "rev": "b1d20e5d05a0c303cbd9ce05ecbb2870d1ccff6f",
+        "rev": "c97b3ce5478e11d621e8f81dd3a94eeea93dc873",
         "type": "github"
       },
       "original": {
