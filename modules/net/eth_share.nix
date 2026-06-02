@@ -27,9 +27,10 @@
 
       networkConfig = {
         DHCPServer = true;
-        IPMasquerade = "both";
+        IPMasquerade = "ipv4";
         IPv6SendRA = true;
-        IPv6AcceptRA = false;
+        IPv6AcceptRA = true;
+        IPv6Forwarding = true;
         DHCPPrefixDelegation = true;
       };
       dhcpPrefixDelegationConfig = {
@@ -40,6 +41,13 @@
         EmitDNS = true;
         Managed = true;
         OtherInformation = true;
+      };
+      dhcpV6Config = {
+        UseDelegatedPrefix = true;
+        PrefixDelegationHint = "::/70";
+      };
+      ipv6AcceptRAConfig = {
+        Token = "eui64";
       };
       ipv6Prefixes = [
         {
