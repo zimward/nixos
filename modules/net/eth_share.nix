@@ -27,7 +27,7 @@
 
       networkConfig = {
         DHCPServer = true;
-        IPMasquerade = "ipv4";
+        IPMasquerade = "both";
         IPv6SendRA = true;
         IPv6AcceptRA = false;
         DHCPPrefixDelegation = true;
