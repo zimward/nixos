@@ -34,12 +34,9 @@
       url = "github:zimward/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      url = "github:nix-community/lanzaboote/001e560fffc8f0235e9db20ebeb4ccde0ade1caf";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     run0-sudo-shim = {
       url = "github:lordgrimmauld/run0-sudo-shim";
