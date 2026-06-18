@@ -57,7 +57,7 @@ let
   };
   starshipConfig =
     let
-      esc = s: lib.escape [ "/" ] (builtins.toString s);
+      esc = s: lib.escape [ "/" ] (toString s);
     in
     pkgs.runCommand "starship-nushell-config.nu" { } ''
       ${lib.getExe starship.wrapper} init nu | sed "s/${esc starship.package}/${esc starship.wrapper}/g" >> "$out"
@@ -78,11 +78,12 @@ let
         }
         edit_mode:vi
       }
-
-      source ${./commands.nu}
-      ${config.cli.nushell.extraConfig}
-      source ${carapaceConfig}
-      use ${starshipConfig}
+      if $nu.is-interactive {
+        source ${./commands.nu}
+        ${config.cli.nushell.extraConfig}
+        source ${carapaceConfig}
+        use ${starshipConfig}
+      }
     '';
   };
 in
