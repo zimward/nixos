@@ -186,7 +186,7 @@
               "Downloads"
               "gits"
               "Dokumente"
-              ".librewolf"
+              ".mozilla" # needed for keepassxc native messaging hosts
               ".thunderbird"
               ".cache" # change this later once permissions have been figured out properly
               ".config" # same as above
