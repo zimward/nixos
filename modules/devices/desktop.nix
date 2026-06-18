@@ -31,6 +31,13 @@
       };
 
       security.soteria.enable = true;
+      systemd.user.services.polkit-soteria = {
+        restartTriggers =
+          if lib.versionAtLeast "0.3.1" pkgs.soteria.version then
+            [ config.system.path ]
+          else
+            throw "soteria updated! it now reregisters agent!";
+      };
 
       #sound
       sys.sound.enable = true;
