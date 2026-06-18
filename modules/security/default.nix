@@ -14,6 +14,7 @@
       persistentAuthentication = true;
     };
     security.run0-sudo-shim.enable = true;
+    security.run0-sudo-shim.package = pkgs.run0-sudo-shim;
     security.apparmor = {
       enableCache = true;
       packages = [ pkgs.apparmor-profiles ];
