@@ -2,7 +2,7 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -36,10 +36,6 @@
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/001e560fffc8f0235e9db20ebeb4ccde0ade1caf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    run0-sudo-shim = {
-      url = "github:lordgrimmauld/run0-sudo-shim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codel = {

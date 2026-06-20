@@ -188,7 +188,7 @@
       "doga:y1nuiJdAESNfSTOJz+pna+PoCtNe/cvVUddkD2jAsmI="
     ];
 
-    nixpkgs.config.rocmSupport = true;
+    # nixpkgs.config.rocmSupport = true;
 
     services.scx = {
       enable = true;
