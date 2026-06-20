@@ -1,29 +1,33 @@
 {
   pkgs,
-  inputs,
   config,
-  lib,
+  modulesPath,
   ...
 }:
 {
-  imports = [ inputs.run0-sudo-shim.nixosModules.default ];
+  disabledModules = [
+    "${modulesPath}/security/run0.nix"
+    "${modulesPath}/security/polkit.nix"
+  ];
+  imports = [
+    ./polkit.nix
+    ./run0.nix
+  ];
   config = {
     security.polkit = {
       enable = true;
       adminIdentities = [ "unix-user:${config.mainUser.userName}" ];
-      persistentAuthentication = true;
-      extraConfig = ''
-        polkit.addRule(function(action, subject) {
-          if (action.id == "org.freedesktop.systemd1.manage-units" && subject.active ${
-            lib.optionalString (config.device.class == "desktop") "&& subject.local"
-          }) {
-            return polkit.Result.AUTH_ADMIN_KEEP;
-          }
-        });
-      '';
+      settings.Polkitd.ExpirationSeconds = 10 * 60;
     };
-    security.run0-sudo-shim.enable = true;
-    security.run0-sudo-shim.package = pkgs.run0-sudo-shim;
+    security.sudo.enable = false;
+
+    security.run0 = {
+      enable = true;
+      enableSudoAlias = true;
+      persistentAuth.enable = true;
+      persistentAuth.enableRemote = config.device.class != "desktop";
+    };
+
     security.apparmor = {
       enableCache = true;
       packages = [ pkgs.apparmor-profiles ];
