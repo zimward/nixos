@@ -61,17 +61,6 @@
 
     services.pid-fan-controller = {
       enable = true;
-      package = pkgs.pid-fan-controller.overrideAttrs {
-        src = pkgs.fetchFromGitHub {
-          owner = "zimward";
-          repo = "pid-fan-controller";
-          rev = "master";
-          hash = "sha256-eNx0XoxO43C7eLVCYDYURd8A5qqXpqcZUo3sZVnBuT8=";
-        };
-        postInstall = ''
-          install -Dm0644 resources/pid-fan-controller.service $out/lib/systemd/system/pid-fan-controller.service
-        '';
-      };
       settings = {
         heatSources = [
           {

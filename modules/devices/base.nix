@@ -135,6 +135,19 @@
 
     services.dbus.implementation = "broker";
 
+    services.pid-fan-controller.package = pkgs.pid-fan-controller.overrideAttrs {
+      version = "0.1.4";
+      src = pkgs.fetchFromGitHub {
+        owner = "zimward";
+        repo = "pid-fan-controller";
+        rev = "master";
+        hash = "sha256-UtTyHftSaLO0x/5ROPbtdeoeeP9aTocvMxHF5DUdQSE=";
+      };
+      postInstall = ''
+        install -Dm0644 resources/pid-fan-controller.service $out/lib/systemd/system/pid-fan-controller.service
+      '';
+    };
+
     #oldest possible state
     system.stateVersion = lib.mkDefault "23.11";
   };
