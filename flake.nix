@@ -63,6 +63,7 @@
             { modulesPath, ... }:
             {
               imports = [ "${modulesPath}/profiles/minimal.nix" ];
+              disabledModules = [ ./modules/devices/desktop.nix ];
             }
           );
         in
