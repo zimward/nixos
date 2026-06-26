@@ -48,6 +48,5 @@
     // lib.attrsets.optionalAttrs (config.tmpfsroot.home != null) {
       "/home" = config.tmpfsroot.home;
     };
-    programs.fuse.userAllowOther = true;
   };
 }

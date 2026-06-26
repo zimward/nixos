@@ -1,18 +1,10 @@
 {
   pkgs,
+  lib,
   config,
-  modulesPath,
   ...
 }:
 {
-  disabledModules = [
-    "${modulesPath}/security/run0.nix"
-    "${modulesPath}/security/polkit.nix"
-  ];
-  imports = [
-    ./polkit.nix
-    ./run0.nix
-  ];
   config = {
     security.polkit = {
       enable = true;
@@ -32,5 +24,26 @@
       enableCache = true;
       packages = [ pkgs.apparmor-profiles ];
     };
+    security.account-utils.enable = true;
+    #only on desktops setuid is still needed for fusermount3
+    security.enableWrappers = config.device.class == "desktop";
+    security.wrappers = lib.listToAttrs (
+      map
+        (name: {
+          inherit name;
+          value = {
+            enable = false;
+          };
+        })
+        [
+          "mount"
+          "newgrp"
+          "qemu-bridge-helper"
+          "sg"
+          "spice-client-glib-usb-acl-helper"
+          "su"
+          "umount"
+        ]
+    );
   };
 }
