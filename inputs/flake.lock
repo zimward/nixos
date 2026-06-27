@@ -187,7 +187,9 @@
     "impermanence": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1769548169,
@@ -250,38 +252,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1768564909,
-        "narHash": "sha256-Kell/SpJYVkHWMvnhqJz/8DqQg2b6PguxVWOuadbHCc=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e4bae1bd10c9c57b2cf517953ab70060a828ee6f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-small": {
-      "locked": {
-        "lastModified": 1782506974,
-        "narHash": "sha256-c458V2/NItAdXCscZVmnVMlIvyRNcFnZaE5wZ6PJWzg=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "228f7e313f802be81182cce48a3ddae66231e496",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable-small",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1782467914,
         "narHash": "sha256-inDx/w70OSJoJPqtKh0BrzAsbZZhpya7YgS43jHnhwg=",
         "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
@@ -291,6 +261,19 @@
       "original": {
         "type": "tarball",
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs-small": {
+      "locked": {
+        "lastModified": 1782549904,
+        "narHash": "sha256-SXP8KHTyaUoQ9Wt00Bm3bBIIwbkjoGVaQjIxYVjRL2E=",
+        "rev": "d4aba47551044ebd237ed70fb4c96ddde89c64cd",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1023465.d4aba4755104/nixexprs.tar.xz?lastModified=1782549904&rev=d4aba47551044ebd237ed70fb4c96ddde89c64cd"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.xz"
       }
     },
     "pre-commit": {
@@ -326,7 +309,7 @@
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "nix-matlab": "nix-matlab",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nixpkgs-small": "nixpkgs-small",
         "secrets": "secrets",
         "wrappers": "wrappers"

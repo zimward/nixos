@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.xz";
 
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
@@ -23,6 +23,7 @@
 
     impermanence = {
       url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko = {
