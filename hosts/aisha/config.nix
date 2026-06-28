@@ -147,6 +147,8 @@
     ];
     networking.firewall.enable = true;
 
+    environment.etc."machine-id".text = "12fe9331a0ff4dd692d4db74de6b0b8e";
+
     system.stateVersion = "24.11"; # Did you read the comment?
   };
 }
