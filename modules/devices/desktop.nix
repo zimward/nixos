@@ -37,6 +37,10 @@
           throw "soteria updated! it now reregisters agent!";
     };
 
+    xdg.mime.defaultApplications = {
+      "application/pdf" = "firefox.desktop";
+    };
+
     #sound
     sys.sound.enable = true;
     environment.systemPackages = [ pkgs.nh ];
