@@ -26,7 +26,7 @@
       ]
       ++
         #rarely needed on servers
-        lib.optionals config.graphical.enable [
+        lib.optionals (config.device.class == "desktop") [
           (pkgs.yazi.override {
             optionalDeps = with pkgs; [
               ripgrep
