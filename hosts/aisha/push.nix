@@ -46,11 +46,10 @@ in
           matrix.enabled = true;
           aesgcm.enabled = true;
         };
-        rewrite.webpushfcm.enabled = false;
       };
     in
     {
-      enable = false;
+      enable = true;
       after = [ "network.target" ];
       requires = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
@@ -112,10 +111,6 @@ in
       forceSSL = true;
       quic = true;
       enableACME = true;
-      # locations."/_matrix/push/v1/notify" = {
-      #   recommendedProxySettings = true;
-      #   proxyPass = "http://127.0.0.42:5000";
-      # };
 
       locations."/" = {
         proxyPass = "http://127.0.0.1:8180";
@@ -138,10 +133,10 @@ in
       quic = true;
       enableACME = true;
       #push gateway
-      # locations."/_matrix/push/v1/notify" = {
-      #   proxyPass = "http://127.0.0.42:5000";
-      #   recommendedProxySettings = true;
-      # };
+      locations."/_matrix/push/v1/notify" = {
+        proxyPass = "http://127.0.0.42:5000";
+        recommendedProxySettings = true;
+      };
       locations."/" = {
         proxyPass = "http://127.0.0.1:8082";
         recommendedProxySettings = true;
