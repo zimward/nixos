@@ -117,9 +117,9 @@ in
         proxyWebsockets = true;
         recommendedProxySettings = true;
         extraConfig = ''
-              proxy_connect_timeout		10m;
-          		proxy_send_timeout		10m;
-          		proxy_read_timeout		10m;
+              proxy_connect_timeout		75s;
+          		proxy_send_timeout		10d;
+          		proxy_read_timeout		10d;
           		client_max_body_size		0;
           		proxy_buffering			off;
           		proxy_request_buffering		off;
@@ -141,9 +141,9 @@ in
         proxyPass = "http://127.0.0.1:8082";
         recommendedProxySettings = true;
         extraConfig = ''
-              proxy_connect_timeout		10m;
-          		proxy_send_timeout		10m;
-          		proxy_read_timeout		10m;
+              proxy_connect_timeout		75s;
+          		proxy_send_timeout		10d;
+          		proxy_read_timeout		10d;
           		client_max_body_size		0;
           		proxy_pass_request_headers on;
         '';
