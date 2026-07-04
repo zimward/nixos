@@ -62,6 +62,7 @@ let
     pkgs.runCommand "starship-nushell-config.nu" { } ''
       ${lib.getExe starship.wrapper} init nu | sed "s/${esc starship.package}/${esc starship.wrapper}/g" >> "$out"
     '';
+  extraConfig = pkgs.writeText "extraConf.nu" config.cli.nushell.extraConfig;
 
   nushell = inputs.wrappers.wrapperModules.nushell.apply {
     inherit pkgs;
@@ -70,6 +71,24 @@ let
       starship.wrapper
     ];
     "config.nu".content = ''
+      ${
+        #generate conditional use commands
+        lib.strings.concatMapStringsSep "\n"
+          (f: "const f = if $nu.is-interactive {'${f}'} else { null }; use $f")
+          [
+            starshipConfig
+          ]
+      }
+      ${
+        #generate conditional source commands
+        lib.strings.concatMapStringsSep "\n"
+          (f: "const f = if $nu.is-interactive {'${f}'} else { null }; source $f")
+          [
+            extraConfig
+            carapaceConfig
+          ]
+      }
+      ${builtins.readFile ./commands.nu}
       $env.config = {
         show_banner: false
         cursor_shape:{
@@ -77,12 +96,6 @@ let
           vi_normal:underscore
         }
         edit_mode:vi
-      }
-      if $nu.is-interactive {
-        source ${./commands.nu}
-        ${config.cli.nushell.extraConfig}
-        source ${carapaceConfig}
-        use ${starshipConfig}
       }
     '';
   };
