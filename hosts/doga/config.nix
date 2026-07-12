@@ -162,5 +162,7 @@
       };
       linkConfig.RequiredForOnline = "routable";
     };
+
+    virtualisation.xen.enable = true;
   };
 }
