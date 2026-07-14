@@ -109,9 +109,9 @@
         heatSources = [
           {
             name = "cpu";
-            wildcardPath = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input";
+            wildcardPath = "/sys/devices/platform/nct6775.2608/hwmon/hwmon*/temp2_input";
             pidParams = {
-              setPoint = 60;
+              setPoint = 48;
               P = -5.0e-3;
               I = -2.0e-3;
               D = -6.0e-3;

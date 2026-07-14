@@ -163,6 +163,14 @@
       linkConfig.RequiredForOnline = "routable";
     };
 
-    virtualisation.xen.enable = true;
+    security.lockKernelModules = lib.mkForce false;
+    virtualisation.xen = {
+      enable = true;
+      boot.params = [
+        "dom0=pvh"
+        "cpuidle"
+      ];
+    };
+
   };
 }
