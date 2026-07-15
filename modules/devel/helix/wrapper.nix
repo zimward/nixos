@@ -13,7 +13,7 @@ inputs.wrappers.wrapperModules.helix.apply {
     ]
     ++ lib.optionals config.graphical.enable [
       texlab # latex lsp
-      inputs.codel.packages.x86_64-linux.default
+      # inputs.codel.packages.x86_64-linux.default
     ];
 
   themes = {
@@ -124,13 +124,13 @@ inputs.wrappers.wrapperModules.helix.apply {
       language-server.ltexpp = gattrs {
         command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
       };
-      language-server.codel = {
-        command = "codel";
-        config = {
-          lines_context = 30;
-          model = "qwen3.5-0.8b";
-        };
-      };
+      # language-server.codel = {
+      #   command = "codel";
+      #   config = {
+      #     lines_context = 30;
+      #     model = "qwen3.5-0.8b";
+      #   };
+      # };
       language = [
         {
           name = "nix";
@@ -140,7 +140,7 @@ inputs.wrappers.wrapperModules.helix.apply {
           };
           language-servers = [
             "nixd"
-            "codel"
+            # "codel"
           ];
         }
         {
@@ -148,7 +148,7 @@ inputs.wrappers.wrapperModules.helix.apply {
           auto-format = true;
           language-servers = [
             "rust-analyzer"
-            "codel"
+            # "codel"
           ];
         }
       ]
@@ -160,7 +160,7 @@ inputs.wrappers.wrapperModules.helix.apply {
             "html"
             "css"
           ];
-          language-servers = [ "codel" ];
+          # language-servers = [ "codel" ];
         }
         {
           name = "latex";
