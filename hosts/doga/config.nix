@@ -170,6 +170,8 @@
         "dom0=pvh"
         "cpuidle"
       ];
+      dom0Resources.maxVCPUs = 8;
+      dom0Resources.memory = 32768;
     };
 
   };
