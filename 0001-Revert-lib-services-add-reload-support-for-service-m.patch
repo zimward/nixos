@@ -1,0 +1,132 @@
+From 24138349c54c7ba3f2ced811f4418ede572079f3 Mon Sep 17 00:00:00 2001
+From: "zimward@zimward.moe" <zimward@zimward.moe>
+Date: Sat, 18 Jul 2026 11:08:40 +0200
+Subject: [PATCH 1/2] Revert "lib/services: add reload support for service
+ management"
+
+This reverts commit aae4936e07347062039621483c8fd0b4382ae16c.
+---
+ lib/services/service.nix                      | 33 --------------
+ .../system/service/systemd/service.nix        | 43 -------------------
+ 2 files changed, 76 deletions(-)
+
+diff --git a/lib/services/service.nix b/lib/services/service.nix
+index 449c35426039..57b40e7dbd66 100644
+--- a/lib/services/service.nix
++++ b/lib/services/service.nix
+@@ -6,7 +6,6 @@
+ # The module
+ {
+   lib,
+-  config,
+   ...
+ }:
+ let
+@@ -50,25 +49,6 @@ in
+           a shell script or `importas` from `pkgs.execline`.
+         '';
+       };
+-
+-      reloadSignal = mkOption {
+-        type = types.nullOr types.str;
+-        default = null;
+-        example = "HUP";
+-        description = ''
+-          Configures the reload signal to send to the service manager.
+-        '';
+-      };
+-
+-      reloadCommand = mkOption {
+-        type = types.nullOr types.str;
+-        default = null;
+-        example = lib.literalExpression ''"''${pkgs.coreutils}/bin/kill -HUP $MAINPID"'';
+-
+-        description = ''
+-          Command used for reloading in the underlying service manager to reload.
+-        '';
+-      };
+     };
+ 
+     notificationProtocol = mkOption {
+@@ -86,17 +66,4 @@ in
+       '';
+     };
+   };
+-
+-  config = {
+-    assertions = [
+-      {
+-        assertion = config.process.reloadSignal != null && config.process.reloadCommand != null;
+-        message = "reloadSignal conflicts with reloadCommand. Please either use reloadSignal or reloadCommand.";
+-      }
+-    ];
+-
+-    process.reloadCommand = (lib.mkIf config.process.reloadSignal != null) (
+-      lib.mkForce "${pkgs.coreutils}/bin/kill -${config.process.reloadSignal} $MAINPID"
+-    );
+-  };
+ }
+diff --git a/nixos/modules/system/service/systemd/service.nix b/nixos/modules/system/service/systemd/service.nix
+index 63e80aa19e0c..cc764fc18dce 100644
+--- a/nixos/modules/system/service/systemd/service.nix
++++ b/nixos/modules/system/service/systemd/service.nix
+@@ -113,48 +113,6 @@ in
+       defaultText = lib.literalExpression "config.systemd.lib.escapeSystemdExecArgs config.process.argv";
+     };
+ 
+-    systemd.mainExecReload = mkOption {
+-      description = ''
+-        Main command line for systemd's ExecReload with systemd's specifier and
+-        environment variable substitution enabled.
+-
+-        This option sets the primary ExecRestart entry. Additional ExecReload entries
+-        can be added via `systemd.service.serviceConfig.ExecReload` with `lib.mkBefore`
+-        or `lib.mkAfter`.
+-
+-        This option allows you to use systemd specifiers like `%n` (unit name),
+-        `%i` (instance), `%t` (runtime directory), and environment variables using
+-        `''${VAR}` syntax in your command line.
+-
+-        By default, it is either set to null or this is set to the escaped version of {option}`process.reloadCommand`
+-        when specified to prevent systemd substitution. Set this option explicitly to enable
+-        systemd's substitution features.
+-
+-        To extend {option}`process.reloadCommand` with systemd specifiers, you can append
+-        to the escaped arguments:
+-
+-        ```nix
+-        systemd.mainExecReload =
+-          config.systemd.lib.escapeSystemdExecArgs config.process.reload + " --systemd-unit %n";
+-        ```
+-
+-        This pattern allows you to pass the unit name (or other systemd specifiers)
+-        as additional arguments while keeping the base command from {option}`process.argv`
+-        properly escaped.
+-
+-        See {manpage}`systemd.service(5)` (section "COMMAND LINES") for details on
+-        variable substitution and {manpage}`systemd.unit(5)` (section "SPECIFIERS")
+-        for available specifiers like `%n`, `%i`, `%t`.
+-      '';
+-      type = types.nullOr types.str;
+-      default =
+-        if config.process.reloadCommand then
+-          config.systemd.lib.escapeSystemdExecArgs config.process.reloadCommand
+-        else
+-          "";
+-      defaultText = lib.literalExpression "config.systemd.lib.escapeSystemdExecArgs config.process.reloadCommand";
+-    };
+-
+     systemd.services = mkOption {
+       description = ''
+         This module configures systemd services, with the notable difference that their unit names will be prefixed with the abstract service name.
+@@ -212,7 +170,6 @@ in
+       # TODO description;
+       wantedBy = lib.mkDefault [ "multi-user.target" ];
+       serviceConfig = {
+-        ExecReload = config.systemd.mainExecReload;
+         Type = lib.mkDefault (
+           if (config.serviceManager.notificationProtocol == "systemd") then "notify" else "simple"
+         );
+-- 
+2.54.0
+

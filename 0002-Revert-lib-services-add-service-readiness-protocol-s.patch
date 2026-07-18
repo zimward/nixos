@@ -1,0 +1,55 @@
+From c2f6f9fbc29fd2d861deb28dedc72563c730c328 Mon Sep 17 00:00:00 2001
+From: "zimward@zimward.moe" <zimward@zimward.moe>
+Date: Sat, 18 Jul 2026 11:08:47 +0200
+Subject: [PATCH 2/2] Revert "lib/services: add service readiness protocol
+ support"
+
+This reverts commit 03deb31b6bffea2f119bdec297672bd94413a907.
+---
+ lib/services/service.nix                         | 15 ---------------
+ nixos/modules/system/service/systemd/service.nix |  4 +---
+ 2 files changed, 1 insertion(+), 18 deletions(-)
+
+diff --git a/lib/services/service.nix b/lib/services/service.nix
+index 57b40e7dbd66..1bcf0845f0d7 100644
+--- a/lib/services/service.nix
++++ b/lib/services/service.nix
+@@ -50,20 +50,5 @@ in
+         '';
+       };
+     };
+-
+-    notificationProtocol = mkOption {
+-      type = types.listOf (
+-        types.enum [
+-          "systemd"
+-          "s6"
+-        ]
+-      );
+-
+-      default = [ ];
+-      apply = v: lib.unique v;
+-      description = ''
+-        Notification protocol that this service supports with the underlying service manager.
+-      '';
+-    };
+   };
+ }
+diff --git a/nixos/modules/system/service/systemd/service.nix b/nixos/modules/system/service/systemd/service.nix
+index cc764fc18dce..5fdf70c53b08 100644
+--- a/nixos/modules/system/service/systemd/service.nix
++++ b/nixos/modules/system/service/systemd/service.nix
+@@ -170,9 +170,7 @@ in
+       # TODO description;
+       wantedBy = lib.mkDefault [ "multi-user.target" ];
+       serviceConfig = {
+-        Type = lib.mkDefault (
+-          if (config.serviceManager.notificationProtocol == "systemd") then "notify" else "simple"
+-        );
++        Type = lib.mkDefault "simple";
+         Restart = lib.mkDefault "always";
+         RestartSec = lib.mkDefault "5";
+         ExecStart = [
+-- 
+2.54.0
+

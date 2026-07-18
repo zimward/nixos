@@ -9,8 +9,26 @@
         nixpkgs-small
         flake-utils
         ;
+      patched_src = (
+        #only for aisha
+        (import nixpkgs-small { system = "aarch64-linux"; }).applyPatches {
+          name = "fix-mkif";
+          src = nixpkgs-small;
+          patches = [
+            ./0001-Revert-lib-services-add-reload-support-for-service-m.patch
+            ./0002-Revert-lib-services-add-service-readiness-protocol-s.patch
+          ];
+        }
+      );
+      _nixpkgs-small-patched = import "${patched_src}/flake.nix";
+      nixpkgs-small-patched = _nixpkgs-small-patched.outputs {
+        self = {
+          outPath = patched_src;
+        };
+      };
     in
     {
+      inherit nixpkgs-small-patched;
       nixosConfigurations =
         let
           # create a system configuration for a given host.
@@ -70,7 +88,7 @@
         # Combine the configurations for all hosts into an attributes set, mapping each host to its respective system configuration.
         builtins.listToAttrs (
           (map (mkSys nixpkgs [ inputs.cache-beacon.nixosModules.nix-cache-beacon ]) big)
-          ++ (map (mkSys nixpkgs-small [
+          ++ (map (mkSys nixpkgs-small-patched [
             minimalProfile
           ]) small)
         );
