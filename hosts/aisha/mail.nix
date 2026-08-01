@@ -86,7 +86,7 @@
         mail-from = [
           {
             "if" = "listener != 'smtp'";
-            "then" = "strict";
+            "then" = "relaxed";
           }
           {
             "else" = "disable";
@@ -95,7 +95,7 @@
         ehlo = [
           {
             "if" = "listener = 'smtp'";
-            "then" = "strict";
+            "then" = "relaxed";
           }
           {
             "else" = "disable";
