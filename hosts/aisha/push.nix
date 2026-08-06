@@ -173,6 +173,7 @@ in
     ];
     autoendpoint.settings = {
       crypto_keys = secrets.autopush.crypto_key;
+      auth_keys = secrets.autopush.crypto_key;
       db_dsn = "redis://localhost:${toString config.services.redis.servers.autopush-rs.port}";
       port = 8082;
       endpoint_url = "https://${endpointFqdn}";
