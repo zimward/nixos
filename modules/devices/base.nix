@@ -135,12 +135,12 @@
     services.dbus.implementation = "broker";
 
     services.pid-fan-controller.package = pkgs.pid-fan-controller.overrideAttrs {
-      version = "0.1.4";
+      version = "0.1.5";
       src = pkgs.fetchFromGitHub {
         owner = "zimward";
         repo = "pid-fan-controller";
         rev = "master";
-        hash = "sha256-UtTyHftSaLO0x/5ROPbtdeoeeP9aTocvMxHF5DUdQSE=";
+        hash = "sha256-2LylkjhWYMHGG/dSkbBoKv2Dpf6yNqfvsUdmJlwqPzU=";
       };
       postInstall = ''
         install -Dm0644 resources/pid-fan-controller.service $out/lib/systemd/system/pid-fan-controller.service
