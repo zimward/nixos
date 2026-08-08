@@ -19,11 +19,13 @@
     ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [
-      "kvm-intel"
       "nct6775"
     ];
     boot.extraModulePackages = [ ];
-    boot.supportedFilesystems = [ "zfs" ];
+    boot.supportedFilesystems = [
+      "zfs"
+      "btrfs"
+    ];
 
     tmpfsroot.impermanence = true;
 
@@ -32,12 +34,21 @@
     boot.initrd.systemd.services.rollback = {
       wantedBy = [ "initrd.target" ];
       before = [ "sysroot.mount" ];
+      after = [
+        "${
+          lib.removePrefix "-" (
+            lib.strings.replaceString "/" "-" (
+              lib.strings.replaceString "-" "\\x2d" config.fileSystems."/".device
+            )
+          )
+        }.device"
+      ];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
       serviceConfig.RemainAfterExit = "yes";
       script = ''
         mkdir -p /mnt
-        mount ${config.fileSystems."/".device} /mnt
+        mount ${config.fileSystems."/".device} -t ${config.fileSystems."/".fsType} /mnt
 
         btrfs subvolume list -o /mnt/root |
         cut -f9 -d' ' |
