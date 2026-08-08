@@ -106,12 +106,12 @@
       enable = true;
       settings = {
         interval = 100;
-        heatSources = [
+        heat_srcs = [
           {
             name = "cpu";
-            wildcardPath = "/sys/devices/platform/nct6775.2608/hwmon/hwmon*/temp2_input";
-            pidParams = {
-              setPoint = 48;
+            wildcard_path = "/sys/devices/platform/nct6775.2608/hwmon/hwmon*/temp2_input";
+            PID_params = {
+              set_point = 48;
               P = -5.0e-3;
               I = -2.0e-3;
               D = -6.0e-3;
@@ -121,10 +121,10 @@
         fans = [
           {
             #name = "cpu";
-            wildcardPath = "/sys/devices/platform/nct6775.2608/hwmon/hwmon*/pwm2";
-            minPwm = 0;
-            maxPwm = 255;
-            heatPressureSrcs = [ "cpu" ];
+            wildcard_path = "/sys/devices/platform/nct6775.2608/hwmon/hwmon*/pwm2";
+            min_pwm = 0;
+            max_pwm = 255;
+            heat_pressure_srcs = [ "cpu" ];
           }
         ];
       };

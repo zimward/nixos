@@ -57,17 +57,15 @@
     };
 
     #fan settings
-    systemd.services.pid-fan-controller-sleep.enable = false;
-
     services.pid-fan-controller = {
       enable = true;
       settings = {
-        heatSources = [
+        heat_srcs = [
           {
             name = "cpu";
-            wildcardPath = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
-            pidParams = {
-              setPoint = 60;
+            wildcard_path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp1_input";
+            PID_params = {
+              set_point = 60;
               P = -0.005;
               I = -0.05;
               D = -0.01;
@@ -75,9 +73,9 @@
           }
           {
             name = "gpu";
-            wildcardPath = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
-            pidParams = {
-              setPoint = 65;
+            wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/temp2_input";
+            PID_params = {
+              set_point = 65;
               P = -0.005;
               I = -0.05;
               D = -0.01;
@@ -87,60 +85,60 @@
         fans = [
           {
             #name = "front intake";
-            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
-            minPwm = 60;
-            maxPwm = 255;
-            heatPressureSrcs = [
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm1";
+            min_pwm = 60;
+            max_pwm = 255;
+            heat_pressure_srcs = [
               "cpu"
               "gpu"
             ];
           }
           {
             #name = "top exhaust";
-            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
-            minPwm = 60;
-            maxPwm = 255;
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm4";
+            min_pwm = 60;
+            max_pwm = 255;
             cutoff = true;
-            heatPressureSrcs = [
+            heat_pressure_srcs = [
               "cpu"
               "gpu"
             ];
           }
           {
             #name = "back exhaust";
-            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm5";
-            minPwm = 60;
-            maxPwm = 255;
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm5";
+            min_pwm = 60;
+            max_pwm = 255;
             cutoff = true;
-            heatPressureSrcs = [
+            heat_pressure_srcs = [
               "cpu"
               "gpu"
             ];
           }
           {
             #name = "front intake 2";
-            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
-            minPwm = 100;
-            maxPwm = 255;
-            heatPressureSrcs = [
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm6";
+            min_pwm = 100;
+            max_pwm = 255;
+            heat_pressure_srcs = [
               "cpu"
               "gpu"
             ];
           }
           {
             #name = "pump";
-            wildcardPath = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm2";
-            minPwm = 100;
-            maxPwm = 255;
-            heatPressureSrcs = [ "cpu" ];
+            wildcard_path = "/sys/devices/platform/nct6775.2592/hwmon/hwmon*/pwm2";
+            min_pwm = 100;
+            max_pwm = 255;
+            heat_pressure_srcs = [ "cpu" ];
           }
           {
             #name = "gpu";
-            wildcardPath = "/sys/class/drm/card*/device/hwmon/hwmon*/pwm1";
-            minPwm = 10;
-            maxPwm = 255;
+            wildcard_path = "/sys/class/drm/card*/device/hwmon/hwmon*/pwm1";
+            min_pwm = 10;
+            max_pwm = 255;
             cutoff = true;
-            heatPressureSrcs = [ "gpu" ];
+            heat_pressure_srcs = [ "gpu" ];
           }
         ];
       };
