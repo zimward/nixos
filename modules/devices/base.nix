@@ -134,6 +134,7 @@
 
     services.dbus.implementation = "broker";
 
+    system.nixos-init.enable = true;
     #oldest possible state
     system.stateVersion = lib.mkDefault "23.11";
   };
