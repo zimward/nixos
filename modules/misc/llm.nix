@@ -19,15 +19,10 @@ in
         inherit models-dir;
 
         models-preset = mkPreset {
-          #fim trained model
-          "qwen3.5-0.8b" = {
-            model = "qwen3.5-0.8B-fim-finetune-q4_k_m.gguf";
-            c = 512;
-            n-gpu-layers = 99;
-          };
-          "qwen3-coder-next" = {
-            model = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
+          "qwen3.6" = {
+            model = "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf";
             cpu-moe = 1;
+            c = 100000;
           };
         };
 
