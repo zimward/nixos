@@ -186,11 +186,11 @@
 
     # nixpkgs.config.rocmSupport = true;
 
-    services.scx = {
-      enable = true;
-      package = pkgs.scx.rustscheds;
-      scheduler = "scx_lavd";
-      extraArgs = [ "--autopilot" ];
-    };
+    # services.scx = {
+    #   enable = true;
+    #   package = pkgs.scx.rustscheds;
+    #   scheduler = "scx_lavd";
+    #   extraArgs = [ "--autopilot" ];
+    # };
   };
 }
