@@ -265,11 +265,11 @@
     },
     "nixpkgs-small": {
       "locked": {
-        "lastModified": 1787608092,
-        "narHash": "sha256-Hn6X9t5aloe4KKTjuGh4gycPW4eignCHNPibZ4ZZqHg=",
-        "rev": "00ca96cb74b778f8c999d5075624fc10636520fc",
+        "lastModified": 1787673450,
+        "narHash": "sha256-d6K3u4og6rXfEWuVACMyJBdXANelak+edQqPWkavXkQ=",
+        "rev": "103cb3a0b62b1d0a4560d265cdfbc0af064f6767",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1061217.00ca96cb74b7/nixexprs.tar.xz?lastModified=1787608092&rev=00ca96cb74b778f8c999d5075624fc10636520fc"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1062056.103cb3a0b62b/nixexprs.tar.xz?lastModified=1787673450&rev=103cb3a0b62b1d0a4560d265cdfbc0af064f6767"
       },
       "original": {
         "type": "tarball",
@@ -374,11 +374,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786302707,
-        "narHash": "sha256-YUeRuvsvqtJAUquflKk9xs9nA3OFlPvbMKiaIw2jC3U=",
+        "lastModified": 1787689022,
+        "narHash": "sha256-Bqpjj0CCqxM82OmXiISCwhfAnN8lIzx0FTRQ2lc8YE8=",
         "owner": "lassulus",
         "repo": "wrappers",
-        "rev": "c47db17fbb8830e4f9f81a3bf416b71d3449687e",
+        "rev": "d8146edff66b5a5263750b41235b5af353e997f1",
         "type": "github"
       },
       "original": {
