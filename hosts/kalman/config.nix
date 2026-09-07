@@ -158,6 +158,17 @@
     graphical.ime.enable = true;
     graphical.matlab.enable = true;
 
+    services.syncthing =
+      let
+        user = config.mainUser.userName;
+      in
+      {
+        enable = true;
+        inherit user;
+        dataDir = config.users.users.${user}.home + "/Dokumente/Sync";
+        configDir = config.users.users.${user}.home + "/.config/syncthing";
+      };
+
     misc.llm.enable = true;
 
     environment.systemPackages = with pkgs; [
