@@ -49,6 +49,8 @@
     graphical.minecraft.enable = true;
     graphical.steam.enable = true;
 
+    graphical.sync.enable = true;
+
     networking.networkmanager.ensureProfiles.profiles = {
       eduroam = {
         connection = {

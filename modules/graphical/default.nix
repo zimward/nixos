@@ -23,6 +23,7 @@
     ./kicad.nix
     ./matlab.nix
     ./steam.nix
+    ./sync.nix
     ./niri
     ./waybar
     ./launcher
