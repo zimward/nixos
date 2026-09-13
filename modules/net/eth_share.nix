@@ -18,7 +18,7 @@
   config = lib.mkIf (config.ethernet.share.device != null) {
     systemd.network.enable = true;
     networking.useNetworkd = true;
-    systemd.network.networks."5-share" = {
+    systemd.network.networks."05-share" = {
       enable = true;
       matchConfig = {
         Name = config.ethernet.share.device;
