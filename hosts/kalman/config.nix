@@ -145,7 +145,7 @@
 
         };
       }).wrapper;
-
+    graphical.obsidian.enable = true;
     graphical.steam.enable = true;
     graphical.deluge.enable = true;
     graphical.minecraft.enable = true;
