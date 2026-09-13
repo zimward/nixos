@@ -29,8 +29,6 @@
 
     tmpfsroot.impermanence = true;
 
-    #needed for postDeviceCommands
-    system.etc.overlay.enable = false;
     boot.initrd.systemd.services.rollback = {
       wantedBy = [ "initrd.target" ];
       before = [ "sysroot.mount" ];
@@ -141,7 +139,7 @@
       };
     };
 
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    hardware.facter.reportPath = ./report.json;
+    hardware.cpu.intel.updateMicrocode = true;
   };
 }

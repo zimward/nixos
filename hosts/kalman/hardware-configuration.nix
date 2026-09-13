@@ -146,9 +146,6 @@
 
     networking.useDHCP = lib.mkDefault true;
     environment.etc."machine-id".text = "d938ee7267cc490cbaaf0b8193cd754b";
-    hardware.facter = {
-      enable = true;
-      reportPath = ./report.json;
-    };
+    hardware.facter.reportPath = ./report.json;
   };
 }
