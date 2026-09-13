@@ -49,6 +49,9 @@
       };
       linkConfig.RequiredForOnline = "routable";
     };
+    systemd.network.networks."40-eno1" = {
+      enable = false;
+    };
     systemd.network.wait-online.anyInterface = true;
     systemd.network.wait-online.ignoredInterfaces = [
       "wg0"
