@@ -13,6 +13,7 @@
     ./wireguard.nix
     ./nginx.nix
     ./postgres.nix
+    ./network.nix
   ];
 
   config = {
@@ -126,43 +127,6 @@
 
     services.harmonia.cache.enable = true; # Serve up local Nix store
 
-    # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [
-      22
-      111
-      2049
-      4000
-      4001
-      4002
-      20048
-      #ethercalc
-      8000
-      # harmonia cache
-      5000
-    ];
-    networking.firewall.allowedUDPPorts = [
-      2049
-      111
-      4000
-      4001
-      4002
-      20048
-    ];
-    networking.firewall.enable = true;
-    #local intranet interface
-    networking.firewall.trustedInterfaces = [ config.ethernet.share.device ];
-
-    #public interface with ipv6 config
-    systemd.network.networks."10-public" = {
-      matchConfig.Name = "enp8s0f0";
-      networkConfig = {
-        DHCP = "ipv4";
-        IPv6AcceptRA = true;
-        DHCPPrefixDelegation = true;
-      };
-      linkConfig.RequiredForOnline = "routable";
-    };
-
     security.lockKernelModules = lib.mkForce false;
     virtualisation.xen = {
       enable = true;
@@ -171,7 +135,7 @@
         "cpuidle"
       ];
       dom0Resources.maxVCPUs = 8;
-      dom0Resources.memory = 32768;
+      dom0Resources.maxMemory = 32768;
     };
 
   };

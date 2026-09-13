@@ -107,10 +107,6 @@
       "ia32_emulation=false"
     ];
 
-    networking.useDHCP = lib.mkDefault true;
-    systemd.network.enable = true;
-    networking.useNetworkd = true;
-
     services.pid-fan-controller = {
       enable = true;
       settings = {
