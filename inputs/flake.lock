@@ -77,6 +77,22 @@
         "type": "github"
       }
     },
+    "domUnix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789376349,
+        "narHash": "sha256-mQ/+AJ1D4VjIeL2xDscgWewtllw/33tM1DLmk3FA/es=",
+        "owner": "zimward",
+        "repo": "domUnix",
+        "rev": "96d359338340570ff0168300373a7cbab3f24cd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zimward",
+        "repo": "domUnix",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -304,6 +320,7 @@
         "cache-beacon": "cache-beacon",
         "codel": "codel",
         "disko": "disko",
+        "domUnix": "domUnix",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "impermanence": "impermanence",

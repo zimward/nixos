@@ -47,7 +47,7 @@
         IPv6AcceptRA = true;
         DHCPPrefixDelegation = true;
       };
-      linkConfig.RequiredForOnline = "routable";
+      linkConfig.RequiredForOnline = true;
     };
     systemd.network.networks."40-eno1" = {
       enable = false;

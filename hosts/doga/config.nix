@@ -9,11 +9,11 @@
     inputs.cache-beacon.nixosModules.nix-cache-beacon
     ./hardware-configuration.nix
     ./minecraft.nix
-    ./ethercalc
     ./wireguard.nix
     ./nginx.nix
     ./postgres.nix
     ./network.nix
+    ./vms.nix
   ];
 
   config = {
@@ -93,13 +93,6 @@
     };
 
     users.users.minidlna.extraGroups = [ "users" ];
-
-    services.ethercalc2.enable = true;
-    systemd.services.ethercalc.serviceConfig = {
-      StateDirectory = lib.mkForce null;
-      WorkingDirectory = lib.mkForce "/nix/persist/system/ethercalc";
-      ReadWritePaths = "/nix/persist/system/ethercalc";
-    };
 
     environment.persistence."/nix/persist/system" =
       let

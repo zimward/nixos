@@ -28,6 +28,13 @@ in
         };
       };
     };
+    appendHttpConfig = ''
+      server{
+        listen 192.168.178.169:8000;
+        listen 192.168.0.1:8000;
+        return 301 $scheme://ethercalc:8000$request_uri;
+      }
+    '';
   };
 
   services.webdav-server-rs = {
@@ -58,6 +65,7 @@ in
   networking.firewall.allowedTCPPorts = [
     80
     443
+    8000
   ];
   networking.firewall.allowedUDPPorts = [ 443 ];
 }

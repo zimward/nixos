@@ -47,6 +47,11 @@
       url = "github:adisbladis/nix-cache-beacon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    domUnix = {
+      url = "github:zimward/domUnix";
+      flake = false;
+    };
   };
   outputs = _: { };
 }
