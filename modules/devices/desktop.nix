@@ -22,10 +22,8 @@
     };
 
     services.resolved.settings.Resolve = {
-      DNSSEC = lib.mkDefault "true";
-      DNSOverTLS = "true";
-      LLMNR = "true";
-      Domains = [ "~." ];
+      DNSSEC = true;
+      DNSOverTLS = "opportunistic";
     };
 
     security.soteria.enable = true;
