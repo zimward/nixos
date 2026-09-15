@@ -124,11 +124,11 @@
     virtualisation.xen = {
       enable = true;
       boot.params = [
-        "dom0=pvh"
+        # "dom0=pvh"
         "cpuidle"
       ];
-      dom0Resources.maxVCPUs = 8;
       dom0Resources.maxMemory = 32768;
+      dom0Resources.memory = 16384;
     };
 
   };
