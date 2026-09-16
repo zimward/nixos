@@ -131,6 +131,7 @@
         "console=com1,vga"
         "dom0=pvh"
         "cpuidle"
+        "ucode=scan"
       ];
       dom0Resources.maxMemory = 32768;
       dom0Resources.memory = 16384;
