@@ -21,7 +21,6 @@
     ./fonts.nix
     ./ime.nix
     ./kicad.nix
-    ./matlab.nix
     ./steam.nix
     ./sync.nix
     ./niri

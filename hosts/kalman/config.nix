@@ -156,7 +156,6 @@
       graphical._freetime = false;
     };
     graphical.ime.enable = true;
-    graphical.matlab.enable = true;
 
     graphical.sync.enable = true;
 

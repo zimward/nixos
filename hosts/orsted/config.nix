@@ -57,7 +57,6 @@
     # only ssh is running with pubkey auth so a firewall would only waste memory
     networking.firewall.enable = false;
     graphical.ime.enable = true;
-    graphical.matlab.enable = true;
     motd.enable = lib.mkForce false;
 
     # vpn stuff

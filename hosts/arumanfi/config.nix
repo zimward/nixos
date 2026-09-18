@@ -109,7 +109,6 @@
     # only ssh is running with pubkey auth so a firewall would only waste memory
     networking.firewall.enable = false;
     graphical.ime.enable = true;
-    graphical.matlab.enable = true;
     environment.systemPackages = with pkgs; [
       freecad-wayland
     ];
@@ -194,7 +193,6 @@
               ".config" # same as above
               ".local" # ""
               ".steam"
-              ".matlab"
             ];
     };
     #dont auto garbage collect to prevent having to recompile build tools constantly
