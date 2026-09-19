@@ -21,6 +21,7 @@
         requires = [
           "proc-xen.mount"
           "xenstored.service"
+          "network-online.target"
         ];
         after = [
           "proc-xen.mount"
