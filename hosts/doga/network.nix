@@ -52,10 +52,9 @@
     systemd.network.networks."40-eno1" = {
       enable = false;
     };
-    systemd.network.wait-online.anyInterface = true;
     systemd.network.wait-online.ignoredInterfaces = [
       "wg0"
-      "enp8s0f0" # base10G public interface
+      "enp8s0f0" # base1G onboard interface
     ];
   };
 }
