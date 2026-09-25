@@ -39,6 +39,8 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg" # workstation
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL6wkiD+2gXU8TwEmBld1/2RdBJ4na2FnkYSYIjx4Ua" # T400
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILG1gWO9yWvsjgO/L7mWnZGgLsSvlhElW3dafBJW8QRE zimward@arumanfi"
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIGCy7LBbhV3MmCv82PBV3j52cOmsCChMBB3nwT8sUgpGAAAABHNzaDo= me@cyclopentane.eu"
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFbPFUAlsWsIPH1810CzFnEKXiGjEAIWFpfJPZyvdbvWAAAABHNzaDo= me@cyclopentane.eu (backup)"
     ];
 
     users.users.nixremote = {
