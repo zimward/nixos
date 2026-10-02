@@ -111,6 +111,10 @@
     graphical.ime.enable = true;
     environment.systemPackages = with pkgs; [
       freecad-wayland
+      kdePackages.neochat
+    ];
+    nixpkgs.config.permittedInsecurePackages = [
+      "olm-3.2.16"
     ];
 
     motd.enable = lib.mkForce false;
