@@ -52,6 +52,7 @@
     systemd.network.networks."40-eno1" = {
       enable = false;
     };
+    systemd.network.networks."05-share".linkConfig.RequiredForOnline = true;
     systemd.network.wait-online.ignoredInterfaces = [
       "wg0"
       "enp8s0f0" # base1G onboard interface
