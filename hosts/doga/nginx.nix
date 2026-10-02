@@ -30,7 +30,7 @@ in
     };
     appendHttpConfig = ''
       server{
-        listen 0.0.0.0:8000;
+        listen 192.168.178.169:8000;
         return 301 $scheme://ethercalc:8000$request_uri;
       }
     '';
