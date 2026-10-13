@@ -19,6 +19,10 @@ in
       wal_keep_size = "200MB";
     };
   };
+  systemd.services.postgresql.serviceConfig = {
+    CPUQuota = "30%";
+    CPUWeight = "60";
+  };
   networking.firewall.extraCommands = ''
     ip6tables -A nixos-fw -p tcp --source ${replicationPeer} --dport ${port}:${port} -j nixos-fw-accept
   '';
