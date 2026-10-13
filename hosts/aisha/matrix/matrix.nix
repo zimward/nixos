@@ -132,6 +132,11 @@ in
     };
   };
 
+  systemd.services.matrix-synapse.serviceConfig = {
+    CPUWeight = 50;
+    CPUQuota = "150%"; # max 1.5 cores
+  };
+
   services.synapse-auto-compressor.enable = true;
 
   #auto-discovery via .well-known
