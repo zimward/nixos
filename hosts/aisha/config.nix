@@ -123,6 +123,8 @@
       serviceConfig = {
         MemoryHigh = "1G";
         MemoryMax = "2.5G";
+        CPUWeight = 10;
+        CPUQuota = "50%";
       };
       environment.TMPDIR = "/nix/tmp";
     };
