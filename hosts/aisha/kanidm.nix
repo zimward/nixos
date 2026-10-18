@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  secrets,
+  ...
+}:
 let
   cfg = config.services.kanidm;
   certDir = "/run/kanidm.ca";
@@ -34,13 +39,11 @@ in
   };
 
   services.kanidm = {
-    package = pkgs.kanidm_1_8;
+    package = pkgs.kanidmWithSecretProvisioning_1_11;
     server.enable = true;
     client.enable = true;
     server.settings = {
       bindaddress = "[::1]:8443";
-      # is read only for now for some reason. needs to be fixed
-      # db_path = "/nix/persist/system/kanidm/kanidm.db";
       domain = "idm.zimward.moe";
       origin = "https://idm.zimward.moe";
       tls_chain = "${certDir}/${cfg.server.settings.domain}.pem";
@@ -51,6 +54,22 @@ in
       ca_path = "${certDir}/rootCA.pem";
       verify_ca = true;
       verify_hostnames = false;
+    };
+    provision = {
+      enable = true;
+
+      adminPasswordFile = toString (pkgs.writeText "kanidm-admin" secrets.kanidm.admin);
+      idmAdminPasswordFile = toString (pkgs.writeText "kanidm-admin" secrets.kanidm.idm);
+
+      autoRemove = false;
+      groups = {
+        mail = {
+          overwriteMembers = false;
+        };
+        matrix = {
+          overwriteMembers = false;
+        };
+      };
     };
   };
   services.nginx.virtualHosts."idm.zimward.moe" = {
