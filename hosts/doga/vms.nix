@@ -61,7 +61,10 @@
             Type = "oneshot";
             RemainAfterExit = true;
             ExecStart = "${pkgs.xen}/bin/xl create ${ethervmCfg cfg}";
-            ExecStop = "${pkgs.xen}/bin/xl shutdown -w ${cfg.name}";
+            ExecStop = [
+              "${pkgs.xen}/bin/xl shutdown -w ${cfg.name}"
+              "${pkgs.xen}/bin/xl destroy ${cfg.name}"
+            ];
           };
       };
 
