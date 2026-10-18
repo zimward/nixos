@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    inputs.impermanence.nixosModules.impermanence
+    inputs.impermanence.nixosModules.default
     ../misc/mainUser.nix
   ];
   options = {
@@ -123,7 +123,7 @@
       dates = "9:00";
       options = "--delete-older-than 3d";
     };
-    nix.registry.n.to = config.nix.registry.nixpkgs.to;
+    nix.registry.n.to = inputs.nixpkgs;
 
     systemd.services.nixos-upgrade.environment = {
       GIT_SSH_COMMAND = lib.optionalString (

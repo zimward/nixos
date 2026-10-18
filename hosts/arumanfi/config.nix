@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    inputs.disko.nixosModules.disko
+    "${inputs.disko}/module.nix"
     inputs.lanzaboote.nixosModules.lanzaboote
     ./disko.nix
   ];

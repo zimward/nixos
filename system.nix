@@ -1,24 +1,37 @@
 let
-  inputs = (import ./inputs).inputs;
-  inherit (inputs)
-    nixpkgs
-    nixpkgs-small
-    ;
-in
-let
+  #npins sources
+  inputs = (import ./npins);
+  inherit (inputs) nixos-unstable nixos-unstable-small;
+
+  nixos-inputs =
+    nixpkgs:
+    let
+      pkgs = import nixpkgs { };
+    in
+    {
+      lanzaboote = import inputs.lanzaboote { inherit pkgs; };
+      impermanence.nixosModules.default = "${inputs.impermanence}/nixos.nix";
+      wrappers = import inputs.wrappers { inherit pkgs; };
+      inherit nixpkgs;
+      domUnix = inputs.domUnix;
+      disko = inputs.disko;
+    };
+
   # create a system configuration for a given host.
   mkSys = nixp: extraModules: name: {
     inherit name;
-    value = nixp.lib.nixosSystem {
+    value = import "${nixp}/nixos" {
       specialArgs = {
-        inherit inputs;
+        inputs = nixos-inputs nixp;
         secrets = import (inputs.secrets);
       };
-      modules = [
-        (./hosts + "/${name}/config.nix")
-        ./modules
-      ]
-      ++ extraModules;
+      configuration = {
+        imports = [
+          (./hosts + "/${name}/config.nix")
+          ./modules
+        ]
+        ++ extraModules;
+      };
     };
   };
 
@@ -62,8 +75,11 @@ let
 in
 # Combine the configurations for all hosts into an attributes set, mapping each host to its respective system configuration.
 builtins.listToAttrs (
-  (map (mkSys nixpkgs [ inputs.cache-beacon.nixosModules.nix-cache-beacon ]) big)
-  ++ (map (mkSys nixpkgs-small [
+  (map (mkSys nixos-unstable [ ]) big)
+  ++ (map (mkSys nixos-unstable-small [
     minimalProfile
   ]) small)
 )
+// {
+  inputs = (nixos-inputs nixos-unstable);
+}

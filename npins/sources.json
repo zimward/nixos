@@ -1,0 +1,99 @@
+{
+  "pins": {
+    "disko": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "disko"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.13.0",
+      "revision": "56ef5e72fec74b993ad0973b2dfa4eadeb48ba41",
+      "url": "https://api.github.com/repos/nix-community/disko/tarball/refs/tags/v1.13.0",
+      "hash": "sha256-CNzzBsRhq7gg4BMBuTDObiWDH/rFYHEuDRVOwCcwXw4="
+    },
+    "domUnix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "zimward",
+        "repo": "domUnix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "5c7b50518d3110ebf99f509154923cb78e9cd1e3",
+      "url": "https://github.com/zimward/domUnix/archive/5c7b50518d3110ebf99f509154923cb78e9cd1e3.tar.gz",
+      "hash": "sha256-Hr7h70CQV3Ener11cWrPrniVFlB0vev/sl6tpnZ+/kM="
+    },
+    "impermanence": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "impermanence"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "fa627f4c8b8e92f58f58a73d99ee4e1304e64eb2",
+      "url": "https://github.com/nix-community/impermanence/archive/fa627f4c8b8e92f58f58a73d99ee4e1304e64eb2.tar.gz",
+      "hash": "sha256-s0TeXWG5Ci75Y/Hzon0Z7NrN/fG773Rc54/z6oPFszQ="
+    },
+    "lanzaboote": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "lanzaboote"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "4b98333073bdaf9b1b5dd7d87c2dab96883b234e",
+      "url": "https://github.com/nix-community/lanzaboote/archive/4b98333073bdaf9b1b5dd7d87c2dab96883b234e.tar.gz",
+      "hash": "sha256-aefPlhND0AelMxBw8g1R0JZKpm/Wkamhj49sbR60pHw="
+    },
+    "nixos-unstable": {
+      "type": "Channel",
+      "name": "nixos-unstable",
+      "artifact": "nixexprs.tar.xz",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1107793.1d060086d60c/nixexprs.tar.xz",
+      "hash": "sha256-iNjybNORi/2+shilhMlkNr01UHWKOHRGzQyIyvobs9o="
+    },
+    "nixos-unstable-small": {
+      "type": "Channel",
+      "name": "nixos-unstable-small",
+      "artifact": "nixexprs.tar.xz",
+      "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1108738.ae2b13d55ef7/nixexprs.tar.xz",
+      "hash": "sha256-LqcfywlS4+BqFx2WedBxYtmSBWEu6GomqiuOghdtlzo="
+    },
+    "secrets": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "ssh://git@zimward.moe/~/secrets"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "0d3df4ffcabf2626444eb2c215e9a36ff9dbc4e7",
+      "url": null,
+      "hash": "sha256-aZYddpjuNumlWOcLg0LdAlQ+lin9T2mhTh3F8L7WWAg="
+    },
+    "wrappers": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "lassulus",
+        "repo": "wrappers"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "37d05efcab820ef96f083b251040ae2848445959",
+      "url": "https://github.com/lassulus/wrappers/archive/37d05efcab820ef96f083b251040ae2848445959.tar.gz",
+      "hash": "sha256-X/+r5QLrzFmlO4Kx4WKEu2Ol/Xr6XWSjyIMd//Sl0Mo="
+    }
+  },
+  "version": 8
+}
