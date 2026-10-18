@@ -10,6 +10,7 @@
     ./matrix
     ./mail.nix
     ./git.nix
+    ./kanidm.nix
     ./wireguard.nix
     ./cinny.nix
     ./push.nix
