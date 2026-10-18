@@ -230,6 +230,9 @@
       "doga:y1nuiJdAESNfSTOJz+pna+PoCtNe/cvVUddkD2jAsmI="
     ];
 
+    systemd.services.polkit.restartTriggers = lib.mkForce [ ];
+    systemd.services.polkit.reloadTriggers = [ config.system.path ];
+
     # nixpkgs.config.rocmSupport = true;
 
     # services.scx = {
