@@ -44,6 +44,7 @@ in
     livekitUrl = "wss://${fqdn}/livekit/sfu";
     keyFile = livekitKeyFile;
   };
+  systemd.services.lk-jwt-service.environment.LIVEKIT_FULL_ACCESS_HOMESERVERS = "*";
 
   services.nginx.virtualHosts.${fqdn} = {
     locations."^~ /livekit/jwt/" = {
