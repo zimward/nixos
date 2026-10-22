@@ -59,6 +59,7 @@ in
         proxy_set_header Accept-Encoding gzip;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
+        proxy_set_header Access-Control-Allow-Origin "*";
       '';
 
       priority = 400;
