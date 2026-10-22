@@ -69,7 +69,7 @@
         # Combine the configurations for all hosts into an attributes set, mapping each host to its respective system configuration.
         builtins.listToAttrs (
           (map (mkSys nixpkgs [ inputs.cache-beacon.nixosModules.nix-cache-beacon ]) big)
-          ++ (map (mkSys nixpkgs-small [
+          ++ (map (mkSys nixpkgs [
             minimalProfile
           ]) small)
         );
