@@ -25,7 +25,6 @@
   };
   config = lib.mkIf (config.device.class != "none") {
     # Remove perl from activation
-    boot.initrd.systemd.enable = lib.mkDefault true;
     system.etc.overlay.enable = lib.mkDefault true;
     services.userborn.enable = lib.mkDefault true;
     system.disableInstallerTools = true;
