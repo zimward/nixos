@@ -39,6 +39,8 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkSxvX/P000vgk1Bb2exsC1eq8sY7UhPPo6pUm3OOgg" # workstation
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL6wkiD+2gXU8TwEmBld1/2RdBJ4na2FnkYSYIjx4Ua" # T400
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILG1gWO9yWvsjgO/L7mWnZGgLsSvlhElW3dafBJW8QRE zimward@arumanfi"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINg2WYMRKINwbH5UCqqK2qq/qW0gG1NnaALHqEyU4NzM" # nea
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFgJu1eENEEVRht6bx5X0ZfCGqz5y3KNicXLv4D7skXR" # nea
     ];
 
     users.users.nixremote = {
