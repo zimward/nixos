@@ -13,7 +13,6 @@ inputs.wrappers.wrapperModules.helix.apply {
     ]
     ++ lib.optionals config.graphical.enable [
       texlab # latex lsp
-      # inputs.codel.packages.x86_64-linux.default
     ];
 
   themes = {
@@ -21,7 +20,8 @@ inputs.wrappers.wrapperModules.helix.apply {
       inherits = "tokyonight";
       "ui.background" = { };
       "ui.text" = { };
-    };
+    }
+    // import ./reduce-colors.nix;
   };
 
   ignores = [
