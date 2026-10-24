@@ -39,7 +39,12 @@ in
         thunderbird-latest
         pavucontrol
         comma
-        ltspice
+        (ltspice.overrideAttrs (finalAttrs: {
+          src = pkgs.fetchurl {
+            url = "https://ltspice.analog.com/download/${finalAttrs.version}/LTspice64.msi";
+            hash = "sha256-8iFj8VQg5DotXGZEDgOO8DGp8BmhgfOWuV7c717rw1c=";
+          };
+        }))
         swayimg
       ])
       ++ (lib.optionals cfg._freetime (
