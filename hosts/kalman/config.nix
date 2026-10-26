@@ -167,6 +167,10 @@
       ghidra
       #needed for tpm support to function in virt-manager
       swtpm
+      kdePackages.neochat
+    ];
+    nixpkgs.config.permittedInsecurePackages = [
+      "olm-3.2.16"
     ];
 
     systemd.network.networks."10-lan" = {
