@@ -27,6 +27,14 @@ in
           recommendedProxySettings = true;
         };
       };
+      "jelly.zimward.moe" = {
+        forceSSL = true;
+        enableACME = true;
+        listenAddresses = [ ip ];
+        locations."/" = {
+          proxyPass = "http://localhost:3000";
+        };
+      };
     };
     appendHttpConfig = ''
       server{

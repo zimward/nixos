@@ -14,6 +14,7 @@
     ./nginx.nix
     ./postgres.nix
     ./network.nix
+    ./jellyfin.nix
     ./vms.nix
   ];
 
