@@ -89,6 +89,7 @@ let
           ]
       }
       ${builtins.readFile ./commands.nu}
+      ${builtins.readFile ./syscli.nu}
       $env.config = {
         show_banner: false
         cursor_shape:{

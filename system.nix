@@ -80,6 +80,3 @@ builtins.listToAttrs (
     minimalProfile
   ]) small)
 )
-// {
-  inputs = (nixos-inputs nixos-unstable);
-}
