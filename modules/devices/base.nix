@@ -123,7 +123,10 @@
       dates = "9:00";
       options = "--delete-older-than 3d";
     };
-    nix.registry.n.to = inputs.nixpkgs;
+    nix.registry.n.to = {
+      path = toString inputs.nixpkgs;
+      type = "path";
+    };
 
     systemd.services.nixos-upgrade.environment = {
       GIT_SSH_COMMAND = lib.optionalString (
