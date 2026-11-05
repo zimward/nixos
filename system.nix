@@ -1,3 +1,6 @@
+{
+  rev ? "dirty",
+}:
 let
   #npins sources
   inputs = (import ./npins);
@@ -31,6 +34,7 @@ let
           ./modules
         ]
         ++ extraModules;
+        config.system.configurationRevision = rev;
       };
     };
   };

@@ -7,15 +7,18 @@ def n [mode: string@RUNM, system?: string, ...flags] {
             msg: $"invalid mode ($mode)"
         }
     }
-    let build_system = {|sys| ^nom-build ./system.nix --attr $"($sys).config.system.build.toplevel" ...$flags |from json}
+    let build_system = {|sys|
+        let rev = ^git rev-parse HEAD
+        ^nom-build ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$flags |from json
+    }
     let closure_info = {|c|nix path-info --json -Sh $c | from json | select  closureSize narSize path | into filesize closureSize narSize}
     let build_system_h = {|sys|
-                            let closure = $"/(do $build_system $system)"
-                            ^nix store diff-closures /run/current-system $closure
-                            print "Build derivation:"
-                            print (do $closure_info $closure)
-                            echo $closure
-                        }
+        let closure = $"/(do $build_system $system)"
+        ^nix store diff-closures /run/current-system $closure
+        print "Build derivation:"
+        print (do $closure_info $closure)
+        echo $closure
+    }
     match $mode {
         "check" => {
             if $system == null {
