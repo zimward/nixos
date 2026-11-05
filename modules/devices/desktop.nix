@@ -34,7 +34,10 @@
 
     #sound
     sys.sound.enable = true;
-    environment.systemPackages = [ pkgs.nh ];
+    environment.systemPackages = [
+      pkgs.npins
+      pkgs.nix-output-monitor
+    ];
     boot.initrd.systemd.network.wait-online.enable = false;
     boot.kernelPackages = pkgs.linuxPackages_latest;
     systemd.network.wait-online.enable = false;
