@@ -7,6 +7,11 @@ def n [mode: string@RUNM, system?: string, ...flags] {
             msg: $"invalid mode ($mode)"
         }
     }
+    let system = if $system == "." {
+        (uname).nodename
+    } else {
+        $system
+    }
     let build_system = {|sys|
         let rev = ^git rev-parse HEAD
         ^nom-build ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$flags |from json
