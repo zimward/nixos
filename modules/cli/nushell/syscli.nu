@@ -27,12 +27,14 @@ def n [mode: string@RUNM, system?: string, ...flags] {
     match $mode {
         "check" => {
             if $system == null {
-           ^nix eval --json -E "import ./system.nix |> builtins.attrNames" --impure | from json | each {|system|
+            let rev = ^git rev-parse HEAD
+           ^nix eval --json -E "import ./system.nix {} |> builtins.attrNames" --impure | from json | each {|system|
                     print $"checking ($system)"
-                    ^nix eval --json -E $"\(import ./system.nix\).($system).config.system.build.toplevel" --impure ...$flags | from json
+                    ^nix eval --json -E $"\(import ./system.nix {rev=''($rev)'';}\).($system).config.system.build.toplevel" --impure ...$flags | from json
                 }
             } else {
-                ^nix eval --json -E $"\(import ./system.nix\).($system).config.system.build.toplevel" --impure ...$flags | from json
+                let rev = ^git rev-parse HEAD
+                ^nix eval --json -E $"\(import ./system.nix {rev=''($rev)'';} \).($system).config.system.build.toplevel" --impure ...$flags | from json
             }
         }
         "build" => {let _ = do $build_system_h $system}

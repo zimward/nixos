@@ -127,6 +127,11 @@
       path = toString inputs.nixpkgs;
       type = "path";
     };
+    nix.registry.nixpkgs.to = {
+      path = toString inputs.nixpkgs;
+      type = "path";
+    };
+    environment.sessionVariables.NIX_PATH = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     systemd.services.nixos-upgrade.environment = {
       GIT_SSH_COMMAND = lib.optionalString (
