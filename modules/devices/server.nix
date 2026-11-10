@@ -30,6 +30,15 @@
 
     fonts.fontconfig.enable = false;
 
+    #don't ask for a password on servers after initial login
+    security.polkit.extraConfig = ''
+      polkit.addRule(function(action,subject){
+        if (action.id == "org.freedesktop.systemd1.manage-units" && subject.active && subject.user =="${config.mainUser.userName}"){
+          return polkit.Result.YES;
+        }
+      });
+    '';
+
     system.autoUpgrade.allowReboot = true;
     system.autoUpgrade.dates = lib.mkForce "4:00";
 
