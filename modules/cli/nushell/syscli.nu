@@ -7,8 +7,7 @@ def npins_to_uris [path:path]: nothing -> list<string> {
             $val.url
         }
     }
-    # whitelist codeload in case of redirects
-    $pins | append "https://codeload.github.com"
+    $pins
 }
 
 const MODES = [check test switch build]
