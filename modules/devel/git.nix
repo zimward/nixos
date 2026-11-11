@@ -18,7 +18,7 @@ let
         backend = "gpg";
         key = config.devel.git.signingkey;
       };
-      git.sign-on-push = true;
+      revsets.git-sign-on-push = "~signed() & mine()";
     };
   };
 in
