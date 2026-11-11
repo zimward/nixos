@@ -1,7 +1,19 @@
-const MODES = [check test switch build]
-def RUNM [] { $MODES}
+def npins_to_uris [path:path]: nothing -> list<string>  {
+    let pins = (open $path).pins | items {|_,val|
+        if $val.url == null {
+          # this most likely happens for raw git inputs
+          $val.repository?.url?  
+        } else {
+            $val.url
+        }
+    };
+    $pins
+}
 
-def n [mode: string@RUNM, system?: string, ...flags] {
+def n [mode: string@[check test switch build], system?: string, ...flags] {
+    let uris = npins_to_uris ./npins/sources.json;
+    let common_args = ["--restrict-eval" "-I=./" "--allowed-uris" ($uris | str join ' ' | $"'($in)'") "--no-allow-import-from-derivation"];
+
     if $mode not-in $MODES {
         error make {
             msg: $"invalid mode ($mode)"
@@ -14,7 +26,7 @@ def n [mode: string@RUNM, system?: string, ...flags] {
     }
     let build_system = {|sys|
         let rev = ^git rev-parse HEAD
-        ^nom-build ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$flags |from json
+        ^nom-build ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$common_args ...$flags |from json
     }
     let closure_info = {|c|nix path-info --json -Sh $c | from json | select  closureSize narSize path | into filesize closureSize narSize}
     let build_system_h = {|sys|
@@ -27,14 +39,15 @@ def n [mode: string@RUNM, system?: string, ...flags] {
     match $mode {
         "check" => {
             if $system == null {
-            let rev = ^git rev-parse HEAD
-           ^nix eval --json -E "import ./system.nix {} |> builtins.attrNames" --impure | from json | each {|system|
+                let rev = ^git rev-parse HEAD
+                ^nix eval --json --expr "import ./system.nix {} |> builtins.attrNames" --impure | from json |
+                each {|system|
                     print $"checking ($system)"
-                    ^nix eval --json -E $"\(import ./system.nix {rev=''($rev)'';}\).($system).config.system.build.toplevel" --impure ...$flags | from json
+                    ^nix eval --json --expr $"\(import ./system.nix {rev=''($rev)'';}\).($system).config.system.build.toplevel" --impure ...$flags | from json
                 }
             } else {
                 let rev = ^git rev-parse HEAD
-                ^nix eval --json -E $"\(import ./system.nix {rev=''($rev)'';} \).($system).config.system.build.toplevel" --impure ...$flags | from json
+                ^nix eval --json --expr $"\(import ./system.nix {rev=''($rev)'';} \).($system).config.system.build.toplevel" --impure ...$flags | from json
             }
         }
         "build" => {let _ = do $build_system_h $system}
@@ -47,6 +60,6 @@ def n [mode: string@RUNM, system?: string, ...flags] {
                     } else {
                         print "aborting..."
                     }
-                }
+        }
     }
 }
