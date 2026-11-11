@@ -1,4 +1,4 @@
-def npins_to_uris [path:path]: nothing -> list<string>  {
+def npins_to_uris [path:path]: nothing -> list<string> {
     let pins = (open $path).pins | items {|_,val|
         if $val.url == null {
           # this most likely happens for raw git inputs
@@ -6,24 +6,22 @@ def npins_to_uris [path:path]: nothing -> list<string>  {
         } else {
             $val.url
         }
-    };
-    $pins
+    }
+    # whitelist codeload in case of redirects
+    $pins | append "https://codeload.github.com"
 }
 
-def n [mode: string@[check test switch build], system?: string, ...flags] {
-    let uris = npins_to_uris ./npins/sources.json;
-    let common_args = ["--restrict-eval" "-I=./" "--allowed-uris" ($uris | str join ' ' | $"'($in)'") "--no-allow-import-from-derivation"];
+const MODES = [check test switch build]
+def n [mode: string@[...$MODES], system?: string, ...flags]: nothing -> oneof<nothing,string> {
+    let uris = npins_to_uris ./npins/sources.json
+    let common_args = ["--extra-experimental-features" "pipe-operator" "--restrict-eval" "-I=./" "--allowed-uris" ($uris | str join ' ') "--no-allow-import-from-derivation"]
 
     if $mode not-in $MODES {
         error make {
             msg: $"invalid mode ($mode)"
         }
     }
-    let system = if $system == "." {
-        (uname).nodename
-    } else {
-        $system
-    }
+    let system = if $system == "." { (uname).nodename } else { $system }
     let build_system = {|sys|
         let rev = ^git rev-parse HEAD
         ^nom-build ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$common_args ...$flags |from json
@@ -34,32 +32,44 @@ def n [mode: string@[check test switch build], system?: string, ...flags] {
         ^nix store diff-closures /run/current-system $closure
         print "Build derivation:"
         print (do $closure_info $closure)
-        echo $closure
+        $closure
     }
     match $mode {
         "check" => {
-            if $system == null {
-                let rev = ^git rev-parse HEAD
-                ^nix eval --json --expr "import ./system.nix {} |> builtins.attrNames" --impure | from json |
-                each {|system|
-                    print $"checking ($system)"
-                    ^nix eval --json --expr $"\(import ./system.nix {rev=''($rev)'';}\).($system).config.system.build.toplevel" --impure ...$flags | from json
+            let rev = ^git rev-parse HEAD
+            let systems: list<string> = if $system == null {
+               #check all systems if none is specified
+               ^nix eval --json --expr "builtins.attrNames (import ./system.nix {})" --impure | from json
+            } else { [ $system ] };
+            # potentially run checks in paralell
+            print $"checking systems ($systems | str join ' ')"
+            let _ = $systems | par-each {|system|
+                let res = with-env {FORCE_COLOR: 1} {^nix eval --json --file ./system.nix --argstr rev $rev $"($system).config.system.build.toplevel" ...$common_args --impure ...$flags | complete }
+                if $res.exit_code == 0 {
+                    #filter `fetching `messages and control code lines
+                    let warn = $res.stderr | lines | where $in !~ "fetching" | where ($in | str length) < 200 | length | $in > 0
+                    if not $warn {
+                        print $"($system): OK"
+                    } else {
+                        print $"($system): OK with warnings"
+                        print -e -r $res.stderr
+                    }
+                } else {
+                    print $"($system) failed:"
+                    print -e -r $res.stderr
                 }
-            } else {
-                let rev = ^git rev-parse HEAD
-                ^nix eval --json --expr $"\(import ./system.nix {rev=''($rev)'';} \).($system).config.system.build.toplevel" --impure ...$flags | from json
             }
         }
-        "build" => {let _ = do $build_system_h $system}
+        "build" => {do $build_system_h $system}
         _       => {
-                    let closure = do $build_system_h $system
-                    print $"Do you want to ($mode)?"
-                    let answer = [yes,no] | input list
-                    if $answer == "yes" {
-                        ^run0 nixos-rebuild --store-path $closure $mode ...$flags
-                    } else {
-                        print "aborting..."
-                    }
+            let closure = do $build_system_h $system
+            print $"Do you want to ($mode)?"
+            let answer = [yes,no] | input list
+            if $answer == "yes" {
+                ^nixos-rebuild --elevate run0 --store-path $closure $mode ...$flags
+            } else {
+                print "aborting..."
+            }
         }
     }
 }

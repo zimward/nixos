@@ -12,7 +12,11 @@ let
       pkgs = import nixpkgs { };
     in
     {
-      lanzaboote = import inputs.lanzaboote { inherit pkgs; };
+      lanzaboote = import inputs.lanzaboote {
+        inherit pkgs;
+        crane = import inputs.crane { inherit pkgs; };
+        rust-overlay = inputs.rust-overlay;
+      };
       impermanence.nixosModules.default = "${inputs.impermanence}/nixos.nix";
       wrappers = import inputs.wrappers { inherit pkgs; };
       inherit nixpkgs;
