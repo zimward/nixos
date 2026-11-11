@@ -55,7 +55,7 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${lib.getExe pkgs.unifiedpush-common-proxies} -c ${cfg}";
+        ExecStart = "${lib.getExe pkgs.common-proxies} -c ${cfg}";
         Restart = "always";
 
         MemoryDenyWriteExecute = true;
