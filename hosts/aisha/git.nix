@@ -48,27 +48,27 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFgJu1eENEEVRht6bx5X0ZfCGqz5y3KNicXLv4D7skXR" # nea
     ];
   };
-  systemd.timers.updateFlake = {
+  systemd.timers.updateSources = {
     enable = true;
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "3:30";
-      Unit = "updateFlake.service";
+      Unit = "updateSources.service";
     };
   };
   environment.systemPackages = [ configuredGit.wrapper ];
-  systemd.services.updateFlake = {
+  systemd.services.updateSources = {
     enable = true;
     serviceConfig = {
       Type = "simple";
       User = "git";
       ExecStart = lib.getExe (
         pkgs.writeShellApplication {
-          name = "updateFlake";
+          name = "updateSources";
           runtimeInputs = [
             configuredGit.wrapper
             config.services.openssh.package
-            config.nix.package
+            pkgs.npins
           ];
           text = ''
             TEMPDIR="$(mktemp -d)"
@@ -80,15 +80,15 @@ in
             trap cleanup EXIT
 
             git clone git@zimward.moe:nixos
-            cd nixos/inputs
-            nix flake update
+            cd nixos
+            npins update
 
             if git diff --exit-code --quiet ; then
               exit 0
             fi
 
-            git add flake.lock
-            git commit -m "flake: update lock"
+            git add npins/sources.json
+            git commit -m "npins: update sources"
             git push
           '';
         }
