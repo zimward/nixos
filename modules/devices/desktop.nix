@@ -41,8 +41,5 @@
     boot.initrd.systemd.network.wait-online.enable = false;
     boot.kernelPackages = pkgs.linuxPackages_latest;
     systemd.network.wait-online.enable = false;
-
-    services.harmonia.cache.enable = true; # Serve up local Nix store
-    networking.firewall.allowedTCPPorts = [ 5000 ]; # Open firewall port for Harmonia
   };
 }

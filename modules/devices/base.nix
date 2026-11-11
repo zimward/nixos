@@ -10,19 +10,6 @@
     inputs.impermanence.nixosModules.default
     ../misc/mainUser.nix
   ];
-  options = {
-    update = {
-      cfgRef = lib.mkOption {
-        type = lib.types.nonEmptyStr;
-        default = "git+ssh://git@zimward.moe/~/nixos";
-        description = "reference to nix flake";
-      };
-      accessKey = lib.mkOption {
-        type = lib.types.nullOr lib.types.path;
-        default = "/etc/ssh/ssh_host_ed25519_key";
-      };
-    };
-  };
   config = lib.mkIf (config.device.class != "none") {
     # Remove perl from activation
     system.etc.overlay.enable = lib.mkDefault true;
@@ -109,13 +96,8 @@
       DefaultTimeoutStopSec = "10s";
     };
 
-    # auto system upgrade
-    system.autoUpgrade = {
-      enable = true;
-      flake = config.update.cfgRef;
-      persistent = true;
-      dates = "10:00";
-    };
+    sys.update.enable = true;
+
     # nixos garbage collection automation
     nix.gc = {
       automatic = true;
@@ -132,12 +114,6 @@
       type = "path";
     };
     environment.sessionVariables.NIX_PATH = [ "nixpkgs=${inputs.nixpkgs}" ];
-
-    systemd.services.nixos-upgrade.environment = {
-      GIT_SSH_COMMAND = lib.optionalString (
-        config.update.accessKey != null
-      ) "ssh -i ${config.update.accessKey}";
-    };
 
     services.dbus.implementation = "broker";
 

@@ -1,4 +1,3 @@
-{ ... }:
 {
   imports = [
     ./mainUser.nix
@@ -6,5 +5,6 @@
     ./unfree.nix
     ./wine.nix
     ./llm.nix
+    ./update.nix
   ];
 }

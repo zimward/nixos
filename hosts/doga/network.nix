@@ -14,8 +14,6 @@
       20048
       #ethercalc
       8000
-      # harmonia cache
-      5000
     ];
     networking.firewall.allowedUDPPorts = [
       2049

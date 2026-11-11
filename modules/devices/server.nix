@@ -39,8 +39,8 @@
       });
     '';
 
-    system.autoUpgrade.allowReboot = true;
-    system.autoUpgrade.dates = lib.mkForce "4:00";
+    sys.update.allowReboot = true;
+    sys.update.date = lib.mkForce "4:00";
 
     #should never be needed
     security.lockKernelModules = true;
