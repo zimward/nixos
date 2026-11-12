@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -127,7 +126,6 @@
       "console=hvc0"
       "earlyprintk=xen"
     ];
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
 
   };
 }

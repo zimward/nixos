@@ -68,23 +68,23 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "4b98333073bdaf9b1b5dd7d87c2dab96883b234e",
-      "url": "https://github.com/nix-community/lanzaboote/archive/4b98333073bdaf9b1b5dd7d87c2dab96883b234e.tar.gz",
-      "hash": "sha256-aefPlhND0AelMxBw8g1R0JZKpm/Wkamhj49sbR60pHw="
+      "revision": "69c7f74b872aae4f360bdd0050106e0fddfed7aa",
+      "url": "https://github.com/nix-community/lanzaboote/archive/69c7f74b872aae4f360bdd0050106e0fddfed7aa.tar.gz",
+      "hash": "sha256-Yb47Gb1KlSGsedQuAqdDz/NNr9goz9PI+uCBDybN9Cs="
     },
     "nixos-unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1113206.f4a03c008967/nixexprs.tar.xz",
-      "hash": "sha256-VZ8WvA9m3XN36juXyg/GwbDRU2OezOHJlXpJCXkccv0="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1119549.d5cc68339997/nixexprs.tar.xz",
+      "hash": "sha256-bTKSclXJAmo9qdxPedTBHUGr8awPr4BrbOoOutJsYIc="
     },
     "nixos-unstable-small": {
       "type": "Channel",
       "name": "nixos-unstable-small",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1117555.c24da8b1d51f/nixexprs.tar.xz",
-      "hash": "sha256-aDNo5UNufgyUk5UzVv+2/yIxnPKxyqM+tMX1jyIY0Mc="
+      "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1121333.b8ce2154aa91/nixexprs.tar.xz",
+      "hash": "sha256-8J0iLu/TjcIfqGd3QU/Vs7FeSHrJ0NZctQpGFPkobkE="
     },
     "rust-overlay": {
       "type": "Git",
