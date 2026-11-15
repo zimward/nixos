@@ -25,11 +25,17 @@
     #needed to rebuild system
     environment.systemPackages = lib.optionals config.devel.git.enable [ pkgs.gitMinimal ];
 
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-      "pipe-operator"
-    ];
+    nix.settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "pipe-operator"
+      ];
+      trusted-users = [
+        "root"
+        config.mainUser.userName
+      ];
+    };
 
     nix.package = pkgs.lixPackageSets.stable.lix;
 
