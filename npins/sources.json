@@ -83,8 +83,8 @@
       "type": "Channel",
       "name": "nixos-unstable-small",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1123087.d760a9ce1a77/nixexprs.tar.xz",
-      "hash": "sha256-Hz0COptPYpsbAHCQyw4Z49aLf2Fw6SRIgNGO1yyfnso="
+      "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1123956.d00708e733dc/nixexprs.tar.xz",
+      "hash": "sha256-7IE+fF5daCHEfuafI9rbeR2er1kII2qLGedd8QrODHI="
     },
     "rust-overlay": {
       "type": "Git",
