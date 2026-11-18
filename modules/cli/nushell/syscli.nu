@@ -23,7 +23,8 @@ def n [mode: string@[...$MODES], system?: string, ...flags]: nothing -> oneof<no
     let system = if $system == "." { (uname).nodename } else { $system }
     let build_system = {|sys|
         let rev = ^git rev-parse HEAD
-        ^nom-build ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$common_args ...$flags |from json
+        let build_prog = if (which nom-build | length) == 0 {"nix-build"} else {"nom-build"}
+        ^$build_prog ./system.nix --argstr rev $rev --attr $"($sys).config.system.build.toplevel" ...$common_args ...$flags |from json
     }
     let closure_info = {|c|nix path-info --json -Sh $c | from json | select  closureSize narSize path | into filesize closureSize narSize}
     let build_system_h = {|sys|
