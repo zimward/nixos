@@ -44,6 +44,7 @@ in
         config.programs.ssh.package
         config.nix.package.out
         config.systemd.package
+        config.system.build.nixos-rebuild
       ];
       environment = {
         REBOOT = if cfg.allowReboot then "1" else "0";

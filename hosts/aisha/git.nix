@@ -68,7 +68,7 @@ in
           runtimeInputs = [
             configuredGit.wrapper
             config.services.openssh.package
-            config.nix.package
+            config.nix.package.out
             pkgs.npins
           ];
           text = ''
